@@ -14,7 +14,9 @@ Install MySQL database for Windows
 Create nursing_database
  * username = root
  * password = admin
+ 
+```
 run database_scripts in the scripts folder to create tables (WIP)
-
+```
 ... 
 
