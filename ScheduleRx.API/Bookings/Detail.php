@@ -6,17 +6,19 @@ header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
 include_once '../config/database.php';
-include_once '../models/Course.php';
+include_once '../models/Booking.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$Course = new Course($db);
+$Booking = new Booking($db);
 
-$Course->COURSE_ID = isset($_GET['COURSE_ID']) ? $_GET['COURSE_ID'] : die();
-$Course->Detail();
-$CourseList = array(
-    "COURSE_ID" =>  $Course->COURSE_ID,
-    "STUDENTS" => $Course->STUDENTS
+$Booking->COURSE_ID = isset($_GET['COURSE_ID']) ? $_GET['COURSE_ID'] : die();
+$Booking->Detail();
+$bookingInfo = array(
+    "COURSE_ID" =>  $Booking->COURSE_ID,
+    "ROOM_ID" => $Booking->ROOM_ID,
+    "START_TIME" => $Booking->START_TIME,
+    "END_TIME" => $Booking->END_TIME
 );
 
-print_r(json_encode($CourseList));
+print_r(json_encode($bookingInfo));

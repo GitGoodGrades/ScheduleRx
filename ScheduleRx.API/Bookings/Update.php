@@ -7,18 +7,20 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/database.php';
-include_once '../models/Course.php';
+include_once '../models/Booking.php';
 
 $database = new Database();
 $db = $database->getConnection();
 
-$Course = new Course($db);
+$Booking = new Booking($db);
 $data = json_decode(file_get_contents("php://input"));
 
-$Course->COURSE_ID = $data->COURSE_ID;
-$Course->STUDENTS = $data->STUDENTS;
+$Booking->COURSE_ID = $data->COURSE_ID;
+$Booking->ROOM_ID = $data->ROOM_ID;
+$Booking->START_TIME = $data->START_TIME;
+$Booking->END_TIME = $data->END_TIME;
 
-if($Course->Update()){
+if($Booking->Update()){
     echo '{';
     echo '"message": "Course was updated."';
     echo '}';

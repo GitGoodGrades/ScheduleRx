@@ -3,29 +3,31 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once '../config/database.php';
-include_once '../models/Course.php';
+include_once '../models/Booking.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$course = new Course($db);
-$stmt = $course->Index();
+$booking = new Booking($db);
+$stmt = $booking->Index();
 $num = $stmt->rowCount();
 
 if($num>0){
-    $courseList=array();
-    $courseList["records"]=array();
+    $bookingList=array();
+    $bookingList["records"]=array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
-        $courseItem=array(
+        $bookingItem=array(
             "COURSE_ID" => $COURSE_ID,
-            "STUDENTS" => $STUDENTS
+            "ROOM_ID" => $ROOM_ID,
+            "START_TIME" => $START_TIME,
+            "END_TIME" => $END_TIME
         );
-        array_push($courseList["records"], $courseItem);
+        array_push($bookingList["records"], $bookingItem);
     }
-    echo json_encode($courseList);
+    echo json_encode($bookingList);
 }
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No booking found.")
     );
 }
