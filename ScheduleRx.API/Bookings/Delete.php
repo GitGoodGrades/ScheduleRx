@@ -14,10 +14,7 @@ $db = $database->getConnection();
 $Booking = new Booking($db);
 $data = json_decode(file_get_contents("php://input"));
 
-$Booking->COURSE_ID = $data->COURSE_ID;
-$Booking->ROOM_ID = $data->ROOM_ID;
-$Booking->START_TIME = $data->START_TIME;
-$Booking->END_TIME = $data->END_TIME;
+$Booking->BOOKING_ID = $data->BOOKING_ID;
 
 if($Booking->delete()){
     echo '{';

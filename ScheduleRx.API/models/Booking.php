@@ -11,6 +11,7 @@ class Booking
     private $conn;
     private $table = "booking";
 
+    public $BOOKING_ID;
     public $COURSE_ID;
     public $ROOM_ID;
     public $START_TIME;
@@ -22,9 +23,9 @@ class Booking
 
     function Index(){
         $query =
-            "SELECT COURSE_ID, ROOM_ID, START_TIME, END_TIME
+            "SELECT BOOKING_ID, COURSE_ID, ROOM_ID, START_TIME, END_TIME
             FROM ". $this->table ." 
-            ORDER BY COURSE_ID DESC";
+            ORDER BY BOOKING_ID DESC";
 
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -37,12 +38,12 @@ class Booking
 
     function Detail(){
         $query =
-            "SELECT COURSE_ID, ROOM_ID, START_TIME, END_TIME
+            "SELECT BOOKING_ID, COURSE_ID, ROOM_ID, START_TIME, END_TIME
             FROM " . $this->table ."
-            WHERE COURSE_ID = ?
+            WHERE BOOKING_ID = ?
             LIMIT 0,1";
         $stmt = $this->conn->prepare( $query );
-        $stmt->bindParam(1, $this->COURSE_ID);
+        $stmt->bindParam(1, $this->BOOKING_ID);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -55,19 +56,21 @@ class Booking
     function Create(){
         $query =
             "INSERT INTO " . $this->table . "
-            SET COURSE_ID=:COURSE_ID, ROOM_ID=:ROOM_ID, START_TIME=:START_TIME, END_TIME=:END_TIME, ";
+            SET COURSE_ID=:COURSE_ID, ROOM_ID=:ROOM_ID, START_TIME=:START_TIME, END_TIME=:END_TIME, ROOM_ID=:ROOM_ID";
 
         $stmt = $this->conn->prepare($query);
 
+        $this->BOOKING_ID=htmlspecialchars(strip_tags($this->BOOKING_ID));
         $this->COURSE_ID=htmlspecialchars(strip_tags($this->COURSE_ID));
         $this->ROOM_ID=htmlspecialchars(strip_tags($this->ROOM_ID));
         $this->START_TIME=htmlspecialchars(strip_tags($this->START_TIME));
         $this->END_TIME=htmlspecialchars(strip_tags($this->END_TIME));
 
+        $stmt->bindParam(":COURSE_ID", $this->BOOKING_ID);
         $stmt->bindParam(":COURSE_ID", $this->COURSE_ID);
-        $stmt->bindParam(":STUDENTS", $this->ROOM_ID);
-        $stmt->bindParam(":STUDENTS", $this->START_TIME);
-        $stmt->bindParam(":STUDENTS", $this->END_TIME);
+        $stmt->bindParam(":ROOM_ID", $this->ROOM_ID);
+        $stmt->bindParam(":START_TIME", $this->START_TIME);
+        $stmt->bindParam(":END_TIME", $this->END_TIME);
 
         if($stmt->execute()){
             return true;
@@ -90,9 +93,9 @@ class Booking
         $this->END_TIME=htmlspecialchars(strip_tags($this->END_TIME));
 
         $stmt->bindParam(":COURSE_ID", $this->COURSE_ID);
-        $stmt->bindParam(":STUDENTS", $this->ROOM_ID);
-        $stmt->bindParam(":STUDENTS", $this->START_TIME);
-        $stmt->bindParam(":STUDENTS", $this->END_TIME);
+        $stmt->bindParam(":ROOM_ID", $this->ROOM_ID);
+        $stmt->bindParam(":START_TIME", $this->START_TIME);
+        $stmt->bindParam(":END_TIME", $this->END_TIME);
 
 
         if($stmt->execute()){
@@ -102,7 +105,7 @@ class Booking
     }
 
     function delete(){
-        $query = "DELETE FROM " . $this->table . " WHERE COURSE_ID = ?";
+        $query = "DELETE FROM " . $this->table . " WHERE BOOKING_ID = ?";
 
         $stmt = $this->conn->prepare($query);
 
