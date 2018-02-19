@@ -29,6 +29,14 @@ const Header = (props) => {
   return (
     <AppBar className={classes.appBar}>
       <Toolbar>
+        <IconButton
+          color="default"
+          aria-label="open drawer"
+          onClick={props.handleDrawerToggle}
+          className={classes.navIconHide}
+        >
+          <MenuIcon />
+        </IconButton>
         <Typography type="title" color="inherit" noWrap>
             ULM Nursing ScheduleRx
         </Typography>
