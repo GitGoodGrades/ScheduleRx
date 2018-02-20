@@ -30,10 +30,11 @@ const styles = theme => ({
       height: 'calc(100% - 64px)',
       marginTop: 64,
     },
-    'overflow-x': 'scroll',
+ 
+    overflow: 'auto'
   },
   gridRoot: {
-    flexGrow: 1,
+    height: '100%'
   },
 });
 
