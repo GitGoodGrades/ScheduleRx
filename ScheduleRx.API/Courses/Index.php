@@ -4,26 +4,21 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 include_once '../config/database.php';
-include_once '../models/Course.php';
 
 $database = new Database();
-$db = $database->getConnection();
+$conn = $database->getConnection();
 
-$Course = new Course($db);
-$data = json_decode(file_get_contents("php://input"));
+$query = "SELECT * FROM course";
+$stmt = $this->conn->prepare($query);
 
-$Course->COURSE_ID = $data->COURSE_ID;
-$Course->STUDENTS = $data->STUDENTS;
-
-if($Course->Create()){
+if($stmt->execute()){
     echo '{';
-    echo '"message": "Course was created."';
+    echo '"message": "Courses were retrieved."';
     echo '}';
 }
-else{
+else {
     echo '{';
-    echo '"message": "Unable to create Course."';
+    echo '"message": "Unable to retrieve Courses."';
     echo '}';
 }

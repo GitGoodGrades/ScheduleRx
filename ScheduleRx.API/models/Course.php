@@ -40,26 +40,6 @@ class Course{
         $this->STUDENTS = $row['STUDENTS'];
     }
 
-    function Create(){
-        $query =
-            "INSERT INTO " . $this->table . "
-            SET COURSE_ID=:COURSE_ID, STUDENTS=:STUDENTS";
-
-        $stmt = $this->conn->prepare($query);
-
-        $this->COURSE_ID=htmlspecialchars(strip_tags($this->COURSE_ID));
-        $this->STUDENTS=htmlspecialchars(strip_tags($this->STUDENTS));
-
-        $stmt->bindParam(":COURSE_ID", $this->COURSE_ID);
-        $stmt->bindParam(":STUDENTS", $this->STUDENTS);
-
-        if($stmt->execute()){
-            return true;
-        }
-
-        return false;
-    }
-
     function Update(){
         $query =
             "UPDATE " . $this->table . " 

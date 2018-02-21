@@ -1,30 +1,29 @@
 <?php
-// required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 include_once '../config/database.php';
-include_once '../models/Course.php';
 
 $database = new Database();
-$db = $database->getConnection();
-
-$Course = new Course($db);
+$conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$Course->COURSE_ID = $data->COURSE_ID;
-$Course->STUDENTS = $data->STUDENTS;
+$query = "SELECT * FROM course WHERE COURSE_ID = ?";
+$stmt = $this->conn->prepare($query);
 
-if($Course->Update()){
+$COURSE=htmlspecialchars(strip_tags($data->COURSE_ID));
+
+$stmt->bindParam(1, $COURSE);
+
+if($stmt->execute()){
     echo '{';
-    echo '"message": "Course was updated."';
+    echo '"message": "Courses details retrieved."';
     echo '}';
 }
-else{
+else {
     echo '{';
-    echo '"message": "Unable to update course."';
+    echo '"message": "Unable to retrieve Courses details."';
     echo '}';
 }

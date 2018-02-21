@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5d32983-e46a-4c79-8252-43d2659c9424" name="Default" comment="" />
+    <list default="true" id="d5d32983-e46a-4c79-8252-43d2659c9424" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/ScheduleRx.API/Courses/Index.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/ScheduleRx.API/Courses/Update.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/ScheduleRx.API/models/User.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Create.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Create.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Delete.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Delete.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Detail.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Detail.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Index.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Index.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Update.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Bookings/Update.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Course/Create.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Courses/Create.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Courses/Delete.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Course/Index.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/Course/Update.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/Courses/Detail.php" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.API/models/Course.php" afterPath="$PROJECT_DIR$/ScheduleRx.API/models/Course.php" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,98 +43,52 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="database.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/config/database.php">
+      <file leaf-file-name="Create.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Create.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="database_scripts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/database_scripts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="54" lean-forward="false" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Course.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/models/Course.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+            <state relative-caret-position="391">
+              <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
               <folding>
-                <marker date="1518317524960" expanded="true" signature="241:284" ph="SELECT c.nam... " />
-                <marker date="1518317524960" expanded="true" signature="241:302" ph="SELECT c.nam... . ${$this-&gt;table} ." />
-                <marker date="1518317524960" expanded="true" signature="241:340" ph="SELECT c.nam... ${$this-&gt;table_name}" />
-                <marker date="1518317524960" expanded="true" signature="560:603" ph="SELECT COURS... " />
-                <marker date="1518317524960" expanded="true" signature="560:604" ph="SELECT COURS... ${$this}" />
-                <marker date="1518317524960" expanded="true" signature="560:677" ph="SELECT COURS... ${$this-&gt;table}" />
-                <marker date="1518317524960" expanded="true" signature="560:678" ph="SELECT COURS... " />
-                <marker date="1518317524960" expanded="true" signature="999:1087" ph="INSERT INTO ${$this-&gt;table_name}" />
-                <marker date="1518317524960" expanded="true" signature="999:1088" ph="INSERT INTO ${$this-&gt;table}... " />
-                <marker date="1518317524960" expanded="true" signature="2123:2175" ph="DELETE FROM ${$this-&gt;table_name}... " />
+                <marker date="1519200314809" expanded="true" signature="506:518" ph="INSERT INTO ${$this-&gt;table}... " />
+                <marker date="1519200314809" expanded="true" signature="506:569" ph="INSERT INTO ${$this-&gt;table}SET... " />
+                <marker date="1519200314809" expanded="true" signature="590:605" ph="prepare(${$q... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Delete.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php">
+      <file leaf-file-name="CreateCourse.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Course/scenes/Courses/CreateCourse.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+            <state relative-caret-position="187">
+              <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Detail.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php">
+      <file leaf-file-name="index.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Course/scenes/Courses/index.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Create.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Create.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Update.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Update.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+              <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>COURSE</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>BOOKING</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -126,12 +100,20 @@
         <option value="$PROJECT_DIR$/scripts/database_scripts" />
         <option value="$PROJECT_DIR$/ScheduleRx.API/Course/GET.php" />
         <option value="$PROJECT_DIR$/ScheduleRx.API/Course/PUT.php" />
-        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Index.php" />
-        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php" />
-        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Create.php" />
-        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php" />
-        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Update.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/models/User.php" />
         <option value="$PROJECT_DIR$/ScheduleRx.API/models/Course.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Index.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Bookings/Delete.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Bookings/Detail.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Bookings/Index.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Create.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Bookings/Create.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Bookings/Update.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Update.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Courses/Update.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Courses/Create.php" />
       </list>
     </option>
   </component>
@@ -145,11 +127,11 @@
     <handled-path value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/node_modules" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP" />
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="1358" />
-    <option name="y" value="-470" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -171,41 +153,24 @@
         <subPane>
           <expand>
             <path>
-              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Course" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="b2602c69:ProjectViewProjectNode" />
               <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="scripts" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="schedulerx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="schedulerx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -232,6 +197,7 @@
     <property name="last_opened_file_path" value="C:/xampp/php/php.exe" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -245,25 +211,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.ScheduleRx">
-    <configuration name="Course.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ScheduleRx/ScheduleRx.API/models/Course.php" />
+  <component name="RunManager" selected="JavaScript Debug.Create.php">
+    <configuration name="Create.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/schedulerx/ScheduleRx.API/Courses/Create.php" />
     <configuration name="Index.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ScheduleRx/ScheduleRx.API/Course/Index.php" />
+    <configuration name="Update.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/schedulerx/ScheduleRx.API/Courses/Update.php" />
     <configuration name="database.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ScheduleRx/ScheduleRx.API/config/database.php" />
     <configuration name="ScheduleRx" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner directory="$PROJECT_DIR$" />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.Course.php" />
-      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.Index.php" />
-      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.database.php" />
-      <item index="3" class="java.lang.String" itemvalue="PHPUnit.ScheduleRx" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.Index.php" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.database.php" />
+      <item index="2" class="java.lang.String" itemvalue="PHPUnit.ScheduleRx" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.Update.php" />
+      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.Create.php" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="PHPUnit.ScheduleRx" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.Index.php" />
-        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.database.php" />
-        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.Course.php" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.Create.php" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.Update.php" />
+        <item index="2" class="java.lang.String" itemvalue="PHPUnit.ScheduleRx" />
+        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.Index.php" />
+        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.database.php" />
       </list>
     </recent_temporary>
   </component>
@@ -302,35 +271,55 @@
     <history-entry file="ScheduleRx - 2018.02.11 at 16h 04m 29s.xml">
       <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.20 at 12h 24m 21s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.21 at 00h 47m 09s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26284000" />
+    <option name="totallyTimeSpent" value="46753000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-470" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1078125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14787701" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.076219514" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1711569" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1711569" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="19" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="21" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="22" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="23" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1078125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="24" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1711569" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,17 +333,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/ScheduleRx.API/config/database.php</url>
-          <line>11</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/ScheduleRx.API/config/database.php</url>
           <line>13</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/ScheduleRx.API/config/database.php</url>
-          <line>3</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="5" />
@@ -362,6 +342,176 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding>
+              <marker date="1518757599118" expanded="true" signature="13357:13385" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="14778:15054" ph="{&quot;version&quot;: &quot;0.2.0&quot;...}" />
+              <marker date="1518757599118" expanded="true" signature="14822:15052" ph="[...]" />
+              <marker date="1518757599118" expanded="true" signature="14823:15051" ph="{&quot;name&quot;: &quot;Chrome&quot;...}" />
+              <marker date="1518757599118" expanded="true" signature="14999:15047" ph="{&quot;webpack:///src/*&quot;: &quot;${webRoot}/*&quot;...}" />
+              <marker date="1518757599118" expanded="true" signature="20280:20311" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="20293:20309" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="20417:20482" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="20561:20616" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="20574:20614" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="22478:22552" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="22557:22589" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="22611:22646" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="22666:22773" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="23823:23843" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="23879:23936" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="24018:24123" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="24031:24121" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="25202:25268" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="25301:25588" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="31100:31150" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="31257:31344" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="31554:31594" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="34426:34691" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="34430:34624" ph="//..." />
+              <marker date="1518757599118" expanded="true" signature="37126:37210" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="37211:37315" ph="//..." />
+              <marker date="1518757599118" expanded="true" signature="43162:43309" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="43249:43302" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="43759:43785" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55227:55340" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55249:55329" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55263:55325" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55683:56283" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55705:56272" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55765:55829" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55889:56015" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="55958:55996" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="56097:56144" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="56222:56268" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="57214:57626" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="57236:57615" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="57253:57611" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="57340:57575" ph="//..." />
+              <marker date="1518757599118" expanded="true" signature="58818:58947" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="58827:58947" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="64619:64633" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="65566:65644" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="65683:65728" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="67020:67095" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="67437:67515" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="67554:67566" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="68488:68566" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="68604:68639" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="70256:70306" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="70779:70845" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="71199:71282" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="72573:72990" ph="{&quot;name&quot;: &quot;your-package&quot;...}" />
+              <marker date="1518757599118" expanded="true" signature="72611:72988" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="72641:72741" ph="[...]" />
+              <marker date="1518757599118" expanded="true" signature="72768:72896" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="72786:72890" ph="{&quot;branches&quot;: 90...}" />
+              <marker date="1518757599118" expanded="true" signature="75335:75453" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="92412:92476" ph="{...}" />
+              <marker date="1518757599118" expanded="true" signature="116389:116437" ph="..." />
+              <marker date="1518757599118" expanded="true" signature="116579:116654" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/models/Course.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="1647" column="12" lean-forward="false" selection-start-line="1647" selection-start-column="8" selection-end-line="1647" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Course/components/CourseTable.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/App/components/Header.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-175">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/App/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="56" column="20" lean-forward="true" selection-start-line="56" selection-start-column="20" selection-end-line="56" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Bookings/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/components/BookingTable.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="5" lean-forward="false" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/components/BookingsIndex.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="11" lean-forward="true" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ScheduleRx.API/config/database.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -374,7 +524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="54" lean-forward="false" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -382,22 +531,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
-          <folding>
-            <marker date="1518317524960" expanded="true" signature="241:284" ph="SELECT c.nam... " />
-            <marker date="1518317524960" expanded="true" signature="241:302" ph="SELECT c.nam... . ${$this-&gt;table} ." />
-            <marker date="1518317524960" expanded="true" signature="241:340" ph="SELECT c.nam... ${$this-&gt;table_name}" />
-            <marker date="1518317524960" expanded="true" signature="560:603" ph="SELECT COURS... " />
-            <marker date="1518317524960" expanded="true" signature="560:604" ph="SELECT COURS... ${$this}" />
-            <marker date="1518317524960" expanded="true" signature="560:677" ph="SELECT COURS... ${$this-&gt;table}" />
-            <marker date="1518317524960" expanded="true" signature="560:678" ph="SELECT COURS... " />
-            <marker date="1518317524960" expanded="true" signature="999:1087" ph="INSERT INTO ${$this-&gt;table_name}" />
-            <marker date="1518317524960" expanded="true" signature="999:1088" ph="INSERT INTO ${$this-&gt;table}... " />
-            <marker date="1518317524960" expanded="true" signature="2123:2175" ph="DELETE FROM ${$this-&gt;table_name}... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Delete.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
@@ -405,7 +543,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Detail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
@@ -413,7 +551,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Index.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
@@ -421,15 +559,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Create.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Create.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
-          <folding />
+          <folding>
+            <marker date="1519200314809" expanded="true" signature="506:518" ph="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1519200314809" expanded="true" signature="506:569" ph="INSERT INTO ${$this-&gt;table}SET... " />
+            <marker date="1519200314809" expanded="true" signature="590:605" ph="prepare(${$q... " />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Update.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Update.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
@@ -449,11 +591,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="54" lean-forward="false" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Delete.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
@@ -461,7 +602,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Detail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
@@ -469,7 +610,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Index.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
@@ -477,15 +618,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Create.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Create.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1519200314809" expanded="true" signature="506:518" ph="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1519200314809" expanded="true" signature="506:569" ph="INSERT INTO ${$this-&gt;table}SET... " />
+            <marker date="1519200314809" expanded="true" signature="590:605" ph="prepare(${$q... " />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Update.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Update.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
@@ -497,61 +642,68 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1462">
           <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding>
-            <marker date="1518317524960" expanded="true" signature="241:284" ph="SELECT c.nam... " />
-            <marker date="1518317524960" expanded="true" signature="241:302" ph="SELECT c.nam... . ${$this-&gt;table} ." />
-            <marker date="1518317524960" expanded="true" signature="241:340" ph="SELECT c.nam... ${$this-&gt;table_name}" />
-            <marker date="1518317524960" expanded="true" signature="560:603" ph="SELECT COURS... " />
-            <marker date="1518317524960" expanded="true" signature="560:604" ph="SELECT COURS... ${$this}" />
-            <marker date="1518317524960" expanded="true" signature="560:677" ph="SELECT COURS... ${$this-&gt;table}" />
-            <marker date="1518317524960" expanded="true" signature="560:678" ph="SELECT COURS... " />
-            <marker date="1518317524960" expanded="true" signature="999:1087" ph="INSERT INTO ${$this-&gt;table_name}" />
-            <marker date="1518317524960" expanded="true" signature="999:1088" ph="INSERT INTO ${$this-&gt;table}... " />
-            <marker date="1518317524960" expanded="true" signature="2123:2175" ph="DELETE FROM ${$this-&gt;table_name}... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/db_tables.sql" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/0185ca6a-5a5f-46c6-b957-7fad784c1fb8/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/76e2d90a-e765-4a39-a4f4-bdf3aed4bef4/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/0185ca6a-5a5f-46c6-b957-7fad784c1fb8/console.sql" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/76e2d90a-e765-4a39-a4f4-bdf3aed4bef4/console.sql" />
     <entry file="file://$PROJECT_DIR$/scripts/database_scripts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="54" lean-forward="false" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Update.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/models/Booking.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="323">
+          <caret line="120" column="5" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="120" selection-end-column="5" />
+          <folding>
+            <marker date="1519148581894" expanded="true" signature="403:410" ph="SELECT COURS... ${$this-&gt;table}" />
+            <marker date="1519148581894" expanded="true" signature="403:536" ph="SELECT BOOKI... ${$this-&gt;table}" />
+            <marker date="1519148581894" expanded="true" signature="756:907" ph="SELECT BOOKI... ${$this-&gt;table}" />
+            <marker date="1519148581894" expanded="true" signature="774:907" ph="SELECT COURS... ${$this-&gt;table}" />
+            <marker date="1519148581894" expanded="true" signature="1316:1396" ph="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1519148581894" expanded="true" signature="1316:1447" ph="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1519148581894" expanded="true" signature="1316:1465" ph="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1519148581894" expanded="true" signature="3197:3250" ph="DELETE FROM ${$this-&gt;table}... " />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Index.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/routes.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        <state relative-caret-position="0">
+          <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+          <folding>
+            <marker date="1519150369337" expanded="true" signature="292:360" ph="SELECT * FRO... ${$this-&gt;table}" />
+            <marker date="1519150369337" expanded="true" signature="292:365" ph="SELECT * FRO... ${$this-&gt;table}" />
+            <marker date="1519150369337" expanded="true" signature="584:669" ph="SELECT BOOKI... ${$this-&gt;table}" />
+            <marker date="1519150369337" expanded="true" signature="1075:1224" ph="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1519150369337" expanded="true" signature="2956:3009" ph="DELETE FROM ${$this-&gt;table}... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/config/database.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
@@ -561,44 +713,136 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ScheduleRx.API/models/Course.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+        <state relative-caret-position="115">
+          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
           <folding>
-            <marker date="1518317524960" expanded="true" signature="241:284" ph="SELECT c.nam... " />
-            <marker date="1518317524960" expanded="true" signature="241:302" ph="SELECT c.nam... . ${$this-&gt;table} ." />
-            <marker date="1518317524960" expanded="true" signature="241:340" ph="SELECT c.nam... ${$this-&gt;table_name}" />
-            <marker date="1518317524960" expanded="true" signature="560:603" ph="SELECT COURS... " />
-            <marker date="1518317524960" expanded="true" signature="560:604" ph="SELECT COURS... ${$this}" />
-            <marker date="1518317524960" expanded="true" signature="560:677" ph="SELECT COURS... ${$this-&gt;table}" />
-            <marker date="1518317524960" expanded="true" signature="560:678" ph="SELECT COURS... " />
-            <marker date="1518317524960" expanded="true" signature="999:1087" ph="INSERT INTO ${$this-&gt;table_name}" />
-            <marker date="1518317524960" expanded="true" signature="999:1088" ph="INSERT INTO ${$this-&gt;table}... " />
-            <marker date="1518317524960" expanded="true" signature="2123:2175" ph="DELETE FROM ${$this-&gt;table_name}... " />
+            <marker date="1519150369440" expanded="true" signature="241:340" ph="SELECT COURS... ${$this-&gt;table}" />
+            <marker date="1519150369440" expanded="true" signature="560:677" ph="SELECT COURS... ${$this-&gt;table}" />
+            <marker date="1519150369440" expanded="true" signature="1575:1627" ph="DELETE FROM ${$this-&gt;table}... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/Update.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        <state relative-caret-position="306">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <marker date="1519194791193" expanded="true" signature="480:675" ph="UPDATE booking... " />
+            <marker date="1519194791193" expanded="true" signature="486:675" ph="UPDATE course... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="49" lean-forward="false" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
+          <folding>
+            <marker date="1519194404410" expanded="true" signature="423:444" ph="SELECT * FRO... booking" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/Detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="26" column="48" lean-forward="false" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+          <folding>
+            <marker date="1519194404338" expanded="true" signature="478:520" ph="SELECT * FRO... booking" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/Delete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="26" column="46" lean-forward="false" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+          <folding>
+            <marker date="1519194404276" expanded="true" signature="478:518" ph="DELETE FROM course... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Delete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1519195336707" expanded="true" signature="478:516" ph="DELETE FROM ${$this-&gt;table}... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="29" lean-forward="false" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+          <folding>
+            <marker date="1519195336770" expanded="true" signature="478:518" ph="SELECT FROM course... " />
+            <marker date="1519195336770" expanded="true" signature="486:518" ph="DELETE FROM course... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <marker date="1519195336619" expanded="true" signature="478:580" ph="UPDATE course... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/Create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4">
+          <caret line="12" column="31" lean-forward="false" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+          <folding>
+            <marker date="1519194691493" expanded="true" signature="480:504" ph="INSERT INTO course... " />
+            <marker date="1519194691493" expanded="true" signature="480:528" ph="INSERT INTO course... " />
+            <marker date="1519194691493" expanded="true" signature="480:680" ph="INSERT INTO course... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+          <folding>
+            <marker date="1519189394453" expanded="true" signature="423:443" ph="SELECT * FRO... course" />
+            <marker date="1519189394453" expanded="true" signature="431:443" ph="DELETE FROM course... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Course/scenes/Courses/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="6" lean-forward="true" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/config/database.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Course/scenes/Courses/CreateCourse.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+        <state relative-caret-position="187">
+          <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Course/Create.php">
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
-          <folding />
+        <state relative-caret-position="391">
+          <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+          <folding>
+            <marker date="1519200314809" expanded="true" signature="506:518" ph="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1519200314809" expanded="true" signature="506:569" ph="INSERT INTO ${$this-&gt;table}SET... " />
+            <marker date="1519200314809" expanded="true" signature="590:605" ph="prepare(${$q... " />
+          </folding>
         </state>
       </provider>
     </entry>

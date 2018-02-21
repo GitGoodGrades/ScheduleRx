@@ -6,24 +6,30 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
 
+//test to find file-path
+
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "DELETE FROM booking WHERE BOOKING_ID = ?";
-$stmt = $this->conn->prepare($query);
+$query =  ("INSERT INTO course SET COURSE_ID=:COURSE_ID, STUDENTS=:STUDENTS");
 
-$BOOKING=htmlspecialchars(strip_tags($data->BOOKING_ID));
 
-$stmt->bindParam(1, $BOOKING);
+$stmt = $conn->prepare($query);
+
+$COURSE=htmlspecialchars(strip_tags($data->COURSE_ID));
+$STUDENT=htmlspecialchars(strip_tags($data->STUDENTS));
+
+$stmt->bindParam(":COURSE_ID", $COURSE);
+$stmt->bindParam(":STUDENTS", $STUDENT);
 
 if($stmt->execute()){
     echo '{';
-    echo '"message": "Booking was deleted."';
+    echo '"message": "Courses was created."';
     echo '}';
 }
 else {
     echo '{';
-    echo '"message": "Unable to delete Booking."';
+    echo '"message": "Unable to create Courses."';
     echo '}';
 }

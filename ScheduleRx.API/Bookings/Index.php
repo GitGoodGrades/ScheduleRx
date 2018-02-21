@@ -1,33 +1,24 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
-include_once '../models/Booking.php';
 
 $database = new Database();
-$db = $database->getConnection();
-$booking = new Booking($db);
-$stmt = $booking->Index();
-$num = $stmt->rowCount();
+$conn = $database->getConnection();
 
-if($num>0){
-    $bookingList=array();
-    $bookingList["records"]=array();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        extract($row);
-        $bookingItem=array(
-            "COURSE_ID" => $COURSE_ID,
-            "ROOM_ID" => $ROOM_ID,
-            "START_TIME" => $START_TIME,
-            "END_TIME" => $END_TIME
-        );
-        array_push($bookingList["records"], $bookingItem);
-    }
-    echo json_encode($bookingList);
+$query = "SELECT * FROM booking";
+$stmt = $this->conn->prepare($query);
+
+if($stmt->execute()){
+    echo '{';
+    echo '"message": "Bookings were retrieved."';
+    echo '}';
 }
-else{
-    echo json_encode(
-        array("message" => "No booking found.")
-    );
+else {
+    echo '{';
+    echo '"message": "Unable to retrieve Bookings."';
+    echo '}';
 }
