@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CourseTable from '../../components/CourseTable';
-import CourseForm from '../../components/CourseForm';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
 
 class Courses extends Component {
     state = {
-        courseList: []
+        courseList: [],
+        isLoading: true
     };
 
     componentDidMount() {
@@ -13,13 +14,15 @@ class Courses extends Component {
       .then(res => {
         const courseList = res.data;
         this.setState({ courseList });
+        this.setState({isLoading: false})
       });
     };
 
     render(){
         return(
             <div>
-                <CourseTable courseList={this.state.courseList} />
+                {this.state.isLoading && <CircularProgress size={75} /> ||
+                <CourseTable courseList={this.state.courseList} />}
             </div>
         );
     };

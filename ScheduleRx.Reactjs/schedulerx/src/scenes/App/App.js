@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
-
 import Header from './components/Header';
 import routes from '../../routes';
+import LeftNavigationPanel from './components/LeftNavigationPanel';
 
 const styles = theme => ({
   root: {
@@ -23,20 +22,17 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     width: '100%',
     padding: theme.spacing.unit * 3,
-    height: 'calc(100% - 56px)',
+    height: '100%',
     marginTop: 56,
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
       marginTop: 64,
     },
-    'overflow-x': 'scroll',
+ 
+    overflow: 'auto'
   },
   gridRoot: {
-    flexGrow: 1,
-  },
-  gridPaper: {
-    padding: theme.spacing.unit * 2,
-    height: '100%',
+    height: '100%'
   },
 });
 
@@ -44,23 +40,34 @@ const styles = theme => ({
 class App extends React.Component {
   constructor() {
     super();
+    this.state= {
+      mobileOpen: false,
+  }
+  }
+
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
   }
 
   render() {
     const { classes } = this.props;
+
     return (
       <div className={classes.root}>
-      <Header />
         <div className={classes.appFrame}>
-        <main className={classes.content}>
-          <Grid container className={classes.gridRoot}>
-            {routes}
-          </Grid>
-        </main>
+          <Header handleDrawerToggle={this.handleDrawerToggle} />
+          <LeftNavigationPanel
+            mobileOpen={this.state.mobileOpen}
+            handleDrawerToggle={this.handleDrawerToggle}
+          />
+          <main className={classes.content}>
+            <Grid container className={classes.gridRoot}>
+              {routes}
+            </Grid>
+          </main>
+        </div>
       </div>
-    </div>
-
-);
+    );
   }
 }
 
