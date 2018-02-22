@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CourseTable from '../../components/CourseTable';
-import CourseForm from '../../components/CourseForm';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 
 class Courses extends Component {

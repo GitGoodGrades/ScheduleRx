@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
-
 import Header from './components/Header';
 import routes from '../../routes';
 import LeftNavigationPanel from './components/LeftNavigationPanel';

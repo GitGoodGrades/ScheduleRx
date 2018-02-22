@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Table, { TableBody, TableHead, TableFooter, TableCell, TableRow, TableSortLabel, TablePagination } from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import Hidden from 'material-ui/Hidden/Hidden';
-import { CircularProgress } from 'material-ui/Progress';
 
 class CourseTable extends Component {
   render() {
-    const courseList = this.props.courseList;
-    
+    const courseList = this.props.courseList;  
     return (
       <Paper>
           <Table >
