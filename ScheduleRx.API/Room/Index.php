@@ -3,30 +3,28 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once '../config/database.php';
-include_once '../models/Room.php';
+include_once '../models/Course.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$Room = new Room($db);
-$stmt = $Room->Index();
+
+$query = "SELECT * FROM room ORDER BY ROOM_ID DESC";
+
+$stmt = $db->prepare($query);
+$stmt->execute();
 $num = $stmt->rowCount();
 
 if($num>0){
-    $RoomList=array();
-    $RoomList["records"]=array();
+    $roomList=array();
+    $roomList["records"]=array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
-        $RoomItem=array(
-            "ROOM_ID" => $ROOM_ID,
-            "ROOM_DESCRIPTION" => $ROOM_DESCRIPTION,
-            "CAPACITY" => $CAPACITY
-        );
-        array_push($RoomList["records"], $RoomItem);
+        array_push($roomList["records"], $row);
     }
-    echo json_encode($RoomList);
+    echo json_encode($roomList);
 }
 else{
     echo json_encode(
-        array("message" => "No Room found.")
+        array("message" => "No rooms found.")
     );
 }

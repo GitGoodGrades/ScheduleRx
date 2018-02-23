@@ -1,30 +1,33 @@
 <?php
-// required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 include_once '../config/database.php';
-include_once '../models/Course.php';
 
 $database = new Database();
-$db = $database->getConnection();
-
-$Course = new Course($db);
+$conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$Course->COURSE_ID = $data->COURSE_ID;
-$Course->STUDENTS = $data->STUDENTS;
+$query =  ("INSERT INTO course SET COURSE_ID=:COURSE_ID, STUDENTS=:STUDENTS");
 
-if($Course->Update()){
+
+$stmt = $conn->prepare($query);
+
+$COURSE=htmlspecialchars(strip_tags($data->COURSE_ID));
+$STUDENT=htmlspecialchars(strip_tags($data->STUDENTS));
+
+$stmt->bindParam(":COURSE_ID", $COURSE);
+$stmt->bindParam(":STUDENTS", $STUDENT);
+
+if($stmt->execute()){
     echo '{';
-    echo '"message": "Course was updated."';
+    echo '"message": "Courses was created."';
     echo '}';
 }
-else{
+else {
     echo '{';
-    echo '"message": "Unable to update course."';
+    echo '"message": "Unable to create Courses."';
     echo '}';
 }

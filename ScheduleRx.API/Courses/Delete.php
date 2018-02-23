@@ -4,26 +4,26 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 include_once '../config/database.php';
-include_once '../models/Course.php';
 
 $database = new Database();
-$db = $database->getConnection();
-
-$Course = new Course($db);
-
+$conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$Course->COURSE_ID = $data->COURSE_ID;
+$query = "DELETE FROM course WHERE COURSE_ID = ?";
+$stmt = $conn->prepare($query);
 
-if($Course->delete()){
+$COURSE=htmlspecialchars(strip_tags($data->COURSE_ID));
+
+$stmt->bindParam(1, $COURSE);
+
+if($stmt->execute()){
     echo '{';
-    echo '"message": "Course was deleted."';
+    echo '"message": "Courses was deleted."';
     echo '}';
 }
-else{
+else {
     echo '{';
-    echo '"message": "Unable to delete object."';
+    echo '"message": "Unable to delete Courses."';
     echo '}';
 }

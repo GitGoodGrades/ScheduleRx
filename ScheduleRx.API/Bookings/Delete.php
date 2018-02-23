@@ -4,25 +4,26 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 include_once '../config/database.php';
-include_once '../models/Booking.php';
 
 $database = new Database();
-$db = $database->getConnection();
-
-$Booking = new Booking($db);
+$conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$Booking->BOOKING_ID = $data->BOOKING_ID;
+$query = "DELETE FROM booking WHERE BOOKING_ID = ?";
+$stmt = $conn->prepare($query);
 
-if($Booking->delete()){
+$BOOKING =htmlspecialchars(strip_tags($data->BOOKING_ID));
+
+$stmt->bindParam(1, $BOOKING);
+
+if($stmt->execute()){
     echo '{';
-    echo '"message": "Booking was created."';
+    echo '"message": "Booking was deleted."';
     echo '}';
 }
-else{
+else {
     echo '{';
-    echo '"message": "Unable to create Booking."';
+    echo '"message": "Unable to delete Booking."';
     echo '}';
 }

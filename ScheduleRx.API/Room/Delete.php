@@ -4,25 +4,26 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 include_once '../config/database.php';
-include_once '../models/Room.php';
 
 $database = new Database();
-$db = $database->getConnection();
-
-$Room = new Room($db);
+$conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$Room->Room_ID = $data->Room_ID;
+$query = "DELETE FROM room WHERE ROOM_ID = ?";
+$stmt = $conn->prepare($query);
 
-if($Room->delete()){
+$ROOM=htmlspecialchars(strip_tags($data->ROOM_ID));
+
+$stmt->bindParam(1, $ROOM);
+
+if($stmt->execute()){
     echo '{';
-    echo '"message": "Room was created."';
+    echo '"message": "room was deleted."';
     echo '}';
 }
-else{
+else {
     echo '{';
-    echo '"message": "Unable to create Room."';
+    echo '"message": "Unable to delete room."';
     echo '}';
 }

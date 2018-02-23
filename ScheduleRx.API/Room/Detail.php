@@ -6,18 +6,24 @@ header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
 include_once '../config/database.php';
-include_once '../models/Room.php';
+include_once '../models/Course.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$Room = new Room($db);
+$data = json_decode(file_get_contents("php://input"));
 
-$Room->Room_ID = isset($_GET['Room_ID']) ? $_GET['Room_ID'] : die();
-$Room->Detail();
-$RoomInfo = array(
-    "Room_ID" =>  $Room->Room_ID,
-    "ROOM_DESCRIPTION" => $Room->ROOM_DESCRIPTION,
-    "CAPACITY" => $Room->CAPACITY
-);
+$query = "SELECT * FROM room WHERE ROOM_ID = ? LIMIT 0,1";
 
-print_r(json_encode($RoomInfo));
+$stmt = $db->prepare( $query );
+$stmt->bindParam(1,$data->ROOM_ID);
+$stmt->execute();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($row) {
+    print_r(json_encode($row));
+}
+else {
+    echo null;
+}
+
+// Returns null if the record was not found.
