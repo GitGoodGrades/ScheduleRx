@@ -21,4 +21,12 @@ export const ListItems = ({ toggle }) =>
         <ListItemText primary="Courses" />
       </ListItem>
     </Link>
+    <Link to="/register">
+    <ListItem button onClick={toggle}>
+    <ListItemIcon>
+    <InboxIcon />
+    </ListItemIcon>
+    <ListItemText primary="Register" />
+    </ListItem>
+    </Link>
    </div>);
