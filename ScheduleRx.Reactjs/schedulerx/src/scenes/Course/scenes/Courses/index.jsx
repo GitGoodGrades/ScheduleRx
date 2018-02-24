@@ -10,7 +10,7 @@ class Courses extends Component {
     };
 
     componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Course/Index.php`)
+        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
       .then(res => {
         const courseList = res.data;
         this.setState({ courseList });
