@@ -5,7 +5,7 @@ import InboxIcon from 'material-ui-icons/MoveToInbox';
 
 export const ListItems = ({ toggle }) =>
   (<div>
-    <Link to="/home">
+    <Link to="/">
       <ListItem button onClick={toggle}>
         <ListItemIcon>
           <InboxIcon />
