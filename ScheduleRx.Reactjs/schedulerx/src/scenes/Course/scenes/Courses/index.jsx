@@ -13,8 +13,7 @@ class Courses extends Component {
         axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
       .then(res => {
         const courseList = res.data;
-        this.setState({ courseList });
-        this.setState({isLoading: false})
+        this.setState({ courseList, isLoading: false});
       });
     };
 
