@@ -5,9 +5,6 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import { withStyles } from 'material-ui/styles';
-import List from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import { ListItems } from '../../../components/tileData';
 
 const styles = theme => ({
   appBar: {
@@ -29,6 +26,14 @@ const Header = (props) => {
   return (
     <AppBar className={classes.appBar}>
       <Toolbar>
+        <IconButton
+          color="default"
+          aria-label="open drawer"
+          onClick={props.handleDrawerToggle}
+          className={classes.navIconHide}
+        >
+          <MenuIcon />
+        </IconButton>
         <Typography type="title" color="inherit" noWrap>
             ULM Nursing ScheduleRx
         </Typography>

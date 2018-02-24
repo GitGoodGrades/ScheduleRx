@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import CourseTable from '../../components/CourseTable';
-import CourseForm from '../../components/CourseForm';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
 
 class Courses extends Component {
     state = {
-        courseList: []
+        courseList: [],
+        isLoading: true
     };
 
     componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Course/Index.php`)
+        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
       .then(res => {
         const courseList = res.data;
-        this.setState({ courseList });
+        this.setState({ courseList, isLoading: false});
       });
     };
 
     render(){
         return(
             <div>
-                <CourseTable courseList={this.state.courseList} />
+                {this.state.isLoading && <CircularProgress size={75} /> ||
+                <CourseTable courseList={this.state.courseList} />}
             </div>
         );
     };

@@ -10,13 +10,21 @@ include_once '../models/Course.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$Course = new Course($db);
+$data = json_decode(file_get_contents("php://input"));
 
-$Course->COURSE_ID = isset($_GET['COURSE_ID']) ? $_GET['COURSE_ID'] : die();
-$Course->Detail();
-$CourseList = array(
-    "COURSE_ID" =>  $Course->COURSE_ID,
-    "STUDENTS" => $Course->STUDENTS
-);
+$query = "SELECT COURSE_ID, STUDENTS
+            FROM course
+            WHERE COURSE_ID = ?
+            LIMIT 0,1";
 
-print_r(json_encode($CourseList));
+$stmt = $db->prepare( $query );
+$stmt->bindParam(1,$data->COURSE_ID);
+$stmt->execute();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($row) {
+    print_r(json_encode($row));
+}
+else {
+    echo null;
+}

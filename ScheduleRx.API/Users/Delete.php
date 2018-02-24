@@ -10,20 +10,20 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "DELETE FROM room WHERE ROOM_ID = ?";
+$query = "DELETE FROM users WHERE USER_ID = ?";
 $stmt = $conn->prepare($query);
 
-$ROOM=htmlspecialchars(strip_tags($data->ROOM_ID));
+$USER=htmlspecialchars(strip_tags($data->USER_ID));
 
-$stmt->bindParam(1, $ROOM);
+$stmt->bindParam(1, $USER);
 
 if($stmt->execute()){
     echo '{';
-    echo '"message": "room was deleted."';
+    echo '"message": "User was deleted."';
     echo '}';
 }
 else {
     echo '{';
-    echo '"message": "Unable to delete room."';
+    echo '"message": "Unable to delete User."';
     echo '}';
 }

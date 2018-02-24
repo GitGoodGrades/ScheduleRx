@@ -7,8 +7,13 @@ include_once '../models/Course.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$course = new Course($db);
-$stmt = $course->Index();
+
+$query = "SELECT COURSE_ID, STUDENTS
+          FROM course
+          ORDER BY COURSE_ID DESC";
+
+$stmt = $db->prepare($query);
+$stmt->execute();
 $num = $stmt->rowCount();
 
 if($num>0){
@@ -16,16 +21,12 @@ if($num>0){
     $courseList["records"]=array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         extract($row);
-        $courseItem=array(
-            "COURSE_ID" => $COURSE_ID,
-            "STUDENTS" => $STUDENTS
-        );
-        array_push($courseList["records"], $courseItem);
+        array_push($courseList["records"], $row);
     }
     echo json_encode($courseList);
 }
 else{
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "No Courses found.")
     );
 }

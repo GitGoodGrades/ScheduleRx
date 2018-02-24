@@ -10,20 +10,21 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "DELETE FROM room WHERE ROOM_ID = ?";
+$query =  ("INSERT INTO roles SET ROLE=:ROLE");
+
 $stmt = $conn->prepare($query);
 
-$ROOM=htmlspecialchars(strip_tags($data->ROOM_ID));
+$ROL=htmlspecialchars(strip_tags($data->ROLE));
 
-$stmt->bindParam(1, $ROOM);
+$stmt->bindParam(":ROLE", $ROL);
 
 if($stmt->execute()){
     echo '{';
-    echo '"message": "room was deleted."';
+    echo '"message": "role was created."';
     echo '}';
 }
 else {
     echo '{';
-    echo '"message": "Unable to delete room."';
+    echo '"message": "Unable to create role."';
     echo '}';
 }

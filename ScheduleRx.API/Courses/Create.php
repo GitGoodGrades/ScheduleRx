@@ -10,20 +10,24 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "DELETE FROM room WHERE ROOM_ID = ?";
+$query =  ("INSERT INTO course SET COURSE_ID=:COURSE_ID, STUDENTS=:STUDENTS");
+
+
 $stmt = $conn->prepare($query);
 
-$ROOM=htmlspecialchars(strip_tags($data->ROOM_ID));
+$COURSE=htmlspecialchars(strip_tags($data->COURSE_ID));
+$STUDENT=htmlspecialchars(strip_tags($data->STUDENTS));
 
-$stmt->bindParam(1, $ROOM);
+$stmt->bindParam(":COURSE_ID", $COURSE);
+$stmt->bindParam(":STUDENTS", $STUDENT);
 
 if($stmt->execute()){
     echo '{';
-    echo '"message": "room was deleted."';
+    echo '"message": "Courses was created."';
     echo '}';
 }
 else {
     echo '{';
-    echo '"message": "Unable to delete room."';
+    echo '"message": "Unable to create Courses."';
     echo '}';
 }
