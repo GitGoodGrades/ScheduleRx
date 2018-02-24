@@ -32,7 +32,8 @@ const styles = theme => ({
     overflow: 'auto'
   },
   gridRoot: {
-    height: '100%'
+    height: '100%',
+    minHeight: 900
   },
 });
 

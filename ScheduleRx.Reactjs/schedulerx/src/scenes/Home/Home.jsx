@@ -1,24 +1,19 @@
 import React from 'react';
-import List from 'material-ui/List';
-import { ListItems} from '../../components/tileData';
 import Calendar from '../../components/Calendar';
 
-const eventList = [
+const events = [
     {
-      id: 0,
-      title: 'All Day Event very long title',
-      allDay: true,
-      start: new Date(2018, 2, 10),
-      end: new Date(2018, 2, 11),
+      title: 'Event very long title',
+      startDate: new Date(2018, 1, 10, 20, 0, 0, 0),
+      endDate: new Date(2018, 1, 10, 21, 0, 0, 0),
     },
     {
-      id: 1,
       title: 'Long Event',
-      start: new Date(2018, 2, 12),
-      end: new Date(2015, 2, 13),
+      startDate: new Date(2018, 1, 18, 20, 0, 0, 0),
+      endDate: new Date(2018, 1, 19, 21, 0, 0, 0),
     },
 ]  
 
-const Home = () => <div height="100%"><Calendar events={eventList}/></div>;
+const Home = () => <div minHeight="700" className="rbc-calendar"><Calendar events={events}/></div>;
 
 export default Home;

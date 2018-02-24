@@ -1,5 +1,3 @@
-import purple from 'material-ui/colors/purple';
-import blue from 'material-ui/colors/blue';
 import red from 'material-ui/colors/red';
 import blueGrey from 'material-ui/colors/blueGrey';
 
