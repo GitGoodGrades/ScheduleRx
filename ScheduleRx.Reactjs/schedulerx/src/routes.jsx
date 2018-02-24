@@ -7,7 +7,7 @@ import Home from './scenes/Home/Home';
 //import COMPONENT from './COMPONENT/PATH';
 
 const routes = (
-  <div>
+  <div height="100%">
     <Route exact path="/" component={Home} />
     <Route path="/course/list" component={Courses} />
     <Route path="/course/create" component={CreateCourse} />

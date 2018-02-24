@@ -3,9 +3,7 @@ html {
 }
 
 body {
-  // display: block;
   height: 100%;
-  // width: 100%;
   margin: 0px;
 }
 
@@ -13,6 +11,6 @@ a {
   text-decoration: none;
 }
 
-#app {
+#App {
   height: 100%;
 }
