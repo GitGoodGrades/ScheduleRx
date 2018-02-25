@@ -3,6 +3,7 @@ import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import axios from "axios/index";
 import ScheduleIDDropDown from 'ScheduleIDDropDown';
+import CourseDropDown from "./CourseDropDown";
 
 class EventForm extends React.Component {
     /**constructor() {
@@ -36,12 +37,20 @@ class EventForm extends React.Component {
          this.props.onSave(this.state.BOOKING_ID, this.state.COURSE_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME);
     };
 
+    getCourseList = () => courseList => {
+        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
+            .then(res => {
+                courseList = res.data;
+            });
+    };
+
     render() {
         const { classes } = this.props;
         return (
             <Paper>
                 <form className={classes.container}>
-                    <ScheduleIDDropDown onChange= />
+                    /**<ScheduleIDDropDown onChange= />*/
+                    <CourseDropDown courseList={this.getCourseList}/>
                 </form>
                 <Button variant="raised" onClick={this.handleSave} >
                     Save
