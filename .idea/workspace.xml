@@ -332,7 +332,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1519540592200</updated>
-      <workItem from="1519540593331" duration="9568000" />
+      <workItem from="1519540593331" duration="9572000" />
     </task>
     <task id="LOCAL-00001" summary="removed workspace file">
       <created>1519541107311</created>
@@ -383,11 +383,18 @@
       <option name="project" value="LOCAL" />
       <updated>1519579950993</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added events list">
+      <created>1519580199910</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1519580199910</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9568000" />
+    <option name="totallyTimeSpent" value="9572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />

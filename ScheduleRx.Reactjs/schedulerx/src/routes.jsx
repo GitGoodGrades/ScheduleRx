@@ -2,6 +2,9 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Courses from './scenes/Course/scenes/Courses/index';
 import CreateCourse from './scenes/Course/scenes/Courses/CreateCourse';
+import Events from './scenes/Event/scenes/Events/index';
+import CreateEvent from './scenes/Event/scenes/Events/CreateEvent';
+import RegisterForm from './scenes/Register/RegisterForm'
 import RegisterForm from './scenes/Register/scenes/RegisterForm'
 import Home from './scenes/Home/Home';
 import CreateSchedule from './scenes/Schedule/scenes/CreateSchedule';
@@ -13,7 +16,9 @@ const routes = (
     <Route exact path="/" component={Home} />
     <Route path="/course/list" component={Courses} />
     <Route path="/course/create" component={CreateCourse} />
+    <Route path="/event/list" component={Events} />
     <Route path="/register" component={RegisterForm}/>
+    <Route path="/event/create" component={CreateEvent} />
     <Route path="/schedule/create" component={CreateSchedule} />
   </div>);
 
