@@ -8,16 +8,16 @@ import Paper from 'material-ui/Paper';
 import axios from "axios/index";
 
 
-const styles = theme => ({
+const styles =({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
     },
-    textField: {
+    /**textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         width: 200,
-    },
+    },*/
     menu: {
         width: 200,
     },
@@ -58,6 +58,7 @@ class EventForm extends React.Component {
                 const courseList = res.data;
                 this.setState(courseList);
             });
+
     };
 
     render() {
@@ -66,14 +67,14 @@ class EventForm extends React.Component {
             <Paper>
                 <form className={classes.container}>
 
-                    <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+                    <DropDownMenu value={1} onChange={this.handleChange} styles={styles.customWidth}>
                         {(this.state.courseList.records && this.state.courseList.records.length > 0 && this.state.courseList.records.map(row => {
                             return (
                                 <MenuItem value={row.index} primaryText={row.COURSE_ID} />
                             );
                         })) || <MenuItem value={0} primaryText={'No Courses to Show'}/>}
                     </DropDownMenu>
-                    <TextField
+                    /**<TextField
                         id="SECTION_ID"
                         label="Course Section"
                         className={classes.textField}
@@ -81,7 +82,7 @@ class EventForm extends React.Component {
                         onChange={this.handleChange('SECTION_ID')}
                         margin="normal"
                         required="true"
-                    />
+                    />*/
                 </form>
                 <Button variant="raised" onClick={this.handleSave} >
                     Save
