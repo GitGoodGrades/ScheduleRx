@@ -6,12 +6,14 @@ import { BrowserRouter } from 'react-router-dom';
 import './app.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+
 render(
-    (<MuiThemeProvider >
+    (<MuiThemeProvider>
         <BrowserRouter className="App">
-        <App className="App"/>
-    </BrowserRouter>
-    </MuiThemeProvider>    ),
+         <App className="App"/>
+        </BrowserRouter>
+        </MuiThemeProvider>
+    ),
     document.getElementById('root')
 );
 
