@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="36db5648-5735-44d4-b188-c9703c2bc86c" name="Default" comment="Added events list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/components/EventForm.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/components/EventForm.jsx" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/routes.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/routes.jsx" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +17,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EventForm.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EventForm.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/components/EventForm.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
+            <state relative-caret-position="2332">
               <caret line="47" column="6" lean-forward="false" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/routes.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="371">
+              <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -89,6 +101,7 @@
         <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/components/EventTable.jsx" />
         <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/scenes/Events/CreateEvent.jsx" />
         <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/components/EventForm.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/routes.jsx" />
       </list>
     </option>
   </component>
@@ -319,7 +332,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1519540592200</updated>
-      <workItem from="1519540593331" duration="9312000" />
+      <workItem from="1519540593331" duration="9568000" />
     </task>
     <task id="LOCAL-00001" summary="removed workspace file">
       <created>1519541107311</created>
@@ -363,20 +376,27 @@
       <option name="project" value="LOCAL" />
       <updated>1519547875609</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added events list">
+      <created>1519579950993</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1519579950993</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9312000" />
+    <option name="totallyTimeSpent" value="9568000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3872" height="2092" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.49570817" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.075375535" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.49356222" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.0791309" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.92462444" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.9208691" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25482833" sideWeight="0.86271185" order="0" side_tool="false" content_ui="combo" />
@@ -550,8 +570,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/components/EventForm.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
+        <state relative-caret-position="2332">
           <caret line="47" column="6" lean-forward="false" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/routes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="8" column="43" lean-forward="true" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
