@@ -3,15 +3,15 @@ import axios from 'axios';
 import EventForm from '../../components/EventForm';
 
 class CreateEvent extends Component {
-    handleSave(course, section, room, start, end, schedule) {
+    handleSave(schedule, course, section, room, start, end) {
 
         axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Course/Create.php`, {
+            SCHEDULE_ID: schedule,
             COURSE_ID: course,
             SECTION_ID: section,
             ROOM_ID: room,
             START_TIME: start,
-            END_TIME: end,
-            SCHEDULE_ID: schedule
+            END_TIME: end
         })
             .then(function (response) {
                 console.log(response);
