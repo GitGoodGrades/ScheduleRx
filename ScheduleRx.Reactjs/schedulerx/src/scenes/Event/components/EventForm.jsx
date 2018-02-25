@@ -2,7 +2,6 @@ import React from 'react';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import axios from "axios/index";
-import ScheduleIDDropDown from 'ScheduleIDDropDown';
 import CourseDropDown from "./CourseDropDown";
 
 class EventForm extends React.Component {
@@ -45,11 +44,9 @@ class EventForm extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
         return (
             <Paper>
-                <form className={classes.container}>
-                    /**<ScheduleIDDropDown onChange= />*/
+                <form>
                     <CourseDropDown courseList={this.getCourseList}/>
                 </form>
                 <Button variant="raised" onClick={this.handleSave} >

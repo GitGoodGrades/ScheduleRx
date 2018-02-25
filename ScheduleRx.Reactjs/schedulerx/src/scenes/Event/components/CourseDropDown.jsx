@@ -19,7 +19,7 @@ class CourseDropDown extends React.Component {
         const courseList = this.props.courseList;
         return (
             <div>
-                <DropDownMenu value=this.state.value onChange={this.handleChange}>
+                <DropDownMenu value={this.state.value} onChange={this.handleChange}>
                     {(courseList.records && courseList.records.length > 0 && courseList.records.map(row =>
                         {return (
                             <MenuItem value={row.COURSE_ID} primaryText={row.COURSE_ID}/>

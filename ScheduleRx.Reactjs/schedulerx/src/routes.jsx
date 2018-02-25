@@ -16,7 +16,6 @@ const routes = (
     <Route exact path="/" component={Home} />
     <Route path="/course/list" component={Courses} />
     <Route path="/course/create" component={CreateCourse} />
-   /* <Route path="/event/list" component={Events} />*/
     <Route path="/register" component={RegisterForm}/>
     <Route path="/event/create" component={CreateEvent} />
     <Route path="/schedule/create" component={CreateSchedule} />
