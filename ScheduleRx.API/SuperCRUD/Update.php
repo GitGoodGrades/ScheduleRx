@@ -1,5 +1,5 @@
 <?php
-function UpdateRecord (string $tableName, object $fields, string $primaryKey, pdo $conn) {
+function UpdateRecord ($tableName, $fields, $primaryKey, $conn) {
     global $stmt;
 
     $update = "UPDATE ". $tableName . " SET ";

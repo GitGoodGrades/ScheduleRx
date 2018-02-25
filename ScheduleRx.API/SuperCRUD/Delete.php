@@ -1,5 +1,5 @@
 <?php
-function DeleteRecord ($tableName, $PrimaryKey, $value, pdo $conn) {
+function DeleteRecord ($tableName, $PrimaryKey, $value, $conn) {
     global $stmt;
     $query = ('DELETE FROM ' . $tableName ." WHERE " . $PrimaryKey . '=:' . $PrimaryKey);
     $stmt = $conn->prepare($query);

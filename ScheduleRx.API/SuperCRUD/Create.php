@@ -1,5 +1,5 @@
 <?php
-function CreateRecord (string $tableName, $fields, pdo $conn) {
+function CreateRecord ($tableName, $fields, $conn) {
     global $stmt;
     $query = ('INSERT INTO ' . $tableName ." SET ");
 

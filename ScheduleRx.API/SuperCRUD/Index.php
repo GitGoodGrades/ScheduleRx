@@ -1,5 +1,5 @@
 <?php
-function GetAll(string $tableName, string $primaryKey, pdo $conn) {
+function GetAll($tableName, $primaryKey, $conn) {
     $query = ('SELECT * FROM ' . $tableName. ' ORDER BY ' . $primaryKey. ' DESC');
     $stmt = $conn->prepare($query);
 
