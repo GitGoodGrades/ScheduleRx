@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import axios from "axios/index";
+import {ulmTheme} from "../../../theme";
 
 const styles = theme => ({
     container: {
@@ -64,6 +65,7 @@ class EventForm extends React.Component {
         return (
             <Paper>
                 <form className={classes.container}>
+                    <MuiThemeProvider muiTheme={ulmTheme}>
                     <DropDownMenu value={this.state.value} onChange={this.handleChange}>
                         {(this.state.courseList.records && this.state.courseList.records.length > 0 && this.state.courseList.records.map(row => {
                             return (
@@ -71,6 +73,7 @@ class EventForm extends React.Component {
                             );
                         })) || <MenuItem value={0} primaryText={'No Courses to Show'}/>}
                     </DropDownMenu>
+                    </MuiThemeProvider>
                 </form>
                 <Button variant="raised" onClick={this.handleSave} >
                     Save
