@@ -13,8 +13,10 @@ const Calendar = props => (
       {...this.props}
       style={{minHeight: 500, overflow: 'auto'}}
       events={props.events}
-      startAccessor='startDate'
-      endAccessor='endDate'
+      titleAccessor="COURSE_ID"
+      startAccessor='START_TIME'
+      endAccessor='END_TIME'
+      defaultDate={new Date()}
     />
   </div>
 );
