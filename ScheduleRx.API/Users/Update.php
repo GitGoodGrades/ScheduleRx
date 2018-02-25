@@ -5,32 +5,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
+include  '../SuperCRUD/Update.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "UPDATE users SET         USER_PASSWORD=:USER_PASSWORD,
-                                    EMAIL=:EMAIL,
-                                    ROLE=:ROLE
-                        WHERE       USER_ID = :USER_ID";
-$stmt = $conn->prepare($query);
-
-$USER=htmlspecialchars(strip_tags($data->USER_ID));
-$PASSWORD=htmlspecialchars(strip_tags($data->USER_PASSWORD));
-$MAIL=htmlspecialchars(strip_tags($data->EMAIL));
-$ROL=htmlspecialchars(strip_tags($data->ROLE));
-
-$stmt->bindParam(":USER_ID", $USER);
-$stmt->bindParam(":USER_PASSWORD", $PASSWORD);
-$stmt->bindParam(":EMAIL", $MAIL);
-$stmt->bindParam(":ROLE", $ROL);
-
-if($stmt->execute()){
-    echo '{';
-    echo '"message": "User Info was updated."';
-    echo '}';
-}
-else {
-    echo null;
-}
+echo UpdateRecord('users',$data, 'USER_ID',  $conn);

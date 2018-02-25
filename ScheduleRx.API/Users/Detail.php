@@ -4,24 +4,12 @@ header("Access-Control-Allow-Headers: access");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
+
 include_once '../config/database.php';
+include_once '../SuperCRUD/Detail.php';
 
 $database = new Database();
-$db = $database->getConnection();
+$conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "SELECT * FROM users WHERE USER_ID = ? LIMIT 0,1";
-
-$stmt = $db->prepare( $query );
-$stmt->bindParam(1,$data->USER_ID);
-$stmt->execute();
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if ($row) {
-    print_r(json_encode($row));
-}
-else {
-    echo null;
-}
-
-// Returns null if the record was not found.
+print_r(FindRecord('users', 'USER_ID', $data->USER_ID, $conn));
