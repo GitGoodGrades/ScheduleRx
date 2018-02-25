@@ -45,7 +45,7 @@ class EventForm extends React.Component {
 
     handleSave = () => {
         this.props.onSave(this.state.SCHEDULE_ID,  this.state.COURSE_ID, this.state.SECTION_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME);
-    }
+    };
 
     componentDidMount() {
         axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
@@ -61,8 +61,11 @@ class EventForm extends React.Component {
             <Paper>
                 <form className={classes.container}>
                     <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-
-
+                        {(this.props.courseList.records && this.props.courseList.records.length > 0 && this.props.courseList.records.map(row => {
+                            return (
+                                <MenuItem value={row.index} primaryText={row.COURSE_ID} />
+                            );
+                        })) || <MenuItem value={0} primaryText={'No Courses to Show'}/>}
                     </DropDownMenu>
                 </form>
                 <Button variant="raised" onClick={this.handleSave} >
