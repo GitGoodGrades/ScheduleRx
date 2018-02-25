@@ -1,64 +1,39 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import axios from "axios/index";
-
-
-const styles =({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    /**textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: 200,
-    },*/
-    menu: {
-        width: 200,
-    },
-    customWidth: {
-        width: 200,
-
-    }
-});
-
+import ScheduleIDDropDown from 'ScheduleIDDropDown';
 
 class EventForm extends React.Component {
-    state = {
-        BOOKING_ID: '',
-        SCHEDULE_ID: '',
-        COURSE_ID: '',
-        SECTION_ID: '',
-        ROOM_ID: '',
-        START_TIME: '',
-        END_TIME: '',
-        courseList: []
-    };
+    /**constructor() {
+        super();
+        this.state = {
+            SCHEDULE_ID: '',
+            COURSE_ID: '',
+            SECTION_ID: '',
+            ROOM_ID: '',
+            START_TIME: '',
+            END_TIME: ''
+        };
+    }*/
 
-    /**handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
+    constructor() {
+        super();
+        this.state = {
+            BOOKING_ID: '',
+            COURSE_ID: '',
+            ROOM_ID: '',
+            START_TIME: '',
+            END_TIME: ''
+        };
+    }
+
+    /**handleSave = () => {
+        this.props.onSave(this.state.SCHEDULE_ID,  this.state.COURSE_ID, this.state.SECTION_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME);
     };*/
 
-    handleChange = (event, index, value) => this.setState({value});
-
     handleSave = () => {
-        this.props.onSave(this.state.SCHEDULE_ID,  this.state.COURSE_ID, this.state.SECTION_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME);
-    };
-
-    componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
-            .then(res => {
-                const courseList = res.data;
-                this.setState(courseList);
-            });
-
+         this.props.onSave(this.state.BOOKING_ID, this.state.COURSE_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME);
     };
 
     render() {
@@ -66,23 +41,7 @@ class EventForm extends React.Component {
         return (
             <Paper>
                 <form className={classes.container}>
-
-                    <DropDownMenu value={1} onChange={this.handleChange} styles={styles.customWidth}>
-                        {(this.state.courseList.records && this.state.courseList.records.length > 0 && this.state.courseList.records.map(row => {
-                            return (
-                                <MenuItem value={row.index} primaryText={row.COURSE_ID} />
-                            );
-                        })) || <MenuItem value={0} primaryText={'No Courses to Show'}/>}
-                    </DropDownMenu>
-                    /**<TextField
-                        id="SECTION_ID"
-                        label="Course Section"
-                        className={classes.textField}
-                        value={this.state.name}
-                        onChange={this.handleChange('SECTION_ID')}
-                        margin="normal"
-                        required="true"
-                    />*/
+                    <ScheduleIDDropDown onChange= />
                 </form>
                 <Button variant="raised" onClick={this.handleSave} >
                     Save
@@ -92,4 +51,4 @@ class EventForm extends React.Component {
     }
 }
 
-export default withStyles(styles)(EventForm);
+export default EventForm;

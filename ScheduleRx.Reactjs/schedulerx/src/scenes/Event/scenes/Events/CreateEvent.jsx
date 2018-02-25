@@ -3,9 +3,27 @@ import axios from 'axios';
 import EventForm from '../../components/EventForm';
 
 class CreateEvent extends Component {
-    handleSave(schedule, course, section, room, start, end) {
 
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Course/Create.php`, {
+    handleSave(bookingid, course, room, start, end) {
+
+        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Booking/Create.php`, {
+            BOOKING_ID: bookingid,
+            COURSE_ID: course,
+            ROOM_ID: room,
+            START_TIME: start,
+            END_TIME: end
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    /**handleSave(schedule, course, section, room, start, end) {
+
+        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Booking/Create.php`, {
             SCHEDULE_ID: schedule,
             COURSE_ID: course,
             SECTION_ID: section,
@@ -19,7 +37,8 @@ class CreateEvent extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-    }
+    }*/
+
     render(){
         return(
             <div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/**import React, { Component } from 'react';
 import axios from 'axios';
 import EventTable from '../../components/EventTable';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
@@ -26,4 +26,4 @@ class Events extends Component {
         );
     };
 }
-export default Events;
+export default Events;*/
