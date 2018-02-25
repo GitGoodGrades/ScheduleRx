@@ -5,37 +5,11 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
+include  '../SuperCRUD/Create.php';
+
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query =  ("INSERT INTO room SET    ROOM_ID=:ROOM_ID,
-                                    CAPACITY=:CAPACITY,
-                                    ROOM_NAME=:ROOM_NAME,
-                                    LOCATION=:LOCATION,
-                                    DESCRIPTION=:DESCRIPTION");
-$stmt = $conn->prepare($query);
-
-$ROOM=htmlspecialchars(strip_tags($data->ROOM_ID));
-$CAP=htmlspecialchars(strip_tags($data->CAPACITY));
-$NAME=htmlspecialchars(strip_tags($data->ROOM_NAME));
-$LOC=htmlspecialchars(strip_tags($data->LOCATION));
-$DES=htmlspecialchars(strip_tags($data->DESCRIPTION));
-
-$stmt->bindParam(":ROOM_ID", $ROOM);
-$stmt->bindParam(":CAPACITY", $CAP);
-$stmt->bindParam(":ROOM_NAME", $NAME);
-$stmt->bindParam(":LOCATION", $LOC);
-$stmt->bindParam(":DESCRIPTION", $DES);
-
-if($stmt->execute()){
-    echo '{';
-    echo '"message": "Room was created."';
-    echo '}';
-}
-else {
-    echo '{';
-    echo '"message": "Unable to create Room."';
-    echo '}';
-}
+echo CreateRecord('room', $data, $conn);

@@ -11,4 +11,4 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-echo UpdateRecord('room',$data, 'ROOM_ID', $conn);
+echo UpdateRecord('course',$data, 'COURSE_ID', $conn);

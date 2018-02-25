@@ -6,26 +6,10 @@ header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
 include_once '../config/database.php';
-include_once '../models/Course.php';
+include_once '../SuperCRUD/Detail.php';
 
 $database = new Database();
-$db = $database->getConnection();
+$conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$query = "SELECT * FROM booking WHERE BOOKING_ID = ? LIMIT 0,1";
-$stmt = $db->prepare( $query );
-
-$BOOKING =htmlspecialchars(strip_tags($data->BOOKING_ID));
-
-$stmt->bindParam(1,$BOOKING);
-$stmt->execute();
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if ($row) {
-    print_r(json_encode($row));
-}
-else {
-    echo "entry not found";
-}
-
-// Returns null if the record was not found.
+print_r(FindRecord('booking', 'BOOKING_ID', $data->BOOKING_ID, $conn));
