@@ -61,7 +61,7 @@ class EventForm extends React.Component {
             <Paper>
                 <form className={classes.container}>
                     <DropDownMenu value={this.state.value} onChange={this.handleChange}>
-                        {(this.props.courseList.records && this.props.courseList.records.length > 0 && this.props.courseList.records.map(row => {
+                        {(this.state.courseList.records && this.state.courseList.records.length > 0 && this.state.courseList.records.map(row => {
                             return (
                                 <MenuItem value={row.index} primaryText={row.COURSE_ID} />
                             );

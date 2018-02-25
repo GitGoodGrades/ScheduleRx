@@ -5,9 +5,10 @@ import App from './scenes/App/App';
 import { BrowserRouter } from 'react-router-dom';
 import './app.css';
 
-render((
-<BrowserRouter className="App">
-    <App className="App"/>
-</BrowserRouter>
-), document.getElementById('root'));
+render(
+    (<BrowserRouter className="App">
+        <App className="App"/>
+    </BrowserRouter>),
+    document.getElementById('root')
+);
 
