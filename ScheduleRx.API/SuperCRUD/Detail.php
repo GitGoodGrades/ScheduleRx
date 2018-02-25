@@ -1,5 +1,5 @@
 <?php
-function FindRecord($tableName, $PrimaryKey, $value, pdo $conn)
+function FindRecord($tableName, $PrimaryKey, $value, $conn)
 {
     $query = ('SELECT * FROM ' . $tableName . " WHERE " . $PrimaryKey . '=:' . $PrimaryKey);
     $stmt = $conn->prepare($query);
