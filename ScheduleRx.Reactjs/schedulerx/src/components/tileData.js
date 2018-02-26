@@ -13,12 +13,12 @@ export const ListItems = ({ toggle }) =>
         <ListItemText primary="Home" />
       </ListItem>
     </Link>
-    <Link to="/course/list">
+    <Link to="/schedule/create">
       <ListItem button onClick={toggle}>
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Courses" />
+        <ListItemText primary="Schedule" />
       </ListItem>
     </Link>
     <Link to="/register">

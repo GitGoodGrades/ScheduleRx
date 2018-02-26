@@ -8,5 +8,5 @@ include  '../SuperCRUD/Index.php';
 $database = new Database();
 $conn = $database->getConnection();
 
-print_r(GetAll('roels', 'ROLE_ID', $conn));
+print_r(GetAll('roles', 'ROLE_ID', $conn));
 
