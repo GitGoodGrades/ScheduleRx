@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import axios from "axios/index";
 import CourseDropDown from "./CourseDropDown";
 import { withStyles } from 'material-ui/styles';
 
-class EventForm extends React.Component {
+class EventForm extends Component {
     /**constructor() {
         super();
         this.state = {
@@ -20,17 +20,16 @@ class EventForm extends React.Component {
 
 
 
-    constructor() {
-        super();
-        this.state = {
+    state = {
             BOOKING_ID: '',
             COURSE_ID: '',
             ROOM_ID: '',
             START_TIME: '',
             END_TIME: '',
-            courseList: []
-        };
-    }
+            courseList: [],
+            roomList: [],
+    };
+
 
     /**handleSave = () => {
         this.props.onSave(this.state.SCHEDULE_ID,  this.state.COURSE_ID, this.state.SECTION_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME);

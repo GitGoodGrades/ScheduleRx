@@ -4,9 +4,13 @@ import EventForm from '../../components/EventForm';
 
 class CreateEvent extends Component {
 
-    handleSave(bookingid, course, room, start, end) {
+    state = {
+        courseList: [],
+        roomList: []
+    };
 
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Booking/Create.php`, {
+    handleSave(bookingid, course, room, start, end) {
+                axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Booking/Create.php`, {
             BOOKING_ID: bookingid,
             COURSE_ID: course,
             ROOM_ID: room,
@@ -38,6 +42,14 @@ class CreateEvent extends Component {
                 console.log(error);
             });
     }*/
+
+
+    componentDidMount() {
+        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
+            .then(res => {
+                this.setState({courseList: res.data})
+            })
+    }
 
     render(){
         return(
