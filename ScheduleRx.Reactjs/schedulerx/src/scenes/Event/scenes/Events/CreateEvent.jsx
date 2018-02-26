@@ -27,23 +27,21 @@ class CreateEvent extends Component {
                 this.setState({sectionList: res.data})
             });
 
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
-            .then(res => {
-                this.setState({scheduleList: res.data})
-            });
-
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
-            .then(res => {
-                res.data.records.map(row => {
-                    console.log(row.SCHEDULE_ID)
-                    if (!row.IS_ARCHIVED && !row.IS_RELEASED) {
-                        this.setState({scheduleID: row.SCHEDULE_ID})
-                    }
-                })
-            });
-        }
+        // axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
+        //     .then(res => {
+        //         this.setState({scheduleList: res.data}, this.getScheduleID)
+        // });
 
 
+    }
+
+    // getScheduleID = () => {
+    //     this.state.scheduleList.records && this.state.scheduleList.records.map(row => {
+    //         if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "0") {
+    //             this.setState({scheduleID: row.SCHEDULE_ID});
+    //         }
+    //     })
+    // };
 
 
 
@@ -73,7 +71,6 @@ class CreateEvent extends Component {
                     courseList={this.state.courseList}
                     roomList={this.state.roomList}
                     sectionList={this.state.sectionList}
-                    scheduleID={ this.state.scheduleID}
                 />
             </div>
         );

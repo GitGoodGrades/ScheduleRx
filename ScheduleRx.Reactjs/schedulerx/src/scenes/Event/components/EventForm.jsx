@@ -6,6 +6,7 @@ import { MenuItem } from 'material-ui/Menu';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
+import axios from 'axios';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme =>({
@@ -26,16 +27,23 @@ const styles = theme =>({
 
 class EventForm extends Component {
     state = {
-            SCHEDULE_ID: '',
             COURSE_ID: '',
             SECTION_ID: '',
             ROOM_ID: '',
             START_TIME: '',
-            END_TIME: ''
+            END_TIME: '', 
+            SCHEDULE_ID: ''
         };
 
     handleSave = () => {
-        this.props.onSave(this.state.COURSE_ID, this.state.SECTION_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME, this.props.scheduleID);
+        this.props.onSave(
+            this.state.COURSE_ID, 
+            this.state.SECTION_ID, 
+            this.state.ROOM_ID, 
+            this.state.START_TIME, 
+            this.state.END_TIME,
+            this.state.SCHEDULE_ID
+        );
     };
 
 
@@ -43,6 +51,19 @@ class EventForm extends Component {
         this.setState({ [event.target.name]: event.target.value });
     };
 
+    componentDidMount() {
+        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
+            .then(res => {
+                res.data.records.map(row => {
+                    console.log(row.SCHEDULE_ID)
+                    if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "0") {
+                        this.setState({SCHEDULE_ID: row.SCHEDULE_ID}, )
+                    }
+                })
+            }
+        );
+    }
+            
 
     render() {
         const {classes} = this.props;
