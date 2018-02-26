@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import NewUserForm from './NewUserForm';
+import NewUserForm from '../components/NewUserForm';
 
 export default class RegisterForm extends Component {
     handleSave(userID, userPass, email, role) {
@@ -9,7 +9,7 @@ export default class RegisterForm extends Component {
             USER_ID: userID,
             USER_PASSWORD: userPass,
             EMAIL: email,
-            ROLE: role
+            ROLE_ID: role
         })
             .then(function (response) {
                 console.log(response);

@@ -5,10 +5,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
-include  '../SuperCRUD/Update.php';
+include  '../SuperCRUD/Delete.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-echo UpdateRecord('section',$data, 'SECTION_ID', $conn);
+echo DeleteRecord('schedule',"SCHEDULE_ID", $data->SCHEDULE_ID, $conn );
