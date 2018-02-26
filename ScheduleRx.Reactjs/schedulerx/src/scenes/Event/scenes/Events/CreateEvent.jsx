@@ -8,7 +8,8 @@ class CreateEvent extends Component {
         courseList: [],
         sectionList: [],
         roomList: [],
-        scheduleId: null
+        scheduleList: [],
+        scheduleID: ''
     };
 
     componentDidMount() {
@@ -26,25 +27,30 @@ class CreateEvent extends Component {
                 this.setState({sectionList: res.data})
             });
 
-
-    }
-
-    // function checkSchedule() {
-    //
-    // }
-
-
-    handleSave(course, section, room, start, end) {
-        let scheduleId = "";
         axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
             .then(res => {
-                (res.data.records && res.data.records > 0 && res.data.records.map(row => {
-                    if(!row.IS_RELEASED && !row.IS_ARCHIVED)
-                        scheduleId = row.SCHEDULE_ID;
-                }))
-        ;});
+                this.setState({scheduleList: res.data})
+            });
+
+        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
+            .then(res => {
+                res.data.records.map(row => {
+                    console.log(row.SCHEDULE_ID)
+                    if (!row.IS_ARCHIVED && !row.IS_RELEASED) {
+                        this.setState({scheduleID: row.SCHEDULE_ID})
+                    }
+                })
+            });
+        }
+
+
+
+
+
+    handleSave(course, section, room, start, end, scheduleID) {
+
         axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Bookings/Create.php`, {
-            SCHEDULE_ID: scheduleId,
+            SCHEDULE_ID: scheduleID,
             COURSE_ID: course,
             SECTION_ID: section,
             ROOM_ID: room,
@@ -67,6 +73,7 @@ class CreateEvent extends Component {
                     courseList={this.state.courseList}
                     roomList={this.state.roomList}
                     sectionList={this.state.sectionList}
+                    scheduleID={ this.state.scheduleID}
                 />
             </div>
         );

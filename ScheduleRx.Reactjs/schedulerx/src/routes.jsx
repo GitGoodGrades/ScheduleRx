@@ -4,7 +4,6 @@ import Courses from './scenes/Course/scenes/Courses/index';
 import CreateCourse from './scenes/Course/scenes/Courses/CreateCourse';
 //import Events from './scenes/Event/scenes/Events/index';
 import CreateEvent from './scenes/Event/scenes/Events/CreateEvent';
-import RegisterForm from './scenes/Register/RegisterForm'
 import RegisterForm from './scenes/Register/scenes/RegisterForm'
 import Home from './scenes/Home/Home';
 import CreateSchedule from './scenes/Schedule/scenes/CreateSchedule';

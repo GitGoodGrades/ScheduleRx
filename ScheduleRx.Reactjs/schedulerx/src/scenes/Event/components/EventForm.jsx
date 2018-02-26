@@ -35,7 +35,7 @@ class EventForm extends Component {
         };
 
     handleSave = () => {
-        this.props.onSave(this.state.COURSE_ID, this.state.SECTION_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME);
+        this.props.onSave(this.state.COURSE_ID, this.state.SECTION_ID, this.state.ROOM_ID, this.state.START_TIME, this.state.END_TIME, this.props.scheduleID);
     };
 
 
