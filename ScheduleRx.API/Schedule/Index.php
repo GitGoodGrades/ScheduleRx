@@ -8,4 +8,4 @@ include_once '../SuperCRUD/Index.php';
 $database = new Database();
 $conn = $database->getConnection();
 
-echo GetAll('section', 'SECTION_ID', $conn);
+echo GetAll('schedule', 'SCHEDULE_ID', $conn);

@@ -88,10 +88,9 @@ class NewUserForm extends React.Component {
                             className={classes.textField}
                         >
                             <option value={""}>NONE</option>
-                            <option value={"Student"}>Student</option>
-                            <option value={"Instructor"}>Instructor</option>
-                            <option value={"Schedule Admin"}>Schedule Admin</option>
-                            <option value={"System Admin"}>System Admin</option>
+                            <option value={3}>Student</option>
+                            <option value={2}>Instructor</option>
+                            <option value={1}>Schedule Admin</option>
                         </Select>
                     </div>
                 </form>

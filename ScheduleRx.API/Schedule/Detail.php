@@ -12,4 +12,4 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-print_r(FindRecord('section', 'SECTION_ID', $data->SECTION_ID, $conn));
+print_r(FindRecord('schedule', 'SCHEDULE_ID', $data->SCHEDULE_ID, $conn));
