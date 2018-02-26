@@ -50,7 +50,7 @@ class CourseForm extends React.Component {
                 onChange={this.handleChange('COURSE_ID')}
                 margin="normal"
                 required="true"
-                />
+                ></TextField>
                 <TextField
                 id="STUDENTS"
                 label="Class Size"

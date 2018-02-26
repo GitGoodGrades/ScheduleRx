@@ -1,4 +1,4 @@
-CALL update_db();
+
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`course` (
   COURSE_ID 	VARCHAR(5) 	NOT NULL,
@@ -82,8 +82,8 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`booking` (
   SECTION_ID 	VARCHAR(5)	NOT NULL,
   START_TIME 	DATETIME   	NOT NULL,
   END_TIME   	DATETIME   	NOT NULL,
-  BOOKING_ID 	INT 		NOT NULL AUTO_INCREMENT,
   SCHEDULE_ID 	VARCHAR(10) NOT NULL,
+  BOOKING_ID 	INT 		NOT NULL AUTO_INCREMENT,
   /**USER_ID    	INT(10)    	NOT NULL,**/
   CONSTRAINT PK_BOOKING PRIMARY KEY (BOOKING_ID),
   FOREIGN KEY (ROOM_ID) REFERENCES room(ROOM_ID),
@@ -139,23 +139,28 @@ VALUES 	('100', 50, 'room1', 'nursing', ''),
         
 INSERT INTO nursing_database.section
 VALUES 
-	('N2004', '43928', 11),
-    ('N2004', '41422', 2),
-    ('N3011', '43942', 69),
-    ('N4000', '44196', 9),
-    ('N3010', '43940', 12);
+	('43928', 'N2004', 11),
+    ('41422', 'N2004', 2),
+    ('43942', 'N3011', 69),
+    ('44196', 'N4000', 9),
+    ('43940', 'N3010', 12);
+
+INSERT INTO nursing_database.schedule
+VALUES ('FALL2018', '2018-07-01 08:00:00', '2018-08-01 23:59:00', '2018-08-15 08:00:00', '2018-12-05 16:00:00', FALSE, FALSE);
+	
     
 
 INSERT INTO nursing_database.booking 
+(ROOM_ID, COURSE_ID, SECTION_ID, START_TIME, END_TIME, SCHEDULE_ID)
 VALUES 	
-	('100', 'N2004', '43928', '2018-2-2 11:00:00', '2018-2-2 12:00:00', '1'),
+	('100', 'N2004', '43928', '2018-02-02 11:00:00', '2018-02-02 12:00:00', 'FALL2018'),
 
-	('101', 'N2004', '41422', '2018-2-3 11:00:00', '2018-2-3 01:00:00', '2'),
+	('101', 'N2004', '41422', '2018-02-03 11:00:00', '2018-02-03 01:00:00', 'FALL2018'),
 
-        ('102', 'N3011', '43942', '2018-2-18 11:00:00', '2018-2-18 12:00:00', '3'),
+        ('102', 'N3011', '43942', '2018-02-18 11:00:00', '2018-02-18 12:00:00', 'FALL2018'),
 
-        ('103', 'N4000', '2018-2-19 11:00:00', '2018-2-19 12:00:00', '4'),
+        ('103', 'N4000', '44196', '2018-02-19 11:00:00', '2018-02-19 12:00:00', 'FALL2018'),
 
-        ('104', 'N3010', '2018-2-20 11:00:00', '2018-2-20 12:00:00', '5');
+        ('104', 'N3010', '43940', '2018-02-20 11:00:00', '2018-02-20 12:00:00', 'FALL2018');
         
 

@@ -22,19 +22,11 @@ export const ListItems = ({ toggle }) =>
       </ListItem>
     </Link>
     <Link to="/register">
-    <ListItem button onClick={toggle}>
-    <ListItemIcon>
-    <InboxIcon />
-    <Link to="/event/list">
-      <ListItem button onClick={toggle}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Events" />
-      </ListItem>
-    </Link>
-    </ListItemIcon>
-    <ListItemText primary="Register" />
-    </ListItem>
+        <ListItem button onClick={toggle}>
+            <ListItemIcon>
+                 <InboxIcon />
+            </ListItemIcon>
+        <ListItemText primary="Register" />
+        </ListItem>
     </Link>
    </div>);
