@@ -4,6 +4,16 @@ import { withStyles } from 'material-ui/styles';
 import Header from './components/Header';
 import routes from '../../routes';
 import LeftNavigationPanel from './components/LeftNavigationPanel';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import * as action from '../../actions/actionCreator';
+
+const mapDispatchToProps = (dispatch) => ({
+  getSchedules: (registrationSchedule, currentSchedule) => dispatch(action.changeSchedules(
+      registrationSchedule, 
+      currentSchedule
+    ))
+});
 
 const styles = theme => ({
   root: {
@@ -37,13 +47,30 @@ const styles = theme => ({
   },
 });
 
-
-class Shell extends React.Component {
+class EmptyShell extends React.Component {
   constructor() {
     super();
     this.state= {
       mobileOpen: false,
+    }
   }
+
+  componentDidMount() {
+    let registrationSchedule = {};
+    let currentSchedule = {};
+    axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
+    .then(res => {
+            res.data.records.map(row => {
+                if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "0") {
+                    registrationSchedule = row;
+                }
+                else if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "1") {
+                    currentSchedule = row;
+                }
+            } );
+          this.props.getSchedules(registrationSchedule, currentSchedule)
+        }
+    );
   }
 
   handleDrawerToggle = () => {
@@ -71,5 +98,7 @@ class Shell extends React.Component {
     );
   }
 }
+
+const Shell = connect(null, mapDispatchToProps)(EmptyShell)
 
 export default withStyles(styles, { withTheme: true })(Shell);
