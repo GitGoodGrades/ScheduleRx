@@ -16,4 +16,3 @@ render(
     ),
     document.getElementById('root')
 );
-

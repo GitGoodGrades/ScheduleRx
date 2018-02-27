@@ -26,24 +26,7 @@ class CreateEvent extends Component {
             .then(res => {
                 this.setState({sectionList: res.data})
             });
-
-        // axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
-        //     .then(res => {
-        //         this.setState({scheduleList: res.data}, this.getScheduleID)
-        // });
-
-
     }
-
-    // getScheduleID = () => {
-    //     this.state.scheduleList.records && this.state.scheduleList.records.map(row => {
-    //         if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "0") {
-    //             this.setState({scheduleID: row.SCHEDULE_ID});
-    //         }
-    //     })
-    // };
-
-
 
     handleSave(course, section, room, start, end, scheduleID) {
 
