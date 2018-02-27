@@ -9,7 +9,15 @@ import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 
 class ScheduleTable extends Component {
-  state = {id: '', open: false};
+  constructor(props){
+    super();
+    
+  }
+  state = {id: '', open: false, scheduleList: []};
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({scheduleList: nextProps});
+  }
 
   handleClick = (event, id) => {
     this.setState({id, open: true})
@@ -30,12 +38,13 @@ class ScheduleTable extends Component {
       
       <Paper>
         <Dialog
+        width={500}
         open={this.state.open}
         onClose={this.handleClose}
         >
         <DialogTitle>{this.state.id}</DialogTitle>
         <DialogContent>
-          <form>
+          <form width={500}>
             <FormControl>
             <InputLabel htmlFor="Release">Released?</InputLabel>
                 <Select
