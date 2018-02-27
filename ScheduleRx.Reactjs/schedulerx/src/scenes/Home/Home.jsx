@@ -10,10 +10,10 @@ class Home extends Component {
         axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Bookings/Index.php`)
       .then(res => {
         const events = res.data.records;
-        for(let obj of events){
-            obj.START_TIME = moment(obj.START_TIME).toDate();
-            obj.END_TIME = moment(obj.END_TIME).toDate();
-        }
+        // for(let obj of events){
+        //     obj.START_TIME = moment(obj.START_TIME).toDate();
+        //     obj.END_TIME = moment(obj.END_TIME).toDate();
+        // }
         this.setState({ events });
       });
     };
@@ -22,7 +22,7 @@ class Home extends Component {
             <div 
                 className="rbc-calendar"
             >
-                <Calendar events={this.state.events} />
+                {/* <Calendar events={this.state.events} /> */}
             </div>
         )
     }

@@ -6,7 +6,7 @@ import { ulmTheme as theme } from '../../theme';
 
 const App = () =>
   (
-    <MuiThemeProvider muiTheme={theme}>
+    <MuiThemeProvider theme={theme}>
       <Switch>
         <Route path="/" component={Shell} />
       </Switch>
