@@ -57,6 +57,6 @@ class CreateEvent extends Component {
                 />
             </div>
         );
-};
+    };
 }
 export default CreateEvent;
