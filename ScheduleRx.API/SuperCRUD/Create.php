@@ -1,4 +1,4 @@
-<?php
+[-p<?php
 function CreateRecord ($tableName, $fields, $conn) {
     global $stmt;
     $query = ('INSERT INTO ' . $tableName ." SET ");
