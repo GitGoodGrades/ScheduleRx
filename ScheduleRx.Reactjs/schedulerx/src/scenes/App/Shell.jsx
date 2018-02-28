@@ -9,6 +9,7 @@ import axios from 'axios';
 import * as action from '../../actions/actionCreator';
 import { Redirect } from 'react-router';
 import Logging from '../Auth/scenes/logging';
+import Registration from '../Auth/scenes/registration';
 
 const mapStateToProps = (state) => ({
   user: state.userName,
@@ -58,10 +59,13 @@ class EmptyShell extends React.Component {
     super();
     this.state= {
       mobileOpen: false,
+      register: false
     }
   }
 
-
+  handleClick = () => {
+    this.setState({register: true})
+  }
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -70,8 +74,18 @@ class EmptyShell extends React.Component {
   render() {
     const { classes } = this.props;
     if(this.props.user === '' || this.props.user === null){
+      if(!this.state.register){
+        return (
+        <div>
+          <Logging />
+          <button onClick={this.handleClick}>Register</button>
+        </div>
+      )
+      }
       return (
-        <Logging />      
+        <div>
+          <Registration />
+        </div>
       )
     }
     return (

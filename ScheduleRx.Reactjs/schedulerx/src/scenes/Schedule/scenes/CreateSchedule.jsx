@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ScheduleForm from '../components/ScheduleForm';
+import Home from '../../Home/Home';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+    user: state.userName,
+  });
 
 class CreateSchedule extends Component {
     handleSave(schedule) {
@@ -21,6 +27,11 @@ class CreateSchedule extends Component {
           });
     }
     render(){
+        if(this.props.role === '' || this.props.role !=='1'){
+            return (
+              <Home />      
+            )
+          }
         return(
             <div>
                 <ScheduleForm onSave={this.handleSave}/>
@@ -28,4 +39,4 @@ class CreateSchedule extends Component {
         );
     };
 }
-export default CreateSchedule;
+export default connect(mapStateToProps)(CreateSchedule);

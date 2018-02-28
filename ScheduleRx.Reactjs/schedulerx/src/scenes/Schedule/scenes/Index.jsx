@@ -3,6 +3,12 @@ import axios from 'axios';
 import ScheduleTable from '../components/ScheduleTable';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import moment from 'moment';
+import Home from '../../Home/Home';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+    user: state.userName,
+  });
 
 class Schedules extends Component {
     state = {
@@ -31,6 +37,11 @@ class Schedules extends Component {
     }
 
     render(){
+        if(this.props.role === '' || this.props.role !=='1'){
+            return (
+              <Home />      
+            )
+          }
         return(
             <div>
                 {this.state.isLoading && <CircularProgress size={75} /> ||
@@ -39,4 +50,4 @@ class Schedules extends Component {
         );
     };
 }
-export default Schedules;
+export default connect(mapStateToProps)(Schedules);
