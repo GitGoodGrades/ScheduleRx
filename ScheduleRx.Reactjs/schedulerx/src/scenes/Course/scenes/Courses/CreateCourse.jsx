@@ -16,6 +16,7 @@ class CreateCourse extends Component {
             console.log(error);
           });
     }
+
     render(){
         return(
             <div>
