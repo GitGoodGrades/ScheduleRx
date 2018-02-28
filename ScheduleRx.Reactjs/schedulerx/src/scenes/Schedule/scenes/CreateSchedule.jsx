@@ -5,7 +5,7 @@ import Home from '../../Home/Home';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-    user: state.userName,
+    role: state.userRole,
   });
 
 class CreateSchedule extends Component {

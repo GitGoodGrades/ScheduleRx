@@ -7,10 +7,18 @@ import Home from '../../Home/Home';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-    user: state.userName,
+    role: state.userRole,
   });
 
 class Schedules extends Component {
+    constructor() {
+        super();
+        this.handleState = this.handleState.bind(this);
+    }
+      handleState = (newState) => {
+        this.setState(Object.assign({}, this.state, newState));
+    }
+
     state = {
         scheduleList: [],
         isLoading: true,
@@ -45,7 +53,7 @@ class Schedules extends Component {
         return(
             <div>
                 {this.state.isLoading && <CircularProgress size={75} /> ||
-                <ScheduleTable save={this.update} scheduleList={this.state.scheduleList} />}
+                <ScheduleTable handleState={this.handleState} save={this.update} scheduleList={this.state.scheduleList} />}
             </div>
         );
     };
