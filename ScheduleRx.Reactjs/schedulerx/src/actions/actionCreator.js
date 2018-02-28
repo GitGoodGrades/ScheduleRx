@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 
-export function setUser(value) {
-  return (dispatch) => axios.get(`https://api.github.com/users/${value}/repos`)
-    .then(resp => {
+export function setUser(name, role, sem) {
+  return (dispatch) => 
       dispatch({
         type: 'UPDATE_USER',
-        data: resp.data
+        name: name,
+        role: role, 
+        semester: sem
       });
-    });
 }
 
 export function changeSchedules(registrationSchedule, currentSchedule) {
