@@ -7,6 +7,12 @@ import LeftNavigationPanel from './components/LeftNavigationPanel';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import * as action from '../../actions/actionCreator';
+import { Redirect } from 'react-router';
+import Logging from '../Auth/scenes/logging';
+
+const mapStateToProps = (state) => ({
+  user: state.userName,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getSchedules: (registrationSchedule, currentSchedule) => dispatch(action.changeSchedules(
@@ -55,23 +61,7 @@ class EmptyShell extends React.Component {
     }
   }
 
-  componentDidMount() {
-    let registrationSchedule = {};
-    let currentSchedule = {};
-    axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
-    .then(res => {
-            res.data.records.map(row => {
-                if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "0") {
-                    registrationSchedule = row;
-                }
-                else if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "1") {
-                    currentSchedule = row;
-                }
-            } );
-          this.props.getSchedules(registrationSchedule, currentSchedule)
-        }
-    );
-  }
+
 
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -79,7 +69,11 @@ class EmptyShell extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    if(this.props.user === '' || this.props.user === null){
+      return (
+        <Logging />      
+      )
+    }
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -99,6 +93,6 @@ class EmptyShell extends React.Component {
   }
 }
 
-const Shell = connect(null, mapDispatchToProps)(EmptyShell)
+const Shell = connect(mapStateToProps, mapDispatchToProps)(EmptyShell)
 
 export default withStyles(styles, { withTheme: true })(Shell);

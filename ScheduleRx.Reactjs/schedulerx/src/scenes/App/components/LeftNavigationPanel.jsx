@@ -5,7 +5,12 @@ import Drawer from 'material-ui/Drawer';
 import List from 'material-ui/List';
 import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
-import { ListItems } from '../../../components/tileData';
+import { AdminItems, FacultyItems, StudentItems }  from '../../../components/tileData';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  role: state.userRole,
+});
 
 const drawerWidth = 240;
 
@@ -21,22 +26,36 @@ const styles = theme => ({
       position: 'relative',
       height: '100%',
     },
+    
   },
+  hidden: {
+      display: 'none'
+  }
 });
 
-class ResponsiveDrawer extends Component {
+class Panel extends Component {
 
   render() {
     const { classes, theme } = this.props;
-
     const drawer = (
-      <div>
-        <div className={classes.drawerHeader} />
-        <Divider />
-        <List><ListItems toggle={this.props.handleDrawerToggle} /></List>
-        <Divider />
-      </div>
-    );
+            <div>
+              <div className={classes.drawerHeader} />
+              <Divider />
+              <List><StudentItems toggle={this.props.handleDrawerToggle}/></List>
+              <List 
+                className={this.props.role === '3'  ? classes.hidden : ''}
+              >
+                <FacultyItems toggle={this.props.handleDrawerToggle}/>
+              </List>
+              <List 
+                className={this.props.role !== '1' ? classes.hidden : ''}
+              >
+                <AdminItems toggle={this.props.handleDrawerToggle}/>
+              </List>
+              <Divider />
+            </div>
+    )
+    
 
     return [
           <Hidden mdUp>
@@ -70,10 +89,6 @@ class ResponsiveDrawer extends Component {
         ];
   }
 }
-
-ResponsiveDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
+const ResponsiveDrawer = connect(mapStateToProps)(Panel);
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
