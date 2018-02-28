@@ -9,7 +9,12 @@ import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import theme from '../../../theme/index';
+import { connect } from 'react-redux';
 
+const mapStateToProps = (state) => ({
+    currentSchedule: state.currentSchedule,
+    registrationSchedule: state.registrationSchedule
+  });
 
 const styles = theme =>({
     Form: {
@@ -43,7 +48,7 @@ const styles = theme =>({
 
 });
 
-class EventForm extends Component {
+class EmptyEventForm extends Component {
     state = {
         COURSE_ID: '',
         SECTION_ID: '',
@@ -64,24 +69,12 @@ class EventForm extends Component {
         );
     };
 
-
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
 
-    componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
-            .then(res => {
-                    res.data.records.map(row => {
-                        console.log(row.SCHEDULE_ID)
-                        if (row.IS_ARCHIVED === "0" && row.IS_RELEASED === "0") {
-                            this.setState({SCHEDULE_ID: row.SCHEDULE_ID}, )
-                        }
-                    })
-                }
-            );
-    }
-
+    x = this.props.currentSchedule;
+    y = this.props.registrationSchedule;
 
     render() {
         const {classes} = this.props;
@@ -183,5 +176,7 @@ class EventForm extends Component {
         );
     }
 }
+
+const EventForm = connect(mapStateToProps)(EmptyEventForm)
 
 export default withStyles(styles)(EventForm);

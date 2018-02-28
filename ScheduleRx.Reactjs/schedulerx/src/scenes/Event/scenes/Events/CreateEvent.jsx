@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import EventForm from '../../components/EventForm';
+import Home from '../../../Home/Home';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+    role: state.userRole,
+  });
 
 class CreateEvent extends Component {
 
@@ -47,6 +53,11 @@ class CreateEvent extends Component {
     }
 
     render(){
+        if(this.props.role === '' || this.props.role ==='3'){
+            return (
+              <Home />      
+            )
+          }
         return(
             <div>
                 <EventForm
@@ -59,4 +70,4 @@ class CreateEvent extends Component {
         );
     };
 }
-export default CreateEvent;
+export default connect(mapStateToProps)(CreateEvent);
