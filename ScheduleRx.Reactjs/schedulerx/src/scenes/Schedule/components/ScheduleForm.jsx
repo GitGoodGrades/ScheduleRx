@@ -94,7 +94,7 @@ class ScheduleForm extends React.Component {
                 />
                 <TextField
                     id="END_SEM_DATE"
-                    label="End registration date"
+                    label="Semester end date"
                     onChange={this.handleChange}
                     type="date"
                     className={classes.textField}
