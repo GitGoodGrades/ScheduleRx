@@ -31,7 +31,7 @@ class Logging extends React.Component {
             }
             this.props && this.props.sendUser(USER_ID, ROLE_ID, SEMESTER_ID);
         }); 
-    }
+    };
 
     render(){
         

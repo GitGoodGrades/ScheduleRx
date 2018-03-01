@@ -8,8 +8,8 @@ import {FormControl, FormHelperText} from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
 import moment from 'moment';
-import {connect} from 'react-redux';
-import {Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 
 const mapStateToProps = (state) => ({
     currentSchedule: state.currentSchedule,
@@ -64,14 +64,20 @@ class EmptyEventForm extends Component {
 
     handleSave = () => {
 
-        let today = new moment().toDate;
+        let today = new moment().toDate();
         let startReg = this.props.registrationSchedule.START_REG_DATE;
         let endReg = this.props.registrationSchedule.START_REG_DATE;
+        let semStart = this.props.currentSchedule.START_SEM_DATE;
+        let semEND = this.props.currentSchedule.END_SEM_DATE;
         let eventStart = this.state.START_TIME;
+        let eventEnd  = this.state.END_TIME;
 
-        if (today >= startReg && today <= endReg) {
-            if (eventStart >= startReg && eventStart <= endReg) {
+        console.log(today);
+        console.log(startReg);
+        console.log(endReg);
 
+        if (moment(today).isBetween(startReg,endReg)) {
+            if (moment(eventStart).isAfter(semStart) && moment(eventEnd).isBefore(semEND) ) {
                 this.props.onSave(
                     this.state.COURSE_ID,
                     this.state.SECTION_ID,
