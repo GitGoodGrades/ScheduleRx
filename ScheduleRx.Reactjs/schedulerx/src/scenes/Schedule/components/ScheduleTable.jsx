@@ -11,9 +11,8 @@ import Select from 'material-ui/Select';
 class ScheduleTable extends Component {
   constructor(props){
     super();
-    
+    this.state = {id: '', open: false, scheduleList: []};
   }
-  state = {id: '', open: false, scheduleList: []};
 
   componentWillReceiveProps(nextProps) {
     this.setState({scheduleList: nextProps});
@@ -35,7 +34,6 @@ class ScheduleTable extends Component {
   render() {
     const ScheduleList = this.props.scheduleList;  
     return (
-      
       <Paper>
         <Dialog
         width={500}
