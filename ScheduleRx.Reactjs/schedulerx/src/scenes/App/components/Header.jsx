@@ -31,7 +31,7 @@ const logout = () => {
   this.props.log();
 }
 
-const unwrappedHead = (props) => {
+const Header = (props) => {
   const { classes, handleDrawerToggle } = props;
   return (
     <AppBar className={classes.appBar}>
