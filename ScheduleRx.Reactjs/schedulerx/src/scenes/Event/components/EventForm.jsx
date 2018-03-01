@@ -10,6 +10,7 @@ import TextField from 'material-ui/TextField';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
     currentSchedule: state.currentSchedule,
@@ -59,32 +60,32 @@ class EmptyEventForm extends Component {
         ROOM_ID: '',
         START_TIME: '',
         END_TIME: '',
-        SCHEDULE_ID: ''
+        SCHEDULE_ID: '',
+        IS_RELEASED: ''
     };
 
+    componentDidMount(){
+        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Detail.php`,
+        {
+            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+        })
+        .then(res => {
+            this.setState({IS_RELEASED: res.data.IS_RELEASED});
+        })}
+    
+
     handleSave = () => {
-
-        let today = new moment().toDate();
-        let startReg = this.props.registrationSchedule.START_REG_DATE;
-        let endReg = this.props.registrationSchedule.START_REG_DATE;
-        let semStart = this.props.currentSchedule.START_SEM_DATE;
-        let semEND = this.props.currentSchedule.END_SEM_DATE;
-        let eventStart = this.state.START_TIME;
-        let eventEnd  = this.state.END_TIME;
-
-        console.log(today);
-        console.log(startReg);
-        console.log(endReg);
-
-        if (moment(today).isBetween(startReg,endReg)) {
-            if (moment(eventStart).isAfter(semStart) && moment(eventEnd).isBefore(semEND) ) {
+        const today = new moment().toDate();
+        if (this.state.IS_RELEASED === "0") {
+            if (moment(this.state.START_TIME).isAfter(this.props.registrationSchedule.START_REG_DATE)
+                 && moment(this.state.END_TIME).isBefore(this.props.registrationSchedule.END_REG_DATE) ) {
                 this.props.onSave(
                     this.state.COURSE_ID,
                     this.state.SECTION_ID,
                     this.state.ROOM_ID,
                     this.state.START_TIME,
                     this.state.END_TIME,
-                    this.state.SCHEDULE_ID
+                    this.props.registrationSchedule.SCHEDULE_ID
                 );
             }
             else {
@@ -95,9 +96,9 @@ class EmptyEventForm extends Component {
         else {
             alert("Cannot Create Event's outside Registration time");
             return <Redirect path='/event/create'/>
-        }
+        };
     }
-    ;
+        
 
     handleChange = event => {
         this.setState({[event.target.name]: event.target.value});
@@ -197,7 +198,7 @@ class EmptyEventForm extends Component {
                             <Button
                                 className={classes.button}
                                 variant="raised"
-                                onClick={this.handleSave}
+                                onClick={this.handleSave.bind(this)}
                             >
                                 Save
                             </Button>
