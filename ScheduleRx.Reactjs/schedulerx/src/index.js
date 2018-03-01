@@ -12,8 +12,7 @@ const store = configureStore();
 render((
 <Provider store={store}>
     <BrowserRouter className="App">
-        <App className="App"/>
+        <App style={{fontfamily: 'Cuprum, sans-serif',}} className="App"/>
     </BrowserRouter>
 </Provider>
 ), document.getElementById('root'));
-

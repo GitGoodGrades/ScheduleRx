@@ -11,13 +11,15 @@ import { Redirect } from 'react-router';
 import Logging from '../Auth/scenes/logging';
 import Registration from '../Auth/scenes/registration';
 
+
+
 const mapStateToProps = (state) => ({
   user: state.userName,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getSchedules: (registrationSchedule, currentSchedule) => dispatch(action.changeSchedules(
-      registrationSchedule, 
+      registrationSchedule,
       currentSchedule
     ))
 });
@@ -44,13 +46,25 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
       marginTop: 64,
+
     },
- 
-    overflow: 'auto'
+
+    overflow: 'auto',
   },
   gridRoot: {
     height: '100%',
     minHeight: 900
+  },
+  buttonwrapper: {
+    border: '',
+    padding: 10,
+    textAlign: 'center',
+  },
+  regbutton: {
+    margin: 'auto',
+    backgroundColor: 'white',
+    border: 'none',
+    color: 'rgb(111, 0, 41)',
   },
 });
 
@@ -78,7 +92,9 @@ class EmptyShell extends React.Component {
         return (
         <div>
           <Logging />
-          <button onClick={this.handleClick}>Register</button>
+          <div className={classes.buttonwrapper}>
+          <button className={classes.regbutton} onClick={this.handleClick}>Never been here before? Register</button>
+          </div>
         </div>
       )
       }

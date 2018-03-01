@@ -7,6 +7,14 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
+import theme from '../../../theme/index';
+import { withStyles } from 'material-ui/styles';
+
+const styles = theme => ({
+  dialogSelect: {
+    width: '80%',
+  },
+});
 
 class ScheduleTable extends Component {
   constructor(props){
@@ -32,49 +40,54 @@ class ScheduleTable extends Component {
   }
 
   render() {
-    const ScheduleList = this.props.scheduleList;  
+    const ScheduleList = this.props.scheduleList;
+    const {classes} = this.props;
     return (
       <Paper>
         <Dialog
         width={500}
         open={this.state.open}
         onClose={this.handleClose}
+        style={{background: 'rgba(111, 0, 41, .4)'}}
         >
-        <DialogTitle>{this.state.id}</DialogTitle>
+        <DialogTitle><h1 style={{color: 'rgb(111, 0, 41)', fontWeight: 'lighter', fontSize: '1em'}}>Make the schedule for {this.state.id} visible?</h1></DialogTitle>
         <DialogContent>
-          <form width={500}>
-            <FormControl>
-            <InputLabel htmlFor="Release">Released?</InputLabel>
-                <Select
+          <form width={600}>
+
+            <FormControl style={{border: '', width: '100%'}}>
+            <InputLabel htmlFor="Release"></InputLabel>
+                <Select style={{width: 300, margin: 'auto', color: 'rgb(111, 0, 41)'}}
+                  className={classes.dialogSelect}
                   native
                   onChange={this.handleChange}
                   input={<Input id="Release" />}
                 >
                   <option value="" />
-                  <option value={1}>True</option>
-                  <option value={0}>false</option>
+                  <option value={1}>Yes</option>
+                  <option value={0}>No</option>
                 </Select>
             </FormControl>
           </form>
         </DialogContent>
       </Dialog>
-          <Table >
+          <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>List Of Schedules</h1>
+          <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Schedule Id</TableCell>
-                <TableCell >Registration Start</TableCell>
-                <TableCell>Registration End</TableCell>
-                <TableCell >Semester Start</TableCell>
-                <TableCell>Semester End</TableCell>
-                <TableCell >Schedule is Released</TableCell>
+                <TableCell>Semester</TableCell>
+                <TableCell>Event Registration Begin Date</TableCell>
+                <TableCell>Event Registration End Date</TableCell>
+                <TableCell>Semester Begin Date</TableCell>
+                <TableCell>Semester End Date</TableCell>
+                <TableCell>Schedule is Visible?</TableCell>
               </TableRow>
-            </ TableHead>
+            </TableHead>
             <TableBody>
               {(ScheduleList.records && ScheduleList.records.length > 0 && ScheduleList.records.map(row => {
                 return (
-                  <TableRow 
+                  <TableRow
                     hover
-                    onClick={event => this.handleClick(event, row.SCHEDULE_ID)} 
+                    onClick={event => this.handleClick(event, row.SCHEDULE_ID)}
                     id={row.SCHEDULE_ID}
                   >
                     <TableCell>{row.SCHEDULE_ID}</TableCell>
@@ -82,7 +95,7 @@ class ScheduleTable extends Component {
                     <TableCell>{moment(row.END_REG_DATE).format("MMM Do YYYY")}</TableCell>
                     <TableCell >{moment(row.START_SEM_DATE).format("MMM Do YYYY")}</TableCell>
                     <TableCell>{moment(row.END_SEM_DATE).format("MMM Do YYYY")}</TableCell>
-                    <TableCell >{row.IS_RELEASED === "0"?"False":"True"}</TableCell>
+                    <TableCell >{row.IS_RELEASED === "0"?"No":"Yes"}</TableCell>
                   </TableRow>
                 );
               })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
@@ -93,4 +106,4 @@ class ScheduleTable extends Component {
   }
 }
 
-export default ScheduleTable;
+export default withStyles(styles)(ScheduleTable);

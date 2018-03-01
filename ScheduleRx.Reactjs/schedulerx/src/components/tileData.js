@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import InboxIcon from 'material-ui-icons/MoveToInbox';
 
 export const AdminItems = ({ toggle }) =>
-    <div>
+    <div style={{fontFamily: 'Cuprum'}}>
         <Link to="/schedule/create">
             <ListItem button onClick={toggle}>
                 <ListItemIcon>
@@ -12,7 +12,7 @@ export const AdminItems = ({ toggle }) =>
                 </ListItemIcon>
             <ListItemText primary="Create Schedule"/>
             </ListItem>
-        </Link>  
+        </Link>
         <Link to="/schedule/List">
             <ListItem button onClick={toggle}>
                 <ListItemIcon>
@@ -24,7 +24,7 @@ export const AdminItems = ({ toggle }) =>
     </div>
 
 export const FacultyItems = ({ toggle }) =>
-    <div>
+    <div style={{fontFamily: 'Cuprum'}}>
         <Link to="/event/create">
             <ListItem button onClick={toggle}>
                 <ListItemIcon>
@@ -36,7 +36,7 @@ export const FacultyItems = ({ toggle }) =>
     </div>
 
 export const StudentItems = ({ toggle }) =>
-    <div>
+    <div style={{fontFamily: 'Cuprum'}}>
         <Link to="/">
             <ListItem button onClick={toggle}>
                 <ListItemIcon><InboxIcon/></ListItemIcon>

@@ -47,7 +47,7 @@ class Schedules extends Component {
     render(){
         if(this.props.role === '' || this.props.role !=='1'){
             return (
-              <Home />      
+              <Home />
             )
           }
         return(

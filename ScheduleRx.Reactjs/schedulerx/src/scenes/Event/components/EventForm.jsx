@@ -44,6 +44,10 @@ const styles = theme =>({
     },
     button: {
         margin: 'auto',
+    },
+    title: {
+      color: 'rgb(111, 0, 41)',
+      textAlign: 'center',
     }
 
 });
@@ -82,6 +86,7 @@ class EmptyEventForm extends Component {
             <Paper>
                 <div className={classes.FormContainer}>
                     <form className={classes.Form}>
+                      <div className={classes.title}><h1>Add Event To Schedule</h1></div>
                         <div className={classes.DDContainer}>
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="course-helper">Course</InputLabel>
@@ -172,7 +177,7 @@ class EmptyEventForm extends Component {
                         </div>
                     </form>
                 </div>
-            </ Paper>
+            </Paper>
         );
     }
 }
