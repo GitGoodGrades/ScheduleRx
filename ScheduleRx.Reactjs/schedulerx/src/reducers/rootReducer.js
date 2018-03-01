@@ -21,6 +21,18 @@ const initialState = {
         currentSchedule: action.current,
         registrationSchedule: action.reg
       };
+    case 'REMOVE_USER':
+      return {
+        ...state,
+        userName: '',
+        userRole: '',
+        semester: ''
+      };
+    case 'CHANGE_REGISTRATION':
+      return {
+        ...state,
+        registrationSchedule:action.reg
+      }
     default:
       return state;
     }

@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Cuprum');
+
 html {
   height: 100%;
+
+
 }
 
 body {
   height: 100%;
   margin: 0px;
+  font-family: 'Cuprum', sans-serif;
 }
 
 a {

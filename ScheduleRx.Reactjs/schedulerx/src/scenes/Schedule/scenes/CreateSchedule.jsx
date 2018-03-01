@@ -5,7 +5,7 @@ import Home from '../../Home/Home';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-    user: state.userName,
+    role: state.userRole,
   });
 
 class CreateSchedule extends Component {
@@ -29,7 +29,7 @@ class CreateSchedule extends Component {
     render(){
         if(this.props.role === '' || this.props.role !=='1'){
             return (
-              <Home />      
+              <Home />
             )
           }
         return(

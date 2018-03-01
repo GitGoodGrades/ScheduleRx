@@ -19,7 +19,7 @@ const schoolPalette = {
   palette: {
     primary: {
         light: '#bf443f',
-        main: '#890a18',
+        main: '#6f0029',
         dark: '#560000',
         contrastText: '#fff',
       },

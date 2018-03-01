@@ -4,13 +4,28 @@ import ScheduleTable from '../components/ScheduleTable';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import moment from 'moment';
 import Home from '../../Home/Home';
+import * as action from '../../../actions/actionCreator';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-    user: state.userName,
+    role: state.userRole,
   });
 
+const mapDispatchToProps = (dispatch) => ({
+    registration: (reg) => dispatch(action.updateRegistration(
+        reg
+      ))
+})
+
 class Schedules extends Component {
+    constructor() {
+        super();
+        this.handleState = this.handleState.bind(this);
+    }
+      handleState = (newState) => {
+        this.setState(Object.assign({}, this.state, newState));
+    }
+
     state = {
         scheduleList: [],
         isLoading: true,
@@ -33,21 +48,29 @@ class Schedules extends Component {
             SCHEDULE_ID: id,
             IS_RELEASED: released,
             END_REG_DATE: currentDate
+        },
+        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Detail.php`,
+        {
+            SCHEDULE_ID: id,
         })
+        .then(res => {
+            this.props.registration(res.data);
+        }))
+        
     }
 
     render(){
         if(this.props.role === '' || this.props.role !=='1'){
             return (
-              <Home />      
+              <Home />
             )
           }
         return(
             <div>
                 {this.state.isLoading && <CircularProgress size={75} /> ||
-                <ScheduleTable save={this.update} scheduleList={this.state.scheduleList} />}
+                <ScheduleTable handleState={this.handleState} save={this.update} scheduleList={this.state.scheduleList} />}
             </div>
         );
     };
 }
-export default connect(mapStateToProps)(Schedules);
+export default connect(mapStateToProps, mapDispatchToProps)(Schedules);

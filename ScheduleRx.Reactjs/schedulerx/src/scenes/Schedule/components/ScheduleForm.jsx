@@ -13,10 +13,10 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 230,
   },
   menu: {
-    width: 200,
+    width: 230,
   },
 });
 
@@ -47,6 +47,7 @@ class ScheduleForm extends React.Component {
 
     return (
         <Paper>
+          <h1 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Create New Schedule</h1>
             <form className={classes.container}>
                 <TextField
                     id="SCHEDULE_ID"
@@ -58,7 +59,7 @@ class ScheduleForm extends React.Component {
                 />
                 <TextField
                     id="START_REG_DATE"
-                    label="Begin registration date"
+                    label="Event Registration Begin Date"
                     onChange={this.handleChange}
                     type="date"
                     className={classes.textField}
@@ -70,7 +71,7 @@ class ScheduleForm extends React.Component {
                 />
                 <TextField
                     id="END_REG_DATE"
-                    label="End registration date"
+                    label="Event Registration End Date"
                     onChange={this.handleChange}
                     type="date"
                     className={classes.textField}
@@ -82,7 +83,7 @@ class ScheduleForm extends React.Component {
                 />
                 <TextField
                     id="START_SEM_DATE"
-                    label="Semester start date"
+                    label="Semester Begin Date"
                     onChange={this.handleChange}
                     type="date"
                     className={classes.textField}
@@ -94,7 +95,7 @@ class ScheduleForm extends React.Component {
                 />
                 <TextField
                     id="END_SEM_DATE"
-                    label="End registration date"
+                    label="Semester End Date"
                     onChange={this.handleChange}
                     type="date"
                     className={classes.textField}
@@ -105,10 +106,12 @@ class ScheduleForm extends React.Component {
                     required={true}
                 />
             </form>
+            <div style={{border: '', textAlign: 'right', paddingRight: 5, paddingBottom: 5}}>
             <Button variant="raised" onClick={this.handleSave} >
                 Save
             </Button>
-        </ Paper>
+          </div>
+        </Paper>
     );
   }
 }

@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
+import React, {Component} from 'react';
+import {withStyles} from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
-import Input, { InputLabel } from 'material-ui/Input';
-import { MenuItem } from 'material-ui/Menu';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import Input, {InputLabel} from 'material-ui/Input';
+import {MenuItem} from 'material-ui/Menu';
+import {FormControl, FormHelperText} from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
-import axios from 'axios';
-import theme from '../../../theme/index';
+import moment from 'moment';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import axios from 'axios';
 
 const mapStateToProps = (state) => ({
     currentSchedule: state.currentSchedule,
     registrationSchedule: state.registrationSchedule
-  });
+});
 
-const styles = theme =>({
+const styles = theme => ({
     Form: {
         paddingBottom: 10,
         paddingTop: 10,
@@ -44,6 +45,10 @@ const styles = theme =>({
     },
     button: {
         margin: 'auto',
+    },
+    title: {
+      color: 'rgb(111, 0, 41)',
+      textAlign: 'center',
     }
 
 });
@@ -55,22 +60,48 @@ class EmptyEventForm extends Component {
         ROOM_ID: '',
         START_TIME: '',
         END_TIME: '',
-        SCHEDULE_ID: ''
+        SCHEDULE_ID: '',
+        IS_RELEASED: ''
     };
+
+    componentDidMount(){
+        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Detail.php`,
+        {
+            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+        })
+        .then(res => {
+            this.setState({IS_RELEASED: res.data.IS_RELEASED});
+        })}
+    
 
     handleSave = () => {
-        this.props.onSave(
-            this.state.COURSE_ID,
-            this.state.SECTION_ID,
-            this.state.ROOM_ID,
-            this.state.START_TIME,
-            this.state.END_TIME,
-            this.state.SCHEDULE_ID
-        );
-    };
+        const today = new moment().toDate();
+        if (this.state.IS_RELEASED === "0") {
+            if (moment(this.state.START_TIME).isAfter(this.props.registrationSchedule.START_REG_DATE)
+                 && moment(this.state.END_TIME).isBefore(this.props.registrationSchedule.END_REG_DATE) ) {
+                this.props.onSave(
+                    this.state.COURSE_ID,
+                    this.state.SECTION_ID,
+                    this.state.ROOM_ID,
+                    this.state.START_TIME,
+                    this.state.END_TIME,
+                    this.props.registrationSchedule.SCHEDULE_ID
+                );
+            }
+            else {
+                alert("Event times must fall withing Registration time");
+                return <Redirect path='/event/create'/>
+            }
+        }
+        else {
+            alert("Cannot Create Event's outside Registration time");
+            return <Redirect path='/event/create'/>
+        };
+    }
+        
 
     handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({[event.target.name]: event.target.value});
     };
 
     x = this.props.currentSchedule;
@@ -82,11 +113,12 @@ class EmptyEventForm extends Component {
             <Paper>
                 <div className={classes.FormContainer}>
                     <form className={classes.Form}>
+                      <div className={classes.title}><h1>Add Event To Schedule</h1></div>
                         <div className={classes.DDContainer}>
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="course-helper">Course</InputLabel>
                                 <Select
-                                    input={<Input name="Course" id="course-helper" />}
+                                    input={<Input name="Course" id="course-helper"/>}
                                     className={classes.Select}
                                     name="COURSE_ID"
                                     value={this.state.COURSE_ID}
@@ -102,10 +134,10 @@ class EmptyEventForm extends Component {
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="section-helper">Section</InputLabel>
                                 <Select
-                                    input={<Input name="Section" id="section-helper" />}
+                                    input={<Input name="Section" id="section-helper"/>}
                                     className={classes.Select}
                                     name="SECTION_ID"
-                                    value ={this.state.SECTION_ID}
+                                    value={this.state.SECTION_ID}
                                     onChange={this.handleChange}
                                 >
                                     {(this.props.sectionList.records && this.props.sectionList.records.length > 0 && this.props.sectionList.records.map(row => {
@@ -113,7 +145,8 @@ class EmptyEventForm extends Component {
                                             return (
                                                 <MenuItem value={row.SECTION_ID}>{row.SECTION_ID}</MenuItem>
                                             );
-                                        };
+                                        }
+                                        ;
                                     })) || <MenuItem value=''>None</MenuItem>};
                                     <option value={""}>None</option>
                                 </Select>
@@ -121,7 +154,7 @@ class EmptyEventForm extends Component {
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="section-helper">Room</InputLabel>
                                 <Select
-                                    input={<Input name="Room" id="room-helper" />}
+                                    input={<Input name="Room" id="room-helper"/>}
                                     className={classes.Select}
                                     name="ROOM_ID"
                                     value={this.state.ROOM_ID}
@@ -165,18 +198,24 @@ class EmptyEventForm extends Component {
                             <Button
                                 className={classes.button}
                                 variant="raised"
-                                onClick={this.handleSave}
+                                onClick={this.handleSave.bind(this)}
                             >
                                 Save
                             </Button>
                         </div>
                     </form>
                 </div>
-            </ Paper>
+            </Paper>
         );
     }
 }
 
-const EventForm = connect(mapStateToProps)(EmptyEventForm)
+const
+    EventForm = connect(mapStateToProps)(EmptyEventForm)
 
-export default withStyles(styles)(EventForm);
+export default withStyles(styles)
+
+(
+    EventForm
+)
+;

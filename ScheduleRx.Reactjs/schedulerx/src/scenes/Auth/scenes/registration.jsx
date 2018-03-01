@@ -13,7 +13,7 @@ class Registration extends Component {
             userInfo.first ? ROLE_ID = 1 : ROLE_ID = 2;
         }
 
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Users/Create.php`, {
+        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx/ScheduleRx.API/Users/Create.php`, {
             USER_ID: userInfo.USER_ID,
             ROLE_ID: ROLE_ID,
             EMAIL: userInfo.EMAIL,

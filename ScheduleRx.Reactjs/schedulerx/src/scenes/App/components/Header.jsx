@@ -5,6 +5,12 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import { withStyles } from 'material-ui/styles';
+import * as action from '../../../actions/actionCreator';
+import { connect } from 'react-redux';
+
+const mapDispatchToProps = (dispatch) => ({
+  log: () => dispatch(action.logout())
+});
 
 const styles = theme => ({
   appBar: {
@@ -21,6 +27,10 @@ const styles = theme => ({
   },
 });
 
+const logout = () => {
+  this.props.log();
+}
+
 const Header = (props) => {
   const { classes, handleDrawerToggle } = props;
   return (
@@ -35,9 +45,10 @@ const Header = (props) => {
           <MenuIcon />
         </IconButton>
         <Typography type="title" color="inherit" noWrap>
-            ULM Nursing ScheduleRx
+            <h1 style={{fontFamily: 'Cuprum', textShadow: '-2px 0 black, 0 2px black, 2px 0 black, 0 -2px black'}}>ScheduleRx</h1>
         </Typography>
       </Toolbar>
+      <button onClick={this.logout}/>
     </AppBar>
   );
 };

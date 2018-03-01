@@ -20,3 +20,18 @@ export function changeSchedules(registrationSchedule, currentSchedule) {
         })
 }
 
+export function updateRegistration(registrationSchedule) {
+    return (dispatch) => 
+        dispatch({
+            type: 'CHANGE_REGISTRATION',
+            reg: registrationSchedule
+        })
+}
+
+export function logout() {
+    return (dispatch) =>
+        dispatch({
+            type: 'REMOVE_USER'
+        });
+}
+
