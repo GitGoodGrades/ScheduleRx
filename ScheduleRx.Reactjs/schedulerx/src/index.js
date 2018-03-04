@@ -1,11 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
-import './index.css';
-import App from './scenes/App/App';
+import './Base Componenets/index.css';
+import App from './App/App';
 import { BrowserRouter } from 'react-router-dom';
-import './app.css';
+import './Base Componenets/app.css';
 import { Provider } from 'react-redux';
-import configureStore from './store/store';
+import configureStore from './Redux/store/store';
 
 const store = configureStore();
 
