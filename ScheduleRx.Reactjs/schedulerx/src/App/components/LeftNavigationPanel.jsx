@@ -4,7 +4,7 @@ import {withStyles} from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import List from 'material-ui/List';
 import Hidden from 'material-ui/Hidden';
-import {AdminItems, FacultyItems, StudentItems, AdminScheduleList} from '../../Base Componenets/tileData';
+import {AdminItems, FacultyItems, StudentItems, AdminScheduleList} from '../../Base Components/tileData';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => ({

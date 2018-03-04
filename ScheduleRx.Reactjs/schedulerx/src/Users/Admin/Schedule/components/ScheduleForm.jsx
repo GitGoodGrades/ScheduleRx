@@ -3,7 +3,7 @@ import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
-import theme from '../../../MaterialUI/theme/index';
+import theme from '../../../../MaterialUI/theme/index';
 
 const styles = theme => ({
   container: {

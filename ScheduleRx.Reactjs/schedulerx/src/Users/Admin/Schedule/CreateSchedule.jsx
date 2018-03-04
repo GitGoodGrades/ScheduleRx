@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ScheduleForm from './ScheduleForm';
+import ScheduleForm from './components/ScheduleForm';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({

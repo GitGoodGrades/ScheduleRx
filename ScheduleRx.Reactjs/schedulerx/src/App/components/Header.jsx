@@ -48,7 +48,7 @@ const Header = (props) => {
           <MenuIcon />
         </IconButton>
         <Typography type="title" color="inherit" noWrap>
-            <h1 style={{fontFamily: 'Cuprum', textShadow: '-2px 0 black, 0 2px black, 2px 0 black, 0 -2px black'}}>ScheduleRx</h1>
+            <p style={{fontFamily: 'Cuprum', textShadow: '-2px 0 black, 0 2px black, 2px 0 black, 0 -2px black'}}>ScheduleRx</p>
         </Typography>
       </Toolbar>
     </AppBar>

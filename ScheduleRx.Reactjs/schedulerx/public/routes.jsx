@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Courses from '../Users/Admin/Course/index';
-import CreateCourse from '../Users/Admin/Course/CreateCourse';
-import CreateEvent from '../Users/Admin/Event/CreateEvent';
+import Courses from '../src/Users/Admin/Course/index';
+import CreateCourse from '../src/Users/Admin/Course/CreateCourse';
+import CreateEvent from '../src/Users/Admin/Event/CreateEvent';
 import Home from '../scenes/Home/Home';
-import CreateSchedule from '../Users/Admin/Schedule/CreateSchedule';
-import Schedules from '../Users/Admin/Schedule/Index';
+import CreateSchedule from '../src/Users/Admin/Schedule/CreateSchedule';
+import Schedules from '../src/Users/Admin/Schedule/Index';
 
 //import COMPONENT from './COMPONENT/PATH';
 

@@ -11,7 +11,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import axios from 'axios';
-import { styles } from './EventStyles';
+import { styles } from '../EventStyles';
 
 const mapStateToProps = (state) => ({
     currentSchedule: state.currentSchedule,

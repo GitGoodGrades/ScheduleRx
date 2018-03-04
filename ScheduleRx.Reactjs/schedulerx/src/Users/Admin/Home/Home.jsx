@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Calendar from '../../../Base Componenets/Calendar';
+import Calendar from '../../../Base Components/Calendar';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import moment from 'moment';

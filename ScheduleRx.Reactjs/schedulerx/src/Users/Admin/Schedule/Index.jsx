@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ScheduleTable from './ScheduleTable';
+import ScheduleTable from './components/ScheduleTable';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import moment from 'moment';
 import Home from '../Home/Home';

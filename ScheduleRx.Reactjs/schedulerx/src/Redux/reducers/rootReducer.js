@@ -3,7 +3,8 @@ const initialState = {
     userRole: '',
     semester: '',
     currentSchedule: {},
-    registrationSchedule: {}
+    registrationSchedule: {},
+    courseList: []
   };
   
   const rootReducer = (state = initialState, action) => {
@@ -32,6 +33,27 @@ const initialState = {
       return {
         ...state,
         registrationSchedule:action.reg
+      }
+    case 'SEARCH_COURSES':
+      return {
+        ...state,
+        courseList: action.data
+      }
+    case 'SEARCH_ROOMS':
+      return {
+        ...state,
+        roomList: action.data
+      }
+    case 'SEARCH_SECTIONS':
+      return {
+        ...state,
+        sectionList: action.data
+      }  
+    case 'SEARCH_SCHEDULES': 
+      return {
+        ...state,
+        currentSchedule: action.current,
+        registrationSchedule: action.registration
       }
     default:
       return state;
