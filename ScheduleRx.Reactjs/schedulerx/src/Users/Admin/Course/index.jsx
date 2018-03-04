@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import CourseTable from './CourseTable';
+import CourseTable from './components/CourseTable';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
+import { connect } from 'react-redux';
+import * as action from '../../../Redux/actions/actionCreator';
+
+const mapStateToProps = (state) => ({
+    courses: state.courseList
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onLoad: () => dispatch(action.searchCourses())
+});
 
 class Courses extends Component {
-    state = {
-        courseList: [],
-        isLoading: true
-    };
-
     componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
-      .then(res => {
-        const courseList = res.data;
-        this.setState({ courseList, isLoading: false});
-      });
+        this.props.onLoad();
     };
 
     render(){
+        const { courses } = this.props;
         return(
             <div>
-                {this.state.isLoading && <CircularProgress size={75} /> ||
-                <CourseTable courseList={this.state.courseList} />}
+            {
+                courses &&
+                <CourseTable courseList={courses} />
+            }   
             </div>
         );
     };
 }
-export default Courses;
+export default connect(mapStateToProps, mapDispatchToProps)(Courses);

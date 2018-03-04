@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import EventForm from './EventForm';
+import EventForm from './components/EventForm';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
   });
+
+const mapDispatchToProps = (dispatch) => ({
+    loadCourses: () => dispatch(action.searchCourses()),
+    loadRooms: () => dispatch(action.searchRooms()),
+    loadSections: () => dispatch(action.searchSections())
+});
 
 class CreateEvent extends Component {
 
@@ -18,19 +24,9 @@ class CreateEvent extends Component {
     };
 
     componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Courses/Index.php`)
-            .then(res => {
-                this.setState({courseList: res.data})
-            });
-
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Room/Index.php`)
-            .then(res => {
-                this.setState({roomList: res.data})
-            });
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Section/Index.php`)
-            .then(res => {
-                this.setState({sectionList: res.data})
-            });
+        this.props.loadCourses;
+        this.props.loadRooms;
+        this.props.loadSections;
     }
 
     handleSave(course, section, room, start, end, scheduleID) {
@@ -65,4 +61,4 @@ class CreateEvent extends Component {
         );
     };
 }
-export default connect(mapStateToProps)(CreateEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent);

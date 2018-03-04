@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import CourseForm from './CourseForm';
+import { client } from '../../../configuration/client';
+import CourseForm from './components/CourseForm';
 
 class CreateCourse extends Component {
-    handleSave(course, students) {
-
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Course/Create.php`, {
-            COURSE_ID: course,
-            STUDENTS: students
+    handleSave(COURSE_ID, COURSE_TITLE, SEMESTER_ID) {
+        client.post(`Courses/Create.php`, {
+            COURSE_ID,
+            COURSE_TITLE,
+            SEMESTER_ID
           })
           .then(function (response) {
             console.log(response);
