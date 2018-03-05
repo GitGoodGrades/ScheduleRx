@@ -13,54 +13,24 @@ import { Redirect } from 'react-router';
 import axios from 'axios';
 import { styles } from '../EventStyles';
 
-const mapStateToProps = (state) => ({
-    currentSchedule: state.currentSchedule,
-    registrationSchedule: state.registrationSchedule
-});
 
-class EmptyEventForm extends Component {
+class EventForm extends Component {
     state = {
         COURSE_ID: '',
         SECTION_ID: '',
         ROOM_ID: '',
         START_TIME: '',
         END_TIME: '',
-        SCHEDULE_ID: '',
-        IS_RELEASED: ''
     };
 
-    componentDidMount(){
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Detail.php`,
-        {
-            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
-        })
-        .then(res => {
-            this.setState({IS_RELEASED: res.data.IS_RELEASED});
-        })}
-    
-
     handleSave = () => {
-        if (this.state.IS_RELEASED === "0") {
-            if (moment(this.state.START_TIME).isAfter(this.props.registrationSchedule.START_SEM_DATE)
-                 && moment(this.state.END_TIME).isBefore(this.props.registrationSchedule.END_SEM_DATE) ) {
-                this.props.onSave(
-                    this.state.COURSE_ID,
-                    this.state.SECTION_ID,
-                    this.state.ROOM_ID,
-                    this.state.START_TIME,
-                    this.state.END_TIME,
-                    this.props.registrationSchedule.SCHEDULE_ID
-                );
-            }
-            else {
-                alert("Event must fall within Semester Period");
-                return <Redirect path='/event/create'/>
-            }
-        }
-        else {
-            alert("Cannot Create Event's outside Registration time");
-            return <Redirect path='/event/create'/>
-        }
+        this.props.onSave(
+            this.state.COURSE_ID, 
+            this.state.SECTION_ID, 
+            this.state.ROOM_ID, 
+            this.state.START_TIME, 
+            this.state.END_TIME,
+        )
     };
         
 
@@ -68,11 +38,9 @@ class EmptyEventForm extends Component {
         this.setState({[event.target.name]: event.target.value});
     };
 
-    x = this.props.currentSchedule;
-    y = this.props.registrationSchedule;
-
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
+
         return (
             <Paper>
                 <div className={classes.FormContainer}>
@@ -88,7 +56,7 @@ class EmptyEventForm extends Component {
                                     value={this.state.COURSE_ID}
                                     onChange={this.handleChange}
                                 >
-                                    {(this.props.courseList.records && this.props.courseList.records.length > 0 && this.props.courseList.records.map(row => {
+                                    {(this.props.courseList && this.props.courseList.length > 0 && this.props.courseList.map(row => {
                                         return (
                                             <MenuItem value={row.COURSE_ID}>{row.COURSE_ID}</MenuItem>
                                         )
@@ -104,7 +72,7 @@ class EmptyEventForm extends Component {
                                     value={this.state.SECTION_ID}
                                     onChange={this.handleChange}
                                 >
-                                    {(this.props.sectionList.records && this.props.sectionList.records.length > 0 && this.props.sectionList.records.map(row => {
+                                    {(this.props.sectionList && this.props.sectionList.length > 0 && this.props.sectionList.map(row => {
                                         if (row.COURSE_ID === this.state.COURSE_ID) {
                                             return (
                                                 <MenuItem value={row.SECTION_ID}>{row.SECTION_ID}</MenuItem>
@@ -124,7 +92,7 @@ class EmptyEventForm extends Component {
                                     value={this.state.ROOM_ID}
                                     onChange={this.handleChange}
                                 >
-                                    {(this.props.roomList.records && this.props.roomList.records.length > 0 && this.props.roomList.records.map(row => {
+                                    {(this.props.roomList && this.props.roomList.length > 0 && this.props.roomList.map(row => {
                                         return (
                                             <MenuItem value={row.ROOM_ID}>{row.ROOM_ID}</MenuItem>
                                         );
@@ -173,7 +141,5 @@ class EmptyEventForm extends Component {
         );
     }
 }
-
-const EventForm = connect(mapStateToProps)(EmptyEventForm);
 
 export default withStyles(styles)(EventForm);

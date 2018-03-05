@@ -3,33 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d5d32983-e46a-4c79-8252-43d2659c9424" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/README.md" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/README.md" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/Header.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/Header.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/LeftNavigationPanel.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/LeftNavigationPanel.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/App.test.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/App.test.js" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/Calendar.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Components/Calendar.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/app.css" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/app.css" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/index.css" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/index.css" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/logo.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/registerServiceWorker.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/registerServiceWorker.js" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/routes.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/routes.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/tileData.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Components/tileData.js" />
       <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/actions/actionCreator.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/actions/actionCreator.js" />
       <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/reducers/rootReducer.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/reducers/rootReducer.js" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/CourseForm.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/components/CourseForm.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/CourseTable.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/components/CourseTable.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/CreateCourse.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/CreateCourse.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/index.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/index.jsx" />
       <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/CreateEvent.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/CreateEvent.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/EventForm.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/components/EventForm.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Home/Home.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Home/Home.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/CreateSchedule.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/CreateSchedule.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/Index.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/Index.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/ScheduleForm.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/components/ScheduleForm.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/ScheduleTable.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/components/ScheduleTable.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Faculty/Home/Home.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Faculty/Home/Home.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Student/Home/Home.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Student/Home/Home.jsx" />
-      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/index.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/index.js" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/components/EventForm.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/components/EventForm.jsx" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -137,8 +114,8 @@
       <file leaf-file-name="CreateEvent.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/CreateEvent.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -447,7 +424,7 @@
       <workItem from="1519089743860" duration="2226000" />
       <workItem from="1519147418686" duration="589000" />
       <workItem from="1519880274820" duration="62000" />
-      <workItem from="1520192895184" duration="2806000" />
+      <workItem from="1520192895184" duration="3409000" />
     </task>
     <servers />
   </component>
@@ -475,7 +452,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58656000" />
+    <option name="totallyTimeSpent" value="59259000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -813,8 +790,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/CreateEvent.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>

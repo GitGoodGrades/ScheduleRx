@@ -4,7 +4,10 @@ const initialState = {
     semester: '',
     currentSchedule: {},
     registrationSchedule: {},
-    courseList: []
+    courseList: [],
+    sectionList: [],
+    roomList: [],
+    conflictList: null
   };
   
   const rootReducer = (state = initialState, action) => {
@@ -54,6 +57,11 @@ const initialState = {
         ...state,
         currentSchedule: action.current,
         registrationSchedule: action.registration
+      }
+    case 'SEARCH_CONFLICTS':
+      return {
+        ...state,
+        conflictList: action.data
       }
     default:
       return state;
