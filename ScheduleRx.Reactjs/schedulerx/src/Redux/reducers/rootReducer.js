@@ -8,7 +8,8 @@ const initialState = {
     sectionList: [],
     roomList: [],
     conflictList: null,
-    adminCalendar: []
+    adminCalendar: [],
+    scheduleList: []
   };
   
   const rootReducer = (state = initialState, action) => {
@@ -68,6 +69,11 @@ const initialState = {
       return {
         ...state,
         adminCalendar: action.data
+      }
+    case 'SEARCH_SCHEDULE_LIST':
+      return {
+        ...state,
+        scheduleList: action.data
       }
     default:
       return state;

@@ -3,6 +3,7 @@ import Calendar from '../../../Base Components/Calendar';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import moment from 'moment';
+// import * as action from '../../../Redux/actions/actionCreator';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -10,6 +11,10 @@ const mapStateToProps = (state) => ({
     semester: state.semester,
     schedule: state.currentSchedule
 });
+
+// const mapDispatchToProps = (dispatch) => ({
+//     onLoad: (variables) => dispatch(action.facultyCalendar(variables))
+// });
 
 class Home extends Component {
     state = {events: []};
@@ -24,6 +29,9 @@ class Home extends Component {
                 });
                 this.setState({events});
             });
+        //CHANGE TO:
+
+        //this.props.onLoad(variable to send)
 
     };
 
@@ -38,4 +46,7 @@ class Home extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(
+    mapStateToProps,
+    // mapDispatchToProps
+)(Home);

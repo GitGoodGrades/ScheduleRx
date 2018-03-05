@@ -83,7 +83,7 @@ class ScheduleTable extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {(ScheduleList.records && ScheduleList.records.length > 0 && ScheduleList.records.map(row => {
+              {(ScheduleList && ScheduleList.length > 0 && ScheduleList.map(row => {
                 return (
                   <TableRow
                     hover
