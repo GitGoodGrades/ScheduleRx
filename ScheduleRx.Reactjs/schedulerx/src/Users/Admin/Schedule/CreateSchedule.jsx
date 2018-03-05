@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { client } from '../../../configuration/client';
 import ScheduleForm from './components/ScheduleForm';
 import { connect } from 'react-redux';
 
@@ -9,7 +10,7 @@ const mapStateToProps = (state) => ({
 
 class CreateSchedule extends Component {
     handleSave(schedule) {
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Create.php`, {
+        client.post(`Schedule/Create.php`, {
             SCHEDULE_ID: schedule.SCHEDULE_ID,
             START_REG_DATE: schedule.START_REG_DATE,
             END_REG_DATE: schedule.END_REG_DATE,

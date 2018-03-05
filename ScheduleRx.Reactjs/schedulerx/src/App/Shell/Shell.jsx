@@ -2,7 +2,7 @@ import React from 'react';
 import {withStyles} from 'material-ui/styles';
 import {connect} from 'react-redux';
 import * as action from '../../Redux/actions/actionCreator';
-import {Redirect} from 'react-router';
+import {Link} from 'react-router-dom';
 import Logging from '../Auth/scenes/logging';
 import { styles }  from './ShellStyles';                      //importing CSS for Shell
 import { AdminProfile, FacultyProfile, StudentProfile } from './HomeBuilder';
@@ -31,7 +31,7 @@ class EmptyShell extends React.Component {
     }
 
     RegisterClick = () => {
-        return <Redirect path="/Register"/>;
+        return <Link to="/Register"/>;
     };
 
     handleDrawerToggle = () => {

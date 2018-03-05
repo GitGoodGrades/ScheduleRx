@@ -18,6 +18,7 @@ const styles = theme => ({
 
 class RegisterForm extends React.Component {
   state = { first: false}
+    //get Steven to return null 
     componentDidMount(){
         axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Users/Index.php`)
           .then(res => {

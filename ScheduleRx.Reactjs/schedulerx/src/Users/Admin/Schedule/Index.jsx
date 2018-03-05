@@ -6,15 +6,18 @@ import moment from 'moment';
 import Home from '../Home/Home';
 import * as action from '../../../Redux/actions/actionCreator';
 import { connect } from 'react-redux';
+import { client } from '../../../configuration/client';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
+    schedules: state.scheduleList
   });
 
 const mapDispatchToProps = (dispatch) => ({
     registration: (reg) => dispatch(action.updateRegistration(
         reg
-      ))
+      )),
+    onLoad: () => dispatch(action.searchScheduleList())
 });
 
 class Schedules extends Component {
@@ -27,43 +30,33 @@ class Schedules extends Component {
     };
 
     state = {
-        scheduleList: [],
-        isLoading: true,
         selectedId: '',
         visible: false,
         endDate: moment().format("YYYY-MM-DD hh:mm:ss")
     };
 
     componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Index.php`)
-      .then(res => {
-        const scheduleList = res.data;
-        this.setState({ scheduleList, isLoading: false});
-      });
+        this.props.onLoad();
     };
 
     update = (id, released, currentDate) => {
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Update.php`,
+        client.post(`Schedule/Update.php`,
         {
             SCHEDULE_ID: id,
             IS_RELEASED: released,
             END_REG_DATE: currentDate
-        },
-        axios.post(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Schedule/Detail.php`,
-        {
-            SCHEDULE_ID: id,
-        })
-        .then(res => {
-            this.props.registration(res.data);
-        }))
+        }
+        .then(
+            this.props.updateRegistration(id)
+        ))
+
         
-    };
+    }
 
     render(){
         return(
             <div>
-                {this.state.isLoading && <CircularProgress size={75} /> ||
-                <ScheduleTable handleState={this.handleState} save={this.update} scheduleList={this.state.scheduleList} />}
+                <ScheduleTable handleState={this.handleState} save={this.update} scheduleList={this.props.schedules} />
             </div>
         );
     };

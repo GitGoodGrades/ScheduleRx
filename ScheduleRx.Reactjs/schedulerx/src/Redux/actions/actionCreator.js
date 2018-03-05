@@ -10,8 +10,35 @@ export function adminCalendar() {
             data: res.data.records
         })
     });
-    
 }
+
+// export function facultyCalendar() {
+//     return (dispatch) =>
+//     client.post(`Bookings/Index.php`),
+//     {
+//         //teacher teaches functionality
+//     }
+//     .then(res => {    
+//         dispatch({
+//             type: 'FACULTY_CALENDAR',
+//             data: res.data.records
+//         })
+//     });
+// }
+
+// export function studentCalendar() {
+//     return (dispatch) =>
+//     client.post(`Bookings/Index.php`),
+//     {
+//         //student takes functionality
+//     }
+//     .then(res => {    
+//         dispatch({
+//             type: 'STUDENT_CALENDAR',
+//             data: res.data.records
+//         })
+//     });
+// }
 
 export function searchConflicts() {
     return (dispatch) =>
@@ -105,6 +132,17 @@ export function updateRegistration(registrationSchedule) {
             type: 'CHANGE_REGISTRATION',
             reg: registrationSchedule
         })
+}
+
+export function searchScheduleList(){
+    return (dispatch) => 
+        client.get(`Schedule/Index.php`)
+        .then(res => {
+        dispatch({
+            type: 'SEARCH_SCHEDULE_LIST',
+            data: res.data.records
+        })
+        });
 }
 
 export function logout() {

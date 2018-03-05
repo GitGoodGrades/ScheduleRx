@@ -1,6 +1,6 @@
 import React from 'react';
 import { MuiThemeProvider } from 'material-ui/styles';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Router } from 'react-router-dom';
 import Shell from './Shell/Shell';
 import { ulmTheme as theme } from '../MaterialUI/theme/index';
 import Logging from './Auth/scenes/logging';
