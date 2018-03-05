@@ -1,6 +1,18 @@
 import axios from 'axios';
 import {client} from '../../configuration/client';
 
+export function adminCalendar() {
+    return (dispatch) =>
+    client.get(`Bookings/Index.php`)
+    .then(res => {    
+        dispatch({
+            type: 'ADMIN_CALENDAR',
+            data: res.data.records
+        })
+    });
+    
+}
+
 export function searchConflicts() {
     return (dispatch) =>
     client.get(`Bookings/Conflict.php`)
@@ -8,7 +20,8 @@ export function searchConflicts() {
         dispatch({
             type: 'SEARCH_CONFLICTS',
             data: res.data.records
-        })});
+        })
+    });
 }
 
 export function searchSchedules() {

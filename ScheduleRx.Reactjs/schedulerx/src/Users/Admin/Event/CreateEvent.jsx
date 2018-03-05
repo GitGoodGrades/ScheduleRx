@@ -25,10 +25,10 @@ const mapDispatchToProps = (dispatch) => ({
 
 class CreateEvent extends Component {
     componentDidMount() {
-        this.props.loadCourses;
-        this.props.loadRooms;
-        this.props.loadSections;
-        this.props.loadSchedules;
+        this.props.loadCourses();
+        this.props.loadRooms();
+        this.props.loadSections();
+        this.props.loadSchedules();
     }
 
     handleSave(course, section, room, start, end) {

@@ -3,38 +3,29 @@ import Calendar from '../../../Base Components/Calendar';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import moment from 'moment';
+import * as action from '../../../Redux/actions/actionCreator';
 
 const mapStateToProps = (state) => ({
-    role: state.userRole,
-    user: state.userName,
-    semester: state.semester,
-    schedule: state.currentSchedule
+    events: state.adminCalendar
   });
+
+const mapDispatchToProps = (dispatch) => ({
+    onLoad: () => dispatch(action.adminCalendar())
+});
 
 class Home extends Component {
     state = { events: []};
 
     componentDidMount() {
-            axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Bookings/Index.php`)
-            .then(res => {
-                const events = res.data.records;
-                events && events.map(obj => {
-                    obj.START_TIME = moment(obj.START_TIME).toDate();
-                    obj.END_TIME = moment(obj.END_TIME).toDate();
-                });
-                this.setState({ events });
-            });
-        
+        this.props.onLoad();       
     };
     render(){
         return(
-            <div 
-                className="rbc-calendar"
-            >
-                <Calendar events={this.state.events} />
+            <div className="rbc-calendar">
+                <Calendar events={this.props.events} />
             </div>
         )
     }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
