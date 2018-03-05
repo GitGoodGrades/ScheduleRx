@@ -22,7 +22,7 @@ $data = json_decode(file_get_contents("php://input"));
 echo findConflict( 'booking',$data->START_TIME, $data->END_TIME, $data->ROOM_ID, $conn);
 
 function findConflict( $tableName,$start, $end, $room , $conn) {
-    //Get all Bookings Index, (We can Alter this to get Events only for a specifically given room)
+    //Get all Bookings on the given room
     $allBookings = json_decode(Search($tableName, 'ROOM_ID', $room, $conn));
     //Define empty Array, this will be the container for the conflicts
     $conflicts = [];
