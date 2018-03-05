@@ -1,6 +1,6 @@
 <?php
-function Search($tableName, $searchKey, $whereKey, $conn) {
-    $query = ('SELECT * FROM ' . $tableName . " WHERE " . $searchKey . '=' . $whereKey );
+function Search($tableName, $searchKey, $whereValue, $conn) {
+    $query = ('SELECT * FROM ' . $tableName . " WHERE " . $searchKey . '=' . $whereValue );
     $stmt = $conn->prepare($query);
 
     $stmt->execute();
