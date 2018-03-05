@@ -1,6 +1,16 @@
 import axios from 'axios';
 import {client} from '../../configuration/client';
 
+export function searchConflicts() {
+    return (dispatch) =>
+    client.get(`Bookings/Conflict.php`)
+    .then(res => {    
+        dispatch({
+            type: 'SEARCH_CONFLICTS',
+            data: res.data.records
+        })});
+}
+
 export function searchSchedules() {
     let scheduleList = [];
     let currentSchedule = {};
@@ -9,8 +19,7 @@ export function searchSchedules() {
     client.get(`Schedule/Index.php`)
     .then(res => {    
         scheduleList = res.data.records
-        }
-    )
+    
 
     for(let obj of scheduleList){
         if(!obj.IS_RELEASED && !obj.IS_ARCHIVED){
@@ -19,14 +28,14 @@ export function searchSchedules() {
             currentSchedule = obj;
         }
     }
-    
+
     dispatch({
         type: 'SEARCH_SCHEDULE',
         current: currentSchedule,
         registration: registrationSchedule
-    })
+    })    }
+    )
 }
-
 
 export function searchSections() {
     return (dispatch) =>
