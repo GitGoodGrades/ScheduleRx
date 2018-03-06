@@ -17,7 +17,7 @@ function Search($tableName, $searchKey, $whereValue, $conn) {
     }
     else{
         return json_encode(
-            array("message" => "No " . $tableName . "s found.")
+            array("message" => "No " . $tableName . "s found. ERROR CODE:" . $stmt->errorCode())
         );
     }
 }
