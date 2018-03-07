@@ -1,4 +1,5 @@
-
+CREATE SCHEMA IF NOT EXISTS nursing_database;
+use nursing_database;
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`semester` (
   SEMESTER_ID INT(1)		NOT NULL,
@@ -23,17 +24,17 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`course` (
 INSERT INTO nursing_database.course 
 VALUES 	('N2000', 'Nursing Concepts', 1),
 
-	('N2002', 'Transitions In Nursing', 1),
+		('N2002', 'Transitions In Nursing', 1),
         
-	('N2004', 'Health Assessment', 1),
+		('N2004', 'Health Assessment', 1),
         
-	('N2009', 'Fundamentals of Professional Nursing Practice', 1),
+		('N2009', 'Fundamentals of Professional Nursing Practice', 1),
 
-	('N3009', 'Adult Health Nursing 1', 2),
+		('N3009', 'Adult Health Nursing 1', 2),
     
         ('N3010', 'Mental Health Nursing', 2),
      
-	('N3011', 'Nursing Synthesis 1', 2),
+		('N3011', 'Nursing Synthesis 1', 2),
     
         ('N3028', 'Adult Health Nursing 2', 3),
     
@@ -83,16 +84,16 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`users` (
 
 INSERT INTO users
 VALUES  (10000001, '11', 'admin1@ulm', 1, null),
-	(20000001, '21', 'faculty1@ulm', 2, null),
-	(20000002, '22', 'faculty2@ulm', 2, null),
-	(20000003, '23', 'faculty3@ulm', 2, null),
-	(20000004, '24', 'faculty4@ulm', 2, null),
-	(20000005, '25', 'faculty5@ulm', 2, null),
-	(30000001, '31', 'student1@war', 3, 1),
-	(30000002, '32', 'student2@war', 3, 2),
-	(30000003, '33', 'student3@war', 3, 3),
-	(30000004, '34', 'student4@war', 3, 4),
-	(30000005, '35', 'student5@war', 3, 5);
+		(20000001, '21', 'faculty1@ulm', 2, null),
+		(20000002, '22', 'faculty2@ulm', 2, null),
+		(20000003, '23', 'faculty3@ulm', 2, null),
+		(20000004, '24', 'faculty4@ulm', 2, null),
+		(20000005, '25', 'faculty5@ulm', 2, null),
+		(30000001, '31', 'student1@war', 3, 1),
+		(30000002, '32', 'student2@war', 3, 2),
+		(30000003, '33', 'student3@war', 3, 3),
+		(30000004, '34', 'student4@war', 3, 4),
+		(30000005, '35', 'student5@war', 3, 5);
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`room_capabilities` (
   CAPABILITY   VARCHAR(20),
@@ -114,7 +115,7 @@ INSERT INTO nursing_database.room
 
 VALUES 	('100', 50, 'room1', 'nursing', null, null),
 
-	('101', 51, 'room2', 'nursing', null, null),
+		('101', 51, 'room2', 'nursing', null, null),
 
         ('102', 70, 'room3', 'nursing', null, null),
 
@@ -152,35 +153,40 @@ VALUES ('SPRING2018',
 FALSE, FALSE);
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`booking` (
-  ROOM_ID    	INT(3)      	NOT NULL,
-  COURSE_ID  	VARCHAR(5) 	NOT NULL,
-  SECTION_ID 	VARCHAR(5)	NOT NULL,
+  ROOM_ID    	  INT(3)      	  NOT NULL,
   
-  START_TIME 	DATETIME   	NOT NULL,
-  END_TIME   	DATETIME   	NOT NULL,
+  START_TIME 	  DATETIME   	  NOT NULL,
+  END_TIME   	  DATETIME        NOT NULL,
   
-  SCHEDULE_ID 	VARCHAR(10),
-  BOOKING_ID 	INT(2)		NOT NULL AUTO_INCREMENT,
+  SCHEDULE_ID 	  VARCHAR(10),
+  BOOKING_ID 	  INT(2)		  NOT NULL AUTO_INCREMENT,
   BOOKING_TITLE   VARCHAR(50)     NOT NULL,               # BOOKING_TITLE INSTEAD OF EVENT TITLE
-
+  DETAILS         VARCHAR(50), 
   CONSTRAINT PK_BOOKING PRIMARY KEY (BOOKING_ID),
   FOREIGN KEY (ROOM_ID) REFERENCES room(ROOM_ID),
-  FOREIGN KEY (COURSE_ID) REFERENCES course(COURSE_ID),
-  FOREIGN KEY (SECTION_ID) REFERENCES section(SECTION_ID),
   FOREIGN KEY (SCHEDULE_ID) REFERENCES schedule(SCHEDULE_ID)
 );
 
+CREATE TABLE IF NOT EXISTS `nursing_database`.`event_section` (
+  BOOKING_ID 	  INT(2)		  NOT NULL,
+  SECTION_ID 	  VARCHAR(5)	  NOT NULL,
+
+  CONSTRAINT PK_BOOKING_SECTION PRIMARY KEY (BOOKING_ID, SECTION_ID),
+  FOREIGN KEY (BOOKING_ID) REFERENCES booking(BOOKING_ID),
+  FOREIGN KEY (SECTION_ID) REFERENCES section(SECTION_ID)
+)
+ 
 INSERT INTO nursing_database.booking 
 VALUES 	
-	(100, 'N2004', '43928', '2018-03-02 11:00:00', '2018-03-02 12:00:00', 'SPRING2018', 1, 'classroom meeting'),
+	(100, '2018-03-02 11:00:00', '2018-03-02 12:00:00', 'SPRING2018', 1, 'classroom meeting', null),
 
-	(101, 'N2004', '41422', '2018-03-03 11:00:00', '2018-03-03 01:00:00', 'SPRING2018', 2, 'classroom meeting'),
+	(101, '2018-03-03 11:00:00', '2018-03-03 01:00:00', 'SPRING2018', 2, 'classroom meeting', null),
 
-	(102, 'N3011', '43942', '2018-03-18 11:00:00', '2018-03-18 12:00:00', 'SPRING2018', 3, 'classroom meeting'),
+	(102, '2018-03-18 11:00:00', '2018-03-18 12:00:00', 'SPRING2018', 3, 'classroom meeting', null),
 
-	(103, 'N4000', '44196', '2018-03-19 11:00:00', '2018-03-19 12:00:00', 'SPRING2018', 4, 'classroom meeting'),
+	(103, '2018-03-19 11:00:00', '2018-03-19 12:00:00', 'SPRING2018', 4, 'classroom meeting', null),
 
-	(104, 'N3010', '43940', '2018-03-20 11:00:00', '2018-03-20 12:00:00', 'SPRING2018', 5, 'classroom meeting');
+	(104, '2018-03-20 11:00:00', '2018-03-20 12:00:00', 'SPRING2018', 5, 'classroom meeting', null);
 
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (
@@ -190,6 +196,8 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (
   FOREIGN KEY (CONFLICT_ID) REFERENCES conflict(CONFLICT_ID),
   FOREIGN KEY (BOOKING_ID) REFERENCES booking(BOOKING_ID)
 );
+
+CREATE SCHEMA IF NOT EXISTS banner_database;
 
 use banner_database;
 
@@ -204,7 +212,6 @@ CREATE TABLE IF NOT EXISTS `banner_database`.`teacher_teaches` (
   SECTION_ID    VARCHAR(5)      NOT NULL,
   PRIMARY KEY (USER_ID, SECTION_ID)
 );
-
 
 INSERT INTO teacher_teaches
 VALUES (20000001, '40303'),
@@ -221,4 +228,3 @@ VALUES (30000001, '40303'),
        (30000002, '43942'),
        (30000003, '41111'),
        (30000004, '44196');
-       
