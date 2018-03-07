@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as action from '../../../Redux/actions/actionCreator';
 import moment from 'moment';
 import { client } from '../../../configuration/client';
+import EventCalendar from './components/EventCalendar';
 
 const mapStateToProps = (state) => ({
     courses: state.courseList,
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => ({
     sections: state.sectionList,
     current_schedule: state.currentSchedule,
     registration_schedule: state.registrationSchedule,
-    conflict_List: state.conflictList
+    conflict_List: state.conflictList,
+    events: state.adminCalendar
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -68,10 +70,18 @@ class CreateEvent extends Component {
             });
     }
 
+    selectEvent = (event) => {
+        console.log(event);
+    }
+
+    selectSlot = (slot) => {
+        console.log(slot);
+    }
+
     render(){
         return(
             <div>
-                {
+                {/* {
                 this.props.courses && this.props.sections && this.props.rooms &&
                 <EventForm
                     onSave={this.handleSave}
@@ -82,7 +92,8 @@ class CreateEvent extends Component {
                     registrationSchedule={this.props.registration_schedule}
                     conflictList={this.props.conflict_List}
                 />
-                }
+                } */}
+                <EventCalendar events={this.props.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}/>
             </div>
         );
     };
