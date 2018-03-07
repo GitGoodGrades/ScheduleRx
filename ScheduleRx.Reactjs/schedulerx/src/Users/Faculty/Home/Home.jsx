@@ -3,50 +3,61 @@ import Calendar from '../../../Base Components/Calendar';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import moment from 'moment';
-// import * as action from '../../../Redux/actions/actionCreator';
+import * as action from '../../../Redux/actions/actionCreator';
+import EventView from '../../../Base Components/eventView';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
     user: state.userName,
     semester: state.semester,
-    schedule: state.currentSchedule
+    calendar: state.userCalendar
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//     onLoad: (variables) => dispatch(action.facultyCalendar(variables))
-// });
+const mapDispatchToProps = (dispatch) => ({
+    onLoad: (user, role) => dispatch(action.userCalendar(user, role))
+});
 
 class Home extends Component {
-    state = {events: []};
+    state = {
+        events: [],
+        event: {}
+    };
 
     componentDidMount() {
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Bookings/Index.php`)
-            .then(res => {
-                const events = res.data.records;
+        this.props.onLoad(this.props.user, this.props.role)
+            .then(() => {
+                const events = this.props.calendar;
                 events && events.map(obj => {
                     obj.START_TIME = moment(obj.START_TIME).toDate();
                     obj.END_TIME = moment(obj.END_TIME).toDate();
                 });
                 this.setState({events});
-            });
-        //CHANGE TO:
+            }
+        );
+    }
 
-        //this.props.onLoad(variable to send)
+    handleSelectSlot = () => {
+        console.log();
+    }
 
-    };
+    handleSelectEvent = (event) => {
+        this.setState({event})
+    }
 
     render() {
         return (
             <div
                 className="rbc-calendar"
             >
-                <Calendar events={this.state.events}/>
+                <Calendar 
+                    events={this.state.events} 
+                    handleEventSelection={this.handleSelectEvent} 
+                    handleSlotSelection={this.handleSelectSlot}
+                />
+                <EventView event={this.state.event} />
             </div>
         )
     }
 }
 
-export default connect(
-    mapStateToProps,
-    // mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

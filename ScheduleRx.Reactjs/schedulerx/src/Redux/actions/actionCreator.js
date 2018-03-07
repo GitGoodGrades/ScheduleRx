@@ -12,33 +12,20 @@ export function adminCalendar() {
     });
 }
 
-// export function facultyCalendar() {
-//     return (dispatch) =>
-//     client.post(`Bookings/Index.php`),
-//     {
-//         //teacher teaches functionality
-//     }
-//     .then(res => {    
-//         dispatch({
-//             type: 'FACULTY_CALENDAR',
-//             data: res.data.records
-//         })
-//     });
-// }
-
-// export function studentCalendar() {
-//     return (dispatch) =>
-//     client.post(`Bookings/Index.php`),
-//     {
-//         //student takes functionality
-//     }
-//     .then(res => {    
-//         dispatch({
-//             type: 'STUDENT_CALENDAR',
-//             data: res.data.records
-//         })
-//     });
-// }
+export function userCalendar(user, role) {
+    return (dispatch) =>
+    client.post(`Bookings/MyEvents.php`,
+    {
+        USER_ID: user,
+        ROLE_ID: role
+    })
+    .then(res => {    
+        dispatch({
+            type: 'USER_CALENDAR',
+            data: res.data
+        })
+    });
+}
 
 export function searchConflicts() {
     return (dispatch) =>
