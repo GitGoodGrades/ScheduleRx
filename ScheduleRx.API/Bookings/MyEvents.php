@@ -25,9 +25,9 @@ $data = json_decode(file_get_contents("php://input"));
 
 //If it is a teacher
 if ($data->ROLE_ID == '2')
-    $results = json_decode(Search( 'teacher_teaches','CWID',$data->USER_ID,  $conn2));
+    $results = json_decode(Search( 'teacher_teaches','USER_ID',$data->USER_ID,  $conn2));
 else {
-    $results = json_decode(Search( 'student_takes','CWID',$data->USER_ID,  $conn2));
+    $results = json_decode(Search( 'student_takes','USER_ID',$data->USER_ID,  $conn2));
 }
 
 //the $results variable now holds  list of section numbers the Student Takes, or the Teacher Teaches
