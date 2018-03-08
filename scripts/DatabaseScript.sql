@@ -174,7 +174,14 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`event_section` (
   CONSTRAINT PK_BOOKING_SECTION PRIMARY KEY (BOOKING_ID, SECTION_ID),
   FOREIGN KEY (BOOKING_ID) REFERENCES booking(BOOKING_ID),
   FOREIGN KEY (SECTION_ID) REFERENCES section(SECTION_ID)
-)
+);
+
+insert into event_section values
+(1,40303),
+(2,41111),
+(3,41422),
+(3,43928),
+(4,43940);
  
 INSERT INTO nursing_database.booking 
 VALUES 	
