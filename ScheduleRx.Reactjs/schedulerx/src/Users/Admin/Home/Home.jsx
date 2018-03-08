@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from '../../../Base Components/Calendar';
+import EventView from '../../../Base Components/eventView';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import moment from 'moment';
@@ -14,15 +15,33 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Home extends Component {
-    state = { events: []};
+    state = { events: [], event: {}, open: false};
 
     componentDidMount() {
         this.props.onLoad();       
     };
-    render(){
-        return(
-            <div className="rbc-calendar">
-                <Calendar events={this.props.events} />
+    handleSelectSlot = () => {
+        console.log();
+    }
+
+    handleSelectEvent = (event) => {
+        this.setState({event, open: true})
+    }
+
+    handleClose = () => {
+        this.setState({ open: false})
+    }
+    render() {
+        return (
+            <div
+                className="rbc-calendar"
+            >
+                <Calendar 
+                    events={this.props.events}
+                    handleEventSelection={this.handleSelectEvent} 
+                    handleSlotSelection={this.handleSelectSlot}
+                />
+                <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>
         )
     }

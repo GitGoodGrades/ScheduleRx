@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
     role: state.userRole,
     user: state.userName,
     semester: state.semester,
+    schedule: state.currentSchedule,
     calendar: state.userCalendar
 });
 
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch) => ({
 class Home extends Component {
     state = {
         events: [],
-        event: {}
+        event: {},
+        open: false
     };
 
     componentDidMount() {
@@ -32,29 +34,31 @@ class Home extends Component {
                     obj.END_TIME = moment(obj.END_TIME).toDate();
                 });
                 this.setState({events});
-            }
-        );
+            });
     }
-
+    
     handleSelectSlot = () => {
         console.log();
     }
 
     handleSelectEvent = (event) => {
-        this.setState({event})
+        this.setState({event, open: true})
     }
 
+    handleClose = () => {
+        this.setState({ open: false})
+    }
     render() {
         return (
             <div
                 className="rbc-calendar"
             >
                 <Calendar 
-                    events={this.state.events} 
+                    events={this.state.events}
                     handleEventSelection={this.handleSelectEvent} 
                     handleSlotSelection={this.handleSelectSlot}
                 />
-                <EventView event={this.state.event} />
+                <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>
         )
     }

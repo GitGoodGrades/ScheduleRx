@@ -22,7 +22,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Home extends Component {
-    state = {events: []};
+    state = {
+        events: [],
+        event: {},
+        open: false
+    };
 
     componentDidMount() {
         this.props.onLoad(this.props.user, this.props.role)
@@ -41,7 +45,11 @@ class Home extends Component {
     }
 
     handleSelectEvent = (event) => {
-        this.setState({event})
+        this.setState({event, open: true})
+    }
+
+    handleClose = () => {
+        this.setState({ open: false})
     }
     render() {
         return (
@@ -53,7 +61,7 @@ class Home extends Component {
                     handleEventSelection={this.handleSelectEvent} 
                     handleSlotSelection={this.handleSelectSlot}
                 />
-                <EventView event={this.state.event} />
+                <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>
         )
     }
