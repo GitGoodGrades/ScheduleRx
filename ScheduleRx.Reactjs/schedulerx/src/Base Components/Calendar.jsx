@@ -7,8 +7,6 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 BigCalendar.momentLocalizer(moment); 
 
-
-
 class Calendar extends Component {
 
   selectEvent = (event) => {
@@ -26,7 +24,7 @@ class Calendar extends Component {
         {...this.props}
         selectable
         style={{minHeight: 500, overflow: 'auto'}}
-        events={this.props.events}
+        events={this.props.events.length > 0 ? this.props.events : [] }
         titleAccessor="COURSE_ID"
         startAccessor='START_TIME'
         endAccessor='END_TIME'
