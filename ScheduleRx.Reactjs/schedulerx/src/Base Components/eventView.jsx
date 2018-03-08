@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import moment from 'moment';
+import Dialog from 'material-ui/Dialog';
 
 const styles = theme => ({
   card: {
@@ -26,28 +27,42 @@ const styles = theme => ({
   },
 });
 
-function EventView(props) {
-  const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
 
-  return (
-    <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title}>{props.event && props.event.ROOM_ID}</Typography>
-          <Typography variant="headline" component="h2">
-            {props.event && props.event.BOOKING_TITLE}
-          </Typography>
-          <Typography className={classes.pos}>{props.event && props.event.COURSE_ID}</Typography>
-          <Typography component="p">
-            {props.event && moment(props.event.START_TIME).format('MMMM Do YYYY')} <br />
-            {props.event && moment(props.event.START_TIME).format('h:mm a')} - 
-            {props.event && moment(props.event.END_TIME).format('h:mm a')}
-          </Typography>
-        </CardContent>
-      </Card>
-    </div>
+class EventView extends Component{
+  handleClose = () => {
+  this.props.onClose();
+  };
+  
+  render(){
+    const { classes, event, onClose } = this.props;
+    const bull = <span className={classes.bullet}>•</span>;
+    
+    return (
+      <Dialog
+          open={this.props.open}
+          onClose={this.handleClose}
+          onBackdropClick={this.handleClose}
+      >
+        <div>
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography className={classes.title}>{event && event.ROOM_ID}</Typography>
+              <Typography variant="headline" component="h2">
+                {event && event.BOOKING_TITLE}
+              </Typography>
+              <Typography className={classes.pos}>{event && event.COURSE_ID}</Typography>
+              <Typography component="p">
+                {event && moment(event.START_TIME).format('MMMM Do YYYY')} <br />
+                {event && moment(event.START_TIME).format('h:mm a')} - 
+                {event && moment(event.END_TIME).format('h:mm a')}
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+      </ Dialog>
   );
+  }
+  
 }
 
 export default withStyles(styles)(EventView);
