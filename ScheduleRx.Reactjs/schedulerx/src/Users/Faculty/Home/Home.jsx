@@ -29,7 +29,7 @@ class Home extends Component {
         this.props.onLoad(this.props.user, this.props.role)
             .then(() => {
                 const events = this.props.calendar;
-                events && events.map(obj => {
+                events && events.length > 0 && events.map(obj => {
                     obj.START_TIME = moment(obj.START_TIME).toDate();
                     obj.END_TIME = moment(obj.END_TIME).toDate();
                 });
