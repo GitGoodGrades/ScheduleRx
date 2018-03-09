@@ -14,8 +14,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const styles = theme => ({
   appBar: {
-    position: 'absolute',
-      zIndex: '5',
     [theme.breakpoints.up('md')]: {
       width: `100%`,
     },
@@ -37,7 +35,7 @@ const logout = () => {                         //commented this out because the 
 const Header = (props) => {
   const { classes, handleDrawerToggle } = props;
   return (
-    <AppBar className={classes.appBar}>
+    <AppBar >
       <Toolbar>
         <IconButton
           color="default"

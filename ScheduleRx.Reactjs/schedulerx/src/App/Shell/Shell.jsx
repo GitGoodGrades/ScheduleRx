@@ -26,7 +26,6 @@ class EmptyShell extends React.Component {
     constructor() {
         super();
         this.state = {
-            mobileOpen: false,
         }
     }
 
@@ -34,9 +33,9 @@ class EmptyShell extends React.Component {
         return <Link to="/Register"/>;
     };
 
-    handleDrawerToggle = () => {
+    /**handleDrawerToggle = () => {
         this.setState({mobileOpen: !this.state.mobileOpen});
-    };
+    };*/
 
     render() {
         const {classes} = this.props;  //pulls css from props
@@ -60,11 +59,11 @@ class EmptyShell extends React.Component {
         let userRole = this.props.role;
         switch(userRole) {
             case '1':
-                return <AdminProfile mobileOpen={this.state.mobileOpen}/>;
+                return <AdminProfile/>;
             case '2':
-                return <FacultyProfile mobileOpen={this.state.mobileOpen}/>;
+                return <FacultyProfile />;
             default:
-                return <StudentProfile mobileOpen={this.state.mobileOpen}/>;
+                return <StudentProfile/>;
         }
     }
 }
