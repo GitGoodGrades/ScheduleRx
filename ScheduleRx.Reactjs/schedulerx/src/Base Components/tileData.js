@@ -1,50 +1,23 @@
 import React from 'react';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { Link } from 'react-router-dom';
-import InboxIcon from 'material-ui-icons/MoveToInbox';
 
-export const AdminItems = ({ toggle }) =>
-    <div style={{fontFamily: 'Cuprum'}}>
-        <Link to="/schedule/create">
-            <ListItem button onClick={toggle}>
-                <ListItemIcon>
-                    <InboxIcon/>
-                </ListItemIcon>
-            <ListItemText primary="Create Schedule"/>
-            </ListItem>
-        </Link>
-    </div>;
+export const AdminCreateSchedule = () =>
 
-export const AdminScheduleList = ({ toggle }) =>
-    <div style={{fontFamily: 'Cuprum'}}>
-            <Link to="/schedule/List">
-                <ListItem button onClick={toggle}>
-                    <ListItemIcon>
-                        <InboxIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="Schedules"/>
-                </ListItem>
-            </Link>
-    </div>;
+        <Link to="/schedule/create">Create New Schedule </Link>
 
-export const FacultyItems = ({ toggle }) =>
-    <div style={{fontFamily: 'Cuprum'}}>
-        <Link to="/event/create">
-            <ListItem button onClick={toggle}>
-                <ListItemIcon>
-                    <InboxIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Create Event"/>
-            </ListItem>
-        </Link>
-    </div>;
+  ;
+export const AdminManageSchedule = () =>
+        <Link to="/schedule/List">Manage </Link>
+    ;
 
-export const StudentItems = ({ toggle }) =>
-    <div style={{fontFamily: 'Cuprum'}}>
-        <Link to="/">
-            <ListItem button onClick={toggle}>
-                <ListItemIcon><InboxIcon/></ListItemIcon>
-                <ListItemText primary="Home"/>
-            </ListItem>
-        </Link>
-    </div>;
+export const FacultyItems = () =>
+
+      <Link to="/event/create">Create New Event </Link>
+
+    ;
+
+export const StudentItems = () =>
+      <Link to="/">Home </Link>
+
+    ;

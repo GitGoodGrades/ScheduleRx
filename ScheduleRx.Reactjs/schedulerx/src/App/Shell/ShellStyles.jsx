@@ -6,12 +6,14 @@ export const styles = theme => ({
         zIndex: 1,
         height: '100%',
         overflow: 'hidden',
+
     },
     appFrame: {
         position: 'relative',
         display: 'inline',
         width: '100%',
         height: '100%',
+        border: '4px solid yellow',
     },
     content: {
         backgroundColor: theme.palette.background.default,
@@ -27,10 +29,12 @@ export const styles = theme => ({
 
         },
         overflow: 'auto',
+
     },
     gridRoot: {
         height: '100%',
-        minHeight: 900
+        minHeight: 900,
+        border: '4px solid yellow',
     },
     buttonwrapper: {
         border: '',

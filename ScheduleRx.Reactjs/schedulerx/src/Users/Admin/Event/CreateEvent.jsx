@@ -6,6 +6,7 @@ import * as action from '../../../Redux/actions/actionCreator';
 import moment from 'moment';
 import { client } from '../../../configuration/client';
 import EventCalendar from './components/EventCalendar';
+import EventTopForm from './components/EventTopForm';
 
 const mapStateToProps = (state) => ({
     courses: state.courseList,
@@ -36,20 +37,20 @@ class CreateEvent extends Component {
     handleSave(course, section, room, start, end) {
         let scheduleID = null;
         this.props.getEvents(start, end);
-        
+
         if(this.state.conflict_List === null){
             if(moment(start).isBetween(
-                this.props.current_schedule.START_SEM_DATE, 
+                this.props.current_schedule.START_SEM_DATE,
                 this.props.current_schedule.END_SEM_DATE)){
 
                 scheduleID = null;
                 // CREATE REQUEST LOGIC HERE
 
             } else if (moment(start).isBetween(
-                this.props.registration_schedule.START_SEM_DATE, 
+                this.props.registration_schedule.START_SEM_DATE,
                 this.props.registration_schedule.END_SEM_DATE)){
                     scheduleID = this.props.registration_schedule.SCHEDULE_ID;
-            }    
+            }
         } else {
             //conflict logic
         }
@@ -80,7 +81,7 @@ class CreateEvent extends Component {
 
     render(){
         return(
-            <div>
+            <div style={{display:'inline'}}>
                 {/* {
                 this.props.courses && this.props.sections && this.props.rooms &&
                 <EventForm
@@ -93,6 +94,7 @@ class CreateEvent extends Component {
                     conflictList={this.props.conflict_List}
                 />
                 } */}
+                <EventTopForm/>
                 <EventCalendar events={this.props.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}/>
             </div>
         );
