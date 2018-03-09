@@ -9,4 +9,4 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-echo Search( 'booking',$data->SEARCH_BY,$data->WHERE,  $conn);
+echo Search( 'booking',$data->SEARCH_BY, $data->WHERE,  $conn);

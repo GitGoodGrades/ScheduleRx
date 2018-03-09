@@ -12,9 +12,8 @@ function CreateRecord ($tableName, $fields, $conn) {
     unset($value);
 
     foreach ($fields as $key => $value) {
-        $temp=htmlspecialchars(strip_tags($value));
         $colonize = ":" . $key;
-        $stmt->bindValue($colonize, $temp);
+        $stmt->bindValue($colonize, $value);
     }
 
     return $stmt->execute() ? $tableName . ' was created.' : $tableName . ' was not created ERROR CODE:' . $stmt->errorCode();

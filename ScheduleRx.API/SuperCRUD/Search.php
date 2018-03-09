@@ -1,6 +1,6 @@
 <?php
-function Search($tableName, $searchKey, $whereKey, $conn) {
-    $query = ('SELECT * FROM ' . $tableName . " WHERE " . $searchKey . '=' . $whereKey );
+function Search($tableName, $searchKey, $whereValue, $conn) {
+    $query = ('SELECT * FROM ' . $tableName . " WHERE " . $searchKey . '=' . $whereValue );
     $stmt = $conn->prepare($query);
 
     $stmt->execute();
@@ -17,7 +17,7 @@ function Search($tableName, $searchKey, $whereKey, $conn) {
     }
     else{
         return json_encode(
-            array("message" => "No " . $tableName . "s found.")
+            array("message" => "No " . $tableName . "s found. ERROR CODE:" . $stmt->errorCode())
         );
     }
 }
