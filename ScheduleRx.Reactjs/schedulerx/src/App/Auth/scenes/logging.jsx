@@ -4,6 +4,7 @@ import {client} from '../../../configuration/client';
 import * as action from '../../../Redux/actions/actionCreator';
 import LoginForm from '../components/login';
 import { Redirect } from 'react-router-dom';
+import styles from '../../Shell/ShellStyles';
 
 const mapDispatchToProps = (dispatch) => ({
     sendUser: (USER_ID, USER_ROLE, SEMESTER_ID) => dispatch(action.setUser(

@@ -40,7 +40,7 @@ class ScheduleForm extends React.Component {
 
   handleSave = () => {
       this.props.onSave(this.state);
-  }
+  };
 
   render() {
     const { classes } = this.props;
