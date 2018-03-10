@@ -68,8 +68,9 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`roles` (
 
 INSERT INTO nursing_database.roles 
 VALUES (1, 'administrator'),
-       (2, 'faculty'),
-       (3, 'student');
+       (2, 'lead'),
+	   (3, 'faculty'),
+       (4, 'student');
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`users` (
   USER_ID        INT(8)         NOT NULL,      #Campuswide ID (CWID)
@@ -84,16 +85,16 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`users` (
 
 INSERT INTO users
 VALUES  (10000001, '11', 'admin1@ulm', 1, null),
-		(20000001, '21', 'faculty1@ulm', 2, null),
-		(20000002, '22', 'faculty2@ulm', 2, null),
-		(20000003, '23', 'faculty3@ulm', 2, null),
-		(20000004, '24', 'faculty4@ulm', 2, null),
-		(20000005, '25', 'faculty5@ulm', 2, null),
-		(30000001, '31', 'student1@war', 3, 1),
-		(30000002, '32', 'student2@war', 3, 2),
-		(30000003, '33', 'student3@war', 3, 3),
-		(30000004, '34', 'student4@war', 3, 4),
-		(30000005, '35', 'student5@war', 3, 5);
+		(20000001, '21', 'faculty1@ulm', 3, null),
+		(20000002, '22', 'faculty2@ulm', 3, null),
+		(20000003, '23', 'faculty3@ulm', 3, null),
+		(20000004, '24', 'faculty4@ulm', 3, null),
+		(20000005, '25', 'faculty5@ulm', 3, null),
+		(30000001, '31', 'student1@war', 4, 1),
+		(30000002, '32', 'student2@war', 4, 2),
+		(30000003, '33', 'student3@war', 4, 3),
+		(30000004, '34', 'student4@war', 4, 4),
+		(30000005, '35', 'student5@war', 4, 5);
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`room_capabilities` (
   CAPABILITY   VARCHAR(20),
@@ -175,13 +176,6 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`event_section` (
   FOREIGN KEY (BOOKING_ID) REFERENCES booking(BOOKING_ID),
   FOREIGN KEY (SECTION_ID) REFERENCES section(SECTION_ID)
 );
-
-insert into event_section values
-(1,40303),
-(2,41111),
-(3,41422),
-(3,43928),
-(4,43940);
  
 INSERT INTO nursing_database.booking 
 VALUES 	
@@ -196,12 +190,28 @@ VALUES
 	(104, '2018-03-20 11:00:00', '2018-03-20 12:00:00', 'SPRING2018', 5, 'classroom meeting', null);
 
 
+insert into event_section values
+(1,40303),
+(2,41111),
+(3,41422),
+(3,43928),
+(4,43940);
+
+
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (
   CONFLICT_ID       INT(3)     NOT NULL,
   BOOKING_ID        INT(2)     NOT NULL,
   PRIMARY KEY (CONFLICT_ID, BOOKING_ID),
   FOREIGN KEY (CONFLICT_ID) REFERENCES conflict(CONFLICT_ID),
   FOREIGN KEY (BOOKING_ID) REFERENCES booking(BOOKING_ID)
+);
+
+CREATE TABLE IF NOT EXISTS `nursing_database`.`leads_course` (
+  COURSE_ID 	VARCHAR(5) 	NOT NULL,
+  USER_ID       INT(8)         NOT NULL,
+  PRIMARY KEY (COURSE_ID, USER_ID),
+  FOREIGN KEY (COURSE_ID) REFERENCES course(COURSE_ID),
+  FOREIGN KEY (USER_ID) REFERENCES users(USER_ID)
 );
 
 CREATE SCHEMA IF NOT EXISTS banner_database;
