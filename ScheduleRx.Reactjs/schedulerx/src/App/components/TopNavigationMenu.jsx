@@ -4,9 +4,15 @@ import {withStyles} from 'material-ui/styles';
 import {AdminItems, FacultyItems, StudentItems} from '../../Base Components/tileData';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as action from "../../Redux/actions/actionCreator";
+import { Redirect } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    logOut: () => dispatch(action.logout())
 });
 
 const styles = theme => ({
@@ -17,11 +23,28 @@ const styles = theme => ({
         display: 'none'
     },
     seen: {
-      display: 'inline',
+        display: 'inline',
+        marginLeft: '80px',
+    },
+    asText: {
+        display: "inline",
+        background: 'none',
+        border: 'none',
+        marginLeft: '80px',
+        padding: '0',
+        cursor: "pointer"
     }
 });
 
 class TopNavMenu extends Component {
+
+    LogOut = () => {
+        sessionStorage.removeItem('myID');
+        sessionStorage.removeItem('myRole');
+        sessionStorage.removeItem('mySem');
+        this.props.logOut();
+        return <Redirect to path="/"/>;
+    };
 
     render() {
       const {classes} = this.props;
@@ -34,6 +57,7 @@ class TopNavMenu extends Component {
                     className={this.props.role !== '1' ? classes.hidden : classes.seen}>Create New Schedule </Link>
               <Link to="/schedule/List"
                     className={this.props.role !== '1' ? classes.hidden : classes.seen}>Manage </Link>
+              <button className={classes.asText} onClick={this.LogOut}>|  Log Out  | </button>
           </nav>
       );
 
@@ -92,6 +116,6 @@ class TopNavMenu extends Component {
     }
 }
 
-const EmptyTopNavMenu = connect(mapStateToProps)(TopNavMenu);
+const EmptyTopNavMenu = connect(mapStateToProps, mapDispatchToProps)(TopNavMenu);
 
 export default withStyles(styles, {withTheme: true})(EmptyTopNavMenu);

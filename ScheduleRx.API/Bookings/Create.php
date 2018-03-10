@@ -17,6 +17,7 @@ $newID = rand(0,999);
 $data->BOOKING_ID = $newID;
 
 $sectionEntries = $data->SECTION_ID;
+$initialNote = $data->NOTE;
 
 unset($data->SECTION_ID);
 unset($data->COURSE_ID);
@@ -26,6 +27,6 @@ echo CreateRecord('booking', $data, $conn);
 $LastEntry = json_decode(FindRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn));
 
 foreach ($sectionEntries as $sec_ID) {
-    $newAssoc = array( "SECTION_ID" => $sec_ID, "BOOKING_ID" => $LastEntry->BOOKING_ID);
+    $newAssoc = array( "SECTION_ID" => $sec_ID, "BOOKING_ID" => $LastEntry->BOOKING_ID, "NOTES" => $initialNote );
     echo CreateRecord('event_section', $newAssoc, $conn);
 }

@@ -51,6 +51,6 @@ class EmptyTopForm extends Component {
   }
 }
 
-const EventTopForm = connect(mapStateToProps)(EmptyTopForm);
+const EventTopForm = (EmptyTopForm);
 
 export default withStyles(styles)(EventTopForm)
