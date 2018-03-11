@@ -12,7 +12,8 @@ const initialState = {
     scheduleList: [],
     userCalendar: [],
     facultyList: [],
-    userList: []
+    userList: [],
+    leadsCourses: []
   };
   
   const rootReducer = (state = initialState, action) => {
@@ -88,6 +89,11 @@ const initialState = {
         ...state,
         userList: action.users,
         facultyList: action.faculty
+      }
+    case 'SEARCH_LEADS_COURSES':
+      return {
+        ...state,
+        leadsCourses: action.data
       }
     default:
       return state;

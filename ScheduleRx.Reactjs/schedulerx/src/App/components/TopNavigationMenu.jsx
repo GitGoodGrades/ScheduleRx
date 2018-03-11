@@ -60,9 +60,9 @@ class TopNavMenu extends Component {
                 className={this.props.role !== Admin ? classes.hidden : classes.seen}>Manage </Link>
             <Link to="/users/Leads"
                 className={this.props.role !== Admin ? classes.hidden : classes.seen}>Leads </Link>
+            <button className={classes.asText} onClick={this.LogOut}>|  Log Out  | </button>
         </nav>
-              <button className={classes.asText} onClick={this.LogOut}>|  Log Out  | </button>
-          </nav>
+              
       );
 
 

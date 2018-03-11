@@ -6,41 +6,65 @@ import Select from 'material-ui/Select';
 import {MenuItem} from 'material-ui/Menu';
 
 class UserCourseTable extends Component {
-    state = { 
-        course: '',
-        faculty: ''
+    state = {
+        leads: []
     }
-    handleChange = (event) => {
-        event
+    
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({leads: nextProps.leads});
     }
 
+    handleChange = (event) => {
+        let leadsTemp = this.state.leads;
+
+        var index = -1;
+        leadsTemp.find(function(item, i){
+            if(item.COURSE_ID === event.target.name){
+              index = i;
+              return i;
+            }
+          })
+        if (index !== -1) {
+            leadsTemp[index] = {
+                COURSE_ID:  event.target.name ,
+                USER_ID: event.target.value
+            };
+        }
+        // client.post(`xyz`,{
+        //         COURSE_ID: event.target.name,
+        //         USER_ID: event.target.value
+        //     });
+        this.setState({leads: leadsTemp})
+    }
+
+
+
     render() {
-        const {courses} = this.props;  
+        const {leads, faculty} = this.props;  
         return (
         <Paper>
             <Table >
                 <TableBody>
-                {(courses && courses.length > 0 && courses.map(row => {
+                {leads && leads.length > 0 && leads.map(row => {
                     return (
                     <TableRow key={row.COURSE_ID}>
                         <TableCell>{row.COURSE_ID}</TableCell>
                         <TableCell >
-                                    <Select
-                                        input={<Input name="Faculty"/>}
-                                        name="Faculty"
-                                        onChange={this.handleChange}
-                                        value={this.state.faculty}
-                                    >
-                                        {(this.props.faculty && this.props.faculty.length > 0 && this.props.faculty.map(row => {
-                                            return (
-                                                <MenuItem value={row.USER_ID}>{row.USER_ID}</MenuItem>
-                                            )
-                                        })) || <MenuItem>None</MenuItem>};
-                                    </Select>
+                            <Select
+                                name={row.COURSE_ID}
+                                onChange={this.handleChange}
+                                value={row.USER_ID}
+                                >
+                                    {(faculty && faculty.length > 0 && faculty.map(inside => {
+                                        return (
+                                            <MenuItem value={inside.USER_ID}>{inside.USER_ID}</MenuItem>
+                                        )
+                                    })) || <MenuItem>None</MenuItem>};
+                            </Select>
                         </TableCell>
                     </TableRow>
                     );
-                })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
+                })}
                 </TableBody>
             </Table>
         </Paper>

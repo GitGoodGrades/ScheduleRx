@@ -4,12 +4,12 @@ import * as action from '../../../Redux/actions/actionCreator';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-    courses: state.courseList,
+    leads: state.leadsCourses,
     faculty: state.facultyList
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    onLoad: () => dispatch(action.searchCourses())
+    onLoad: () => dispatch(action.searchLeadsCourses())
 })
 
 class Leads extends Component {
@@ -20,7 +20,7 @@ class Leads extends Component {
     render(){
         return(
             <div>
-                <UserCourseTable  faculty={this.props.faculty} courses={this.props.courses}/>
+                <UserCourseTable  faculty={this.props.faculty} leads={this.props.leads}/>
             </div>
         );
     };

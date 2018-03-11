@@ -133,6 +133,17 @@ export function searchScheduleList(){
         });
 }
 
+export function searchLeadsCourses(){
+    return (dispatch) => 
+        client.get(`leads_course/Index.php`) //client.get(`bookings/LeadIndex.php`)
+        .then(res => {
+        dispatch({
+            type: 'SEARCH_LEADS_COURSES',
+            data: res.data.records
+        })
+        });
+}
+
 export function searchUsers() {
     let userList = [];
     let facultyList = [];
