@@ -51,7 +51,7 @@ class Logging extends React.Component {
         const savedUser = sessionStorage.getItem('myID');
         const savedRole = sessionStorage.getItem('myRole');
         const savedSem = sessionStorage.getItem('mySem');
-        console.log(savedUser);
+
         if (savedUser) {
             this.props.sendUser(savedUser, savedRole, savedSem);
             return <Redirect to path="/"/>;
