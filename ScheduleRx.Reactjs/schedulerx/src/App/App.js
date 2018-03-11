@@ -10,7 +10,7 @@ const App = () =>
   (
     <MuiThemeProvider theme={theme}>
       <Switch>
-        <Route path="/" component={Shell} />
+        <Route exact path="/" component={Shell} />
         <Route path="/login" component={Logging}/>
         <Route path="/Register" component={Registration}/>
       </Switch>

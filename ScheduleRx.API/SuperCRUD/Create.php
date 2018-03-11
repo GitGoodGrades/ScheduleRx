@@ -16,5 +16,5 @@ function CreateRecord ($tableName, $fields, $conn) {
         $stmt->bindValue($colonize, $value);
     }
 
-    return $stmt->execute() ? $tableName . ' was created.' : $tableName . ' was not created ERROR CODE:' . $stmt->errorCode();
+    return $stmt->execute() ? $tableName . ' was created.' : null;
 };

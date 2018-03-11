@@ -29,10 +29,6 @@ class EmptyShell extends React.Component {
         }
     }
 
-    RegisterClick = () => {
-        return <Link to="/Register"/>;
-    };
-
     /**handleDrawerToggle = () => {
         this.setState({mobileOpen: !this.state.mobileOpen});
     };*/
@@ -46,9 +42,9 @@ class EmptyShell extends React.Component {
                 <div>
                     <Logging/>
                     <div className={classes.buttonwrapper}>
-                        <button className={classes.regbutton} onClick={this.RegisterClick}>Never been here before?
+                        <Link className={classes.regbutton} to="/register">Never been here before?
                             Register
-                        </button>
+                        </Link>
                     </div>
                 </div>
             )
