@@ -31,8 +31,7 @@ class UserCourseTable extends Component {
             };
         }
         // client.post(`xyz`,{
-        //         COURSE_ID: event.target.name,
-        //         USER_ID: event.target.value
+        //         this.state.leads
         //     });
         this.setState({leads: leadsTemp})
     }
