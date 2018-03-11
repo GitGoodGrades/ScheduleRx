@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { client } from '../../../configuration/client';
 import RegisterForm from '../components/register';
+import { withRouter } from "react-router-dom";
 
 
 class Registration extends Component {
-        
+
     handleSave(userInfo) {
         let ROLE_ID = '';
         if(userInfo.EMAIL && userInfo.EMAIL.toLowerCase().endsWith("@warhawks.ulm.edu")){
@@ -21,7 +22,14 @@ class Registration extends Component {
             SEMESTER_ID: userInfo.SEMESTER_ID
           })
           .then(function (response) {
-            console.log(response);
+              console.log(response);
+            if (response.data === ""){
+                alert("Please Use Your CWID, Try Again");
+            }
+            else {
+                alert("Account created, Please login");
+                window.location = "/";
+            }
           })
           .catch(function (error) {
             console.log(error);
@@ -35,4 +43,4 @@ class Registration extends Component {
         );
     };
 }
-export default Registration;
+export default withRouter(Registration);
