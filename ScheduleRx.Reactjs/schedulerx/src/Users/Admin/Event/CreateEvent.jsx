@@ -82,19 +82,13 @@ class CreateEvent extends Component {
     render(){
         return(
             <div style={{display:'inline'}}>
-                {/* {
-                this.props.courses && this.props.sections && this.props.rooms &&
-                <EventForm
-                    onSave={this.handleSave}
-                    courseList={this.props.courses}
-                    roomList={this.props.rooms}
-                    sectionList={this.props.sections}
-                    currentSchedule={this.props.current_schedule}
-                    registrationSchedule={this.props.registration_schedule}
-                    conflictList={this.props.conflict_List}
+
+                
+                <EventTopForm
+                  courseList={this.props.courses}
+                  roomList={this.props.rooms}
+                  sectionList={this.props.sections}
                 />
-                } */}
-                <EventTopForm/>
                 <EventCalendar events={this.props.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}/>
             </div>
         );

@@ -1,56 +1,51 @@
 import React, { Component } from 'react';
 import {withStyles} from 'material-ui/styles';
-import {Form, Select} from 'antd';
 import {connect} from 'react-redux';
+import { Form } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
-const FormItem = Form.Item;
-const Option = Select.Option;
+
+
+
+
 const styles = theme => ({
   container: {
     minHeight: 300,
   },
 });
 
-class EmptyTopForm extends Component {
+class EventTopForm extends Component {
+  state = {
+      COURSE_ID: '',
+      SECTION_ID: '',
+      ROOM_ID: '',
+  };
+
+
+  handleChange = event => {
+      this.setState({[event.target.name]: event.target.value});
+  };
+
+
   render() {
     const {classes} = this.props;
     return (
       <Form className={classes.container}>
-        <FormItem>
-          <Select
-            style={{ width: 200 }}
+          <Dropdown
             placeholder="Select a course"
-            optionFilterProp="course"
+            name="COURSE_ID"
+            fluid selection
+            options={this.props.courseList}
           >
-            <Option value='1'>1</Option>
-            <Option value='2'>2</Option>
-          </Select>
-        </FormItem>
-        <FormItem>
-          <Select
-            style={{ width: 200 }}
-            placeholder="Select a room"
-            optionFilterProp="room"
-          >
-            <Option value='1'>1</Option>
-            <Option value='2'>2</Option>
-          </Select>
-        </FormItem>
-        <FormItem>
-          <Select
-            style={{ width: 200 }}
-            placeholder="Select a course"
-            optionFilterProp="course"
-          >
-            <Option value='1'>1</Option>
-            <Option value='2'>2</Option>
-          </Select>
-        </FormItem>
+
+
+          </Dropdown>
+
       </Form>
     );
   }
 }
 
-const EventTopForm = (EmptyTopForm);
+
 
 export default withStyles(styles)(EventTopForm)
