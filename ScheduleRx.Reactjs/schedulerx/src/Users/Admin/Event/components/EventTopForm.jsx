@@ -11,7 +11,7 @@ const styles = theme => ({
   },
 });
 
-class EmptyTopForm extends Component {
+class EventTopForm extends Component {
   render() {
     const {classes} = this.props;
     return (
@@ -50,7 +50,5 @@ class EmptyTopForm extends Component {
     );
   }
 }
-
-const EventTopForm = (EmptyTopForm);
 
 export default withStyles(styles)(EventTopForm)

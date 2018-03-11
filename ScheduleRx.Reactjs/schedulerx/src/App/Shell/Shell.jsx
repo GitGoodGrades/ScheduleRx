@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import Logging from '../Auth/scenes/logging';
 import { styles }  from './ShellStyles';                      //importing CSS for Shell
 import { AdminProfile, FacultyProfile, StudentProfile } from './HomeBuilder';
+import { Admin, Lead, Faculty, Student } from '../../configuration/variables';
 
 //Redux Constants to Handle user Information
 const mapStateToProps = (state) => ({
@@ -18,15 +19,14 @@ const mapDispatchToProps = (dispatch) => ({
     getSchedules: (registrationSchedule, currentSchedule) => dispatch(action.changeSchedules(
         registrationSchedule,
         currentSchedule
-    ))
+    )),
+    getUsers: () => dispatch(action.searchUsers())
 });
 
 class EmptyShell extends React.Component {
-
-    constructor() {
-        super();
-        this.state = {
-        }
+    componentDidMount = () => {
+        this.props.getSchedules();
+        this.props.getUsers();
     }
 
     /**handleDrawerToggle = () => {
@@ -53,11 +53,16 @@ class EmptyShell extends React.Component {
         // If the User IS Logged In - Then we Know the Global Data For User is Set
 
         let userRole = this.props.role;
+        const admin = Admin;
+        const lead = Lead;
+        const faculty = Faculty;
         switch(userRole) {
-            case '1':
+            case admin:
                 return <AdminProfile/>;
-            case '2':
-                return <FacultyProfile />;
+            // case lead:
+            //     return <LeadProfile />;
+            case faculty:
+                return <FacultyProfile />
             default:
                 return <StudentProfile/>;
         }

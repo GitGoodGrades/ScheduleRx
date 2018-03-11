@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { client } from '../../../configuration/client';
 import RegisterForm from '../components/register';
+import { Admin, Faculty, Student } from '../../../configuration/variables';
 import { withRouter } from "react-router-dom";
 
 
@@ -9,9 +10,9 @@ class Registration extends Component {
     handleSave(userInfo) {
         let ROLE_ID = '';
         if(userInfo.EMAIL && userInfo.EMAIL.toLowerCase().endsWith("@warhawks.ulm.edu")){
-            ROLE_ID = 3;
+            ROLE_ID = Student;
         }else if(userInfo.EMAIL.toLowerCase().endsWith("@ulm.edu")){
-            userInfo.first ? ROLE_ID = 1 : ROLE_ID = 2;
+            userInfo.first ? ROLE_ID = Admin : ROLE_ID = Faculty;
         }
 
         client.post(`Users/Create.php`, {

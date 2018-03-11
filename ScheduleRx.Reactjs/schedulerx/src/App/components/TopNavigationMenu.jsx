@@ -4,6 +4,7 @@ import {withStyles} from 'material-ui/styles';
 import {AdminItems, FacultyItems, StudentItems} from '../../Base Components/tileData';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Admin, Lead, Faculty, Student } from '../../configuration/variables';
 import * as action from "../../Redux/actions/actionCreator";
 import { Redirect } from 'react-router-dom';
 
@@ -49,14 +50,17 @@ class TopNavMenu extends Component {
     render() {
       const {classes} = this.props;
       return (
-          <nav className={classes.TopNavMenu}>
-              <Link to="/">Home </Link>
-              <Link to="/event/create"
-                    className={this.props.role === '3' ? classes.hidden : classes.seen}>Create New Event </Link>
-              <Link to="/schedule/create"
-                    className={this.props.role !== '1' ? classes.hidden : classes.seen}>Create New Schedule </Link>
-              <Link to="/schedule/List"
-                    className={this.props.role !== '1' ? classes.hidden : classes.seen}>Manage </Link>
+        <nav className={classes.TopNavMenu}>
+            <Link to="/">Home </Link>
+            <Link to="/event/create"
+                className={this.props.role === Student || Faculty ? classes.hidden : classes.seen}>Create New Event </Link>
+            <Link to="/schedule/create"
+                className={this.props.role !== Admin ? classes.hidden : classes.seen}>Create New Schedule </Link>
+            <Link to="/schedule/List"
+                className={this.props.role !== Admin ? classes.hidden : classes.seen}>Manage </Link>
+            <Link to="/users/Leads"
+                className={this.props.role !== Admin ? classes.hidden : classes.seen}>Leads </Link>
+        </nav>
               <button className={classes.asText} onClick={this.LogOut}>|  Log Out  | </button>
           </nav>
       );

@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d5d32983-e46a-4c79-8252-43d2659c9424" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/package-lock.json" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/package-lock.json" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/package.json" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/package.json" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Auth/scenes/registration.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Auth/scenes/registration.jsx" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/Shell.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/Shell.jsx" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/TopNavigationMenu.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/TopNavigationMenu.jsx" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/actions/actionCreator.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/actions/actionCreator.js" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/reducers/rootReducer.js" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/reducers/rootReducer.js" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/AdminRoutes.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/AdminRoutes.jsx" />
+      <change beforePath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/components/EventTopForm.jsx" afterPath="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/components/EventTopForm.jsx" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Search.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Search.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Create.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/Create.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Roles/Index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Delete.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Delete.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Detail.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Detail.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Index.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Update.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Users/Update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Update.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Update.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Create.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Create.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>module</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/db_tables.sql" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/0185ca6a-5a5f-46c6-b957-7fad784c1fb8/console.sql" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/details.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/config/database.php" />
+        <option value="$PROJECT_DIR$/scripts/database_scripts" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/GET.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/PUT.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Index.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Detail.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Create.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Delete.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Course/Update.php" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/models/Course.php" />
+        <option value="$PROJECT_DIR$/../XAMPP/php/php.ini" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/components/tileData.js" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/App/components/Header.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/App/components/LeftNavigationPanel.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/scenes/Events/CreateEvent.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/index.html" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Event/components/EventForm.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/App/Shell.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/components/index.js" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/index.js" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/tileData.js" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/ShellStyles.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/App.js" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Componenets/routes.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/routes.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Home/Home.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Student/Home/Home.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Student/StudentRoutes.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Faculty/FacultyRoutes.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Faculty/Home/Home.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/ScheduleTable.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/AdminRoutes.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/CreateSchedule.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/CreateEvent.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/EventForm.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/EventStyles.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/index.js" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/Shell.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/ShellStyles.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/HomeBuilder.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/Index.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/CourseForm.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/LeftNavigationPanel.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Home/Home.jsx" />
+        <option value="$PROJECT_DIR$/ScheduleRx.API/Bookings/MyEvents.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/node_modules" />
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP XAMPP" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="775" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="ScheduleRx" type="cbb8eebc:String" user="ScheduleRx" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Courses" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="models" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Roles" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Room" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Schedule" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Section" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="SuperCRUD" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.API" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Users" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="App" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="App" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="App" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Shell" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Base Components" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="services" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Users" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Users" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="ScheduleRx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScheduleRx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ScheduleRx.Reactjs" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="schedulerx" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Users" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Faculty" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="MySQL" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../XAMPP/php/php.exe" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Nick\Project\ScheduleRx\ScheduleRx.Reactjs\schedulerx\public" />
+      <recent name="C:\Users\Nick\Project\ScheduleRx\ScheduleRx.Reactjs\schedulerx\src\App" />
+      <recent name="C:\Users\Nick\Project\ScheduleRx\ScheduleRx.Reactjs\schedulerx\src\Users\Admin\Schedule\components" />
+      <recent name="C:\Users\Nick\Project\ScheduleRx\ScheduleRx.Reactjs\schedulerx\src\Users\Admin\Event\components" />
+      <recent name="C:\Users\Nick\Project\ScheduleRx\ScheduleRx.Reactjs\schedulerx\src\Users\Admin\Course\components" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\The Madman\Desktop\schedulerx\schedulerx\ScheduleRx.Reactjs\schedulerx\src\Users\Student" />
+      <recent name="C:\Users\The Madman\Desktop\schedulerx\schedulerx\ScheduleRx.Reactjs\schedulerx\src\Users\Faculty" />
+      <recent name="C:\Users\The Madman\Desktop\schedulerx\schedulerx\ScheduleRx.Reactjs\schedulerx\src\Users\Admin" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.Index.php">
+    <configuration name="Course.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ScheduleRx/ScheduleRx.API/models/Course.php" />
+    <configuration name="Index.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ScheduleRx/ScheduleRx.API/Course/Index.php" />
+    <configuration name="database.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ScheduleRx/ScheduleRx.API/config/database.php" />
+    <configuration name="ScheduleRx" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner directory="$PROJECT_DIR$" />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="PHPUnit.ScheduleRx" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.Course.php" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.Index.php" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.database.php" />
+    </list>
+    <recent_temporary>
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.Index.php" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.Course.php" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.database.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d5d32983-e46a-4c79-8252-43d2659c9424" name="Default" comment="" />
+      <created>1518290977529</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1518290977529</updated>
+      <workItem from="1518290978796" duration="19920000" />
+      <workItem from="1518318260783" duration="4635000" />
+      <workItem from="1518455571313" duration="1729000" />
+      <workItem from="1519074512448" duration="4020000" />
+      <workItem from="1519083123807" duration="200000" />
+      <workItem from="1519089743860" duration="2226000" />
+      <workItem from="1519147418686" duration="589000" />
+      <workItem from="1519880274820" duration="62000" />
+      <workItem from="1520192895184" duration="4009000" />
+      <workItem from="1520285107822" duration="72000" />
+      <workItem from="1520454961163" duration="1804000" />
+      <workItem from="1520692328401" duration="3268000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="ScheduleRx - 2018.02.10 at 21h 31m 22s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.10 at 21h 33m 53s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.11 at 15h 59m 21s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.11 at 16h 02m 57s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.11 at 16h 04m 29s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.19 at 16h 28m 12s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="ScheduleRx - 2018.02.19 at 16h 29m 14s.xml">
+      <configuration name="ScheduleRx" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="68319000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20424597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="22" side_tool="false" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280507" sideWeight="0.50512445" order="17" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="7.320644E-4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3280507" sideWeight="0.49487555" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296355" sideWeight="0.48023427" order="20" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1711569" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="23" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="21" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="8" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/reducers/rootReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Redux/store/store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="14" column="72" lean-forward="false" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/App.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Components/Calendar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Components/logo.svg" />
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/routes.jsx" />
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/scenes/Home/Home.jsx" />
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/components/EventForm.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="76" column="19" lean-forward="false" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/components/CourseTable.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="49" lean-forward="false" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="14" column="58" lean-forward="true" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Student/StudentRoutes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Student/Home/Home.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Faculty/FacultyRoutes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Faculty/Home/Home.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/CreateSchedule.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="42" lean-forward="false" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/Index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="57" column="10" lean-forward="true" selection-start-line="57" selection-start-column="10" selection-end-line="57" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/services/utilities.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/MaterialUI/theme/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/CreateCourse.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/components/CourseForm.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Course/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="20" column="15" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/components/ScheduleTable.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="39" column="4" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Schedule/components/ScheduleForm.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/Shell.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/HomeBuilder.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/Shell/ShellStyles.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/CreateEvent.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Home/Home.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/registerServiceWorker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/public/routes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="21" lean-forward="false" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/AdminRoutes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="18" column="49" lean-forward="false" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Base Components/tileData.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/App/components/LeftNavigationPanel.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.Reactjs/schedulerx/src/Users/Admin/Event/EventStyles.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/config/Banner_DB.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/MyEvents.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="59" lean-forward="false" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Bookings/Create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="36" lean-forward="false" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Roles/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Delete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Users/Update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/Courses/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduleRx.API/SuperCRUD/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
