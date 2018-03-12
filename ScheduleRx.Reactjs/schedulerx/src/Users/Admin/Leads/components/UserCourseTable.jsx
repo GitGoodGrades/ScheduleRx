@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import Input, {InputLabel} from 'material-ui/Input';
 import Select from 'material-ui/Select';
 import {MenuItem} from 'material-ui/Menu';
+import {client} from '../../../../configuration/client';
 
 class UserCourseTable extends Component {
     state = {
@@ -30,9 +31,7 @@ class UserCourseTable extends Component {
                 USER_ID: event.target.value
             };
         }
-        // client.post(`xyz`,{
-        //         this.state.leads
-        //     });
+         client.post(`/LeadsCourse/Assign.php`, this.state.leads);
         this.setState({leads: leadsTemp})
     }
 
