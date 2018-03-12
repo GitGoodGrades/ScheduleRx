@@ -31,6 +31,7 @@ class Calendar extends Component {
         defaultDate={new Date()}
         onSelectEvent={event => this.selectEvent(event)}
         onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
+        
       />
     </div>
     )

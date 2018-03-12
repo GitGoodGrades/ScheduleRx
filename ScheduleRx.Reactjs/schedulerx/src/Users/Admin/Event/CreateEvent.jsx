@@ -6,7 +6,7 @@ import * as action from '../../../Redux/actions/actionCreator';
 import moment from 'moment';
 import { client } from '../../../configuration/client';
 import EventCalendar from './components/EventCalendar';
-import EventTopForm from './components/EventTopForm';
+import EventDetailDialog from './components/EventDetailDialog';
 
 const mapStateToProps = (state) => ({
     courses: state.courseList,
@@ -15,7 +15,8 @@ const mapStateToProps = (state) => ({
     current_schedule: state.currentSchedule,
     registration_schedule: state.registrationSchedule,
     conflict_List: state.conflictList,
-    events: state.adminCalendar
+    events: state.adminCalendar,
+    open: false
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -23,30 +24,45 @@ const mapDispatchToProps = (dispatch) => ({
     loadRooms: () => dispatch(action.searchRooms()),
     loadSections: () => dispatch(action.searchSections()),
     loadSchedules: () => dispatch(action.searchSchedules()),
-    getEvents: () => dispatch(action.searchConflicts())
+    getConflictEvents: () => dispatch(action.searchConflicts())
 });
 
 class CreateEvent extends Component {
+    state = {
+      start: '',
+      end: '',
+      sections: [],
+      course: '',
+      room: '',
+      dialogOpen: false
+    };
+
     componentDidMount() {
         this.props.loadCourses();
         this.props.loadRooms();
         this.props.loadSections();
         this.props.loadSchedules();
-    }
+    };
 
-    handleSave(course, section, room, start, end) {
+    handleChange = (name, value) => {
+      this.setState({
+        [name]:value
+      });
+    };
+
+    handleSave = (title, details) => {
         let scheduleID = null;
-        this.props.getEvents(start, end);
+        this.props.getConflictEvents(this.state.start, this.state.end);
 
-        if(this.state.conflict_List === null){
-            if(moment(start).isBetween(
+        if(this.props.conflict_List === null){
+            if(moment(this.state.start).isBetween(
                 this.props.current_schedule.START_SEM_DATE,
                 this.props.current_schedule.END_SEM_DATE)){
 
                 scheduleID = null;
                 // CREATE REQUEST LOGIC HERE
 
-            } else if (moment(start).isBetween(
+            } else if (moment(this.state.start).isBetween(
                 this.props.registration_schedule.START_SEM_DATE,
                 this.props.registration_schedule.END_SEM_DATE)){
                     scheduleID = this.props.registration_schedule.SCHEDULE_ID;
@@ -57,11 +73,13 @@ class CreateEvent extends Component {
 
         client.post(`Bookings/Create.php`, {
             SCHEDULE_ID: scheduleID,
-            COURSE_ID: course,
-            SECTION_ID: section,
-            ROOM_ID: room,
-            START_TIME: start,
-            END_TIME: end
+            COURSE_ID: this.state.course,
+            SECTION_ID: this.state.sections,
+            ROOM_ID: this.state.room,
+            START_TIME: this.state.start,
+            END_TIME: this.state.end,
+            BOOKING_TITLE: title,
+            NOTES: details
         })
             .then(function (response) {
                 console.log(response);
@@ -69,6 +87,16 @@ class CreateEvent extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+
+        this.setState({
+          dialogOpen: false
+        });
+    }
+
+    cancel = () => {
+      this.setState({
+        dialogOpen: false
+      })
     }
 
     selectEvent = (event) => {
@@ -76,20 +104,27 @@ class CreateEvent extends Component {
     }
 
     selectSlot = (slot) => {
-        console.log(slot);
+        this.setState({
+          start: moment(slot.start).format('YYYY-MM-DD hh:mm:ss'),
+          end: moment(slot.end).format('YYYY-MM-DD hh:mm:ss'),
+          dialogOpen: true
+        });
     }
 
     render(){
         return(
             <div style={{display:'inline'}}>
-
-                
-                <EventTopForm
+                <EventForm
                   courseList={this.props.courses}
                   roomList={this.props.rooms}
                   sectionList={this.props.sections}
+                  onChange={this.handleChange}
                 />
-                <EventCalendar events={this.props.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}/>
+
+                <EventCalendar events={this.props.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}
+
+                />
+              <EventDetailDialog start={this.state.start} end={this.state.end} open={this.state.dialogOpen} onSave={this.handleSave} onCancel={this.cancel} />
             </div>
         );
     };

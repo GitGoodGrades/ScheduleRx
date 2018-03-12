@@ -21,6 +21,7 @@ $initialNote = $data->NOTE;
 
 unset($data->SECTION_ID);
 unset($data->COURSE_ID);
+unset($data->NOTES);
 
 echo CreateRecord('booking', $data, $conn);
 
