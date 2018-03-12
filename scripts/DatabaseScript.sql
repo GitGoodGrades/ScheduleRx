@@ -191,11 +191,11 @@ VALUES
 
 
 insert into event_section values
-(1,40303),
-(2,41111),
-(3,41422),
-(3,43928),
-(4,43940);
+(1,40303, null),
+(2,41111, null),
+(3,41422, null),
+(3,43928, null),
+(4,43940, null);
 
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (
