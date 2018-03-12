@@ -8,6 +8,21 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 BigCalendar.momentLocalizer(moment);
 
 class Calendar extends Component {
+  state = {
+    events: []
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    let formattedEvents = [];
+    
+    for(let obj of nextProps.events){
+      obj.START_TIME = new Date(obj.START_TIME);
+      obj.END_TIME = new Date(obj.END_TIME);
+      formattedEvents.push(obj);
+    }
+
+    this.setState({events: formattedEvents})
+  }
 
   selectEvent = (event) => {
     this.props.handleEventSelection(event);
