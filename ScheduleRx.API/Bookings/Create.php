@@ -29,5 +29,7 @@ $LastEntry = json_decode(FindRecord('booking',"BOOKING_ID", $data->BOOKING_ID , 
 
 foreach ($sectionEntries as $sec_ID) {
     $newAssoc = array( "SECTION_ID" => $sec_ID, "BOOKING_ID" => $LastEntry->BOOKING_ID, "NOTES" => $initialNote );
-    echo CreateRecord('event_section', $newAssoc, $conn);
+    CreateRecord('event_section', $newAssoc, $conn);
 }
+
+echo FindRecord('booking', 'BOOKING_ID', $newID, $conn);
