@@ -7,14 +7,14 @@ import Logging from './Auth/scenes/logging';
 import Registration from './Auth/scenes/registration';
 
 const App = () =>
-  (
-    <MuiThemeProvider theme={theme}>
-      <Switch>
-        <Route exact path="/" component={Shell} />
-        <Route path="/login" component={Logging}/>
-        <Route path="/Register" component={Registration}/>
-      </Switch>
-    </MuiThemeProvider>
-  );
+    (
+        <MuiThemeProvider theme={theme}>
+            <Switch>
+                <Route exact path="/login" component={Logging}/>
+                <Route exact path="/Register" component={Registration}/>
+                <Route path="/" component={Shell}/>
+            </Switch>
+        </MuiThemeProvider>
+    );
 
 export default App;

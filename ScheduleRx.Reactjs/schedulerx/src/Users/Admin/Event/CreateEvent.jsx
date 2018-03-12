@@ -7,6 +7,7 @@ import moment from 'moment';
 import { client } from '../../../configuration/client';
 import EventCalendar from './components/EventCalendar';
 import EventDetailDialog from './components/EventDetailDialog';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
     courses: state.courseList,
@@ -129,4 +130,4 @@ class CreateEvent extends Component {
         );
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreateEvent));

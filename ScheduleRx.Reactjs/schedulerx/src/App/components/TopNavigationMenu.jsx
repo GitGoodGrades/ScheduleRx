@@ -5,7 +5,7 @@ import {AdminItems, FacultyItems, StudentItems} from '../../Base Components/tile
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as action from "../../Redux/actions/actionCreator";
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -51,7 +51,7 @@ class TopNavMenu extends Component {
       return (
           <nav className={classes.TopNavMenu}>
               <Link to="/">Home </Link>
-              <Link to="/event/create"
+              <Link to="/event/create" replace
                     className={this.props.role === '3' ? classes.hidden : classes.seen}>Create New Event </Link>
               <Link to="/schedule/create"
                     className={this.props.role !== '1' ? classes.hidden : classes.seen}>Create New Schedule </Link>
@@ -116,6 +116,6 @@ class TopNavMenu extends Component {
     }
 }
 
-const EmptyTopNavMenu = connect(mapStateToProps, mapDispatchToProps)(TopNavMenu);
+const EmptyTopNavMenu = withRouter(connect(mapStateToProps, mapDispatchToProps)(TopNavMenu));
 
 export default withStyles(styles, {withTheme: true})(EmptyTopNavMenu);
