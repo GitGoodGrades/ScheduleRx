@@ -64,6 +64,17 @@ export function searchSchedules() {
     )
 }
 
+export function searchLeadsCourses(){
+    return (dispatch) =>
+        client.get(`LeadsCourse/Index.php`) //client.get(`bookings/LeadIndex.php`)
+            .then(res => {
+                dispatch({
+                    type: 'SEARCH_LEADS_COURSES',
+                    data: res.data.records
+                })
+            });
+}
+
 export function searchSections() {
     return (dispatch) =>
     client.get(`Section/Index.php`)
