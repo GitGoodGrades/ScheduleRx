@@ -8,7 +8,7 @@ export function adminCalendar() {
     .then(res => {    
         dispatch({
             type: 'ADMIN_CALENDAR',
-            data: res.data.records
+            data: res.data
         })
     });
 }

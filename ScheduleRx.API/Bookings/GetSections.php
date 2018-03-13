@@ -3,7 +3,7 @@ function GetSections($bookingID, $conn1) {
     global $stmt;
 
     $query =
-        "SELECT ROOM_ID, START_TIME, END_TIME, SCHEDULE_ID, booking.BOOKING_ID, BOOKING_TITLE, DETAILS, section.SECTION_ID, section.COURSE_ID
+        "SELECT section.SECTION_ID, section.COURSE_ID
          FROM ((booking
          INNER JOIN event_section ON booking.BOOKING_ID = event_section.BOOKING_ID)
          INNER JOIN section ON section.SECTION_ID = event_section.SECTION_ID)
