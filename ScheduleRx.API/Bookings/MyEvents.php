@@ -64,7 +64,5 @@ if($myEvents){
     echo json_encode($myEvents);
 }
 else{
-    echo json_encode(
-        array("message" => "No Events found for USER_ID:" . $data->USER_ID . "!!!")
-    );
+    echo null;
 }
