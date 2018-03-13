@@ -3,13 +3,12 @@ import axios from 'axios';
 import {client} from '../../../configuration/client';
 import ScheduleForm from './components/ScheduleForm';
 import {connect} from 'react-redux';
-
 const mapStateToProps = (state) => ({
     role: state.userRole,
 });
 
 class CreateSchedule extends Component {
-    handleSave(schedule) {
+    handleSave(schedule, history) {
         client.post(`Schedule/Create.php`, {
             SCHEDULE_ID: schedule.SCHEDULE_ID,
             START_REG_DATE: schedule.START_REG_DATE,
@@ -21,6 +20,14 @@ class CreateSchedule extends Component {
         })
             .then(function (response) {
                 console.log(response);
+                if (response.data === "") {
+                    alert("Invalid Times or Dates, Please Try Again...");     //I know it's ugly, Don't kill me Sam
+                }                                                           //I'm Only using these Alerts as place holders
+                else {
+                    alert("Schedule Created");
+                    history.push("/schedule/List");                 //Note: history happens SUPER FAST, without the alert
+                }                                    //message to slow it down, it the user may reach the next page before the data is updated
+                                                                   // Maybe we should consider a short loading screen???
             })
             .catch(function (error) {
                 console.log(error);
@@ -30,7 +37,7 @@ class CreateSchedule extends Component {
     render() {
         return (
             <div>
-                <ScheduleForm onSave={this.handleSave}/>
+                <ScheduleForm onSave={this.handleSave} history={this.props.history}/>
             </div>
         );
     };
