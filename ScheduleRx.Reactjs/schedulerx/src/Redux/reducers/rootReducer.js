@@ -86,6 +86,12 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 leadsCourses: action.data
             };
+        case 'SEARCH_USERS':
+            return {
+                ...state,
+                userList: action.users,
+                facultyList: action.faculty
+            }
         default:
             return state;
     }

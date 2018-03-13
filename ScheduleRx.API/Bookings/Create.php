@@ -32,4 +32,4 @@ foreach ($sectionEntries as $sec_ID) {
     CreateRecord('event_section', $newAssoc, $conn);
 }
 
-echo FindRecord('booking', 'BOOKING_ID', $newID, $conn);
+echo GetSections($newID, $conn);
