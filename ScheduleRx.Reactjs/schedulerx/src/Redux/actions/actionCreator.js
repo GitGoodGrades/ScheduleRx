@@ -1,10 +1,10 @@
-import axios from 'axios';
+//import axios from 'axios';
 import {client} from '../../configuration/client';
 
 export function adminCalendar() {
     return (dispatch) =>
     client.get(`Bookings/Index.php`)
-    .then(res => {    
+    .then(res => {
         dispatch({
             type: 'ADMIN_CALENDAR',
             data: res.data.records
@@ -19,7 +19,7 @@ export function userCalendar(user, role) {
         USER_ID: user,
         ROLE_ID: role
     })
-    .then(res => {    
+    .then(res => {
         dispatch({
             type: 'USER_CALENDAR',
             data: res.data
@@ -30,7 +30,7 @@ export function userCalendar(user, role) {
 export function searchConflicts() {
     return (dispatch) =>
     client.get(`Bookings/Conflict.php`)
-    .then(res => {    
+    .then(res => {
         dispatch({
             type: 'SEARCH_CONFLICTS',
             data: res.data.records
@@ -44,9 +44,9 @@ export function searchSchedules() {
     let registrationSchedule = {};
     return (dispatch) =>
     client.get(`Schedule/Index.php`)
-    .then(res => {    
+    .then(res => {
         scheduleList = res.data.records
-    
+
 
     for(let obj of scheduleList){
         if(!obj.IS_RELEASED && !obj.IS_ARCHIVED){
@@ -78,7 +78,7 @@ export function searchLeadsCourses(){
 export function searchSections() {
     return (dispatch) =>
     client.get(`Section/Index.php`)
-    .then(res => {    
+    .then(res => {
         dispatch({
             type: 'SEARCH_SECTIONS',
             data: res.data.records
@@ -88,7 +88,7 @@ export function searchSections() {
 export function searchRooms() {
     return (dispatch) =>
     client.get(`Room/Index.php`)
-    .then(res => {    
+    .then(res => {
         dispatch({
             type: 'SEARCH_ROOMS',
             data: res.data.records
@@ -98,7 +98,7 @@ export function searchRooms() {
 export function searchCourses() {
     return (dispatch) =>
     client.get(`Courses/Index.php`)
-    .then(res => {    
+    .then(res => {
         dispatch({
             type: 'SEARCH_COURSES',
             data: res.data.records
@@ -106,17 +106,17 @@ export function searchCourses() {
 }
 
 export function setUser(name, role, sem) {
-  return (dispatch) => 
+  return (dispatch) =>
       dispatch({
         type: 'UPDATE_USER',
         name: name,
-        role: role, 
+        role: role,
         semester: sem
       });
 }
 
 export function changeSchedules(registrationSchedule, currentSchedule) {
-    return (dispatch) => 
+    return (dispatch) =>
         dispatch({
             type: 'UPDATE_SCHEDULE',
             current: currentSchedule,
@@ -125,7 +125,7 @@ export function changeSchedules(registrationSchedule, currentSchedule) {
 }
 
 export function updateRegistration(registrationSchedule) {
-    return (dispatch) => 
+    return (dispatch) =>
         dispatch({
             type: 'CHANGE_REGISTRATION',
             reg: registrationSchedule
@@ -133,7 +133,7 @@ export function updateRegistration(registrationSchedule) {
 }
 
 export function searchScheduleList(){
-    return (dispatch) => 
+    return (dispatch) =>
         client.get(`Schedule/Index.php`)
         .then(res => {
         dispatch({
@@ -149,4 +149,3 @@ export function logout() {
             type: 'REMOVE_USER'
         });
 }
-

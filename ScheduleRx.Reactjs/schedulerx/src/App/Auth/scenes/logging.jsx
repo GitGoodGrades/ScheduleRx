@@ -54,7 +54,7 @@ class Logging extends React.Component {
 
         if (savedUser) {
             this.props.sendUser(savedUser, savedRole, savedSem);
-            return <Redirect to path="/"/>;
+            return <Redirect to="/"/>;
         }
         return(
             <div>

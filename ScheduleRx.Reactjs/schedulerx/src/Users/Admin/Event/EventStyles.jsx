@@ -1,4 +1,3 @@
-import React from 'react';
 
 export const styles = theme => ({
     Form: {
@@ -22,16 +21,6 @@ export const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         width: 200,
-    },
-    buttonContainer: {
-        textAlign: 'right',
-    },
-    button: {
-        margin: 'auto',
-    },
-    title: {
-        color: 'rgb(111, 0, 41)',
-        textAlign: 'center',
     }
 
 });
