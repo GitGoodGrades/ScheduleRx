@@ -27,8 +27,7 @@ class Registration extends Component {
                 alert("Please Use Your CWID, Try Again");
             }
             else {
-                alert("Account created, Please login");
-                window.location = "/";
+                 window.location = "/";
             }
           })
           .catch(function (error) {

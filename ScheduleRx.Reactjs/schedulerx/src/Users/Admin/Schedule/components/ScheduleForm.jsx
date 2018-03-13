@@ -39,7 +39,7 @@ class ScheduleForm extends React.Component {
   };
 
   handleSave = () => {
-      this.props.onSave(this.state, this.props.history);
+      this.props.onSave(this.state);
   };
 
   render() {
