@@ -85,6 +85,8 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`users` (
 
 INSERT INTO users
 VALUES  (10000001, '11', 'admin1@ulm', 1, null),
+		(20000006, '26', 'faculty1@ulm', 2, null),
+        (20000007, '27', 'faculty1@ulm', 2, null),
 		(20000001, '21', 'faculty1@ulm', 3, null),
 		(20000002, '22', 'faculty2@ulm', 3, null),
 		(20000003, '23', 'faculty3@ulm', 3, null),
@@ -191,11 +193,11 @@ VALUES
 
 
 insert into event_section values
-(1,40303, null),
-(2,41111, null),
-(3,41422, null),
-(3,43928, null),
-(4,43940, null);
+(1,40303, NULL),
+(2,41111, NULL),
+(3,41422, NULL),
+(3,43928, NULL),
+(4,43940, NULL);
 
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (

@@ -1,20 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=Cuprum');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
 
 html {
   height: 100%;
-
+  background: linear-gradient(-70deg, lightblue, lightgreen);
 
 }
 
 body {
+  padding-top:  200;
   height: 100%;
-  margin: 0px;
-  font-family: 'Cuprum', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+
+}
+
+button {
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+
 }
 
 a {
-  text-decoration: none;
+  text-decoration-line: none;
+
 }
+
 
 #App {
   height: 100%;
