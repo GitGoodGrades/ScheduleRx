@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: The Madman
- * Date: 3/12/2018
- * Time: 7:25 PM
- */
-
 function GetSections($bookingID, $conn1) {
     global $stmt;
+
     $query =
         "SELECT ROOM_ID, START_TIME, END_TIME, SCHEDULE_ID, booking.BOOKING_ID, BOOKING_TITLE, DETAILS, section.SECTION_ID, section.COURSE_ID
          FROM ((booking
@@ -26,11 +20,9 @@ function GetSections($bookingID, $conn1) {
     }
 
     if($relatedSections){
-        return json_encode($relatedSections);
+        return ($relatedSections);
     }
     else{
-        return json_encode(
-            array("message" => "No Events found for USER_ID:" . $bookingID . "!!!")
-        );
+        return null;
     }
 }

@@ -6,7 +6,7 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
 include  '../SuperCRUD/Create.php';
-include  '../SuperCRUD/Detail.php';
+include 'GetEventDetail.php';
 
 
 $database = new Database();
@@ -17,13 +17,13 @@ $newID = rand(0,999);
 $data->BOOKING_ID = $newID;
 
 $sectionEntries = $data->SECTION_ID;
-$initialNote = $data->NOTE;
+$initialNote = $data->NOTES;
 
 unset($data->SECTION_ID);
 unset($data->COURSE_ID);
 unset($data->NOTES);
 
-echo CreateRecord('booking', $data, $conn);
+CreateRecord('booking', $data, $conn);
 
 $LastEntry = json_decode(FindRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn));
 
@@ -32,4 +32,4 @@ foreach ($sectionEntries as $sec_ID) {
     CreateRecord('event_section', $newAssoc, $conn);
 }
 
-echo GetSections($newID, $conn);
+print_r(GetDetail($newID, $conn));
