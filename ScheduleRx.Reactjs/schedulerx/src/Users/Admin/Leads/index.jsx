@@ -9,12 +9,14 @@ const mapStateToProps = (state) => ({
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    onLoad: () => dispatch(action.searchLeadsCourses())
-})
+    loadCourse: () => dispatch(action.searchLeadsCourses()),
+    loadFaculty: () => dispatch(action.searchUsers())
+});
 
 class Leads extends Component {
-    componentDidMount = () => {
-        this.props.onLoad();
+    componentDidMount() {
+        this.props.loadCourse();
+        this.props.loadFaculty();
     }
 
     render(){

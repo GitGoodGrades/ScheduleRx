@@ -19,4 +19,4 @@ function UpdateRecord ($tableName, $fields, $primaryKey, $conn) {
     }
 
     return $stmt->execute() ? $tableName . ' was updated.' : $tableName . ' was not updated ERROR CODE:' . $stmt->errorCode();
-};
+}
