@@ -32,4 +32,4 @@ foreach ($sectionEntries as $sec_ID) {
     CreateRecord('event_section', $newAssoc, $conn);
 }
 
-print_r(GetDetail($newID, $conn));
+echo(json_encode(GetDetail($newID, $conn)));
