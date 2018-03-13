@@ -10,6 +10,8 @@ const initialState = {
     conflictList: null,
     adminCalendar: [],
     scheduleList: [],
+    facultyList: [],
+    userList: [],
     userCalendar: []
 };
 

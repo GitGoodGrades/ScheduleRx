@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {client} from '../../configuration/client';
+import { Admin, Lead, Faculty, Student } from '../../configuration/variables';
 
 export function adminCalendar() {
     return (dispatch) =>
@@ -131,6 +132,31 @@ export function updateRegistration(registrationSchedule) {
             reg: registrationSchedule
         })
 }
+
+export function searchUsers() {
+    let userList = [];
+    let facultyList = [];
+    let roles = [];
+    return (dispatch) =>
+    client.get(`users/Index.php`)
+    .then(res => {    
+        userList = res.data.records
+    
+    for(let obj of userList){
+        if(obj.ROLE_ID === Lead || obj.ROLE_ID === Faculty){
+            facultyList.push(obj);
+        } 
+
+    }
+
+    dispatch({
+        type: 'SEARCH_USERS',
+        users: userList,
+        faculty: facultyList
+    })    }
+    )
+}
+
 
 export function searchScheduleList(){
     return (dispatch) => 
