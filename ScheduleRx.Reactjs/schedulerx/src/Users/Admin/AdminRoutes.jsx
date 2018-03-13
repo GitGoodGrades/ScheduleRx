@@ -18,7 +18,7 @@ const AdminRoutes = (
         <Route path="/event/create" component={CreateEvent}/>
         <Route path="/schedule/create" component={CreateSchedule}/>
         <Route path="/schedule/list" component={Schedules}/>
-        <Route path="/users/roles" component={Leads}/>
+        <Route path="/users/leads" component={Leads}/>
     </div>);
 
 export default AdminRoutes;
