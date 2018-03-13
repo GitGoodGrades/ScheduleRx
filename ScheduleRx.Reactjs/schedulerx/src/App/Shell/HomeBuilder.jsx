@@ -4,6 +4,7 @@ import { styles } from './ShellStyles';
 import AdminRoutes from '../../Users/Admin/AdminRoutes';
 import FacultyRoutes from '../../Users/Faculty/FacultyRoutes';
 import StudentRoutes from '../../Users/Student/StudentRoutes';
+import LeadRoutes from '../../Users/Lead/LeadRoutes';
 import TopNavMenu from '../components/TopNavigationMenu';
 /*
     We 'could' combine these three into to one variable function, but it seemed to be simpler to just leave them separate
@@ -19,6 +20,17 @@ export const AdminProfile = () => (
           </Grid>
         </main>
     </div>
+);
+
+export const LeadProfile = () => (
+  <div>
+    <TopNavMenu/>
+    <main>
+      <Grid>
+        {LeadRoutes}
+      </Grid>
+    </main>
+  </div>
 );
 
 export const FacultyProfile = () => (

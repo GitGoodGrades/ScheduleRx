@@ -86,7 +86,7 @@ class TopNavMenu extends Component {
                   SCHEDULERx
               <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} className={classes.Home} to="/">Home</NavLink>
               <NavLink  activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/event/create" replace
-                    className={this.props.role === '3' ? classes.hidden : classes.seen}>Create New Event</NavLink>
+                    className={(this.props.role === '3' || this.props.role === '4') ? classes.hidden : classes.seen}>Create New Event</NavLink>
                 <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/create"
                     className={this.props.role !== '1' ? classes.hidden : classes.seen}>Create New Schedule</NavLink>
                 <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
