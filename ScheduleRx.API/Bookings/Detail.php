@@ -13,4 +13,7 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-echo GetSections($data->BOOKING_ID, $conn);
+$record = json_decode(FindRecord('booking', 'BOOKING_ID', $data->BOOKING_ID, $conn));
+$record->SECTIONS = GetSections($data->BOOKING_ID, $conn);
+
+print_r($record);
