@@ -10,8 +10,6 @@ function UpdateRecord ($tableName, $fields, $primaryKey, $conn) {
     }
     $query = (substr($update, 0 ,-2) . " WHERE " . $primaryKey . "=:" . $primaryKey);
 
-    print_r($query);
-
     $stmt = $conn->prepare($query);
     unset($value);
 
