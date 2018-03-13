@@ -16,6 +16,7 @@ const baseTheme = {
 };
 
 const schoolPalette = {
+    
   palette: {
     primary: {
         light: '#bf443f',

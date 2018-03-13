@@ -12,7 +12,7 @@ import TopNavMenu from '../components/TopNavigationMenu';
 
 export const AdminProfile = () => (
     <div>
-        <TopNavMenu/>
+        <TopNavMenu />
         <main>
           <Grid>
             {AdminRoutes}

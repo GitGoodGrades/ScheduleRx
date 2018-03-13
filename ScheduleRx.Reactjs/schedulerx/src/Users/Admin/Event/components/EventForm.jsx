@@ -39,7 +39,6 @@ class EventForm extends Component {
 
                 <div className={classes.FormContainer}>
                     <form className={classes.Form}>
-                      <div className={classes.title}><h1>Add Event To Schedule</h1></div>
                         <div className={classes.DDContainer}>
                             <FormControl className={classes.formControl}>
                                 <InputLabel htmlFor="course-helper">Course</InputLabel>

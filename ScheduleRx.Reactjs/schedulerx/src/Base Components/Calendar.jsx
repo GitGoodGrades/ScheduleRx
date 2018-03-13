@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './react-big-calendar.css';
+import {withStyles} from 'material-ui/styles';
 
 // Setup the localizer by providing the moment Object
 
 BigCalendar.momentLocalizer(moment);
+
+const styles = theme => ({
+});
 
 class Calendar extends Component {
   state = {
@@ -14,7 +18,7 @@ class Calendar extends Component {
 
   componentWillReceiveProps = (nextProps) => {
     let formattedEvents = [];
-    
+
     for(let obj of nextProps.events){
       obj.START_TIME = new Date(obj.START_TIME);
       obj.END_TIME = new Date(obj.END_TIME);
@@ -38,7 +42,7 @@ class Calendar extends Component {
       <BigCalendar
         {...this.props}
         selectable
-        style={{minHeight: 500, overflow: 'auto'}}
+        style={{height: 500}}
         events={this.props.events.length > 0 ? this.props.events : [] }
         titleAccessor="BOOKING_TITLE"
         startAccessor='START_TIME'
@@ -46,10 +50,10 @@ class Calendar extends Component {
         defaultDate={new Date()}
         onSelectEvent={event => this.selectEvent(event)}
         onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
-        
+
       />
     </div>
     )
   }
 }
-export default Calendar;
+export default withStyles(styles)(Calendar);

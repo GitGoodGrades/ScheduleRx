@@ -1,9 +1,8 @@
-import React from 'react';
+
 
 export const styles = theme => ({
     root: {
         width: '100%',
-        zIndex: 1,
         height: '100%',
         overflow: 'hidden',
 
