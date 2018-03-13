@@ -8,23 +8,25 @@ import {client} from '../../../../configuration/client';
 
 class UserCourseTable extends Component {
     state = {
-        leads: []
-    }
+        leads: [],
+        faculty: []
+    };
     
     componentWillReceiveProps = (nextProps) => {
         this.setState({leads: nextProps.leads});
-    }
+        this.setState({faculty: nextProps.facultyList});
+    };
 
     handleChange = (event) => {
         let leadsTemp = this.state.leads;
 
-        var index = -1;
+        let index = -1;
         leadsTemp.find(function(item, i){
             if(item.COURSE_ID === event.target.name){
               index = i;
               return i;
             }
-          })
+          });
         if (index !== -1) {
             leadsTemp[index] = {
                 COURSE_ID:  event.target.name ,
@@ -33,7 +35,7 @@ class UserCourseTable extends Component {
         }
          client.post(`/LeadsCourse/Assign.php`, this.state.leads);
         this.setState({leads: leadsTemp})
-    }
+    };
 
 
 

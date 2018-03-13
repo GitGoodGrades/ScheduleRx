@@ -91,7 +91,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 userList: action.users,
                 facultyList: action.faculty
-            }
+            };
         default:
             return state;
     }
