@@ -35,8 +35,13 @@ class CreateEvent extends Component {
       sections: [],
       course: '',
       room: '',
-      dialogOpen: false
+      dialogOpen: false, 
+      events: []
     };
+
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({events: nextProps.events})
+    }
 
     componentDidMount() {
         this.props.loadCourses();
@@ -82,8 +87,10 @@ class CreateEvent extends Component {
             BOOKING_TITLE: title,
             NOTES: details
         })
-            .then(function (response) {
-                console.log(response);
+            .then(res => {
+                let temp = this.state.events;
+                temp.push(res.data);
+                this.setState({events: temp})
             })
             .catch(function (error) {
                 console.log(error);
