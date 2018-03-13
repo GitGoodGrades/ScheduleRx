@@ -40,7 +40,7 @@ class Calendar extends Component {
         selectable
         style={{minHeight: 500, overflow: 'auto'}}
         events={this.props.events.length > 0 ? this.props.events : [] }
-        titleAccessor="COURSE_ID"
+        titleAccessor="BOOKING_TITLE"
         startAccessor='START_TIME'
         endAccessor='END_TIME'
         defaultDate={new Date()}

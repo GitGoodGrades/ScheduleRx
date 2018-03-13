@@ -46,15 +46,18 @@ class EventView extends Component{
         <div>
           <Card className={classes.card}>
             <CardContent>
-              <Typography className={classes.title}>{event && event.ROOM_ID}</Typography>
+              <Typography className={classes.title}>Room: {event && event.ROOM_ID}</Typography>
               <Typography variant="headline" component="h2">
                 {event && event.BOOKING_TITLE}
               </Typography>
-              <Typography className={classes.pos}>{event && event.COURSE_ID}</Typography>
+              <Typography className={classes.pos}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
               <Typography component="p">
                 {event && moment(event.START_TIME).format('MMMM Do YYYY')} <br />
                 {event && moment(event.START_TIME).format('h:mm a')} - 
                 {event && moment(event.END_TIME).format('h:mm a')}
+              </Typography>
+              <Typography component="p">
+                {event && event.DETAILS}
               </Typography>
             </CardContent>
           </Card>
