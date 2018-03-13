@@ -19,12 +19,14 @@ class EventCalendar extends Component{
     }
 
     render(){
+        let time = new Date(new Date().setHours(6));
         return(
            <Calendar events={this.props.events} handleEventSelection={this.selectEvent} handleSlotSelection={this.selectSlot}
              defaultView={this.state.view}
              views={['month', 'week', 'day']}
              step={5}
              timeslots={6}
+             scrollToTime={time.setMinutes(0)}
 
           />
         )

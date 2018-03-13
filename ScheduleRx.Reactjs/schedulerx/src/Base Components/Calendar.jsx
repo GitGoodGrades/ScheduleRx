@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './react-big-calendar.css';
 import {withStyles} from 'material-ui/styles';
 
 // Setup the localizer by providing the moment Object
@@ -43,7 +43,6 @@ class Calendar extends Component {
         {...this.props}
         selectable
         style={{height: 500}}
-        scrollToTime={{hour: 9, minute: 0, second: 0}}
         events={this.props.events.length > 0 ? this.props.events : [] }
         titleAccessor="COURSE_ID"
         startAccessor='START_TIME'
