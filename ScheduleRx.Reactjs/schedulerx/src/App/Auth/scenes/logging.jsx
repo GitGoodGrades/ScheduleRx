@@ -33,22 +33,22 @@ class Logging extends React.Component {
     };
 
     handleSave = (userInfo) => {
-        let USER = '';
-        let ROLE = '';
-        let SEMESTER = '';
+        let USER_ID = '';
+        let ROLE_ID = '';
+        let SEMESTER_ID = '';
         client.post(`Users/Detail.php`, {
             USER_ID: userInfo.USER_ID,
 
         })
             .then(res => {
                 if(userInfo.USER_PASSWORD === res.data.USER_PASSWORD){
-                    USER = res.data.USER_ID;
-                    ROLE= res.data.ROLE_ID;
-                    SEMESTER = res.data.SEMESTER_ID;
+                    USER_ID = res.data.USER_ID;
+                    ROLE_ID = res.data.ROLE_ID;
+                    SEMESTER_ID = res.data.SEMESTER_ID;
                 }
-                this.props && this.props.sendUser(USER, ROLE, SEMESTER);
+                this.props && this.props.sendUser(USER_ID, ROLE_ID, SEMESTER_ID);
 
-                this.saveSession(USER, ROLE, SEMESTER);
+                this.saveSession(USER_ID, ROLE_ID, SEMESTER_ID);
             });
 
 
