@@ -54,7 +54,7 @@ class Home extends Component {
                     handleEventSelection={this.handleSelectEvent} 
                     handleSlotSelection={this.handleSelectSlot}
                 />
-                <EventView event={this.state.events} open={this.state.open} onClose={this.handleClose} />
+                <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>
         )
     }

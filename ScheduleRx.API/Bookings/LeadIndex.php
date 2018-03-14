@@ -13,6 +13,7 @@ include_once '../config/database.php';
 include_once '../config/Banner_DB.php';
 include_once '../SuperCRUD/Search.php';
 include_once '../SuperCRUD/Index.php';
+include_once 'GetEventDetail.php';
 
 $database = new Database();
 $conn1 = $database->getConnection();
@@ -47,7 +48,7 @@ foreach ($allBookings['records'] as $record ) {
     foreach ($results->records as $myRecord ) {
 
         if ($record['SECTION_ID'] == $myRecord->SECTION_ID) {
-            array_push($myEvents, $record);
+            array_push($myEvents, GetDetail($record['BOOKING_ID'], $conn1));
         }
     }
 }
@@ -63,7 +64,7 @@ foreach($myCourses->records as $courseLink) {
     if($relevantEvents) //if this course has events
     {
         foreach ($relevantEvents['records'] as $record) {
-            array_push($myEvents, $record);          //push these additional records to MyEvents
+            array_push($myEvents, GetDetail($record['BOOKING_ID'], $conn1));          //push these additional records to MyEvents
         }
     }
 }

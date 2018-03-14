@@ -13,6 +13,7 @@ include_once '../config/database.php';
 include_once '../config/Banner_DB.php';
 include_once '../SuperCRUD/Search.php';
 include_once '../SuperCRUD/Index.php';
+include_once 'GetEventDetail.php';
 
 //Connect to nursing_database
 $database = new Database();
@@ -55,7 +56,7 @@ foreach ($allBookings['records'] as $record ) {
     foreach ($results->records as $myRecord ) {
 
         if ($record['SECTION_ID'] == $myRecord->SECTION_ID) {
-            array_push($myEvents, $record);
+            array_push($myEvents, GetDetail($record['BOOKING_ID'], $conn1));
         }
     }
 }
