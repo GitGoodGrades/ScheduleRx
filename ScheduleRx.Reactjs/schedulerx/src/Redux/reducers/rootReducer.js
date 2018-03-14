@@ -10,7 +10,8 @@ const initialState = {
     conflictList: null,
     adminCalendar: [],
     scheduleList: [],
-    userCalendar: []
+    userCalendar: [],
+    myCourses: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -85,6 +86,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 leadsCourses: action.data
+            };
+        case 'SEARCH_LEAD_COURSES':
+            return {
+                ...state,
+                myCourses: action.data
             };
         case 'SEARCH_USERS':
             return {

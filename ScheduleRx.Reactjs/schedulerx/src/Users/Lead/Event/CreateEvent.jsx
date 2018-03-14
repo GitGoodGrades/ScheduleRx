@@ -10,7 +10,8 @@ import EventDetailDialog from '../../Admin/Event/components/EventDetailDialog';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
-    courses: state.courseList,
+    user: state.userName,
+    courses: state.myCourses,
     rooms: state.roomList,
     sections: state.sectionList,
     current_schedule: state.currentSchedule,
@@ -21,7 +22,7 @@ const mapStateToProps = (state) => ({
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadCourses: () => dispatch(action.searchCourses()),
+    loadCourses: (user) => dispatch(action.searchLeadCourses(user)),
     loadRooms: () => dispatch(action.searchRooms()),
     loadSections: () => dispatch(action.searchSections()),
     loadSchedules: () => dispatch(action.searchSchedules()),
@@ -44,7 +45,7 @@ class CreateEvent extends Component {
     }
 
     componentDidMount() {
-        this.props.loadCourses();
+        this.props.loadCourses(this.props.user);
         this.props.loadRooms();
         this.props.loadSections();
         this.props.loadSchedules();

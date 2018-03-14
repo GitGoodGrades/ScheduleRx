@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as action from "../../Redux/actions/actionCreator";
 import { Redirect, withRouter } from 'react-router-dom';
+import { Admin, Lead, Faculty, Student } from '../../configuration/variables';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -78,22 +79,23 @@ class TopNavMenu extends Component {
     };
 
     render() {
-      const {classes} = this.props;
-      return (
-          <nav className={classes.TopNavMenu}>
+        const {classes} = this.props;
+       
+        return (
+            <nav className={classes.TopNavMenu}>
 
-              <div className={classes.NavLinkContainer}>
-                  SCHEDULERx
-              <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} className={classes.Home} to="/">Home</NavLink>
-              <NavLink  activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/event/create" replace
-                    className={(this.props.role === '3' || this.props.role === '4') ? classes.hidden : classes.seen}>Create New Event</NavLink>
-                <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/create"
-                    className={this.props.role !== '1' ? classes.hidden : classes.seen}>Create New Schedule</NavLink>
-                <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
-                    className={this.props.role !== '1' ? classes.hidden : classes.seen}>Manage</NavLink>
-                <button className={classes.asText} onClick={this.LogOut}>Log Out</button>
-                </div>
-          </nav>
+                <div className={classes.NavLinkContainer}>
+                    SCHEDULERx
+                <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} className={classes.Home} to="/">Home</NavLink>
+                <NavLink  activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/event/create" 
+                        className={(this.props.role === Faculty || this.props.role === Student) ? classes.hidden : classes.seen}>Create New Event</NavLink>
+                    <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/create"
+                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>Create New Schedule</NavLink>
+                    <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
+                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>Manage</NavLink>
+                    <button className={classes.asText} onClick={this.LogOut}>Log Out</button>
+                    </div>
+            </nav>
       );
 
 

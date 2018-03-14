@@ -74,7 +74,7 @@ foreach($myCourses->records as $courseLink) {
 array_unique($myEvents);
 
 if($myEvents){
-    echo json_encode($myEvents);
+    print_r(json_encode($myEvents, true)) ;
 }
 else{
     echo json_encode(
