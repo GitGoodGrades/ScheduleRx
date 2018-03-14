@@ -14,31 +14,26 @@ export function adminCalendar() {
 }
 
 export function userCalendar(user, role) {
-    let myEvents = [];
-    if(role === Lead){
-        client.post(`Bookings/LeadIndex.php`,
-            {
-                USER_ID: user
-            })
-            .then(res => {
-                myEvents = res.data
-            });
+    let QUERY = null;
+    return (dispatch) =>
+    
+    {if(role === Lead){
+        QUERY = `Bookings/LeadIndex.php`;
     } else{
-        client.post(`Bookings/MyEvents.php`,
+        QUERY = `Bookings/MyEvents.php`;
+    }    
+        client.post(QUERY,
             {
                 USER_ID: user,
                 ROLE_ID: role
             })
             .then(res => {
-                myEvents = res.data
+                dispatch({
+                    type: 'USER_CALENDAR',
+                    data: res.data
+                })
             });
     }
-    return (dispatch) =>
-        
-        dispatch({
-            type: 'USER_CALENDAR',
-            data: myEvents
-        })
     
 }
 

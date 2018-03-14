@@ -71,7 +71,7 @@ foreach($myCourses->records as $courseLink) {
 // remove duplicates,
 // duplicates can come from a teacher teaching and section and Managing the Course of that section
 
-array_unique($myEvents);
+$myEvents = array_values(array_unique($myEvents, SORT_REGULAR));
 
 if($myEvents){
     print_r(json_encode($myEvents, true)) ;
