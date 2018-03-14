@@ -4,7 +4,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import moment from 'moment';
 import * as action from '../../../Redux/actions/actionCreator';
-import EventView from '../../../Base Components/eventView';
+import EventEditView from '../../../Base Components/eventEditView';
+import { client } from '../../../configuration/client';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -44,6 +45,16 @@ class Home extends Component {
     handleClose = () => {
         this.setState({ open: false})
     }
+
+    handleSave = (sectionDetail) => {
+        client.post(`EventSection/EditNote.php`,
+            {
+                BOOKING_ID: sectionDetail.BOOKING_ID,
+                SECTION_ID: sectionDetail.SECTION_ID,
+                NOTES: sectionDetail.details,
+            })
+    }
+
     render() {
         return (
             <div
@@ -54,7 +65,7 @@ class Home extends Component {
                     handleEventSelection={this.handleSelectEvent} 
                     handleSlotSelection={this.handleSelectSlot}
                 />
-                <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
+                <EventEditView onSave={this.handleSave} event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>
         )
     }
