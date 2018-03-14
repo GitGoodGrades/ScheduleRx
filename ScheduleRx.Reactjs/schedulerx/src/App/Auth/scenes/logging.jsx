@@ -5,13 +5,16 @@ import * as action from '../../../Redux/actions/actionCreator';
 import LoginForm from '../components/login';
 import { Redirect } from 'react-router-dom';
 import styles from '../../Shell/ShellStyles';
+import { Admin, Lead, Faculty, Student } from '../../../configuration/variables';
 
 const mapDispatchToProps = (dispatch) => ({
     sendUser: (USER_ID, USER_ROLE, SEMESTER_ID) => dispatch(action.setUser(
         USER_ID,
         USER_ROLE,
         SEMESTER_ID
-    ))
+    )),
+    getMyCourses: (user) => dispatch(action.searchLeadCourses(user)),
+    loadAdminCalendar: () => dispatch(action.adminCalendar())
 });
 
 class Logging extends React.Component {
@@ -45,6 +48,12 @@ class Logging extends React.Component {
                 this.props && this.props.sendUser(USER_ID, ROLE_ID, SEMESTER_ID);
                 this.saveSession(USER_ID, ROLE_ID, SEMESTER_ID);
             });
+
+
+        if(USER_ID === Admin || Lead){
+            this.props.getMyCourses();
+            this.props.loadAdminCalendar();
+        }
     };
 
     render(){

@@ -14,18 +14,32 @@ export function adminCalendar() {
 }
 
 export function userCalendar(user, role) {
+    let myEvents = [];
+    if(role === Lead){
+        client.post(`Bookings/LeadIndex.php`,
+            {
+                USER_ID: user
+            })
+            .then(res => {
+                myEvents = res.data
+            });
+    } else{
+        client.post(`Bookings/MyEvents.php`,
+            {
+                USER_ID: user,
+                ROLE_ID: role
+            })
+            .then(res => {
+                myEvents = res.data
+            });
+    }
     return (dispatch) =>
-    client.post(`Bookings/MyEvents.php`,
-    {
-        USER_ID: user,
-        ROLE_ID: role
-    })
-    .then(res => {
+        
         dispatch({
             type: 'USER_CALENDAR',
-            data: res.data
+            data: myEvents
         })
-    });
+    
 }
 
 export function searchConflicts() {
@@ -72,6 +86,25 @@ export function searchLeadsCourses(){
                 dispatch({
                     type: 'SEARCH_LEADS_COURSES',
                     data: res.data.records
+                })
+            });
+}
+
+export function searchLeadCourses(user){
+    return (dispatch) =>
+        client.get(`LeadsCourse/Index.php`) //client.get(`bookings/LeadIndex.php`)
+            .then(res => {
+                let myCourses = [];
+                const courses = res.data.records;
+                for(let obj in courses){
+                    if(courses[obj].USER_ID === user){
+                        myCourses.push({COURSE_ID: courses[obj].COURSE_ID})
+                    }
+                }    
+
+                dispatch({
+                    type: 'SEARCH_LEAD_COURSES',
+                    data: myCourses
                 })
             });
 }
