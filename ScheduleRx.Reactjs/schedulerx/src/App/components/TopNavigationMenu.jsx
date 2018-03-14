@@ -84,6 +84,20 @@ class TopNavMenu extends Component {
         return (
             <nav className={classes.TopNavMenu}>
 
+              <div className={classes.NavLinkContainer}>
+                  SCHEDULERx
+              <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} className={classes.Home} to="/">Home</NavLink>
+              <NavLink  activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/event/create" replace
+                    className={(this.props.role === '3' || this.props.role === '4') ? classes.hidden : classes.seen}>Create Events</NavLink>
+                <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/create"
+                    className={this.props.role !== '1' ? classes.hidden : classes.seen}>Create Schedule</NavLink>
+                <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
+                    className={this.props.role !== '1' ? classes.hidden : classes.seen}>Manage Schedules</NavLink>
+                <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/users/leads"
+                    className={this.props.role !== '1' ? classes.hidden : classes.seen}>Set Lead Faculty</NavLink>
+                <button className={classes.asText} onClick={this.LogOut}>Log Out</button>
+                </div>
+          </nav>
                 <div className={classes.NavLinkContainer}>
                     SCHEDULERx
                 <NavLink activeStyle={{fontSize: '15px', color: '#D7BAAB'}} className={classes.Home} to="/">Home</NavLink>

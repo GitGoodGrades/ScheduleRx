@@ -16,20 +16,8 @@ const baseTheme = {
 };
 
 const schoolPalette = {
-    
-  palette: {
-    primary: {
-        light: '#bf443f',
-        main: '#6f0029',
-        dark: '#560000',
-        contrastText: '#fff',
-      },
-    secondary: {
-      ...blueGrey,
-      A400: '#00e677',
-    },
-    error: red,
-  },
+
+  
 };
 
 

@@ -1,64 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl, FormHelperText } from 'material-ui/Form';
-import {Button} from 'material-ui';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const styles = theme => ({
-  wrapper: {
-    height: '100%',
-    width: '100%',
-    border: '',
-    background: '',
-  },
-  formWrapper: {
-    border: '',
-  },
-  container: {
-    textAlign: 'center',
-    border: '2px solid black',
-    background: 'rgba(111, 0, 41, .9)',
-    width: 400,
-    marginTop: '10%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    height: 400,
-    paddingTop: '100',
-    color: 'white',
-    borderRadius: '3px',
-  },
-  title: {
-    fontWeight: '10',
-    paddingTop: 25,
-    textShadow: '-2px 0 black, 0 2px black, 2px 0 black, 0 -2px black',
-  },
-  formControl: {
-    background: '',
-    height: 40,
-    border: '',
-    marginBottom: '10px',
-  },
-  CWID: {
-  },
-  pass: {
-  },
-  button: {
-    fontWeight: 'bold',
-    marginTop: 20,
-    background: 'white',
-    color: 'rgb(111, 0, 41)',
-    width: 200,
-    border: '1px solid black',
-  }
+    container: {
+        height: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logcontainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        border: '7px solid white',
+        width: 350,
+        height: 300,
+    },
+    loginfo: {
+        marginBottom: '.25em',
+        height: 30,
+        width: 300,
+        fontFamily: 'Open Sans',
+        padding: '0',
+        border: '1px solid #767676',
+        borderRadius: '2px',
+        paddingLeft: '.2em',
+    },
+    title: {
+        color: 'white',
+        textTransform: 'none',
+        fontWeight: '700',
+        fontSize: '48px',
+        marginBottom: '10px'
+    },
+    LoginButton: {
+        marginBottom: '.5em',
+        background: 'rgba(0, 0, 0, .7)',
+        border: 'none',
+        borderRadius: '2px',
+        color: 'white',
+        height: 30,
+        width: 305,
+    },
+    regbutton: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        fontSize: '14px'
+    }
 });
 
 class LoginForm extends React.Component {
 
   handleChange = event => {
-    this.setState({ [event.target.id]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleSave = () => {
@@ -69,27 +71,33 @@ class LoginForm extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.wrapper}>
-      <div className={classes.formWrapper}>
-      <div className={classes.container}>
-          <div className={classes.title}><h1 className={classes.title}>Login to ScheduleRx</h1></div>
-        <div className={classes.CWID}>
-        <FormControl className={classes.formControl}>
-          <InputLabel style={{marginLeft: '3px', color: 'white'}}
+        <div className={classes.container}>
+        <div className={classes.logcontainer}>
+            <div className={classes.title}><h1 className={classes.title}>SCHEDULERx</h1></div>
+            <form>
 
-            htmlFor="USER_ID">CWID</InputLabel>
-          <Input id="USER_ID" onChange={this.handleChange} />
-        </FormControl>
-        </div>
-        <div className={classes.pass}>
-        <FormControl className={classes.formControl}>
-          <InputLabel style={{marginLeft: '3px', paddingBottom: '5px', color: 'white'}} htmlFor="USER_PASSWORD">Password</InputLabel>
-          <Input id="USER_PASSWORD" type={"password"} onChange={this.handleChange} />
-        </FormControl>
-        </div>
-          <Button className= {classes.button} onClick={this.handleSave}>Login</Button>
-      
-      </div>
+                    <div>
+                        <input placeholder={"CAMPUS WIDE ID"}
+                               className={classes.loginfo}
+                               name="USER_ID"
+                               onChange={this.handleChange}
+                               />
+                    </div>
+                    <div>
+                        <input placeholder="PASSWORD"
+                               className={classes.loginfo}
+                               name="USER_PASSWORD"
+                               type="password"
+                               onChange={this.handleChange}
+                               />
+                    </div>
+                 <button className={classes.LoginButton} onClick={this.handleSave}>login</button>
+                 <div className={classes.regbutton}>Never been here before? <NavLink
+                         style={{color: 'white', fontSize: '14px', marginLeft: '4px'}}
+                         to="/register"> Register</NavLink>
+                </div>
+            </form>
+
     </div>
     </div>
     );

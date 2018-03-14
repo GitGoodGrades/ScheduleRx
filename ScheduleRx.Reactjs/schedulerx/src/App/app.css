@@ -3,18 +3,21 @@
 
 html {
   height: 100%;
-  background: linear-gradient(50deg, rgba(196, 158, 103,.5),50%, rgba(111, 0, 41,.5), rgba(111, 0, 41, .7)) fixed;
+  background: linear-gradient(50deg, rgba(196, 158, 103,.7),50%, rgba(111, 0, 41,.7), rgba(111, 0, 41, .7)), fixed, url("../ULM.JPG");
   background-size: cover;
   background-repeat: no-repeat;
-
+  background-attachment: fixed;
 }
 
 body {
-  padding-top:  200;
   height: 100%;
   font-family: 'Open Sans', sans-serif;
   text-transform: uppercase;
 
+}
+
+#root {
+    height: 100%;
 }
 
 button {
@@ -23,12 +26,22 @@ button {
 
 }
 
+button:hover {
+    background-color: rgba(0,0,0, .8);
+    transition: background-color .3s linear;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: linear;
+    transition-delay: initial;
+}
+
 a {
   text-decoration-line: none;
   text-transform: uppercase;
 
 }
-a:hover {
+
+a:active{
     color: #C2939C;
     transition: color .3s linear;
     transition-property: color;

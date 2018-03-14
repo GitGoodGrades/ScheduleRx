@@ -2,11 +2,40 @@ import React from 'react';
 import {withStyles} from 'material-ui/styles';
 import {connect} from 'react-redux';
 import * as action from '../../Redux/actions/actionCreator';
-import {Link} from 'react-router-dom';
-import Logging from '../Auth/scenes/logging';
-import { styles }  from './ShellStyles';                      //importing CSS for Shell
+import {NavLink} from 'react-router-dom';
+import Logging from '../Auth/scenes/logging';                 //importing CSS for Shell
 import { AdminProfile, FacultyProfile, StudentProfile, LeadProfile } from './HomeBuilder';
 import { Admin, Lead, Faculty, Student } from '../../configuration/variables';
+
+//styles
+const styles = theme => ({
+    root: {
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+
+    },
+    appFrame: {
+        position: 'relative',
+        display: 'inline',
+        width: '100%',
+        height: '100%',
+        border: '4px solid yellow',
+    },
+    content: {
+        width: '100%',
+        display:'inline',
+        position: 'relative',
+        height: '100%',
+        overflow: 'auto',
+
+    },
+    gridRoot: {
+        height: '100%',
+        minHeight: 900,
+        border: '4px solid yellow',
+    },
+});
 
 //Redux Constants to Handle user Information
 const mapStateToProps = (state) => ({
@@ -40,13 +69,8 @@ class EmptyShell extends React.Component {
         //If the User is NOT Logged In
         if (this.props.user === '' || this.props.user === null) {
             return (
-                <div>
+                <div style={{height: '100%'}}>
                     <Logging/>
-                    <div className={classes.buttonwrapper}>
-                        <Link className={classes.regbutton} to="/register">Never been here before?
-                            Register
-                        </Link>
-                    </div>
                 </div>
             )
         }
