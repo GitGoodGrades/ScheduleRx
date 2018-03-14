@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from '../../../Base Components/Calendar';
 import EventView from '../../../Base Components/eventView';
-import axios from 'axios';
 import {connect} from 'react-redux';
-import moment from 'moment';
 import * as action from '../../../Redux/actions/actionCreator';
 import { withStyles } from 'material-ui/styles';
 
@@ -60,7 +58,6 @@ class EmptyHome extends Component {
         const {classes} = this.props;
         return (
             <div
-                className="rbc-calendar"
                 className={classes.root}
 
             >

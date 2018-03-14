@@ -1,6 +1,6 @@
 //import axios from 'axios';
 import {client} from '../../configuration/client';
-import { Admin, Lead, Faculty, Student } from '../../configuration/variables';
+import { Lead, Faculty } from '../../configuration/variables';
 
 export function adminCalendar() {
     return (dispatch) =>

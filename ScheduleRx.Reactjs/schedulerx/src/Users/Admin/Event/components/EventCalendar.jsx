@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BigCalendar from 'react-big-calendar';
 import Calendar from '../../../../Base Components/Calendar';
 
 

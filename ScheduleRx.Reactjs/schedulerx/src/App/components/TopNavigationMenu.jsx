@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
-import {AdminItems, FacultyItems, StudentItems} from '../../Base Components/tileData';
 import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as action from "../../Redux/actions/actionCreator";
 import { Redirect, withRouter } from 'react-router-dom';
-import { Admin, Lead, Faculty, Student } from '../../configuration/variables';
+import { Admin, Faculty, Student } from '../../configuration/variables';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,

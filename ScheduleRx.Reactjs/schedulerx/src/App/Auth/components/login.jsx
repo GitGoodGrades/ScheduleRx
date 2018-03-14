@@ -1,8 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { NavLink } from 'react-router-dom';
 
 const styles = theme => ({
@@ -91,10 +88,13 @@ class LoginForm extends React.Component {
                                onChange={this.handleChange}
                                />
                     </div>
-                 <button className={classes.LoginButton} onClick={this.handleSave}>login</button>
-                 <div className={classes.regbutton}>Never been here before? <NavLink
-                         style={{color: 'white', fontSize: '14px', marginLeft: '4px'}}
-                         to="/register"> Register</NavLink>
+                 <button type="button" className={classes.LoginButton} onClick={this.handleSave}>login</button>
+                 <div className={classes.regbutton}> 
+                    <NavLink
+                        style={{color: 'white', fontSize: '14px', marginLeft: '4px'}}
+                        to="/register">
+                        Never been here before? Register
+                    </NavLink>
                 </div>
             </form>
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import EventForm from './components/EventForm';
 import { connect } from 'react-redux';
 import * as action from '../../../Redux/actions/actionCreator';

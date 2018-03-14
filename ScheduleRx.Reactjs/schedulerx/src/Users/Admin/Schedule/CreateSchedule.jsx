@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {client} from '../../../configuration/client';
 import ScheduleForm from './components/ScheduleForm';
 import {connect} from 'react-redux';

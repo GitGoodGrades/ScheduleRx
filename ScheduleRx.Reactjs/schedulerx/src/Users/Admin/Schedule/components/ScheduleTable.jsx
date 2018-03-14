@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import Table, { TableBody, TableCell, TableRow, TableHead } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import moment from 'moment';
-import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
+import Dialog, { DialogContent, DialogTitle } from 'material-ui/Dialog';
 import Input, { InputLabel } from 'material-ui/Input';
-import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
-import theme from '../../../../MaterialUI/theme/index';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({

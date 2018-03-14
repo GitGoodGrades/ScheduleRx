@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { Link } from 'react-router-dom';
 
 export const AdminCreateSchedule = () =>

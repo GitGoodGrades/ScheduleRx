@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import Input, {InputLabel} from 'material-ui/Input';
 import Select from 'material-ui/Select';
 import {MenuItem} from 'material-ui/Menu';
 import {client} from '../../../../configuration/client';

@@ -4,8 +4,7 @@ import {client} from '../../../configuration/client';
 import * as action from '../../../Redux/actions/actionCreator';
 import LoginForm from '../components/login';
 import { Redirect } from 'react-router-dom';
-import styles from '../../Shell/ShellStyles';
-import { Admin, Lead, Faculty, Student } from '../../../configuration/variables';
+import { Admin, Lead } from '../../../configuration/variables';
 
 const mapDispatchToProps = (dispatch) => ({
     sendUser: (USER_ID, USER_ROLE, SEMESTER_ID) => dispatch(action.setUser(
@@ -18,9 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Logging extends React.Component {
-    constructor() {
-        super();
-    }
     state = {
         registrationSchedule: {},
         currentSchedule: {}
@@ -33,26 +29,24 @@ class Logging extends React.Component {
     };
 
     handleSave = (userInfo) => {
-        let USER_ID = '';
-        let ROLE_ID = '';
-        let SEMESTER_ID = '';
+        let USER = '';
+        let ROLE = '';
+        let SEMESTER = '';
         client.post(`Users/Detail.php`, {
-            USER_ID: userInfo.USER_ID,
-
+            USER_ID: userInfo.USER_ID
         })
-            .then(res => {
-                if(userInfo.USER_PASSWORD === res.data.USER_PASSWORD){
-                    USER_ID = res.data.USER_ID;
-                    ROLE_ID = res.data.ROLE_ID;
-                    SEMESTER_ID = res.data.SEMESTER_ID;
-                }
-                this.props && this.props.sendUser(USER_ID, ROLE_ID, SEMESTER_ID);
+        .then(res => {
+            if(userInfo.USER_PASSWORD === res.data.USER_PASSWORD){
+                USER = res.data.USER_ID;
+                ROLE = res.data.ROLE_ID;
+                SEMESTER = res.data.SEMESTER_ID;
+            }
+            this.props && this.props.sendUser(USER, ROLE, SEMESTER);
+            this.saveSession(USER, ROLE, SEMESTER);
+        });
 
-                this.saveSession(USER_ID, ROLE_ID, SEMESTER_ID);
-            });
 
-
-        if(USER_ID === Admin || Lead){
+        if(USER === Admin || Lead){
             this.props.getMyCourses();
             this.props.loadAdminCalendar();
         }

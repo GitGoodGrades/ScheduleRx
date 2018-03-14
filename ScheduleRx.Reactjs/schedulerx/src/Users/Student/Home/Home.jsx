@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import Calendar from '../../../Base Components/Calendar';
-import axios from 'axios';
 import {connect} from 'react-redux';
 import moment from 'moment';
 import EventView from '../../../Base Components/eventView';
 import * as action from '../../../Redux/actions/actionCreator';
-
-//On This Home Page, We can Assume that it is a Student, Therefore Reducing the code we must write
-// We don't have to check anymore (Woohoo!)
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -37,6 +33,7 @@ class Home extends Component {
                     obj.END_TIME = moment(obj.END_TIME).toDate();
                 });
                 this.setState({events});
+                return;
             });
     }
     

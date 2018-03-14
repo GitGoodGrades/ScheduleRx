@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import Calendar from '../../../Base Components/Calendar';
-import axios from 'axios';
 import {connect} from 'react-redux';
-import moment from 'moment';
 import * as action from '../../../Redux/actions/actionCreator';
 import EventEditView from '../../../Base Components/eventEditView';
 import { client } from '../../../configuration/client';

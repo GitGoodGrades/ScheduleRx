@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import CourseTable from './components/CourseTable';
-import CircularProgress from 'material-ui/Progress/CircularProgress';
 import { connect } from 'react-redux';
 import * as action from '../../../Redux/actions/actionCreator';
 
