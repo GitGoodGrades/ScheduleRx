@@ -2,13 +2,27 @@
 import {client} from '../../configuration/client';
 import { Lead, Faculty } from '../../configuration/variables';
 
+
+function formatEvents(events){
+    let formattedEvents = [];
+
+    for(let obj of events){
+      obj.START_TIME = new Date(obj.START_TIME);
+      obj.END_TIME = new Date(obj.END_TIME);
+      formattedEvents.push(obj);
+    }
+
+    return formattedEvents;
+}
+
 export function adminCalendar() {
     return (dispatch) =>
     client.get(`Bookings/Index.php`)
     .then(res => {
+        const events = formatEvents(res.data);
         dispatch({
             type: 'ADMIN_CALENDAR',
-            data: res.data
+            data: events
         })
     });
 }
@@ -28,9 +42,10 @@ export function userCalendar(user, role) {
                 ROLE_ID: role
             })
             .then(res => {
+                const events = formatEvents(res.data);
                 dispatch({
                     type: 'USER_CALENDAR',
-                    data: res.data
+                    data: events
                 })
             });
     }

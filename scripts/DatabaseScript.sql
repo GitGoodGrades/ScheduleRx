@@ -84,7 +84,8 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`users` (
 );
 
 INSERT INTO users
-VALUES  (10000001, '11', 'admin1@ulm', 1, null),
+VALUES  	(0, '11', 'dummy@ulm', 1, null)
+		(10000001, '11', 'admin1@ulm', 1, null),
 		(20000006, '26', 'faculty1@ulm', 2, null),
         (20000007, '27', 'faculty1@ulm', 2, null),
 		(20000001, '21', 'faculty1@ulm', 3, null),

@@ -25,7 +25,8 @@ const mapDispatchToProps = (dispatch) => ({
     loadRooms: () => dispatch(action.searchRooms()),
     loadSections: () => dispatch(action.searchSections()),
     loadSchedules: () => dispatch(action.searchSchedules()),
-    getConflictEvents: () => dispatch(action.searchConflicts())
+    getConflictEvents: () => dispatch(action.searchConflicts()),
+    getAdminCalendar: () => dispatch(action.adminCalendar())
 });
 
 class CreateEvent extends Component {
@@ -48,6 +49,7 @@ class CreateEvent extends Component {
         this.props.loadRooms();
         this.props.loadSections();
         this.props.loadSchedules();
+        this.props.getAdminCalendar();
     };
 
     handleChange = (name, value) => {

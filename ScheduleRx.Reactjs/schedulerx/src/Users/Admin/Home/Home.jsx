@@ -59,7 +59,6 @@ class EmptyHome extends Component {
         return (
             <div
                 className={classes.root}
-
             >
                 <div className={classes.container}>
                 <Calendar

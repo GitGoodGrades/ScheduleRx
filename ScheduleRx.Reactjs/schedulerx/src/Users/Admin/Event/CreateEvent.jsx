@@ -128,7 +128,7 @@ class CreateEvent extends Component {
                   onChange={this.handleChange}
                 />
 
-                <EventCalendar events={this.props.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}
+                <EventCalendar events={this.state.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}
 
                 />
               <EventDetailDialog start={this.state.start} end={this.state.end} open={this.state.dialogOpen} onSave={this.handleSave} onCancel={this.cancel} />
