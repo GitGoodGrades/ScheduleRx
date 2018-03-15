@@ -47,12 +47,12 @@ class Schedules extends Component {
             this.props.updateRegistration(id)
         ))
 
-        
+
     }
 
     render(){
         return(
-            <div>
+            <div style={{paddingTop: 35}}>
                 <ScheduleTable handleState={this.handleState} save={this.update} scheduleList={this.props.schedules} />
             </div>
         );

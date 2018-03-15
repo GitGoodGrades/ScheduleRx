@@ -4,6 +4,25 @@ import {connect} from 'react-redux';
 import * as action from '../../../Redux/actions/actionCreator';
 import EventEditView from '../../../Base Components/eventEditView';
 import { client } from '../../../configuration/client';
+import { withStyles } from 'material-ui/styles';
+
+const styles = theme => ({
+    root: {
+
+    },
+    container: {
+        paddingTop: 10,
+        paddingBottom:  10,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderRadius: '5px',
+        marginTop: 60,
+        overflow: 'hidden',
+    },
+    cal: {
+        height: '50%',
+    }
+});
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -17,7 +36,7 @@ const mapDispatchToProps = (dispatch) => ({
     onLoad: (user, role) => dispatch(action.userCalendar(user, role))
 });
 
-class Home extends Component {
+class EmptyHome extends Component {
     state = {
         events: [],
         event: {},
@@ -31,7 +50,7 @@ class Home extends Component {
     componentWillReceiveProps = (nextProps) => {
         this.setState({events: nextProps.calendar})
     }
-    
+
     handleSelectSlot = () => {
         console.log();
     }
@@ -54,19 +73,25 @@ class Home extends Component {
     }
 
     render() {
+        const {classes} = this.props;
         return (
             <div
-                className="rbc-calendar"
+                className={classes.root}
             >
-                <Calendar 
+                <div className={classes.container}>
+                <Calendar
+                    className={classes.cal}
                     events={this.state.events}
-                    handleEventSelection={this.handleSelectEvent} 
+                    handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
                 />
                 <EventEditView onSave={this.handleSave} event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>
+        </div>
         )
     }
 }
+
+const Home = withStyles(styles)(EmptyHome);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

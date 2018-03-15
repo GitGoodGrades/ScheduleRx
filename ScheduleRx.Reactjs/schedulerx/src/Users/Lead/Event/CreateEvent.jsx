@@ -36,7 +36,7 @@ class CreateEvent extends Component {
       sections: [],
       course: '',
       room: '',
-      dialogOpen: false, 
+      dialogOpen: false,
       events: []
     };
 
@@ -123,7 +123,7 @@ class CreateEvent extends Component {
 
     render(){
         return(
-            <div style={{display:'inline'}}>
+            <div style={{paddingTop: 35}}>
                 <EventForm
                   courseList={this.props.courses}
                   roomList={this.props.rooms}
