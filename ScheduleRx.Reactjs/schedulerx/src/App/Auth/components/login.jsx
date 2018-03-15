@@ -16,6 +16,7 @@ const styles = theme => ({
         alignItems: 'center',
         width: 350,
         height: 350,
+        position: 'fixed',
     },
     loginfo: {
         marginBottom: '.5em',

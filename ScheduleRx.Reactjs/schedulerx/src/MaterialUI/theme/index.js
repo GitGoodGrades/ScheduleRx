@@ -1,22 +1,26 @@
-
-
+import 'typeface-open-sans';
 import { createMuiTheme } from 'material-ui/styles';
 
 const baseTheme = {
-  overrides: {
-    MuiDrawer: {
-      docked: {
-        flex: '0 0 auto',
-        height: '100%',
-      },
+    root: {
+        fontFamily: 'Open Sans'
     },
-  },
-  drawerWidth: 240
+    typography: {
+        fontWeight: 'normal'
+    },
+    MuiChip: {
+        fontFamily: 'Open Sans'
+    },
+    MuiInputLabel: {
+        fontFamily: 'Open Sans'
+    }
+
 };
+
 
 const schoolPalette = {
 
-  
+
 };
 
 
