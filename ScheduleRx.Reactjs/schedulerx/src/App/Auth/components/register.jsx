@@ -10,6 +10,7 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
+
     },
     regcontainer: {
         display: 'flex',
@@ -17,6 +18,7 @@ const styles = theme => ({
         justifyContent: 'center',
         width: 350,
         height: 400,
+        position: 'fixed',
     },
     reginput: {
         marginBottom: '.5em',

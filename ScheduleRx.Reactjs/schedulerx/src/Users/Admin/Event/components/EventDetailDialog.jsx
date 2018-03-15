@@ -7,7 +7,7 @@ import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
 import moment from 'moment';
 import axios from 'axios';
-import { styles } from '../EventStyles';
+//import { styles } from '../EventStyles';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -15,6 +15,31 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
+
+const styles = theme => ({
+
+    title: {
+        fontFamily: 'Open Sans',
+        fontSize: 20,
+    },
+    field: {
+        fontFamily: 'Open Sans',
+        minWidth: 200,
+        border: '1px solid #7d7d7d',
+        borderRadius: 2,
+        marginTop: 5,
+    },
+    btn: {
+        fontFamily: 'Open Sans'
+    },
+    textdiv: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'middle',
+        width: 300,
+    }
+});
 
 class EventDetailDialog extends Component {
   state = {
@@ -36,34 +61,43 @@ class EventDetailDialog extends Component {
   };
 
   render() {
+      const {classes} = this.props;
     return (
       <Dialog
+        className={classes.container}
         open={this.props.open}
       >
-        <DialogTitle>Create Event</DialogTitle>
-        <DialogContent>
-          <div>
-          <TextField
+        <DialogContent className={classes.content}>
+          <div className={classes.textdiv}>
+              <h1 className={classes.title}>EVENT DETAILS</h1>
+        <div>
+          <input
+            className={classes.field}
             id="title"
             onBlur={this.handleBlur}
+            placeholder="EVENT TITLE"
           >
-          </TextField>
+      </input>
         </div>
         <div>
-          <TextField
+          <textarea
+            className={classes.field}
             id="details"
-            multiline='true'
             onBlur={this.handleBlur}
           >
-          </TextField>
+      </textarea>
+  </div>
         </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.cancel}>
+          <Button
+              className={classes.btn}
+              onClick={this.cancel}>
             Cancel
           </Button>
           <Button
-            onClick={this.handleSave}
+              className={classes.btn}
+              onClick={this.handleSave}
           >
             Submit
           </Button>
@@ -72,5 +106,4 @@ class EventDetailDialog extends Component {
     )
   }
 }
-
-export default EventDetailDialog;
+export default withStyles(styles)(EventDetailDialog);
