@@ -19,7 +19,6 @@ const styles = theme => ({
         display: 'inline',
         width: '100%',
         height: '100%',
-        border: '4px solid yellow',
     },
     content: {
         width: '100%',
@@ -32,7 +31,6 @@ const styles = theme => ({
     gridRoot: {
         height: '100%',
         minHeight: 900,
-        border: '4px solid yellow',
     },
 });
 
