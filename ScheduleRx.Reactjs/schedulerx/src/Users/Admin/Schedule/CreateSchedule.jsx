@@ -36,7 +36,7 @@ class CreateSchedule extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{paddingTop: 35}}>
                 <ScheduleForm onSave={this.handleSave}/>
             </div>
         );
