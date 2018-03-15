@@ -9,9 +9,9 @@ class Registration extends Component {
     handleSave(userInfo) {
         let ROLE_ID = '';
         if(userInfo.EMAIL && userInfo.EMAIL.toLowerCase().endsWith("@warhawks.ulm.edu")){
-            ROLE_ID = 3;
+            ROLE_ID = 4;
         }else if(userInfo.EMAIL.toLowerCase().endsWith("@ulm.edu")){
-            userInfo.first ? ROLE_ID = 1 : ROLE_ID = 2;
+            userInfo.first ? ROLE_ID = 1 : ROLE_ID = 3;
         }
 
         client.post(`Users/Create.php`, {
