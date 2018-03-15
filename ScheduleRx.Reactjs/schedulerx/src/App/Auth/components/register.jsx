@@ -1,27 +1,67 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
-import {Button} from 'material-ui';
+import { div } from 'material-ui/Form';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-  },
+    container: {
+        height: '100%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+    },
+    regcontainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: 350,
+        height: 400,
+    },
+    reginput: {
+        marginBottom: '.5em',
+        textTransform: 'uppercase',
+        height: 30,
+        width: 300,
+        fontFamily: 'Open Sans',
+        padding: '0',
+        border: '1px solid #767676',
+        borderRadius: '2px',
+        paddingLeft: '.2em',
+    },
+    title: {
+        color: 'white',
+        textTransform: 'none',
+        fontWeight: 'bold',
+        fontSize: '60px',
+        marginBottom: '0',
+        letterSpacing: '5px',
+    },
+    subTitle: {
+        color: 'white',
+        textTransform: 'uppercase',
+        fontSize: '18px',
+        fontWeight: 'normal',
+        marginTop: '0',
+    },
+    regbtn: {
+        marginBottom: '.5em',
+        background: 'rgba(0, 0, 0, .6)',
+        border: 'none',
+        borderRadius: '2px',
+        color: 'white',
+        height: 30,
+        width: 305,
+    },
 });
 
 class RegisterForm extends React.Component {
   state = { first: false}
-    //get Steven to return null 
+    //get Steven to return null
     componentDidMount(){
         axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Users/Index.php`)
           .then(res => {
-              this.setState({first: res.data.message === "No userss found." ? true : false}) 
+              this.setState({first: res.data.message === "No userss found." ? true : false})
           })
     }
 
@@ -37,25 +77,55 @@ class RegisterForm extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.container}>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="EMAIL">Email</InputLabel>
-          <Input id="EMAIL" onChange={this.handleChange} />
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="USER_ID">CWID</InputLabel>
-          <Input id="USER_ID" onChange={this.handleChange} />
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="SEMESTER_ID">semester</InputLabel>
-          <Input id="SEMESTER_ID" onChange={this.handleChange} />
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="USER_PASSWORD">Password</InputLabel>
-          <Input id="USER_PASSWORD" type={"password"} onChange={this.handleChange} />
-        </FormControl>
-        
-        <Button onClick={this.handleSave}>Save</Button>
+        <div className={classes.container}>
+            <div className={classes.regcontainer}>
+                <div className={classes.title}><h1 className={classes.title}>SCHEDULERx</h1></div>
+                <h2 className={classes.subTitle}>A Scheduling app for ULM nursing</h2>
+                    <form>
+                    <div>
+                        <input
+                            placeholder="email"
+                            id="EMAIL"
+                            onChange={this.handleChange}
+                            className={classes.reginput}
+                            />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="campus wide id"
+                            id="USER_ID"
+                            onChange={this.handleChange}
+                            className={classes.reginput}
+                            />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="nursing semester"
+                            id="SEMESTER_ID"
+                            onChange={this.handleChange}
+                            className={classes.reginput}
+                            />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="password"
+                            id="USER_PASSWORD"
+                            type={"password"}
+                            onChange={this.handleChange}
+                            className={classes.reginput}
+                            />
+                    </div>
+                    <button
+                        type="button"
+                        className={classes.regbtn}
+                        onClick={this.handleSave}>Register</button>
+                </form>
+                <NavLink
+                    style={{color: 'white', fontSize: '14px', marginLeft: '4px'}}
+                    to="/">
+                    Already Registered? Login
+                </NavLink>
+            </div>
       </div>
     );
   }
