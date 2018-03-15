@@ -25,16 +25,12 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        this.props.onLoad(this.props.user, this.props.role)
-            .then(() => {
-                const events = this.props.calendar;
-                events && events.length > 0 && events.map(obj => {
-                    obj.START_TIME = moment(obj.START_TIME).toDate();
-                    obj.END_TIME = moment(obj.END_TIME).toDate();
-                });
-                this.setState({events});
-                return;
-            });
+        this.props.onLoad(this.props.user, this.props.role);
+    
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({events: nextProps.calendar})
     }
     
     handleSelectSlot = () => {

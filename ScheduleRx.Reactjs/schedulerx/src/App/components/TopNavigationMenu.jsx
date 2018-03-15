@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import * as action from "../../Redux/actions/actionCreator";
 import { Redirect, withRouter } from 'react-router-dom';
 import { Admin, Faculty, Student } from '../../configuration/variables';
+import history from '../History';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -72,8 +73,8 @@ class TopNavMenu extends Component {
         sessionStorage.removeItem('myID');
         sessionStorage.removeItem('myRole');
         sessionStorage.removeItem('mySem');
+        history.push("/");
         this.props.logOut();
-        return <Redirect to path="/"/>;
     };
 
     render() {
