@@ -27,5 +27,5 @@ if ($row) {
     echo json_encode($row);
 }
 else {
-    echo  "ERROR CODE: -" . $stmt->errorCode();
+    echo  null; //"ERROR CODE: -" . $stmt->errorCode();
 }

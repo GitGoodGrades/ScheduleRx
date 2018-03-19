@@ -16,8 +16,6 @@ function Search($tableName, $searchKey, $whereValue, $conn) {
         return json_encode($recordList);
     }
     else{
-        return json_encode(
-            array("message" => "No " . $tableName . "s found. ERROR CODE:" . $stmt->errorCode())
-        );
+        return null; //json_encode(array("message" => "No " . $tableName . "s found. ERROR CODE:" . $stmt->errorCode()));
     }
 }

@@ -47,8 +47,6 @@ function findConflict( $tableName,$start, $end, $room , $conn) {
         return json_encode($conflicts);
     }
     else{
-        return json_encode(
-            array("message" => "No Conflicts found.")
-        );
+        return null; //json_encode(array("message" => "No Conflicts found."));
     }
 }

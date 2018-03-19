@@ -18,11 +18,10 @@ $toLevel3 = json_decode(Search( 'users',"ROLE_ID", 2,  $conn));
 foreach ($toLevel3->records as $record) {
     $field1 = array( "ROLE_ID" => 3, "USER_ID" => $record->USER_ID);
     UpdateRecord("users", $field1, "USER_ID", $conn);
-    echo DeleteRecord("leads_course", "USER_ID" , $record->USER_ID , $conn);
+    DeleteRecord("leads_course", "USER_ID" , $record->USER_ID , $conn);
 }
 
 foreach($data as $json) {
-    if (($json->USER_ID . "") == "00000000") { continue; }
     $field2 = array( "ROLE_ID" => 2, "USER_ID" => $json->USER_ID);
     UpdateRecord('users', $field2, "USER_ID", $conn);
     CreateRecord('leads_course', $json, $conn);

@@ -11,4 +11,4 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-echo DeleteRecord('course',"COURSE_ID", $data->COURSE_ID, $conn );
+DeleteRecord('course',"COURSE_ID", $data->COURSE_ID, $conn );

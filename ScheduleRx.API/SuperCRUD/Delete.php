@@ -5,6 +5,6 @@ function DeleteRecord ($tableName, $PrimaryKey, $value, $conn) {
     $stmt = $conn->prepare($query);
     $stmt->bindValue(":". $PrimaryKey, $value);
 
-    return $stmt->execute() ? $tableName . ' was deleted.' : $tableName . ' was not deleted ERROR CODE:' . $stmt->errorCode();
+    return $stmt->execute() ? $tableName . ' was deleted.' : null; //$tableName . ' was not deleted ERROR CODE:' . $stmt->errorCode();
 }
 

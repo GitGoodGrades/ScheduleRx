@@ -18,5 +18,5 @@ function UpdateRecord ($tableName, $fields, $primaryKey, $conn) {
         $stmt->bindValue(":" . $key, $temp);
     }
 
-    return $stmt->execute() ? $tableName . ' was updated.' : $tableName . ' was not updated ERROR CODE:' . $stmt->errorCode();
+    return $stmt->execute() ? $tableName . ' was updated.' : null; // $tableName . ' was not updated ERROR CODE:' . $stmt->errorCode();
 }
