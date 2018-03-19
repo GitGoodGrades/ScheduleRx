@@ -20,5 +20,5 @@ function UpdateRecord ($tableName, $bookingID, $sectionID, $newNote, $conn) {
 
     $stmt = $conn->prepare($query);
 
-    return $stmt->execute() ? $tableName . ' was updated.' : $tableName . ' was not updated ERROR CODE:' . $stmt->errorCode();
+    return $stmt->execute() ? $tableName . ' was updated.' : null;//$tableName . ' was not updated ERROR CODE:' . $stmt->errorCode();
 };

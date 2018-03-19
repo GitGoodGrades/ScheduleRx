@@ -16,8 +16,6 @@ function GetAll($tableName, $primaryKey, $conn) {
         return json_encode($recordList);
     }
     else{
-        return json_encode(
-            array("message" => "No " . $tableName . "s found.")
-        );
+        return null; //json_encode( array("message" => "No " . $tableName . "s found.") ;
     }
 }

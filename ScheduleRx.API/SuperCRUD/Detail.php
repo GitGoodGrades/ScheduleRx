@@ -11,6 +11,6 @@ function FindRecord($tableName, $PrimaryKey, $value, $conn)
         return json_encode($row);
     }
     else {
-        return $tableName . ' was not found ERROR CODE:' . $stmt->errorCode();
+        return null; //$tableName . ' was not found ERROR CODE:' . $stmt->errorCode();
     }
 }

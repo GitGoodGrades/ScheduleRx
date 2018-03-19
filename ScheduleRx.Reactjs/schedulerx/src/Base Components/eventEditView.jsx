@@ -52,7 +52,7 @@ class EventEditView extends Component{
 
   handleSave = () => {
     this.props.onSave(this.state)
-  }
+  };
   
   render(){
     const { classes, event, onClose } = this.props;
