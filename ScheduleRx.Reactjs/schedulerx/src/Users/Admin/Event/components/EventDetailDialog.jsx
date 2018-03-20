@@ -46,11 +46,11 @@ class EventDetailDialog extends Component {
     title: '',
     details: '',
 
-  }
+  };
 
   cancel = () => {
     this.props.onCancel();
-  }
+  };
 
   handleBlur = (event) => {
     this.setState({[event.target.id]: event.target.value});
