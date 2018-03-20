@@ -32,6 +32,9 @@ class Logging extends React.Component {
         let USER = '';
         let ROLE = '';
         let SEMESTER = '';
+
+        if (userInfo == null) {userInfo = {USER_ID: ""}}
+
         client.post(`Users/Detail.php`, {
             USER_ID: userInfo.USER_ID
         })
@@ -40,9 +43,9 @@ class Logging extends React.Component {
                 USER = res.data.USER_ID;
                 ROLE = res.data.ROLE_ID;
                 SEMESTER = res.data.SEMESTER_ID;
+                this.props && this.props.sendUser(USER, ROLE, SEMESTER);
+                this.saveSession(USER, ROLE, SEMESTER);
             }
-            this.props && this.props.sendUser(USER, ROLE, SEMESTER);
-            this.saveSession(USER, ROLE, SEMESTER);
         });
 
 

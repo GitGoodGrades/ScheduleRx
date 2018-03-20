@@ -40,7 +40,7 @@ class CreateEvent extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({events: nextProps.events})
-    }
+    };
 
     componentDidMount() {
         this.props.loadCourses();
@@ -55,9 +55,22 @@ class CreateEvent extends Component {
       });
     };
 
+    valid() {
+        let complete = false;
+        if (this.state.course !== "" && this.state.room !== "" && this.state.sections.length !== 0)  {
+            complete = true;
+        }
+        return complete;
+    };
+
     handleSave = (title, details) => {
         let scheduleID = null;
         this.props.getConflictEvents(this.state.start, this.state.end);
+
+        if(!this.valid() && title !== null) {
+            //User Feedback That Input was Invalid
+            return null;
+        }
 
         if(this.props.conflict_List === null){
             if(moment(this.state.start).isBetween(
@@ -98,17 +111,17 @@ class CreateEvent extends Component {
         this.setState({
           dialogOpen: false
         });
-    }
+    };
 
     cancel = () => {
       this.setState({
         dialogOpen: false
       })
-    }
+    };
 
     selectEvent = (event) => {
         console.log(event);
-    }
+    };
 
     selectSlot = (slot) => {
         this.setState({
@@ -116,7 +129,7 @@ class CreateEvent extends Component {
           end: moment(slot.end).format('YYYY-MM-DD hh:mm:ss'),
           dialogOpen: true
         });
-    }
+    };
 
     render(){
         return(
