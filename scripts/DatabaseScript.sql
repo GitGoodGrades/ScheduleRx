@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`users` (
 );
 
 INSERT INTO users
-VALUES  	(0, '11', 'dummy@ulm', 1, null)
+VALUES  (0, '11', 'dummy@ulm', 1, null),
 		(10000001, '11', 'admin1@ulm', 1, null),
 		(20000006, '26', 'faculty1@ulm', 2, null),
         (20000007, '27', 'faculty1@ulm', 2, null),
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`room_capabilities` (
 );
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`room` (
-  ROOM_ID   	INT(3)         NOT NULL,
+  ROOM_ID   	VARCHAR(10)         NOT NULL,
   CAPACITY  	INT(3)         NOT NULL,
   ROOM_NAME 	VARCHAR(10),
   LOCATION  	VARCHAR(15) NOT NULL,
@@ -127,7 +127,9 @@ VALUES 	('100', 50, 'room1', 'nursing', null, null),
 
         ('104', 54, 'room5', 'nursing', null, null),
 
-        ('105', 55, 'room6', 'nursing', null, null);
+        ('105', 55, 'room6', 'nursing', null, null),
+		
+		('clinical', 999, null, 'off-campus', null, null );
         
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict` (
@@ -157,22 +159,20 @@ VALUES ('SPRING2018',
 FALSE, FALSE);
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`booking` (
-  ROOM_ID    	  INT(3)      	  NOT NULL,
-  
-  START_TIME 	  DATETIME   	  NOT NULL,
-  END_TIME   	  DATETIME        NOT NULL,
-  
-  SCHEDULE_ID 	  VARCHAR(10),
-  BOOKING_ID 	  INT(2)		  NOT NULL AUTO_INCREMENT,
-  BOOKING_TITLE   VARCHAR(50)     NOT NULL,               # BOOKING_TITLE INSTEAD OF EVENT TITLE
-  DETAILS         VARCHAR(50), 
+  ROOM_ID    	  VARCHAR(10)      	   NOT NULL,
+  START_TIME 	  DATETIME   	   NOT NULL,
+  END_TIME   	  DATETIME         NOT NULL,
+  SCHEDULE_ID 	  VARCHAR(10)			   ,
+  BOOKING_ID 	  BINARY(16)	   NOT NULL,
+  BOOKING_TITLE   VARCHAR(50)      NOT NULL,               # BOOKING_TITLE INSTEAD OF EVENT TITLE
+  DETAILS         VARCHAR(50)			   , 
   CONSTRAINT PK_BOOKING PRIMARY KEY (BOOKING_ID),
   FOREIGN KEY (ROOM_ID) REFERENCES room(ROOM_ID),
   FOREIGN KEY (SCHEDULE_ID) REFERENCES schedule(SCHEDULE_ID)
 );
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`event_section` (
-  BOOKING_ID 	  INT(2)		  NOT NULL,
+  BOOKING_ID 	  BINARY(16)		  NOT NULL,
   SECTION_ID 	  VARCHAR(5)	  NOT NULL,
   NOTES			  VARCHAR(250),
   CONSTRAINT PK_BOOKING_SECTION PRIMARY KEY (BOOKING_ID, SECTION_ID),
@@ -203,7 +203,7 @@ insert into event_section values
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (
   CONFLICT_ID       INT(3)     NOT NULL,
-  BOOKING_ID        INT(2)     NOT NULL,
+  BOOKING_ID        BINARY(16)     NOT NULL,
   PRIMARY KEY (CONFLICT_ID, BOOKING_ID),
   FOREIGN KEY (CONFLICT_ID) REFERENCES conflict(CONFLICT_ID),
   FOREIGN KEY (BOOKING_ID) REFERENCES booking(BOOKING_ID)
@@ -221,19 +221,41 @@ CREATE SCHEMA IF NOT EXISTS banner_database;
 
 use banner_database;
 
+CREATE TABLE IF NOT EXISTS `banner_database`.`users` (
+  USER_ID	VARCHAR(8) 		NOT NULL,
+  FIRSTNAME	VARCHAR(20) 	NOT NULL,
+  LASTNAME	VARCHAR(20) 	NOT NULL,
+  PRIMARY KEY (USER_ID)
+);
+
+INSERT INTO users
+VALUES 
+	   (10000001, 'Dr', 'Pevito'),
+	   (20000001, 'Dennis', 'Demenace'),
+       (20000002, 'Jim', 'Bob'), 
+       (20000003, 'Joe', 'Bob'),
+       (20000004, 'Katty', 'Necklace'),
+       (20000005, 'Johnny', 'Flash'),
+	   (30000001, 'Judy', 'Summers'),
+       (30000002, 'Cash', 'Ameir'),
+       (30000003, 'Jolly', 'Fellows'),
+       (30000004, 'Hideo', 'Kojima');
+
 CREATE TABLE IF NOT EXISTS `banner_database`.`student_takes` (
   USER_ID	VARCHAR(8) 	NOT NULL,
   SECTION_ID    VARCHAR(5)      NOT NULL,
-  PRIMARY KEY (USER_ID, SECTION_ID)
+  PRIMARY KEY (USER_ID, SECTION_ID),
+  FOREIGN KEY (USER_ID) REFERENCES users(USER_ID)
 );
 
 CREATE TABLE IF NOT EXISTS `banner_database`.`teacher_teaches` (
   USER_ID	VARCHAR(8) 	NOT NULL,
   SECTION_ID    VARCHAR(5)      NOT NULL,
-  PRIMARY KEY (USER_ID, SECTION_ID)
+  PRIMARY KEY (USER_ID, SECTION_ID),
+  FOREIGN KEY (USER_ID) REFERENCES users(USER_ID)
 );
 
-INSERT INTO teacher_teaches
+INSERT INTO `banner_database`.`teacher_teaches`
 VALUES (20000001, '40303'),
        (20000002, '43928'), 
        (20000003, '41422'),
@@ -241,7 +263,7 @@ VALUES (20000001, '40303'),
        (20000005, '44196'),
        (20000005, '43940');
        
-INSERT INTO student_takes
+INSERT INTO `banner_database`.`student_takes`
 VALUES (30000001, '40303'),
        (30000001, '43928'),
        (30000001, '41422'),
