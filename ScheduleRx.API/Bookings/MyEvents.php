@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../config/Banner_DB.php';
 include_once '../SuperCRUD/Search.php';
-include_once '../SuperCRUD/Index.php';
+include_once 'LeadIndex.php';
 include_once 'GetEventDetail.php';
 
 $database = new Database();
@@ -18,10 +18,12 @@ $conn2 = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
 /* Script
- * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events relevant to that particular user. Student results
- * all events associated with sections that the student takes in the current schedule. Faculty results includes all the events associated with
- * the sections that the faculty teaches, and Lead results include the events associated with the sections the lead teaches, and includes
- * events associated with sections of courses that the lead manages. Conflicting events are included.
+ * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events relevant to that particular user.
+ * Requires ROLE_ID, USER_ID, CURRENT (current Schedule)
+ * Student results are all events associated with sections that the student takes in the current schedule.
+ * Faculty results are all events associated with sections that the faculty teaches in the current schedule.
+ * Lead results include the events associated with the sections the lead teaches, and includes
+ * events associated with sections of courses that the lead manages. Conflicting events are not included.
  */
 if ($data->ROLE_ID == '2' || $data->ROLE_ID == '3')
     $results = json_decode(Search( 'teacher_teaches','USER_ID',$data->USER_ID,  $conn2));
@@ -74,3 +76,8 @@ if($myEvents){
 else{
     echo null;
 }
+/*
+ *      WARNING: THIS FILE DOES NOT TEST IF A FACULTY IS PRESENT IN THE 'leads_course' TABLE, IF THE GIVEN INFORMATION IS INCORRECT
+ *         AN ERROR IS THROWN, BE SURE THE USER ID MATCHES THE ROLE IN THE DATABASE AND THAT A LEAD'S USER_ID IS PRESENT IN THE
+ *                                                      'leads_course' TABLE.
+ */
