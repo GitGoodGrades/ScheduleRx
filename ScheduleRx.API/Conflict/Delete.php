@@ -14,3 +14,4 @@ $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
 echo DeleteRecord('event_section',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+echo DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
