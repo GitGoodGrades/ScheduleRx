@@ -13,7 +13,8 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$record = json_decode(FindRecord('booking', 'BOOKING_ID', $data->BOOKING_ID, $conn));
-$record->SECTIONS = GetSections($data->BOOKING_ID, $conn);
-
-print_r($record);
+/* Script
+ * Utilizes the 'GetDetail' function to retrieve details about an event. The process itself is abstracted away to be usable
+ * in other areas. This file is to serve POST requests for event details.
+ */
+print_r(GetDetail($data->BOOKING_ID, $conn));
