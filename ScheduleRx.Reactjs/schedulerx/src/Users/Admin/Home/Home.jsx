@@ -10,6 +10,8 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
+import '../../../Base Components/react-big-calendar.css'
+
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
 BigCalendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(BigCalendar)
@@ -112,9 +114,9 @@ class EmptyHome extends Component {
                     titleAccessor="BOOKING_TITLE"
                     startAccessor='START_TIME'
                     endAccessor='END_TIME'
-                    onSelectEvent={event => this.handleSelectEvent(event)}
+                    //onSelectEvent={event => this.handleSelectEvent(event)}
                     defaultDate={new Date()}
-                    onSelectSlot={slotInfo => this.handleSelectSlot(slotInfo)}
+                    //onSelectSlot={slotInfo => this.handleSelectSlot(slotInfo)}
                     views={['month', 'week', 'day']}
                 />
                 <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
