@@ -1,3 +1,6 @@
+drop database nursing_database;
+drop database banner_database;
+
 CREATE SCHEMA IF NOT EXISTS nursing_database;
 use nursing_database;
 
@@ -133,8 +136,8 @@ VALUES 	('100', 50, 'room1', 'nursing', null, null),
         
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict` (
-  CONFLICT_ID	INT (3)	    NOT NULL,
-  DESCRIPTION   VARCHAR(80) NOT NULL,
+  CONFLICT_ID	VARCHAR (36)	    NOT NULL,
+  MESSAGE   VARCHAR(250) NOT NULL,
   CONSTRAINT PK_CONFLICT_ID PRIMARY KEY (CONFLICT_ID)
 );
 
@@ -202,10 +205,12 @@ insert into event_section values
 
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (
-  CONFLICT_ID       INT(3)     NOT NULL,
+  CONFLICT_ID       VARCHAR(3)     NOT NULL,
   BOOKING_ID        VARCHAR(36)     NOT NULL,
+  USER_ID			int(8),
   PRIMARY KEY (CONFLICT_ID, BOOKING_ID),
   FOREIGN KEY (CONFLICT_ID) REFERENCES conflict(CONFLICT_ID),
+  FOREIGN KEY (USER_ID) REFERENCES users(USER_ID),
   FOREIGN KEY (BOOKING_ID) REFERENCES booking(BOOKING_ID)
 );
 
