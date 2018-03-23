@@ -13,6 +13,9 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
+/*
+ * Given a BOOKING_ID, returns the conflict details associated (if any exist)
+ */
 $record = json_decode(FindRecord('event_section', 'BOOKING_ID', $data->BOOKING_ID, $conn));
 $record->SECTIONS = GetSections($data->BOOKING_ID, $conn);
 
