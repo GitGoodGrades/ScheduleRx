@@ -13,6 +13,7 @@ $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
 /* Script
- * Deletes and event from the 'booking' table. WARNING: DOES NOT YET REMOVE ASSOCIATIONS FROM THE 'event section' table
+ * Deletes and event from the 'booking' table and it's associations from the event_sections if  any exist
  */
 echo DeleteRecord('booking',"BOOKING_ID", $data->BOOKING_ID, $conn );
+echo DeleteRecord('event_section', 'BOOKING_ID', $data->BOOKING_ID, $conn);
