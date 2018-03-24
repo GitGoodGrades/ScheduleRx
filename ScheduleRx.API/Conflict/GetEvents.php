@@ -6,28 +6,25 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/database.php';
+include_once '../Bookings/GetEventDetail.php';
 include_once  '../SuperCRUD/Search.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$relEvents = Search('event_conflict', 'CONFLICT_ID', $data->CONFLICT_ID, $conn);
-
-GetConflict("ROOM_ID", $data->ROOM_ID, $conn );
-
-function GetConflict($ConflictID, $value, $conn)
-{
-    $query = ('SELECT * FROM ' . $tableName . " WHERE " . $PrimaryKey . '=:' . $PrimaryKey);
-    $stmt = $conn->prepare($query);
-    $stmt->bindValue(":" . $PrimaryKey, $value);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($row) {
-        return json_encode($row);
+/*
+ * Given a CONFLICT_ID, returns a list of events associated with the conflict ID
+ */
+$relEvents = json_decode(Search('conflict_event', 'CONFLICT_ID', "'" . $data->CONFLICT_ID . "'", $conn));
+$results = [];
+if ($relEvents) {
+    foreach ($relEvents->records as $record) {
+        array_push($results, GetDetail($record->BOOKING_ID, $conn));
     }
-    else {
-        return null; //$tableName . ' was not found ERROR CODE:' . $stmt->errorCode();
-    }
+
+    echo json_encode($results);
+}
+else {
+    echo null;
 }

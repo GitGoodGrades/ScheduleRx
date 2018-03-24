@@ -20,10 +20,10 @@ $data = json_decode(file_get_contents("php://input"));
 /* Script
  * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events relevant to that particular user.
  * Requires ROLE_ID, USER_ID, CURRENT (current Schedule)
- * Student results are all events associated with sections that the student takes in the current schedule.
- * Faculty results are all events associated with sections that the faculty teaches in the current schedule.
- * Lead results include the events associated with the sections the lead teaches, and includes
- * events associated with sections of courses that the lead manages. Conflicting events are not included.
+ *     Student results are all events associated with sections that the student takes in the current schedule.
+ *     Faculty results are all events associated with sections that the faculty teaches in the current schedule.
+ *     Lead results include the events associated with the sections the lead teaches, and includes
+ *     events associated with sections of courses that the lead manages. Conflicting events are not included.
  */
 if ($data->ROLE_ID == '2' || $data->ROLE_ID == '3')
     $results = json_decode(Search( 'teacher_teaches','USER_ID',$data->USER_ID,  $conn2));
@@ -31,13 +31,12 @@ else {
     $results = json_decode(Search( 'student_takes','USER_ID',$data->USER_ID,  $conn2));
 }
 
-//Get all the Events (and include their section numbers from the event_section table
 $query = "";
-if ($data->ROLE_ID == '2') { //if lead, filter by  SCHEDULE_ID not null
+if ($data->ROLE_ID == '2') {
     $query = "select * from booking join event_section on booking.BOOKING_ID = event_section.BOOKING_ID
               WHERE SCHEDULE_ID is not null";
 }
-else { //Only show events for the current schedule to faculty and students
+else {
     $query = "select * from booking join event_section on booking.BOOKING_ID = event_section.BOOKING_ID
               WHERE SCHEDULE_ID='" . $data->CURRENT ."'";
 }
@@ -53,9 +52,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
 $myEvents = [];
 
-/*loop through all the events in our nursing_database, For every event with a section ID that matches anything in MyEvents
-   We will add the the $myEvents Array ( The events will be sorted by SECTION_ID, and thus, so will the myEvents records)
-                     so All of a classes events will be together in the returned object */
 foreach ($allBookings['records'] as $record ) {
     foreach ($results->records as $myRecord ) {
 
@@ -65,7 +61,6 @@ foreach ($allBookings['records'] as $record ) {
     }
 }
 
-//If lead, expand results with leads-course-section-events
 if ($data->ROLE_ID == '2') {
     $myEvents = GetLeadIndex($myEvents, $data->USER_ID, $conn1);
 }
