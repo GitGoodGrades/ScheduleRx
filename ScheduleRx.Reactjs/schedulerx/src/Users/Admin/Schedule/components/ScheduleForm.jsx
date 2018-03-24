@@ -3,6 +3,10 @@ import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
+import { DateRange } from 'react-date-range';
+import  {Dialog,   DialogActions,
+    DialogContent, } from 'material-ui';
+import moment from 'moment';
 
 const styles = theme => ({
   container: {
@@ -13,22 +17,33 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 230,
+    justifyContent: 'center',
+    alignItems: 'middle',
   },
   menu: {
     width: 230,
   },
+  content: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'middle',
+    width: 300,
+  }
 });
 
 
 class ScheduleForm extends React.Component {
   state = {
     SCHEDULE_ID: '',
-    START_REG_DATE: '',
-    END_REG_DATE: '',
-    START_SEM_DATE: '',
-    END_SEM_DATE: '',
+    START_REG_DATE: null,
+    END_REG_DATE: null,
+    START_SEM_DATE: null,
+    END_SEM_DATE: null,
     IS_RELEASED: "0",
-    IS_ARCHIVED: "0"
+    IS_ARCHIVED: "0",
+    reg_open: false,
+    sem_open: false
   };
 
   handleChange = event => {
@@ -37,17 +52,50 @@ class ScheduleForm extends React.Component {
     });
   };
 
-  handleSave = () => {
-      this.props.onSave(this.state);
+  cancel = () => {
+    this.props.onCancel();
+  };
+
+  handleRegSelect = date => {
+      this.setState({ START_REG_DATE: moment(date.startDate).format("YYYY-MM-DD"), END_REG_DATE: moment(date.endDate).format("YYYY-MM-DD")})
+  }
+
+    setRegOpen = () => {
+        this.setState({ reg_open: true })
+    }
+
+    setRegClose = () => {
+        this.setState({ reg_open: false })
+    }
+
+    handleSemSelect = date => {
+        this.setState({ START_SEM_DATE: moment(date.startDate).format("YYYY-MM-DD"), END_SEM_DATE: moment(date.endDate).format("YYYY-MM-DD")})
+    }
+
+    setSemOpen = () => {
+        this.setState({ sem_open: true })
+    }
+
+    setSemClose = () => {
+    this.setState({ sem_open: false })
+    }
+
+    handleSave = () => {
+        this.props.onSave(this.state), this.props.resubmit(this.state);
+        
   };
 
   render() {
     const { classes } = this.props;
 
     return (
-        <Paper>
-          <h1 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Create New Schedule</h1>
-            <form className={classes.container}>
+        <Dialog
+            className={classes.container}
+            open={this.props.open}
+        >
+         <DialogContent className={classes.content}>
+          <h2 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Create New Schedule</h2>
+            <div>
                 <TextField
                     id="SCHEDULE_ID"
                     label="Semester"
@@ -56,61 +104,59 @@ class ScheduleForm extends React.Component {
                     margin="normal"
                     required={true}
                 />
-                <TextField
-                    id="START_REG_DATE"
-                    label="Event Registration Begin Date"
-                    onChange={this.handleChange}
-                    type="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    margin="normal"
-                    required={true}
-                />
-                <TextField
-                    id="END_REG_DATE"
-                    label="Event Registration End Date"
-                    onChange={this.handleChange}
-                    type="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    margin="normal"
-                    required={true}
-                />
-                <TextField
-                    id="START_SEM_DATE"
-                    label="Semester Begin Date"
-                    onChange={this.handleChange}
-                    type="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    margin="normal"
-                    required={true}
-                />
-                <TextField
-                    id="END_SEM_DATE"
-                    label="Semester End Date"
-                    onChange={this.handleChange}
-                    type="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    margin="normal"
-                    required={true}
-                />
-            </form>
-            <div style={{border: '', textAlign: 'right', paddingRight: 5, paddingBottom: 5}}>
-            <Button variant="raised" onClick={this.handleSave} >
-                Save
-            </Button>
-          </div>
-        </Paper>
+            </div>
+            <div>
+                <Button onClick={this.setRegOpen} style={{height: 15}}>
+                    {
+                        (this.state.START_REG_DATE && this.state.END_REG_DATE) ?
+                        `${moment(this.state.START_REG_DATE).format("MM/DD/YYYY")} - ${moment(this.state.END_REG_DATE).format("MM/DD/YYYY")}` :
+                        "Select registration period"
+                    }
+                </ Button>
+                <Dialog open={this.state.reg_open}>
+                    <Paper>
+                        <DateRange
+                            onChange={this.handleRegSelect}
+                        />
+                        <Button onClick={this.setRegClose}>
+                            Save
+                        </Button>
+                    </ Paper>
+                </ Dialog>
+                </div>
+                <div>
+                <Button onClick={this.setSemOpen} style={{height: 15}}>
+                    {
+                        (this.state.START_SEM_DATE && this.state.END_SEM_DATE) ?
+                        `${moment(this.state.START_SEM_DATE).format("MM/DD/YYYY")} - ${moment(this.state.END_SEM_DATE).format("MM/DD/YYYY")}`  :
+                        "Select semester period"
+                    }
+                </ Button>
+                    <Dialog open={this.state.sem_open}>
+                        <DateRange
+                            onInit={this.handleSemSelect}
+                            onChange={this.handleSemSelect}
+                        />
+                        <Button onClick={this.setSemClose}>
+                            Save
+                        </Button>
+                    </ Dialog>
+                </div>
+            </DialogContent>
+            <DialogActions>
+          <Button
+              className={classes.btn}
+              onClick={this.cancel}>
+            Cancel
+          </Button>
+          <Button
+              className={classes.btn}
+              onClick={this.handleSave}
+          >
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

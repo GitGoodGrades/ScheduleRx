@@ -16,7 +16,6 @@ const AdminRoutes = (
         <Route path="/course/list" component={Courses}/>
         <Route path="/course/create" component={CreateCourse}/>
         <Route path="/event/create" component={CreateEvent}/>
-        <Route path="/schedule/create" component={CreateSchedule}/>
         <Route path="/schedule/list" component={Schedules}/>
         <Route path="/users/leads" component={Leads}/>
     </div>);
