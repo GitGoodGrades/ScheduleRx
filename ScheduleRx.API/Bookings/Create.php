@@ -38,6 +38,8 @@ if ($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "") {
 
 $sectionEntries = $data->SECTION_ID;
 $initialNote = $data->NOTES;
+$data->DETAIL = $data->NOTES;
+
 unset($data->SECTION_ID, $data->COURSE_ID, $data->NOTES);
 
 CreateRecord('booking', $data, $conn);
