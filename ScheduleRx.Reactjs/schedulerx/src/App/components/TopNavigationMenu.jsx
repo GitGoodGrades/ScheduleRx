@@ -97,11 +97,6 @@ class TopNavMenu extends Component {
                         Create Events
                     </NavLink>
                     <NavLink 
-                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/create"
-                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
-                        Create Schedule
-                    </NavLink>
-                    <NavLink 
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
                         className={this.props.role !== Admin ? classes.hidden : classes.seen}>
                         Manage Schedules

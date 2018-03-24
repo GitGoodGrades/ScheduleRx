@@ -7,6 +7,9 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import { withStyles } from 'material-ui/styles';
+import TableFooter from 'material-ui/Table';
+import AddIcon from 'material-ui-icons/Add';
+import Button from 'material-ui/Button';
 
 const styles = theme => ({
   dialogSelect: {
@@ -36,6 +39,10 @@ class ScheduleTable extends Component {
   handleClose = () => {
     this.setState({open: false})
   };
+
+  openDialog = () => {
+    this.props.open();
+  }
 
   render() {
     const ScheduleList = this.props.scheduleList;
@@ -98,6 +105,16 @@ class ScheduleTable extends Component {
                 );
               })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
             </TableBody>
+            <TableFooter>
+            <Button 
+              variant="fab" 
+              mini color="secondary" 
+              aria-label="add" 
+              className={classes.button}
+              onClick={this.openDialog}>
+              <AddIcon />
+            </Button>
+            </TableFooter>
           </Table>
       </Paper>
     );
