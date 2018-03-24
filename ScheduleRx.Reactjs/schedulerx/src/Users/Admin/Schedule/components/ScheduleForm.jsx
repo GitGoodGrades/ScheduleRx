@@ -114,14 +114,12 @@ class ScheduleForm extends React.Component {
                     }
                 </ Button>
                 <Dialog open={this.state.reg_open}>
-                    <Paper>
                         <DateRange
                             onChange={this.handleRegSelect}
                         />
                         <Button onClick={this.setRegClose}>
                             Save
                         </Button>
-                    </ Paper>
                 </ Dialog>
                 </div>
                 <div>
