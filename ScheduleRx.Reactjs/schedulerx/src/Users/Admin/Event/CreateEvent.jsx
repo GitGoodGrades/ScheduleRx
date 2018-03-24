@@ -35,7 +35,8 @@ class CreateEvent extends Component {
       course: '',
       room: '',
       dialogOpen: false,
-      events: []
+      events: [],
+      courses: []
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -141,7 +142,7 @@ class CreateEvent extends Component {
                   onChange={this.handleChange}
                 />
 
-                <EventCalendar events={this.state.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot}
+                <EventCalendar events={this.state.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot} style={{zIndex: 0}}
 
                 />
               <EventDetailDialog start={this.state.start} end={this.state.end} open={this.state.dialogOpen} onSave={this.handleSave} onCancel={this.cancel} />

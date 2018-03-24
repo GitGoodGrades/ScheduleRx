@@ -3,11 +3,12 @@ import {withStyles} from 'material-ui/styles';
 import Input, {InputLabel} from 'material-ui/Input';
 import {MenuItem} from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
-import Select from 'material-ui/Select';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 //import { styles } from '../EventStyles';
 import Chip from 'material-ui/Chip';
-
+import Select from 'react-select';
+import Option from '../../../../Base Components/Option';
+import 'react-select/dist/react-select.css';
 
 
 const styles = theme => ({
@@ -21,17 +22,20 @@ const styles = theme => ({
         paddingBottom: 10,
         background: 'rgba(0,0,0, .7)',
         borderRadius: 5,
+        zIndex: 999
     },
     control: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'middle'
+        alignItems: 'middle',
+        zIndex: 999
     },
     Select: {
         minWidth: 200,
         background: '#D7BAAB',
         borderRadius: 3,
         marginRight: 5,
+        zIndex: 999
     },
     label: {
         fontFamily: 'Open Sans',
@@ -42,6 +46,7 @@ const styles = theme => ({
     Input: {
         fontFamily: 'Open Sans',
         fontSize: 12,
+        zIndex: 999
     },
     item: {
         fontFamily: 'Open Sans'
@@ -72,89 +77,79 @@ const theme = createMuiTheme({
 class EventForm extends Component {
     state = {
         course: '',
+        sectionOptions: [],
         sections: [],
         room: ''
     };
 
-    handleChange = event => {
-        this.setState({
-          [event.target.name]: event.target.value
-        })
-        this.props.onChange(event.target.name, event.target.value);
+    handleCourseChange = event => {
+        let sections = [];
+            this.props.sectionList.map(section => {
+                if(section.COURSE_ID === event.value) {
+                  sections.push({label: section.SECTION_ID, value: section.SECTION_ID})
+                }
+            }) 
+            this.setState({sectionOptions: sections, course: event.value});
+            this.props.onChange('course', event.value);
+    }
+
+    handleSectionChange = event => {
+        this.setState({sections: event})
+        this.props.onChange('sections', event);
+    };
+
+    handleRoomChange = event => {
+        this.setState({room: event.value})
+        this.props.onChange('room', event.value);
     };
 
     render() {
         const { classes } = this.props;
-
+        const course = this.state.course
         return (
 
                 <div className={classes.FormContainer}>
-                    <form className={classes.Form}>
-                            <div className={classes.control}>
+                    <form className={classes.Form}  style={{zIndex: 100}}>
+                            <div className={classes.control}  style={{zIndex: 100}}>
                                 <InputLabel className={classes.label} htmlFor="course-helper">Select Course</InputLabel>
-                                    <Select
-                                    input={<Input name="Course" id="course-helper" className={classes.Input}/>}
+                                <Select
                                     className={classes.Select}
-                                    name="course"
-                                    value={this.state.course}
-                                    onChange={this.handleChange}
-                                    disableUnderline={true}
-                                >
-                                    {(this.props.courseList && this.props.courseList.length > 0 && this.props.courseList.map(row => {
-                                        return (
-                                            <MenuItem className={classes.item} value={row.COURSE_ID}>{row.COURSE_ID}</MenuItem>
-                                        )
-                                    })) || <MenuItem className={classes.item} value=''>None</MenuItem>};
-                                </Select>
+                                    onChange={this.handleCourseChange}
+                                    options={this.props.courseList && this.props.courseList.map( row => 
+                                        row = {label: row.COURSE_ID, value: row.COURSE_ID}
+                                    )}
+                                    value={course}
+                                    placeholder="course"
+                                    optionComponent={Option}
+                                />
                             </div>
                             <div className={classes.control}>
-                              <InputLabel htmlFor="select-multiple-chip" className={classes.label}>Select Section(s)</InputLabel>
+                              <InputLabel htmlFor="select-multiple" className={classes.label}>Select Section(s)</InputLabel>
                               <Select
-                                multiple
-                                name="sections"
                                 className={classes.Select}
+                                closeOnSelect={true}
+                                removeSelected={true}
+                                multi
+                                onChange={this.handleSectionChange}
+                                options={this.state.sectionOptions}
+                                placeholder="Sections"
+                                simpleValue
                                 value={this.state.sections}
-                                onChange={this.handleChange}
-                                disableUnderline={true}
-                                input={<Input id="select-multiple-chip" />}
-                                renderValue={selected => (
-                                  <div className={classes.chips}>
-                                    {selected.map(value => <Chip key={value} label={value} className={classes.chip} />)}
-                                  </div>
-                                )}
-                              >
-
-                                {this.props.sectionList.map(section => {
-                                  if(section.COURSE_ID === this.state.course) {
-                                    return (
-                                      <MenuItem
-                                        className={classes.item}
-                                        key={section.SECTION_ID}
-                                        value={section.SECTION_ID}
-                                      >
-                                        {section.SECTION_ID}
-                                      </MenuItem>
-                                    )
-                                }
-                              })}
-                              </Select>
+                                optionComponent={Option}
+                              />
                         </div>
                         <div className={classes.control}>
                                 <InputLabel htmlFor="section-helper" className={classes.label}>Select Room</InputLabel>
                                 <Select
-                                    input={<Input name="Room" id="room-helper" className={classes.input}/>}
                                     className={classes.Select}
-                                    name="room"
+                                    closeOnSelect
+                                    onChange={this.handleRoomChange}
+                                    options={this.props.roomList && this.props.roomList.map( row => 
+                                        row = {label: row.ROOM_ID, value: row.ROOM_ID}
+                                    )}
                                     value={this.state.room}
-                                    onChange={this.handleChange}
-                                    disableUnderline={true}
-                                >
-                                    {(this.props.roomList && this.props.roomList.length > 0 && this.props.roomList.map(row => {
-                                        return (
-                                            <MenuItem  className={classes.item} value={row.ROOM_ID}>{row.ROOM_ID}</MenuItem>
-                                        );
-                                    })) || <MenuItem className={classes.item} value=''>None</MenuItem>};
-                                </Select>
+                                    optionComponent={Option}
+                                />
                         </div>
                     </form>
                 </div>
