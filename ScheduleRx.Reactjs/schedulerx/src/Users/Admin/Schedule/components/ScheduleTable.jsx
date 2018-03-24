@@ -9,7 +9,7 @@ import Select from 'material-ui/Select';
 import { withStyles } from 'material-ui/styles';
 import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
-import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
 
 const styles = theme => ({
   dialogSelect: {
@@ -105,15 +105,17 @@ class ScheduleTable extends Component {
                 );
               })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
             </TableBody>
-            <TableFooter>
-            <Button 
+            <TableFooter height="auto" padding={5}>
+            <IconButton 
               variant="fab" 
               mini color="secondary" 
               aria-label="add" 
               className={classes.button}
               onClick={this.openDialog}>
               <AddIcon />
-            </Button>
+              
+            </IconButton>
+            Add new schedule
             </TableFooter>
           </Table>
       </Paper>
