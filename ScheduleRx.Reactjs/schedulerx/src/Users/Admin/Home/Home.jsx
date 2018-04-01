@@ -10,7 +10,7 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
 
-import '../../../Base Components/react-big-calendar.css'
+//import '../../../Base Components/react-big-calendar.css'
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
 BigCalendar.momentLocalizer(moment);
@@ -81,11 +81,11 @@ class EmptyHome extends Component {
     }
     
 
-    moveEvent = ({ event, START_TIME, END_TIME }) => {
+    moveEvent = ({ event, start, end }) => {
         const  events  = this.state.events
     
         const idx = events.indexOf(event)
-        const updatedEvent = { ...event, START_TIME, END_TIME }
+        const updatedEvent = { ...event, start, end }
     
         const nextEvents = [...events]
         nextEvents.splice(idx, 1, updatedEvent)
@@ -94,7 +94,7 @@ class EmptyHome extends Component {
           events: nextEvents,
         })
     
-        alert(`${event.BOOKING_TITLE} was dropped onto ${event.START_TIME}`)
+        alert(`${event.BOOKING_TITLE} was dropped onto ${event.start}`)
     }
 
 
@@ -104,8 +104,8 @@ class EmptyHome extends Component {
             <div
                 className={classes.root}
                 
-            >
-                <div className={classes.container}>
+            ><br />
+                <div >
                 <DragAndDropCalendar
                     style={{height: 500}}
                     selectable
