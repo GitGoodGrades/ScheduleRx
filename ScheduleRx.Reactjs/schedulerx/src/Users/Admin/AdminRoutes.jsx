@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import Courses from './Course/index';
 import CreateCourse from './Course/CreateCourse';
 import CreateEvent from './Event/CreateEvent';
-import CreateSchedule from './Schedule/CreateSchedule';
 import Schedules from './Schedule/Index';
 import Home from './Home/Home';
 import Leads from './Leads/index';
