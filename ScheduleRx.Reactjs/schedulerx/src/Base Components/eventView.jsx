@@ -32,6 +32,16 @@ class EventView extends Component{
   handleClose = () => {
   this.props.onClose();
   };
+
+    findNote(sectionList) {
+        let arrayLength = sectionList && sectionList.records.length;
+        for (let i = 0; i < arrayLength; i++) {
+            if (sectionList.records[i].SECTION_ID == this.state.SECTION_ID) {
+                return sectionList.records[i].NOTES;
+            }
+        }
+        return "";
+    };
   
   render(){
     const { classes, event, onClose } = this.props;
@@ -59,6 +69,9 @@ class EventView extends Component{
               <Typography component="p">
                 {event && event.DETAILS}
               </Typography>
+                <Typography component="p">
+                    {this.findNote(event && event.SECTIONS)}
+                </Typography>
             </CardContent>
           </Card>
         </div>

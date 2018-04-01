@@ -54,19 +54,19 @@ class EmptyHome extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({events: nextProps.calendar})
-    }
+    };
 
     handleSelectSlot = () => {
         console.log();
-    }
+    };
 
     handleSelectEvent = (event) => {
         this.setState({event, open: true})
-    }
+    };
 
     handleClose = () => {
         this.setState({ open: false})
-    }
+    };
     render() {
         const {classes} = this.props;
         return (
