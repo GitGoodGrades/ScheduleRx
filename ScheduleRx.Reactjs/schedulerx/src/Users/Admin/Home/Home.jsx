@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from '../../../Base Components/Calendar';
-import EventView from '../../../Base Components/eventView';
+import EventViewFullEdit from '../../../Base Components/eventViewFullEdit';
 import {connect} from 'react-redux';
 import * as action from '../../../Redux/actions/actionCreator';
 import { withStyles } from 'material-ui/styles';
@@ -30,18 +30,27 @@ const styles = theme => ({
 
 
 const mapStateToProps = (state) => ({
-    events: state.adminCalendar
+    events: state.adminCalendar,
+    courses: state.courseList,
+    rooms: state.roomList,
+    sections: state.sectionList,
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    onLoad: () => dispatch(action.adminCalendar())
+    onLoad: () => dispatch(action.adminCalendar()),
+    loadCourses: () => dispatch(action.searchCourses()),
+    loadRooms: () => dispatch(action.searchRooms()),
+    loadSections: () => dispatch(action.searchSections()),
 });
 
 class EmptyHome extends Component {
     state = { events: [], event: {}, open: false};
 
     componentDidMount() {
-        this.props.onLoad();
+        this.props.onLoad(),
+        this.props.loadCourses(),
+        this.props.loadRooms(),
+        this.props.loadSections()
     };
     handleSelectSlot = () => {
         console.log();
@@ -68,7 +77,13 @@ class EmptyHome extends Component {
                     handleSlotSelection={this.handleSelectSlot}
                     views={['month', 'week', 'day']}
                 />
-                <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
+                <EventViewFullEdit 
+                    event={this.state.event} 
+                    open={this.state.open} 
+                    onClose={this.handleClose} 
+                    courseList={this.props.courses} 
+                    sectionList={this.props.sections} 
+                    roomList={this.props.rooms} />
                 </div>
             </div>
         )
