@@ -16,6 +16,8 @@ $conn1 = $database->getConnection();
 $database = new Banner_DB();
 $conn2 = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
+$current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
+if (!$current) { exit(null);  } //Stop if there is no released schedule
 
 /* Script
  * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events relevant to that particular user.
@@ -38,7 +40,7 @@ if ($data->ROLE_ID == '2') {
 }
 else {
     $query = "select * from booking join event_section on booking.BOOKING_ID = event_section.BOOKING_ID
-              WHERE SCHEDULE_ID='" . $data->CURRENT ."'";
+              WHERE SCHEDULE_ID='" . $current->SCHEDULE_ID ."'";
 }
 $stmt = $conn1->prepare($query);
 $stmt->execute();
