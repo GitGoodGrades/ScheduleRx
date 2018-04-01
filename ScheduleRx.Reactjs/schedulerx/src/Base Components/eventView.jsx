@@ -42,6 +42,14 @@ class EventView extends Component{
         }
         return "";
     };
+
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({
+            BOOKING_ID: nextProps.event.BOOKING_ID,
+            SECTION_ID: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.length > 0 ? nextProps.event.SECTIONS.records[0].SECTION_ID : '',
+            details: nextProps.event.DETAILS
+        })
+    };
   
   render(){
     const { classes, event, onClose } = this.props;
