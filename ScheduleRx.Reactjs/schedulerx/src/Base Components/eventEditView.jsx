@@ -28,11 +28,14 @@ const styles = theme => ({
   },
 });
 
+const mapStateToProps = (state) => ({
+    role: state.userRole
+});
 
 class EventEditView extends Component{
   state = {
     details: ''
-  }
+  };
 
   handleClose = () => {
     this.props.onClose();
@@ -44,14 +47,25 @@ class EventEditView extends Component{
       SECTION_ID: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.length > 0 ? nextProps.event.SECTIONS.records[0].SECTION_ID : '', 
       details: nextProps.event.DETAILS 
     })
-  }
+  };
 
   handleChange = (event) => {
     this.setState({ details: event.target.value })
-  }
+  };
 
   handleSave = () => {
     this.props.onSave(this.state)
+  };
+
+
+  findNote(sectionList) {
+      let arrayLength = sectionList && sectionList.records.length;
+      for (let i = 0; i < arrayLength; i++) {
+          if (sectionList.records[i].SECTION_ID == this.state.SECTION_ID) {
+              return sectionList.records[i].NOTES;
+          }
+      }
+      return "";
   };
   
   render(){
@@ -87,6 +101,7 @@ class EventEditView extends Component{
             onChange={this.handleChange}
             onBlur={this.handleSave}
             margin="normal"
+            defaultValue={this.findNote(event && event.SECTIONS)}
         />
         </CardContent>
       </Card>

@@ -5,7 +5,7 @@ import * as action from '../../../Redux/actions/actionCreator';
 import EventEditView from '../../../Base Components/eventEditView';
 import { client } from '../../../configuration/client';
 import { withStyles } from 'material-ui/styles';
-
+import history from '../../../App/History';
 const styles = theme => ({
     root: {
 
@@ -49,19 +49,19 @@ class EmptyHome extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({events: nextProps.calendar})
-    }
+    };
 
     handleSelectSlot = () => {
         console.log();
-    }
+    };
 
     handleSelectEvent = (event) => {
         this.setState({event, open: true})
-    }
+    };
 
     handleClose = () => {
         this.setState({ open: false})
-    }
+    };
 
     handleSave = (sectionDetail) => {
         client.post(`EventSection/EditNote.php`,
@@ -70,7 +70,10 @@ class EmptyHome extends Component {
                 SECTION_ID: sectionDetail.SECTION_ID,
                 NOTES: sectionDetail.details,
             })
-    }
+            .then(res => {
+                this.props.onLoad(this.props.user, this.props.role);
+            });
+    };
 
     render() {
         const {classes} = this.props;
