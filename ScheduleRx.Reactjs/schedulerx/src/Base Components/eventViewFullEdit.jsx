@@ -3,15 +3,19 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import Input, {InputLabel} from 'material-ui/Input';
 import Icon from 'material-ui/Icon';
-
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui-pickers/DatePicker';
+import TimePicker from 'material-ui-pickers/TimePicker';
 import moment from 'moment';
 import Dialog from 'material-ui/Dialog';
 import Chip from 'material-ui/Chip';
 import Select from 'react-select';
 import Option from './Option';
+import Save from 'material-ui-icons/Save';
 import 'react-select/dist/react-select.css';
 
 const styles = theme => ({
@@ -39,7 +43,8 @@ const styles = theme => ({
 
 class EventViewEditFull extends Component{
     state = {
-        edit: false
+        edit: false,
+        date: null
     }
     handleClose = () => {
     this.props.onClose();
@@ -55,7 +60,6 @@ class EventViewEditFull extends Component{
         let selectSections = []; 
         nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.map(section => selectSections.push({label: section.SECTION_ID, value: section.SECTION_ID}));
         this.setState({ 
-            event: nextProps.event,
             room: nextProps.event.ROOM_ID,
             course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
             sections: selectSections,
@@ -63,7 +67,8 @@ class EventViewEditFull extends Component{
             details: nextProps.event.DETAILS,
             start: nextProps.event.START_TIME,
             end: nextProps.event.END_TIME,
-            sectionOptions: sections
+            sectionOptions: sections,
+            date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD")
         })
     }
   
@@ -74,21 +79,19 @@ class EventViewEditFull extends Component{
                 sections.push({label: section.SECTION_ID, value: section.SECTION_ID})
                 }
             }) 
-            this.setState({sectionOptions: sections, course: event.value});
+        this.setState({sectionOptions: sections, course: event.value});
     }
 
     handleSectionChange = event => {
         this.setState({sections: event})
-        this.props.onChange('sections', event);
     };
 
     handleRoomChange = event => {
         this.setState({room: event.value})
-        this.props.onChange('room', event.value);
     };
 
     cancel = () => {
-        this.props.onCancel();
+        this.setState({edit: false})
     };
     
     handleBlur = (event) => {
@@ -96,11 +99,25 @@ class EventViewEditFull extends Component{
     };
     
     handleSave = () => {
-        this.props.onSave(this.state.title);
+        this.props.onSave(this.state);
     };
 
     selectEdit = () => {
         this.setState({ edit: true })
+    }
+
+    handleChangeDate = (event) => {
+        this.setState({date: moment(event._d).format("YYYY-MM-DD")})
+    }
+
+    handleChangeStart = (event) => {
+        let date = this.state.date;
+        this.setState({start: date + " " + moment(event._d).format('h:mm a')})
+    }
+
+    handleChangeEnd = (event) => {
+        let date = this.state.date;
+        this.setState({end: date + " " + moment(event._d).format('h:mm a')})
     }
 
   render(){
@@ -129,9 +146,9 @@ class EventViewEditFull extends Component{
               <Typography component="p">
                 {event && event.DETAILS}
               </Typography>
-              <Button variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
+              <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
                 <Icon>edit_icon</Icon>
-              </Button>
+              </IconButton>
             </CardContent>
             <CardContent className={this.state.edit ? '' : classes.hidden}>
                 <Typography variant="headline" component="h2">
@@ -185,14 +202,41 @@ class EventViewEditFull extends Component{
                     />
                 </div>
               <Typography component="p">
-                {event && moment(event.START_TIME).format('MMMM Do YYYY')} <br />
-                {event && moment(event.START_TIME).format('h:mm a')} - 
-                {event && moment(event.END_TIME).format('h:mm a')}
+                <DatePicker
+                    id="date"
+                    value={this.state.date}
+                    onChange={this.handleChangeDate}
+                />
+                <br />
+                <TimePicker
+                    id="start"
+                    value={this.state.start}
+                    onChange={this.handleChangeStart}
+                />
+                <TimePicker
+                    id="end"
+                    value={this.state.end}
+                    onChange={this.handleChangeEnd}
+                />
               </Typography>
-              <Typography component="p">
-                {event && event.DETAILS}
-              </Typography>
+              
+                <TextField
+                    id="details"
+                    multiline
+                    value={this.state.details}
+                    onBlur={this.handleBlur}
+                    margin="normal"
+                    placeholder="details"
+                />
             </CardContent>
+            <CardActions className={this.state.edit ? '' : classes.hidden}>
+                 <Button variant="raised" size="small" onClick={this.cancel}>
+                    Cancel
+                </Button> 
+                <Button variant="raised" size="small" onClick={this.handleSave}>
+                    Save
+                </Button>
+            </CardActions>
           </Card>
         </div>
       </ Dialog>
