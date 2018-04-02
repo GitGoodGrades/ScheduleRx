@@ -44,8 +44,10 @@ const styles = theme => ({
 class EventViewEditFull extends Component{
     state = {
         edit: false,
-        date: null
+        date: null, 
+        sectionChange: false
     }
+
     handleClose = () => {
     this.props.onClose();
     };
@@ -64,7 +66,7 @@ class EventViewEditFull extends Component{
             course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
             sections: selectSections,
             title: nextProps.event.BOOKING_TITLE,
-            details: nextProps.event.DETAILS,
+            details: nextProps.event.NOTES ? nextProps.event.NOTES : '',
             start: nextProps.event.START_TIME,
             end: nextProps.event.END_TIME,
             sectionOptions: sections,
@@ -79,11 +81,11 @@ class EventViewEditFull extends Component{
                 sections.push({label: section.SECTION_ID, value: section.SECTION_ID})
                 }
             }) 
-        this.setState({sectionOptions: sections, course: event.value});
+        this.setState({sectionOptions: sections, course: event.value, sections: []});
     }
 
-    handleSectionChange = event => {
-        this.setState({sections: event})
+    handleSectionChange = (event) => {
+        this.setState({sections: event, sectionChange: true})
     };
 
     handleRoomChange = event => {
@@ -99,7 +101,29 @@ class EventViewEditFull extends Component{
     };
     
     handleSave = () => {
-        this.props.onSave(this.state);
+        let sections = [];
+        let check = this.state.sections;
+        if(!Array.isArray(check)){
+            sections = this.state.sections.split(',');
+        } else {
+            this.state.sections && this.state.sections.map(element => {
+                sections.push(element.value)
+            })
+        }
+        
+
+        let tempEvent = {
+            BOOKING_ID: this.props.event.BOOKING_ID,
+            title: this.state.title,
+            room: this.state.room,
+            course: this.state.course,
+            sections: sections,
+            START_TIME: moment(this.state.start).format("YYYY-MM-DD HH:mm:ss"),
+            END_TIME: moment(this.state.end).format("YYYY-MM-DD HH:mm:ss"),
+            details: this.state.details
+        }
+
+        this.props.onSave(tempEvent);
     };
 
     selectEdit = () => {
@@ -107,7 +131,11 @@ class EventViewEditFull extends Component{
     }
 
     handleChangeDate = (event) => {
-        this.setState({date: moment(event._d).format("YYYY-MM-DD")})
+        this.setState({
+            date: moment(event._d).format("YYYY-MM-DD"),
+            start: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.start).format('h:mm a'),
+            end: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.end).format('h:mm a')
+    })
     }
 
     handleChangeStart = (event) => {
@@ -159,6 +187,12 @@ class EventViewEditFull extends Component{
                         placeholder={event && event.BOOKING_TITLE}
                     >
                     </input>
+                    <input
+                    id="details"
+                    onBlur={this.handleBlur}
+                    placeholder={event && event.DETAILS}
+                    >
+                    </input>
               </Typography>
               <div className={classes.control}>
                     <InputLabel htmlFor="section-helper" className={classes.label}>Select Room</InputLabel>
@@ -182,7 +216,7 @@ class EventViewEditFull extends Component{
                         options={this.props.courseList && this.props.courseList.map( row => 
                             row = {label: row.COURSE_ID, value: row.COURSE_ID}
                         )}
-                        value={event.course}
+                        value={this.state.course}
                         placeholder={(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}
                         optionComponent={Option}
                     />
@@ -220,14 +254,7 @@ class EventViewEditFull extends Component{
                 />
               </Typography>
               
-                <TextField
-                    id="details"
-                    multiline
-                    value={this.state.details}
-                    onBlur={this.handleBlur}
-                    margin="normal"
-                    placeholder="details"
-                />
+               
             </CardContent>
             <CardActions className={this.state.edit ? '' : classes.hidden}>
                  <Button variant="raised" size="small" onClick={this.cancel}>
