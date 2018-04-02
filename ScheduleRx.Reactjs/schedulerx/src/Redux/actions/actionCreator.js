@@ -72,21 +72,20 @@ export function searchSchedules() {
     .then(res => {
         scheduleList = res.data.records
 
-
-    for(let obj of scheduleList){
-        if(!obj.IS_RELEASED && !obj.IS_ARCHIVED){
-            registrationSchedule = obj;
-        } else if (obj.IS_RELEASED && !obj.IS_ARCHIVED){
-            currentSchedule = obj;
+        for(let obj of scheduleList){
+            if(obj.IS_RELEASED === "0" && obj.IS_ARCHIVED === "0"){
+                registrationSchedule = obj;
+            } else if (obj.IS_RELEASED === "1" && obj.IS_ARCHIVED === "0"){
+                currentSchedule = obj;
+            }
         }
-    }
 
-    dispatch({
-        type: 'SEARCH_SCHEDULE',
-        current: currentSchedule,
-        registration: registrationSchedule
-    })    }
-    )
+        dispatch({
+            type: 'SEARCH_SCHEDULES',
+            current: currentSchedule,
+            registration: registrationSchedule
+        })    
+    })
 }
 
 export function searchLeadsCourses(){

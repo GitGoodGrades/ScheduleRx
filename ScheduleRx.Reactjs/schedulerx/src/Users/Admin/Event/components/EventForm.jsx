@@ -94,8 +94,10 @@ class EventForm extends Component {
     }
 
     handleSectionChange = event => {
-        this.setState({sections: event})
-        this.props.onChange('sections', event);
+        let sections = this.state.sections;
+        sections.push(event)
+        this.setState({sections})
+        this.props.onChange('sections', sections);
     };
 
     handleRoomChange = event => {

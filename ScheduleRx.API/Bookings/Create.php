@@ -38,10 +38,11 @@ if ($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "") {
 
 $sectionEntries = $data->SECTION_ID;
 $initialNote = $data->NOTES;
-$data->DETAIL = $data->NOTES;
+$data->DETAILS = $data->NOTES;
 
 unset($data->SECTION_ID, $data->COURSE_ID, $data->NOTES);
 
+//echo CreateRecord('booking', $data, $conn);
 CreateRecord('booking', $data, $conn);
 
 $LastEntry = json_decode(FindRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn));

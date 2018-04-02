@@ -36,11 +36,19 @@ class CreateEvent extends Component {
       room: '',
       dialogOpen: false,
       events: [],
-      courses: []
+      courses: [],
+      current: {},
+      registration: {},
+      title: "",
+      details: ""
     };
 
     componentWillReceiveProps = (nextProps) => {
-        this.setState({events: nextProps.events})
+        this.setState({
+            events: nextProps.events,
+            registration: nextProps.registration_schedule,
+            current: nextProps.current_schedule
+        })
     };
 
     componentDidMount() {
@@ -56,7 +64,7 @@ class CreateEvent extends Component {
       });
     };
 
-    valid() {
+    valid = () => {
         let complete = false;
         if (this.state.course !== "" && this.state.room !== "" && this.state.sections.length !== 0)  {
             complete = true;
@@ -64,15 +72,8 @@ class CreateEvent extends Component {
         return complete;
     };
 
-    handleSave = (title, details) => {
+    save = () => {
         let scheduleID = null;
-        this.props.getConflictEvents(this.state.start, this.state.end);
-
-        if(!this.valid() && title !== null) {
-            //User Feedback That Input was Invalid
-            return null;
-        }
-
         if(this.props.conflict_List === null){
             if(moment(this.state.start).isBetween(
                 this.props.current_schedule.START_SEM_DATE,
@@ -97,10 +98,9 @@ class CreateEvent extends Component {
             ROOM_ID: this.state.room,
             START_TIME: this.state.start,
             END_TIME: this.state.end,
-            BOOKING_TITLE: title,
-            NOTES: details
-        })
-            .then(res => {
+            BOOKING_TITLE: this.state.title,
+            NOTES: this.state.details
+        }).then(res => {
                 let temp = this.state.events;
                 temp.push(res.data);
                 this.setState({events: temp})
@@ -108,6 +108,18 @@ class CreateEvent extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+    }
+    
+    handleSave = (title, details) => {
+        
+        this.props.getConflictEvents(this.start, this.end);
+
+        if(!this.valid() && title !== null) {
+            //User Feedback That Input was Invalid
+            return null;
+        }
+
+        this.save();
 
         this.setState({
           dialogOpen: false
@@ -126,8 +138,8 @@ class CreateEvent extends Component {
 
     selectSlot = (slot) => {
         this.setState({
-          start: moment(slot.start).format('YYYY-MM-DD hh:mm:ss'),
-          end: moment(slot.end).format('YYYY-MM-DD hh:mm:ss'),
+          start: moment(slot.start).format('YYYY-MM-DD HH:mm:ss'),
+          end: moment(slot.end).format('YYYY-MM-DD HH:mm:ss'),
           dialogOpen: true
         });
     };
@@ -142,10 +154,20 @@ class CreateEvent extends Component {
                   onChange={this.handleChange}
                 />
 
-                <EventCalendar events={this.state.events} handleSelectEvent={this.selectEvent} handleSelectSlot={this.selectSlot} style={{zIndex: 0}}
-
+                <EventCalendar 
+                    events={this.state.events}
+                    handleSelectEvent={this.selectEvent}
+                    handleSelectSlot={this.selectSlot} 
+                    style={{zIndex: 0}}
                 />
-              <EventDetailDialog start={this.state.start} end={this.state.end} open={this.state.dialogOpen} onSave={this.handleSave} onCancel={this.cancel} />
+                <EventDetailDialog 
+                    start={this.state.start} 
+                    end={this.state.end}
+                    open={this.state.dialogOpen}
+                    onSave={this.handleSave} 
+                    onChange={this.handleChange}
+                    onCancel={this.cancel}
+                />
             </div>
         );
     };
