@@ -6,6 +6,7 @@ import moment from 'moment';
 import { client } from '../../../configuration/client';
 import EventCalendar from './components/EventCalendar';
 import EventDetailDialog from './components/EventDetailDialog';
+import ConflictDialog from './components/ConflictDialog';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
@@ -40,7 +41,11 @@ class CreateEvent extends Component {
       current: {},
       registration: {},
       title: "",
-      details: ""
+      details: "",
+      conflictFlag: false,
+      conflictRequestString: "",
+      conflictDialogOpen: false,
+      message: ""
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -74,13 +79,21 @@ class CreateEvent extends Component {
 
     save = () => {
         let scheduleID = null;
-        if(this.props.conflict_List === null){
+        let message = null;
+        let conflictFlag = false;
+        if(this.props.conflict_List == null){
             if(moment(this.state.start).isBetween(
                 this.props.current_schedule.START_SEM_DATE,
                 this.props.current_schedule.END_SEM_DATE)){
 
                 scheduleID = null;
-                // CREATE REQUEST LOGIC HERE
+                conflictFlag = true;
+                this.setState({
+                    conflictRequestString: "You are attempting to create an event outside of the semester's registration period. To continue, enter a message below explaing why you need to create this event, and click \"Send Request\" to send your schedule request to the administrator.",
+                    conflictFlag: true,
+                    dialogOpen: false,
+                    conflictDialogOpen: true
+                });
 
             } else if (moment(this.state.start).isBetween(
                 this.props.registration_schedule.START_SEM_DATE,
@@ -88,26 +101,35 @@ class CreateEvent extends Component {
                     scheduleID = this.props.registration_schedule.SCHEDULE_ID;
             }
         } else {
-            //conflict logic
+            this.setState({
+                conflictRequestString: "This event's time and room conflicts with an existing event. To continue, enter a message below explaining why you need this room at this time, and click \"Send Request\" to send your schedule request to the administrator.",
+                conflictFlag: true,
+                dialogOpen: false,
+                conflictDialogOpen: true
+            })
+
+            conflictFlag = true;
         }
 
-        client.post(`Bookings/Create.php`, {
-            SCHEDULE_ID: scheduleID,
-            COURSE_ID: this.state.course,
-            SECTION_ID: this.state.sections,
-            ROOM_ID: this.state.room,
-            START_TIME: this.state.start,
-            END_TIME: this.state.end,
-            BOOKING_TITLE: this.state.title,
-            NOTES: this.state.details
-        }).then(res => {
-                let temp = this.state.events;
-                temp.push(res.data);
-                this.setState({events: temp})
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        if(!conflictFlag){
+            client.post(`Bookings/Create.php`, {
+                SCHEDULE_ID: scheduleID,
+                COURSE_ID: this.state.course,
+                SECTION_ID: this.state.sections,
+                ROOM_ID: this.state.room,
+                START_TIME: this.state.start,
+                END_TIME: this.state.end,
+                BOOKING_TITLE: this.state.title,
+                NOTES: this.state.details
+            }).then(res => {
+                    let temp = this.state.events;
+                    temp.push(res.data);
+                    this.setState({events: temp})
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
     
     handleSave = (title, details) => {
@@ -122,9 +144,37 @@ class CreateEvent extends Component {
         this.save();
 
         this.setState({
-          dialogOpen: false
+          dialogOpen: false,
+          title,
+          details
         });
     };
+
+    handleConflictSave = (message) => {
+        let conflicts = [];
+        this.props.conflict_List && this.props.conflict_List.length > 0 && this.props.conflict_List.map(conflict => {
+            conflicts.push(conflict.BOOKING_IDs);
+        });
+
+        client.post(`Bookings/Create.php`, {
+            SCHEDULE_ID: null,
+            COURSE_ID: this.state.course,
+            SECTION_ID: this.state.sections,
+            ROOM_ID: this.state.room,
+            START_TIME: this.state.start,
+            END_TIME: this.state.end,
+            BOOKING_TITLE: this.state.title,
+            NOTES: this.state.details,
+            BOOKING_IDs: conflicts,
+            MESSAGE: this.state.message
+        }).catch(function (error) {
+                console.log(error);
+            });
+
+        this.setState({
+            conflictDialogOpen: false
+        })
+    }
 
     cancel = () => {
       this.setState({
@@ -167,6 +217,12 @@ class CreateEvent extends Component {
                     onSave={this.handleSave} 
                     onChange={this.handleChange}
                     onCancel={this.cancel}
+                />
+                <ConflictDialog
+                    onConflictSave={this.handleConflictSave}
+                    onConflictChange={this.handleConflictChange}
+                    onConflictCancel={this.handleConflictCancel}
+                    conflictRequestString={this.state.conflictRequestString}
                 />
             </div>
         );
