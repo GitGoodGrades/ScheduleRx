@@ -6,9 +6,8 @@ import moment from 'moment';
 import { client } from '../../../configuration/client';
 import EventCalendar from './components/EventCalendar';
 import EventDetailDialog from './components/EventDetailDialog';
-import EventViewFullEdit from '../../../Base Components/eventViewFullEdit';
+import ConflictDialog from './components/ConflictDialog';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 const mapStateToProps = (state) => ({
     courses: state.courseList,
@@ -43,8 +42,10 @@ class CreateEvent extends Component {
       registration: {},
       title: "",
       details: "",
-      open: false,
-      event: {}
+      conflictFlag: false,
+      conflictRequestString: "",
+      conflictDialogOpen: false,
+      message: ""
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -76,147 +77,104 @@ class CreateEvent extends Component {
         return complete;
     };
 
-    save = (event, repeat, start) => {
+    save = () => {
         let scheduleID = null;
-        let schedule = this.getSchedule();
-        let promises = [];
-        this.props.getConflictEvents(this.state.start, this.state.end);
-
+        let message = null;
+        let conflictFlag = false;
         if(this.props.conflict_List == null){
-            if(moment(start).isBetween(
+            if(moment(this.state.start).isBetween(
                 this.props.current_schedule.START_SEM_DATE,
                 this.props.current_schedule.END_SEM_DATE)){
 
                 scheduleID = null;
-                // CREATE REQUEST LOGIC HERE
+                conflictFlag = true;
+                this.setState({
+                    conflictRequestString: "You are attempting to create an event outside of the semester's registration period. To continue, enter a message below explaing why you need to create this event, and click \"Send Request\" to send your schedule request to the administrator.",
+                    conflictFlag: true,
+                    dialogOpen: false,
+                    conflictDialogOpen: true
+                });
 
-            } else if (moment(start).isBetween(
+            } else if (moment(this.state.start).isBetween(
                 this.props.registration_schedule.START_SEM_DATE,
                 this.props.registration_schedule.END_SEM_DATE)){
                     scheduleID = this.props.registration_schedule.SCHEDULE_ID;
             }
         } else {
-            //conflict logic
+            this.setState({
+                conflictRequestString: "This event's time and room conflicts with an existing event. To continue, enter a message below explaining why you need this room at this time, and click \"Send Request\" to send your schedule request to the administrator.",
+                conflictFlag: true,
+                dialogOpen: false,
+                conflictDialogOpen: true
+            })
+
+            conflictFlag = true;
         }
 
-        let temp = {
-                    SCHEDULE_ID: scheduleID,
-                    COURSE_ID: event.course,
-                    SECTION_ID: event.sections,
-                    ROOM_ID: event.room,
-                    START_TIME:  moment(start).format('YYYY-MM-DD HH:mm:ss'),
-                    END_TIME:   moment(start).format('YYYY-MM-DD ') + moment(event.END_TIME).format('HH:mm:ss'),
-                    BOOKING_TITLE: event.title,
-                    NOTES: event.details
-                }
-
-        if (repeat) {
-            if ((moment(start).isBetween(schedule.START_SEM_DATE, schedule.END_SEM_DATE))) {
-                this.createEvent(temp);
-                this.save(event, true, moment(start).add(1, 'w')); 
-            } else {
-                return null;
-            };
-        } else {
-            this.createEvent(temp);
+        if(!conflictFlag){
+            client.post(`Bookings/Create.php`, {
+                SCHEDULE_ID: scheduleID,
+                COURSE_ID: this.state.course,
+                SECTION_ID: this.state.sections,
+                ROOM_ID: this.state.room,
+                START_TIME: this.state.start,
+                END_TIME: this.state.end,
+                BOOKING_TITLE: this.state.title,
+                NOTES: this.state.details
+            }).then(res => {
+                    let temp = this.state.events;
+                    temp.push(res.data);
+                    this.setState({events: temp})
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
-        
-        
     }
-
-    createEvent = (event) => {
-        client.post(`Bookings/Create.php`, {
-            SCHEDULE_ID: event.SCHEDULE_ID,
-            COURSE_ID: event.COURSE_ID,
-            SECTION_ID: event.SECTION_ID,
-            ROOM_ID: event.ROOM_ID,
-            START_TIME:  event.START_TIME,
-            END_TIME:  event.END_TIME,
-            BOOKING_TITLE: event.BOOKING_TITLE,
-            NOTES: event.NOTES
-        }).then(res => {
-            let temp = this.state.events;
-            temp.push(res.data);
-            this.setState({events: temp})
-        })
-    }
-
-    handleDelete = (id) => {
-        client.post(`Bookings/Delete.php`, {
-            BOOKING_ID: id
-        });
-
-        let temp = this.state.events;
-        temp.map(old => {
-            if(old.BOOKING_ID === id){
-                temp.splice(temp.indexOf(old), 1);
-            }
-        });
-
-        this.setState({
-            events: temp,
-            open: false
-          });
-    }
-
-    handleEdit = (event) => {
-        client.post(`Bookings/Delete.php`, {
-            BOOKING_ID: event.BOOKING_ID
-        });
-
-        let temp = this.state.events;
-        temp.map(old => {
-            if(old.BOOKING_ID === event.BOOKING_ID){
-                temp.splice(temp.indexOf(old), 1);
-            }
-        })
-
-        this.save(event, false, event.START_TIME);
-
-        this.setState({
-            open: false,
-            events: temp
-          });
-    }
-
-    getSchedule = () => {
-        if(moment(this.state.START_TIME).isBetween(
-            this.props.current_schedule.START_SEM_DATE,
-            this.props.current_schedule.END_SEM_DATE)){
-                return this.props.current_schedule;
-            }
-        else if(moment(this.state.START_TIME).isBetween(
-            this.props.registration_schedule.START_SEM_DATE,
-            this.props.registration_schedule.END_SEM_DATE)){
-                return this.props.registration_schedule;
-            }
-        else{
-            return null;
-        }
-    } 
     
-    handleSave = (title, details, repeat) => {
+    handleSave = (title, details) => {
+        
+        this.props.getConflictEvents(this.start, this.end);
+
         if(!this.valid() && title !== null) {
             //User Feedback That Input was Invalid
             return null;
         }
 
-            let tempEvent = {
-            course: this.state.course,
-            sections: this.state.sections,
-            room: this.state.room,
-            START_TIME: this.state.start,
-            END_TIME:  this.state.end,
-            title: title,
-            details: details
-            };
-
-            this.save(tempEvent, repeat, tempEvent.START_TIME);
+        this.save();
 
         this.setState({
-          dialogOpen: false
+          dialogOpen: false,
+          title,
+          details
         });
     };
+
+    handleConflictSave = (message) => {
+        let conflicts = [];
+        this.props.conflict_List && this.props.conflict_List.length > 0 && this.props.conflict_List.map(conflict => {
+            conflicts.push(conflict.BOOKING_IDs);
+        });
+
+        client.post(`Bookings/Create.php`, {
+            SCHEDULE_ID: null,
+            COURSE_ID: this.state.course,
+            SECTION_ID: this.state.sections,
+            ROOM_ID: this.state.room,
+            START_TIME: this.state.start,
+            END_TIME: this.state.end,
+            BOOKING_TITLE: this.state.title,
+            NOTES: this.state.details,
+            BOOKING_IDs: conflicts,
+            MESSAGE: this.state.message
+        }).catch(function (error) {
+                console.log(error);
+            });
+
+        this.setState({
+            conflictDialogOpen: false
+        })
+    }
 
     cancel = () => {
       this.setState({
@@ -225,7 +183,7 @@ class CreateEvent extends Component {
     };
 
     selectEvent = (event) => {
-        this.setState({event, open: true})
+        console.log(event);
     };
 
     selectSlot = (slot) => {
@@ -235,10 +193,6 @@ class CreateEvent extends Component {
           dialogOpen: true
         });
     };
-
-    handleClose = () => {
-        this.setState({ open: false})
-    }
 
     render(){
         return(
@@ -264,15 +218,12 @@ class CreateEvent extends Component {
                     onChange={this.handleChange}
                     onCancel={this.cancel}
                 />
-                <EventViewFullEdit 
-                    event={this.state.event} 
-                    open={this.state.open} 
-                    onClose={this.handleClose} 
-                    courseList={this.props.courses} 
-                    sectionList={this.props.sections} 
-                    roomList={this.props.rooms} 
-                    onSave={this.handleEdit}
-                    delete={this.handleDelete}/>
+                <ConflictDialog
+                    onConflictSave={this.handleConflictSave}
+                    onConflictChange={this.handleConflictChange}
+                    onConflictCancel={this.handleConflictCancel}
+                    conflictRequestString={this.state.conflictRequestString}
+                />
             </div>
         );
     };

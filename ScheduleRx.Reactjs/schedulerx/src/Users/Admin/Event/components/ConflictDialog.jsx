@@ -41,24 +41,21 @@ const styles = theme => ({
     }
 });
 
-class EventDetailDialog extends Component {
+class ConflictDialog extends Component {
   state = {
-    title: '',
-    details: '',
-
+    message: '',
   };
 
-  cancel = () => {
-    this.props.onCancel();
+  conflictCancel = () => {
+    this.props.onConflictCancel();
   };
 
   handleBlur = (event) => {
-    this.setState({[event.target.id]: event.target.value})
-    //this.props.onChange(event.target.id, event.target.value);
+    this.props.onConflictChange(event.target.id, event.target.value);
   };
 
-  handleSave = () => {
-    this.props.onSave(this.state.title, this.state.details);
+  handleConflictSave = () => {
+    this.props.onConflictSave(this.state.message);
   };
 
   render() {
@@ -70,41 +67,32 @@ class EventDetailDialog extends Component {
       >
         <DialogContent className={classes.content}>
           <div className={classes.textdiv}>
-              <h1 className={classes.title}>EVENT DETAILS</h1>
-        <div>
-          <input
-            className={classes.field}
-            id="title"
-            onBlur={this.handleBlur}
-            placeholder="EVENT TITLE"
-          >
-      </input>
-        </div>
+              <h1 className={classes.title}>UH OH!</h1>
+              <p>{this.props.conflictRequestString}</p>
         <div>
           <textarea
             className={classes.field}
-            id="details"
+            id="message"
             onBlur={this.handleBlur}
-          >
-      </textarea>
-  </div>
+          ></textarea>
+        </div>
         </div>
         </DialogContent>
         <DialogActions>
           <Button
               className={classes.btn}
-              onClick={this.cancel}>
-            Cancel
+              onClick={this.conflictCancel}>
+            Cancel Request 
           </Button>
           <Button
               className={classes.btn}
-              onClick={this.handleSave}
+              onClick={this.handleConflictSave}
           >
-            Submit
+            Submit Request
           </Button>
         </DialogActions>
       </Dialog>
     )
   }
 }
-export default withStyles(styles)(EventDetailDialog);
+export default withStyles(styles)(ConflictDialog);
