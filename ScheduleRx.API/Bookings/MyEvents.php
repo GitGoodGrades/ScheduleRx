@@ -10,18 +10,21 @@ include_once '../config/Banner_DB.php';
 include_once '../SuperCRUD/Search.php';
 include_once 'LeadIndex.php';
 include_once 'GetEventDetail.php';
+include_once '../config/LogHandler.php';
 
+$log = Logger::getLogger('EventLog');
 $database = new Database();
 $conn1 = $database->getConnection();
 $database = new Banner_DB();
 $conn2 = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
-if (!$current) { exit(null);  } //Stop if there is no released schedule
+if (!$current) { $log->warn("No Released Schedule"); exit(null); } //Stop if there is no released schedule
 
 /* Script
  * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events relevant to that particular user.
- * Requires ROLE_ID, USER_ID, CURRENT (current Schedule)
+ * @param ROLE_ID | role of the user,
+ * @param USER_ID | ID of the user,
  *     Student results are all events associated with sections that the student takes in the current schedule.
  *     Faculty results are all events associated with sections that the faculty teaches in the current schedule.
  *     Lead results include the events associated with the sections the lead teaches, and includes
@@ -47,6 +50,7 @@ $stmt->execute();
 
 $allBookings=array();
 $allBookings["records"]=array();
+
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     extract($row);
     array_push($allBookings["records"], $row);

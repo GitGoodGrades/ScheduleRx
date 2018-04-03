@@ -8,6 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../SuperCRUD/Delete.php';
 include_once '../config/database.php';
 include  '../SuperCRUD/Delete.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
@@ -17,5 +18,22 @@ $data = json_decode(file_get_contents("php://input"));
  * Deletes a Conflict record and it's associations in the 'conflict_event' table
  * @param CONFLICT_ID the ID of the conflict to delete
  */
-echo DeleteRecord('event_section',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
-echo DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+$eventResponse = DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+$conflictResponse = DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+
+echo $eventResponse;
+echo $conflictResponse;
+
+if ($conflictResponse != null) {
+    $log->info($conflictResponse);
+}
+else {
+    $log->warn("Conflict Deletion Failed");
+}
+
+if ($eventResponse != null) {
+    $log->info($eventResponse);
+}
+else {
+    $log->warn("Conflict_Event Association Deletion Failed");
+}

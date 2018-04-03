@@ -7,9 +7,11 @@ include_once '../SuperCRUD/Create.php';
 include_once '../SuperCRUD/Update.php';
 include_once '../SuperCRUD/Search.php';
 include_once '../SuperCRUD/Delete.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
+$log = Logger::getLogger("LeadChangeLog");
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -20,9 +22,10 @@ foreach ($toLevel3->records as $record) {
     UpdateRecord("users", $field1, "USER_ID", $conn);
     DeleteRecord("leads_course", "USER_ID" , $record->USER_ID , $conn);
 }
-
+$log->debug("All Level 2 Users Reset to Level 3");
 foreach($data as $json) {
     $field2 = array( "ROLE_ID" => 2, "USER_ID" => $json->USER_ID);
     UpdateRecord('users', $field2, "USER_ID", $conn);
     CreateRecord('leads_course', $json, $conn);
 }
+$log->debug("Select Level 3 Users Altered to Level 2");

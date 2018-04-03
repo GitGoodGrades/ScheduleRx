@@ -8,12 +8,13 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../Bookings/GetEventDetail.php';
 include_once '../SuperCRUD/Search.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-/*
+/* Script
  * Given a BOOKING_ID, returns the conflict details associated (if any exist)
  */
 $tableSql = "conflict_event natural join conflict";
