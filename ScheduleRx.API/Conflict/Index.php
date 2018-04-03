@@ -9,11 +9,12 @@ include_once '../config/database.php';
 include_once '../Bookings/GetEventDetail.php';
 include_once '../SuperCRUD/Search.php';
 include_once '../SuperCRUD/Index.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 
-/*
+/* Script
  * Returns the All conflict records and appends event details
  */
 $tableSql = "conflict natural join conflict_event";

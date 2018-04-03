@@ -5,12 +5,16 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
+$log = Logger::getLogger('NoteChangeLog');
 
-echo ChangeNote( $data->BOOKING_ID, $data->SECTION_ID, $data->NOTES, $conn);
+$response = ChangeNote( $data->BOOKING_ID, $data->SECTION_ID, $data->NOTES, $conn);
+$log->info($response);
+echo $response;
 
 function ChangeNote ( $bookingID, $sectionID, $newNote, $conn) {
     global $stmt;

@@ -1,5 +1,8 @@
 <?php
+include_once '../config/LogHandler.php';
+
 function Search($tableName, $searchKey, $whereValue, $conn) {
+    $log = Logger::getLogger("SearchLog");
     $query = ('SELECT * FROM ' . $tableName . " WHERE " . $searchKey . '=' . $whereValue );
     $stmt = $conn->prepare($query);
 
@@ -16,6 +19,7 @@ function Search($tableName, $searchKey, $whereValue, $conn) {
         return json_encode($recordList);
     }
     else{
-        return null; //json_encode(array("message" => "No " . $tableName . "s found. ERROR CODE:" . $stmt->errorCode()));
+        $log->info("No " . $tableName . "s found. ERROR CODE:" . $stmt->errorCode());
+        return null;
     }
 }

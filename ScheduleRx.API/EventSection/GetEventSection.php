@@ -5,6 +5,7 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
@@ -27,5 +28,6 @@ if ($row) {
     echo json_encode($row);
 }
 else {
+
     echo  null; //"ERROR CODE: -" . $stmt->errorCode();
 }

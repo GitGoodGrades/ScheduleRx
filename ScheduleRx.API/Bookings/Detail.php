@@ -8,6 +8,7 @@ header('Content-Type: application/json');
 include_once '../config/database.php';
 include_once '../SuperCRUD/Detail.php';
 include_once 'GetEventDetail.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
