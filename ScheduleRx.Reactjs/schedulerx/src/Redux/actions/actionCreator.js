@@ -52,15 +52,19 @@ export function userCalendar(user, role) {
     
 }
 
-export function searchConflicts() {
+export function searchConflicts(start, end, room) {
     return (dispatch) =>
-    client.get(`Bookings/Conflict.php`)
-    .then(res => {
-        dispatch({
-            type: 'SEARCH_CONFLICTS',
-            data: res.data.records
+        client.post(`Bookings/Conflict.php`, {
+            START_TIME:start,
+            END_TIME:end,
+            ROOM_ID:room
         })
-    });
+            .then(res => {
+                dispatch({
+                    type: 'SEARCH_CONFLICTS',
+                    data: res.data.records
+                })
+            });
 }
 
 export function searchSchedules() {
