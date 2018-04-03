@@ -94,7 +94,7 @@ class TopNavMenu extends Component {
                     <NavLink  
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/event/create" 
                         className={(this.props.role === Faculty || this.props.role === Student) ? classes.hidden : classes.seen}>
-                        Create Events
+                        Manage Events
                     </NavLink>
                     <NavLink 
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
@@ -104,7 +104,7 @@ class TopNavMenu extends Component {
                     <NavLink 
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/users/leads"
                         className={this.props.role !== Admin ? classes.hidden : classes.seen}>
-                        Set Lead Faculty
+                        Manage Lead Faculty
                     </NavLink>
                     <button 
                         className={classes.asText} onClick={this.LogOut}>
