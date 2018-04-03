@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableRow,TableHead } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import Select from 'material-ui/Select';
 import {MenuItem} from 'material-ui/Menu';
 import {client} from '../../../../configuration/client';
+import TableFooter from 'material-ui/Table';
+import AddIcon from 'material-ui-icons/Add';
+import IconButton from 'material-ui/IconButton';
 
 class UserCourseTable extends Component {
     state = {
@@ -71,9 +74,15 @@ class UserCourseTable extends Component {
 
     render() {
         const {leads, faculty} = this.props;  
+        const {classes} = this.props;
         return (
         <Paper>
             <Table >
+                <TableHead>
+                    <TableRow>
+                        <TableCell>shit</TableCell>
+                    </TableRow>
+                </TableHead>
                 <TableBody>
                 {leads && leads.length > 0 && leads.map(row => {
                     return (
@@ -96,6 +105,18 @@ class UserCourseTable extends Component {
                     );
                 })}
                 </TableBody>
+                <TableFooter height="auto" padding={5}>
+            <IconButton 
+              variant="fab" 
+              mini color="secondary" 
+              aria-label="add" 
+              className={classes.button}
+              /*onClick={this.openDialog}*/>
+              <AddIcon />
+              
+            </IconButton>
+            Add new lead
+            </TableFooter>
             </Table>
         </Paper>
         );
