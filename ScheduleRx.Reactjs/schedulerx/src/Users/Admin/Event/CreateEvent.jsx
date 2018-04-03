@@ -6,6 +6,7 @@ import moment from 'moment';
 import { client } from '../../../configuration/client';
 import EventCalendar from './components/EventCalendar';
 import EventDetailDialog from './components/EventDetailDialog';
+import EventViewFullEdit from '../../../Base Components/eventViewFullEdit';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
@@ -40,7 +41,9 @@ class CreateEvent extends Component {
       current: {},
       registration: {},
       title: "",
-      details: ""
+      details: "",
+      open: false,
+      event: {}
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -72,17 +75,18 @@ class CreateEvent extends Component {
         return complete;
     };
 
-    save = () => {
+    save = (event) => {
         let scheduleID = null;
-        if(this.props.conflict_List === null){
-            if(moment(this.state.start).isBetween(
+
+        if(this.props.conflict_List == null){
+            if(moment(event.start).isBetween(
                 this.props.current_schedule.START_SEM_DATE,
                 this.props.current_schedule.END_SEM_DATE)){
 
                 scheduleID = null;
                 // CREATE REQUEST LOGIC HERE
 
-            } else if (moment(this.state.start).isBetween(
+            } else if (moment(event.start).isBetween(
                 this.props.registration_schedule.START_SEM_DATE,
                 this.props.registration_schedule.END_SEM_DATE)){
                     scheduleID = this.props.registration_schedule.SCHEDULE_ID;
@@ -93,13 +97,13 @@ class CreateEvent extends Component {
 
         client.post(`Bookings/Create.php`, {
             SCHEDULE_ID: scheduleID,
-            COURSE_ID: this.state.course,
-            SECTION_ID: this.state.sections,
-            ROOM_ID: this.state.room,
-            START_TIME: this.state.start,
-            END_TIME: this.state.end,
-            BOOKING_TITLE: this.state.title,
-            NOTES: this.state.details
+            COURSE_ID: event.course,
+            SECTION_ID: event.sections,
+            ROOM_ID: event.room,
+            START_TIME: event.START_TIME,
+            END_TIME: event.END_TIME,
+            BOOKING_TITLE: event.title,
+            NOTES: event.details
         }).then(res => {
                 let temp = this.state.events;
                 temp.push(res.data);
@@ -108,6 +112,44 @@ class CreateEvent extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+    }
+
+    handleDelete = (id) => {
+        client.post(`Bookings/Delete.php`, {
+            BOOKING_ID: id
+        });
+
+        let temp = this.state.events;
+        temp.map(old => {
+            if(old.BOOKING_ID === id){
+                temp.splice(temp.indexOf(old), 1);
+            }
+        });
+
+        this.setState({
+            events: temp,
+            open: false
+          });
+    }
+
+    handleEdit = (event) => {
+        client.post(`Bookings/Delete.php`, {
+            BOOKING_ID: event.BOOKING_ID
+        });
+
+        let temp = this.state.events;
+        temp.map(old => {
+            if(old.BOOKING_ID === event.BOOKING_ID){
+                temp.splice(temp.indexOf(old), 1);
+            }
+        })
+
+        this.save(event);
+
+        this.setState({
+            open: false,
+            events: temp
+          });
     }
     
     handleSave = (title, details) => {
@@ -119,7 +161,17 @@ class CreateEvent extends Component {
             return null;
         }
 
-        this.save();
+        let tempEvent = {
+            course: this.state.course,
+            sections: this.state.sections,
+            room: this.state.room,
+            START_TIME: this.state.start,
+            END_TIME: this.state.end,
+            title: this.state.title,
+            details: this.state.details
+        }
+
+        this.save(tempEvent);
 
         this.setState({
           dialogOpen: false
@@ -133,7 +185,7 @@ class CreateEvent extends Component {
     };
 
     selectEvent = (event) => {
-        console.log(event);
+        this.setState({event, open: true})
     };
 
     selectSlot = (slot) => {
@@ -143,6 +195,10 @@ class CreateEvent extends Component {
           dialogOpen: true
         });
     };
+
+    handleClose = () => {
+        this.setState({ open: false})
+    }
 
     render(){
         return(
@@ -168,6 +224,15 @@ class CreateEvent extends Component {
                     onChange={this.handleChange}
                     onCancel={this.cancel}
                 />
+                <EventViewFullEdit 
+                    event={this.state.event} 
+                    open={this.state.open} 
+                    onClose={this.handleClose} 
+                    courseList={this.props.courses} 
+                    sectionList={this.props.sections} 
+                    roomList={this.props.rooms} 
+                    onSave={this.handleEdit}
+                    delete={this.handleDelete}/>
             </div>
         );
     };

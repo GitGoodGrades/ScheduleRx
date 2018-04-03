@@ -62,6 +62,7 @@ class EventViewEditFull extends Component{
         let selectSections = []; 
         nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.map(section => selectSections.push({label: section.SECTION_ID, value: section.SECTION_ID}));
         this.setState({ 
+            BOOKING_ID: nextProps.event.BOOKING_ID,
             room: nextProps.event.ROOM_ID,
             course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
             sections: selectSections,
@@ -113,7 +114,7 @@ class EventViewEditFull extends Component{
         
 
         let tempEvent = {
-            BOOKING_ID: this.props.event.BOOKING_ID,
+            BOOKING_ID: this.state.BOOKING_ID,
             title: this.state.title,
             room: this.state.room,
             course: this.state.course,
@@ -123,11 +124,21 @@ class EventViewEditFull extends Component{
             details: this.state.details
         }
 
+        this.setState({edit: false})
+
         this.props.onSave(tempEvent);
     };
 
     selectEdit = () => {
         this.setState({ edit: true })
+    }
+
+    handleDuplicate = () => {
+        this.setState({ edit: true, BOOKING_ID: null, date: null })
+    }
+
+    handleDelete = () => {
+        this.props.delete(this.state.BOOKING_ID)
     }
 
     handleChangeDate = (event) => {
@@ -176,6 +187,12 @@ class EventViewEditFull extends Component{
               </Typography>
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
                 <Icon>edit_icon</Icon>
+              </IconButton>
+              <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDuplicate}>
+                <Icon>queue_icon</Icon>
+              </IconButton>
+              <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDelete}>
+                <Icon>delete_forever_icon</Icon>
               </IconButton>
             </CardContent>
             <CardContent className={this.state.edit ? '' : classes.hidden}>
@@ -239,6 +256,7 @@ class EventViewEditFull extends Component{
                 <DatePicker
                     id="date"
                     value={this.state.date}
+                    placeholder="select a date"
                     onChange={this.handleChangeDate}
                 />
                 <br />
