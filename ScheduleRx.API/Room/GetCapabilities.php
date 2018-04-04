@@ -19,10 +19,5 @@ function GetCapabilities($ROOM_ID, $conn1) {
         array_push($caps, $row["CAPABILITY"]);
     }
 
-    if($caps){
-        return ($caps);
-    }
-    else{
-        return null;
-    }
+    return $caps;
 }
