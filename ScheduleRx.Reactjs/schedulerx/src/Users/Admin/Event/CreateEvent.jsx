@@ -105,7 +105,7 @@ class CreateEvent extends Component {
                 scheduleID = null;
                 conflictFlag = true;
                 this.setState({
-                    conflictRequestString: "You are attempting to create an event outside of the semester's registration period. To continue, enter a message below explaing why you need to create this event, and click \"Send Request\" to send your schedule request to the administrator.",
+                    conflictRequestString: "You are attempting to create an event outside of the semester's registration period. To continue, enter a message below explaining why you need to create this event, and click \"Send Request\" to send your schedule request to the administrator.",
                     conflictFlag: true,
                     dialogOpen: false,
                     conflictDialogOpen: true
@@ -185,6 +185,8 @@ class CreateEvent extends Component {
                 .catch(function (error) {
                     console.log(error);
                 });
+        } else {
+            //if there IS a conflict do this.
         }
     };
 
