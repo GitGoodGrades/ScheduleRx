@@ -15,10 +15,10 @@ function findConflict( $tableName,$start, $end, $room , $conn) {
          * 3) My Start time falls within another's time frame
          * 4) My End time falls within another's time frame
          */
-        if (($start <= $record->START_TIME && $record->START_TIME <= $end) || //Starts in my Time Frame
-            ($start <= $record->END_TIME && $record->END_TIME <= $end)     || //Ends in my Time Frame
-            ($record->START_TIME <= $start && $start <= $record->END_TIME) || //Start in Your Time Frame
-            ($record->START_TIME <= $end && $end <= $record->END_TIME)        //End in Your Time Frame
+        if (($start < $record->START_TIME && $record->START_TIME < $end) || //Starts in my Time Frame
+            ($start < $record->END_TIME && $record->END_TIME < $end)     || //Ends in my Time Frame
+            ($record->START_TIME < $start && $start <= $record->END_TIME) || //Start in Your Time Frame
+            ($record->START_TIME < $end && $end <= $record->END_TIME)        //End in Your Time Frame
         ) array_push($conflicts,$record);                              //if so, add this record conflict array
 
     }
