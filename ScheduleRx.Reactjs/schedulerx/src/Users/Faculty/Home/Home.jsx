@@ -5,7 +5,7 @@ import * as action from '../../../Redux/actions/actionCreator';
 import EventEditView from '../../../Base Components/eventEditView';
 import { client } from '../../../configuration/client';
 import { withStyles } from 'material-ui/styles';
-import history from '../../../App/History';
+
 const styles = theme => ({
     root: {
 
