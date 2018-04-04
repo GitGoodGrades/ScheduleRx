@@ -10,6 +10,37 @@ class UserCourseTable extends Component {
         leads: [],
         faculty: []
     };
+
+    // componentDidMount = () => {
+    //     let leadArray;
+    //     if(this.props.courses && !this.props.leads){
+    //         let {courses} = this.props;
+    //         let temp = [];
+    //         leadArray = this.setLeads((courses.length - 1), 0, temp);
+    //         this.setState({
+    //             leads: leadArray
+    //         })
+    //     }
+        
+   // }
+
+    // setLeads = (total, point, temp) => {
+    //     if(point < total){
+    //         client.post(`/LeadsCourse/Assign.php`, {
+    //             COURSE_ID: this.props.courses[point].COURSE_ID,
+    //             USER_ID: this.props.user
+    //         });
+    //         temp.push({
+    //             COURSE_ID: this.props.courses[point].COURSE_ID,
+    //             USER_ID: this.props.user
+    //         })
+    //         point++;
+    //         this.setLeads(total, point, temp);
+    //     } else {
+    //         return temp;
+    //     }
+    //     return temp;
+    // }
     
     componentWillReceiveProps = (nextProps) => {
         this.setState({leads: nextProps.leads});
