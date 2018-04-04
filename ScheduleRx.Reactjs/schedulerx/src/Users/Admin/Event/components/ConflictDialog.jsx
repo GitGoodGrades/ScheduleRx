@@ -58,6 +58,7 @@ class ConflictDialog extends Component {
     this.props.onConflictSave(this.state.message);
   };
 
+
   render() {
       const {classes} = this.props;
     return (

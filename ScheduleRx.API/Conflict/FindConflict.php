@@ -6,7 +6,9 @@
 function findConflict( $tableName,$start, $end, $room , $conn) {
     $allBookings = json_decode(Search($tableName, 'ROOM_ID', $room, $conn));
     $conflicts = [];
-
+    if ($allBookings == null) {
+        return null;
+    }
     foreach ($allBookings->records as $record ) {
         /*
          * A 'Conflict' can occur in 4 ways, Assuming we want the same room.
