@@ -45,7 +45,8 @@ class EventViewEditFull extends Component{
     state = {
         edit: false,
         date: null, 
-        sectionChange: false
+        sectionChange: false,
+        originalEvent: {}
     }
 
     handleClose = () => {
@@ -61,7 +62,8 @@ class EventViewEditFull extends Component{
             });
         let selectSections = []; 
         nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.map(section => selectSections.push({label: section.SECTION_ID, value: section.SECTION_ID}));
-        this.setState({ 
+        
+        let original = {
             BOOKING_ID: nextProps.event.BOOKING_ID,
             room: nextProps.event.ROOM_ID,
             course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
@@ -72,6 +74,20 @@ class EventViewEditFull extends Component{
             end: nextProps.event.END_TIME,
             sectionOptions: sections,
             date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD")
+        };
+
+        this.setState({ 
+            BOOKING_ID: nextProps.event.BOOKING_ID,
+            room: nextProps.event.ROOM_ID,
+            course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
+            sections: selectSections,
+            title: nextProps.event.BOOKING_TITLE,
+            details: nextProps.event.NOTES ? nextProps.event.NOTES : '',
+            start: nextProps.event.START_TIME,
+            end: nextProps.event.END_TIME,
+            sectionOptions: sections,
+            date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD"),
+            originalEvent: original
         })
     }
   
@@ -126,7 +142,7 @@ class EventViewEditFull extends Component{
 
         this.setState({edit: false})
 
-        this.props.onSave(tempEvent);
+        this.props.onSave(tempEvent, this.state.originalEvent);
     };
 
     selectEdit = () => {
