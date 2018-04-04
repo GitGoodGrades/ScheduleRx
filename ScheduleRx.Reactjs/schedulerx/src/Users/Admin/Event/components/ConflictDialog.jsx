@@ -51,7 +51,7 @@ class ConflictDialog extends Component {
   };
 
   handleBlur = (event) => {
-    this.props.onConflictChange(event.target.id, event.target.value);
+    this.setState({[event.target.id]: event.target.value});
   };
 
   handleConflictSave = () => {

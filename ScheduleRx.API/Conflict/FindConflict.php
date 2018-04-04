@@ -17,8 +17,9 @@ function findConflict( $tableName,$start, $end, $room , $conn) {
          */
         if (($start < $record->START_TIME && $record->START_TIME < $end) || //Starts in my Time Frame
             ($start < $record->END_TIME && $record->END_TIME < $end)     || //Ends in my Time Frame
-            ($record->START_TIME < $start && $start <= $record->END_TIME) || //Start in Your Time Frame
-            ($record->START_TIME < $end && $end <= $record->END_TIME)        //End in Your Time Frame
+            ($record->START_TIME < $start && $start < $record->END_TIME) || //Start in Your Time Frame
+            ($record->START_TIME < $end && $end < $record->END_TIME) ||        //End in Your Time Frame
+            ($record->START_TIME == $start && $record->END_TIME == $end)
         ) array_push($conflicts,$record);                              //if so, add this record conflict array
 
     }

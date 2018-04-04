@@ -97,7 +97,7 @@ class CreateEvent extends Component {
         let schedule = this.getSchedule();
         let message = null;
         let conflictFlag = false;
-        if(this.state.conflict_List == null){
+        if(this.state.conflict_List == ""){
             if(moment(this.start).isBetween(
                 this.props.current_schedule.START_SEM_DATE,
                 this.props.current_schedule.END_SEM_DATE)){
@@ -262,8 +262,6 @@ class CreateEvent extends Component {
                     return null;
                 }
 
-                self.save();
-
             let tempEvent = {
             course: this.state.course,
             sections: this.state.sections,
@@ -285,9 +283,14 @@ class CreateEvent extends Component {
 
     handleConflictSave = (message) => {
         let conflicts = [];
-        this.props.conflict_List && this.props.conflict_List.length > 0 && this.props.conflict_List.map(conflict => {
-            conflicts.push(conflict.BOOKING_IDs);
+        this.setState({
+            message: message
         });
+
+        this.state.conflict_List && this.state.conflict_List.length > 0 && this.state.conflict_List.map(conflict => {
+            conflicts.push(conflict.BOOKING_ID);
+        });
+        
 
         client.post(`Bookings/Create.php`, {
             SCHEDULE_ID: null,
@@ -299,7 +302,7 @@ class CreateEvent extends Component {
             BOOKING_TITLE: this.state.title,
             NOTES: this.state.details,
             BOOKING_IDs: conflicts,
-            MESSAGE: this.state.message
+            MESSAGE: message
         }).catch(function (error) {
                 console.log(error);
             });
@@ -369,6 +372,7 @@ class CreateEvent extends Component {
                     onConflictChange={this.handleConflictChange}
                     onConflictCancel={this.handleConflictCancel}
                     conflictRequestString={this.state.conflictRequestString}
+                    open={this.state.conflictDialogOpen}
                 />
             </div>
         );
