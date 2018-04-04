@@ -15,6 +15,7 @@ const mapStateToProps = (state) => ({
     sections: state.sectionList,
     current_schedule: state.currentSchedule,
     registration_schedule: state.registrationSchedule,
+    conflict_List: state.conflictList,
     events: state.adminCalendar,
     open: false
   });
@@ -24,6 +25,7 @@ const mapDispatchToProps = (dispatch) => ({
     loadRooms: () => dispatch(action.searchRooms()),
     loadSections: () => dispatch(action.searchSections()),
     loadSchedules: () => dispatch(action.searchSchedules()),
+    getConflictEvents: () => dispatch(action.searchConflicts())
 });
 
 class CreateEvent extends Component {
@@ -43,20 +45,8 @@ class CreateEvent extends Component {
       conflictFlag: false,
       conflictRequestString: "",
       conflictDialogOpen: false,
-      message: "",
-        conflict_List: null
+      message: ""
     };
-    /*
-     searchConflicts = (start, end, room) => {
-            client.post(`Bookings/Conflict.php`, {
-                START_TIME: start,
-                END_TIME: end,
-                ROOM_ID: room
-            })
-                .then(res => {
-                    return res.data;
-                });
-    }; */
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({
@@ -90,8 +80,8 @@ class CreateEvent extends Component {
     save = () => {
         let scheduleID = null;
         let message = null;
-        let conflictFlag = false;
-        if(this.state.conflict_List == null){
+        let conflictFlag = true;
+        if(this.props.conflict_List && this.props.conflict_List == ""){
             if(moment(this.state.start).isBetween(
                 this.props.current_schedule.START_SEM_DATE,
                 this.props.current_schedule.END_SEM_DATE)){
@@ -116,8 +106,7 @@ class CreateEvent extends Component {
                 conflictFlag: true,
                 dialogOpen: false,
                 conflictDialogOpen: true
-            });
-
+            })
             conflictFlag = true;
         }
 
@@ -140,34 +129,24 @@ class CreateEvent extends Component {
                     console.log(error);
                 });
         }
-    };
-
-    doHandleSave = (title, details) => {
-        this.handleSave(title, details);
-    };
+    }
     
     handleSave = (title, details) => {
-        let self = this;
-        client.post(`Bookings/Conflict.php`, {
-            START_TIME: this.state.start,
-            END_TIME: this.state.end,
-            ROOM_ID: this.state.room
-        })
-            .then(res => {
-                self.setState({conflict_List: res.data});
-                if(!this.valid() && title !== null) {
-                    //User Feedback That Input was Invalid
-                    return null;
-                }
+        
+        this.props.getConflictEvents(this.start, this.end);
 
-                self.save();
+        if(!this.valid() && title !== null) {
+            //User Feedback That Input was Invalid
+            return null;
+        }
 
-                self.setState({
-                    dialogOpen: false,
-                    title,
-                    details
-                });
-            });
+        this.save();
+
+        this.setState({
+          dialogOpen: false,
+          title,
+          details
+        });
     };
 
     handleConflictSave = (message) => {
@@ -194,7 +173,7 @@ class CreateEvent extends Component {
         this.setState({
             conflictDialogOpen: false
         })
-    };
+    }
 
     cancel = () => {
       this.setState({
@@ -234,7 +213,7 @@ class CreateEvent extends Component {
                     start={this.state.start} 
                     end={this.state.end}
                     open={this.state.dialogOpen}
-                    onSave={this.doHandleSave}
+                    onSave={this.handleSave} 
                     onChange={this.handleChange}
                     onCancel={this.cancel}
                 />
