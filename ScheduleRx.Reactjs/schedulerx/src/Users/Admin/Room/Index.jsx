@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import RoomTable from './components/RoomTable';
-import moment from 'moment';
+import RoomForm from './components/RoomForm';
 import * as action from '../../../Redux/actions/actionCreator';
 import { connect } from 'react-redux';
 import { client } from '../../../configuration/client';
+import history from '../../../App/History';
 
 const mapStateToProps = (state) => ({
     rooms: state.roomList
@@ -16,17 +17,46 @@ const mapStateToProps = (state) => ({
 
 
 
+
+
 class Rooms extends Component{
-    
-    handleDeleteRoom(room){
-        Client.post('/Room/Delete.php',{ROOM_ID: schedule.ROOM_ID})
+    state = {
+        roomId: '',
+        capacity: '',
+        roomName: '',
+        rooms:[]
+
     }
-    deleteRoom(id){
-        this.props.onDelete(id);
-    }
-    componentDidMount() {
+    componentDidMount = () =>{
         this.props.onLoad();
     }
+
+    reload = (room) => {
+        let tempRoom = this.state.rooms;
+        const newRoom = {
+            ROOM_ID: room.ROOM_ID,
+            CAPACITY: room.CAPACITY,
+            ROOM_NAME: room.ROOM_NAME,
+            LOCATION: room.LOCATION,
+            DESCRIPTION: room.DESCRIPTION,
+        }
+        tempRoom.push(newRoom);
+        this.setState({rooms: tempRoom, dialogOpen: false})
+    }
+
+    reload = (room) => {
+        let tempRoom = this.state.rooms;
+        const newRoom = {
+            ROOM_ID: room.ROOM_ID,
+            CAPACITY: room.CAPACITY,
+            ROOM_NAME: room.ROOM_NAME,
+            LOCATION: room.LOCATION,
+            DESCRIPTION: room.DESCRIPTION,
+        }
+        tempRoom.push(newRoom);
+        this.setState({rooms: tempRoom, dialogOpen: false})
+    }
+
 
     openDialog = () => {
         this.setState({
@@ -46,16 +76,15 @@ class Rooms extends Component{
             CAPACITY: room.CAPACITY,
             ROOM_NAME: room.ROOM_NAME,
             LOCATION: room.LOCATION,
-            CAPABILITY: room.CAPABILITY,
-            DESCRIPTION: room.DESCRIPTION
+            DESCRIPTION: room.DESCRIPTION,
         })
             .then(function (response) {
                 console.log(response);
                 if (response.data === "") {
-                    alert("Invalid data, Please Try Again...");     
+                    alert("Invalid Data, Please Try Again...");     
                 }
                 else {
-                    history.push("/room/list");               
+                    history.push("/room/List");               
                 }  
             })
             .catch(function (error) {
@@ -68,8 +97,9 @@ class Rooms extends Component{
         return(
            
                 <div style={{paddingTop: 35}}> 
-                    <RoomTable roomList = {this.props.rooms} onDelete = {this.deleteRoom.bind(this)}/>
-                </div>
+                    <RoomTable handleState={this.handleState} save={this.update} roomList = {this.props.rooms} open={this.openDialog}/>
+                    <RoomForm onSave={this.handleSave} open={this.state.dialogOpen} onCancel={this.cancel} resubmit={this.reload}/>
+               </div>
             
         );
     };

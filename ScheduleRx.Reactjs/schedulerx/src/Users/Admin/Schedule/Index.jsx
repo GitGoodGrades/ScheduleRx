@@ -44,7 +44,7 @@ class Schedules extends Component {
             END_REG_DATE: currentDate
         }
         .then(
-            this.props.updateRegistration(id)
+            this.props.registration(id)
         ))
 
 

@@ -3,34 +3,23 @@ import Table, { TableBody, TableCell, TableRow, TableHead } from 'material-ui/Ta
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 import TableFooter from 'material-ui/Table';
-import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
 import IconButton from 'material-ui/IconButton';
+import Dialog, { DialogContent, DialogTitle } from 'material-ui/Dialog';
+
+import { FormControl } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
+import Select from 'material-ui/Select';
+
+const styles = theme => ({
+  dialogSelect: {
+    width: '80%',
+  },
+});
 
 class RoomTable extends Component{
 
   
-    componentWillReceiveProps(nextProps) {
-      this.setState({scheduleList: nextProps});
-    }
-  
-    handleClick = (event, id) => {
-      this.setState({id, open: true})
-    };
-  
-    handleChange = (event) => {
-      this.props.save(this.state.id, event.target.value, moment().format("YYYY-MM-DD hh:mm:ss"))
-      this.setState({open: false})
-    };
-  
-    handleClose = () => {
-      this.setState({open: false})
-    };
-  
-    openDialog = () => {
-      this.props.open();
-    }
-  }
       render(){
           const RoomList = this.props.roomList;
           const {classes} = this.props;
@@ -38,31 +27,21 @@ class RoomTable extends Component{
               <Paper>
                 <Dialog
         width={500}
-        open={this.state.open}
-        onClose={this.handleClose}
+        
         style={{background: 'rgba(111, 0, 41, .4)'}}
         >
-        <DialogTitle><h1 style={{color: 'rgb(111, 0, 41)', fontWeight: 'lighter', fontSize: '1em'}}>Make the schedule for {this.state.id} visible?</h1></DialogTitle>
+
         <DialogContent>
           <form width={600}>
 
-            <FormControl style={{border: '', width: '100%'}}>
+            <FormControl style={{border: '', width: '60%'}}>
             <InputLabel htmlFor="Release"></InputLabel>
-                <Select style={{width: 300, margin: 'auto', color: 'rgb(111, 0, 41)'}}
-                  className={classes.dialogSelect}
-                  native
-                  onChange={this.handleChange}
-                  input={<Input id="Release" />}
-                >
-                  <option value="" />
-                  <option value={1}>Yes</option>
-                  <option value={0}>No</option>
-                </Select>
+                <div>hello</div>
             </FormControl>
           </form>
         </DialogContent>
       </Dialog>
-          <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>List Of Schedules</h1>
+          <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>List Of Rooms</h1>
                 <Table>
             <TableHead>
               <TableRow>
@@ -73,21 +52,19 @@ class RoomTable extends Component{
                 <TableCell>Location</TableCell>
                 <TableCell>Capability</TableCell>
                 <TableCell>Description</TableCell>
-                <TableCell>Delete Room</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {(RoomList && RoomList.length > 0 && RoomList.map(row => {
                 return (
                   <TableRow>
-                    <TableCell><a href = '#' onClick={this.editRoom.bind(this)}>Edit</a></TableCell>
+                    <TableCell><a href = '#'>Edit</a></TableCell>
                     <TableCell>{row.ROOM_ID}</TableCell>
                     <TableCell>{row.CAPACITY}</TableCell>
                     <TableCell>{row.ROOM_NAME}</TableCell>
                     <TableCell>{row.LOCATION}</TableCell>
                     <TableCell>{row.CAPABILITY}</TableCell>
                     <TableCell>{row.DESCRIPTION}</TableCell>
-                    <TableCell> <a href = '#' onClick={this.deleteRoom.bind(this)}>X</a> </TableCell>
                   </TableRow>
                 );
               })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
@@ -98,14 +75,14 @@ class RoomTable extends Component{
               mini color="secondary" 
               aria-label="add" 
               className={classes.button}
-              /*onClick={this.openDialog}*/>
+              onClick={this.openDialog}>
               <AddIcon />
               
             </IconButton>
-            Add new room
+            Add new Room
             </TableFooter>
           </Table>
               </Paper>
           );
       }
-    }export default RoomTable;
+    }export default withStyles(styles)(RoomTable);
