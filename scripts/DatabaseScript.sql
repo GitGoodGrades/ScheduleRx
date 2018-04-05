@@ -403,6 +403,11 @@ CREATE TABLE IF NOT EXISTS `nursing_database`.`leads_course` (
   FOREIGN KEY (USER_ID) REFERENCES users(USER_ID)
 );
 
+INSERT INTO nursing_database.leads_course
+VALUES	('N2000', 20000001),
+		('N2002', 20000001),
+        ('N2004', 20000001);
+
 CREATE SCHEMA IF NOT EXISTS banner_database;
 
 use banner_database;
@@ -520,4 +525,5 @@ VALUES  (30000000, '40011'),
 		(30000012, '40051'),
 		(30000012, '40053'),
 		(30000013, '40052'),
-(30000013, '40053');
+		(30000013, '40053');
+
