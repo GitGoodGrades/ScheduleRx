@@ -386,7 +386,7 @@ VALUES
 ('1f3e89a5-0e6a-4bd2-b98d-6cb2eef2b89c',	40036, null);
 
 CREATE TABLE IF NOT EXISTS `nursing_database`.`conflict_event` (
-  CONFLICT_ID       VARCHAR(3)     NOT NULL,
+  CONFLICT_ID       VARCHAR(36)     NOT NULL,
   BOOKING_ID        VARCHAR(36)     NOT NULL,
   USER_ID			int(8),
   PRIMARY KEY (CONFLICT_ID, BOOKING_ID),
@@ -526,3 +526,4 @@ VALUES  (30000000, '40011'),
 		(30000012, '40053'),
 		(30000013, '40052'),
 		(30000013, '40053');
+

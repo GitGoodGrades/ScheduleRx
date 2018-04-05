@@ -31,7 +31,7 @@ $BIDs = [];
 $newID = substr((string)getGUID(),1 , 36);
 $data->BOOKING_ID = $newID;
 
-if ($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "") {
+if ($data->ROOM_ID != 'clinical' && ($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "")) {
     $conflict = true;
     $message = $data->MESSAGE;
     $BIDs = $data->BOOKING_IDs;
