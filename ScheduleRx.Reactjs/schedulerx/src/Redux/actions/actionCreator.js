@@ -213,6 +213,23 @@ export function searchUsers() {
             )
 }
 
+export function getConflictList(){
+    let conflicts = [];
+    let formattedConflictList = [];
+    return (dispatch) =>
+        client.get(`Conflict/Index.php`)
+            .then(res => {
+                conflicts = res.data.records;
+                if(!Array.isArray(conflicts)){
+                    conflicts = null;
+                }
+                dispatch({
+                    type: 'SEARCH_CONFLICT_LIST',
+                    data: conflicts
+                })    }
+            )
+}
+
 export function logout() {
     return (dispatch) =>
         dispatch({

@@ -106,6 +106,11 @@ class TopNavMenu extends Component {
                         className={this.props.role !== Admin ? classes.hidden : classes.seen}>
                         Manage Lead Faculty
                     </NavLink>
+                    <NavLink 
+                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/Conflicts"
+                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
+                        Conflicts/Requests
+                    </NavLink>
                     <button 
                         className={classes.asText} onClick={this.LogOut}>
                         Log Out
