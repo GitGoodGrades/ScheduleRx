@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { client } from '../../../configuration/client';
 import history from '../../../App/History';
 import ConflictView from './components/ConflictView';
+import { withRouter } from 'react-router-dom';
 import ApproveDialog from './components/ApproveDialog';
 
 const mapStateToProps = (state) => ({
@@ -15,7 +16,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onLoad: () => dispatch(action.getConflictList()),
-    getLeads: () => dispatch(action.searchLeadsCourses())
+    getLeads: () => dispatch(action.searchLeadsCourses()),
+    setGlobals: (event) => dispatch(action.setEditGlobals(event))
 });
 
 class Conflicts extends Component {
@@ -68,7 +70,17 @@ class Conflicts extends Component {
       };
 
     handleEdit = () => {
-        //Edit Request Logic Here
+        let events = this.state.conflict.EVENTS;
+        let selectEvent = null;
+        events && events.map(event => {
+            if(event.SCHEDULE_ID == null)
+            {
+                selectEvent = event;
+            }
+        });
+
+        this.props.setGlobals(selectEvent);
+        this.props.history.push('/event/create');
     }
 
     handleApprove = () => {
@@ -183,4 +195,4 @@ class Conflicts extends Component {
         );
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Conflicts);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Conflicts));

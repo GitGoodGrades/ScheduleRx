@@ -73,7 +73,8 @@ class CreateEvent extends Component {
         this.setState({
             events: nextProps.events,
             registration: nextProps.registration_schedule,
-            current: nextProps.current_schedule
+            current: nextProps.current_schedule,
+            redirected: nextProps.redirected_date
         })
     };
 
@@ -408,7 +409,7 @@ class CreateEvent extends Component {
                     handleSelectSlot={this.selectSlot} 
                     style={{zIndex: 0}}
                     conflictBookingId={this.props.redirected_event && this.props.redirected_event.BOOKING_ID}
-                    date={this.props.redirected_date ? this.props.redirected_date : new Date()}
+                    date={this.state.redirected ? this.state.redirected : new Date()}
                 />
                 <EventDetailDialog 
                     start={this.state.start} 
