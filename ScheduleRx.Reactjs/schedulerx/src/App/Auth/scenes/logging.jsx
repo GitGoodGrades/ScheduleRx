@@ -40,7 +40,7 @@ class Logging extends React.Component {
     }
 
     setArchives = (archives) => {
-        client.post('Schedule/Archived.php', {
+        client.post('Schedule/Archive.php', {
             ARCHIVES: archives
         })
     }
