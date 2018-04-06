@@ -113,7 +113,10 @@ class ScheduleForm extends React.Component {
                         "Select registration period"
                     }
                 </ Button>
-                <Dialog open={this.state.reg_open}>
+                <Dialog 
+                    open={this.state.reg_open} 
+                    onBackdropClick={this.setRegClose}    
+                >
                         <DateRange
                             onChange={this.handleRegSelect}
                         />
@@ -130,7 +133,10 @@ class ScheduleForm extends React.Component {
                         "Select semester period"
                     }
                 </ Button>
-                    <Dialog open={this.state.sem_open}>
+                    <Dialog 
+                        open={this.state.sem_open}
+                        onBackdropClick={this.setSemClose}    
+                    >
                         <DateRange
                             onInit={this.handleSemSelect}
                             onChange={this.handleSemSelect}

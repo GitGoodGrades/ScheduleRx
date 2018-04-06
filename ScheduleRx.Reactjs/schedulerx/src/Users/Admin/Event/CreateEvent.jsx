@@ -119,9 +119,24 @@ class CreateEvent extends Component {
     };
 
     handleChange = (name, value) => {
-      this.setState({
-        [name]:value
-      });
+        let sections = [];
+        if(name == 'sections'){
+            let check = value;
+            if(!Array.isArray(check)){
+                sections = value.split(',');
+            } else {
+                value && value.map(element => {
+                    sections.push(element.value)
+                })
+            }
+            this.setState({sections: sections})
+        }else{
+            this.setState({
+            [name]:value
+        });
+        }
+        
+        
     };
 
     handleClose = () => {

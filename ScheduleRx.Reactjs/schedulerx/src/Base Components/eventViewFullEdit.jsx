@@ -280,11 +280,13 @@ class EventViewEditFull extends Component{
                     id="start"
                     value={this.state.start}
                     onChange={this.handleChangeStart}
+                    disabled={this.state.date == null}
                 />
                 <TimePicker
                     id="end"
                     value={this.state.end}
                     onChange={this.handleChangeEnd}
+                    disabled={this.state.date == null}
                 />
               </Typography>
               
