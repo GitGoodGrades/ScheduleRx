@@ -133,7 +133,40 @@ class EventViewEditFull extends Component{
           <IconButton variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
             <Clear></Clear>
             </IconButton>
-            <CardContent className={this.state.edit ? classes.hidden : ''}>
+            <CardContent className={this.props.conflict.TYPE === "Conflict" ? classes.hidden : ''}>
+                <h2>
+                    Request for room {this.props.conflict.ROOM} on {moment(this.props.conflict.CONFLICT_START).format("MMM Do YYYY")}
+                </h2>
+                <Table>
+                <TableBody>
+                <TableRow id={0} hover="false">
+                        <TableCell>Event Title</TableCell>
+                        <TableCell>{    
+                            this.state.conflictEvent && this.state.conflictEvent.BOOKING_TITLE }
+                        </TableCell>
+                    </TableRow>
+                    <TableRow id={1}>
+                        <TableCell>Course</TableCell>
+                        <TableCell >{
+                            this.state.conflictEvent &&
+                            this.state.conflictEvent.SECTIONS &&
+                            this.state.conflictEvent.SECTIONS.records &&
+                            this.state.conflictEvent.SECTIONS.records[0].COURSE_ID}
+                        </TableCell>
+                    </TableRow>
+                    <TableRow id={2} hover="false">
+                        <TableCell>Event Time</TableCell>
+                        <TableCell>{    
+                            this.state.conflictEvent && 
+                            moment(this.state.conflictEvent.START_TIME).format('h:mm a') + "-" +  moment(this.state.conflictEvent.END_TIME).format('h:mm a')}
+                        </TableCell>
+                    </TableRow>
+                </TableBody>
+                </Table>
+                <h3> Reason for Request: </h3>
+                <p>{this.props.conflict.MESSAGE}</p>
+            </CardContent>
+            <CardContent className={this.props.conflict.TYPE === "Conflict" ? '' : classes.hidden}>
                 <h2>
                     Conflict in room {this.props.conflict.ROOM} on {moment(this.props.conflict.CONFLICT_START).format("MMM Do YYYY")}
                 </h2>
@@ -219,58 +252,10 @@ class EventViewEditFull extends Component{
                             moment(this.state.conflictEvent.START_TIME).format('h:mm a') + "-" +  moment(this.state.conflictEvent.END_TIME).format('h:mm a')}
                         </TableCell>
                     </TableRow>
-                    {/* <TableRow id={3} hover="false">
-                        <TableCell>Sections</TableCell>
-                        <TableCell>{
-                            this.state.events && this.state.events.length > 2 && this.state.events.map((elem, index, array) => {
-                                if(index+2 < array.length){
-                                    return<div>
-                                    {(index+1)+ ". " + (this.state.events[index].SECTIONS &&
-                                                        this.state.events[index].SECTIONS.records.map((el, i, arr) => {
-                                                        if (i+1 < arr.length) { 
-                                                            return el.SECTION_ID + ", ";
-                                                        } else {
-                                                            return el.SECTION_ID;
-                                                        }}))}
-                                    <br/>
-                                    </div>
-                                }
-                                else if (index+1 == array.length){
-                                    return;
-                                }
-                                else{
-                                    return (index+1)+ ". " + (this.state.events[index].SECTIONS &&
-                                    this.state.events[index].SECTIONS.records.map((el, i, arr) => {
-                                        if (i+1 < arr.length) { 
-                                            return el.SECTION_ID + ", ";
-                                        } else {
-                                            return el.SECTION_ID;
-                                        }}))
-                                }
-                            }) ||   this.state.events &&
-                                    this.state.events[0].SECTIONS &&
-                                    this.state.events[0].SECTIONS.records.map((el, i, arr) => {
-                                        if (i+1 < arr.length) { 
-                                            return el.SECTION_ID + ", ";
-                                        } else {
-                                            return el.SECTION_ID;
-                                        }
-                        })}</TableCell>
-                        <TableCell >{
-                            this.state.events &&
-                            this.state.events[this.state.events.length - 1].SECTIONS &&
-                            this.state.events[this.state.events.length - 1].SECTIONS.records.map((elem, index, array) => {
-                                if (index+1 < array.length) { 
-                                    return elem.SECTION_ID + ", ";
-                                } else {
-                                    return elem.SECTION_ID;
-                                }
-                        })}</TableCell>
-                    </TableRow> */}
                 </TableBody>
-            </Table>
-            <h3> Reason for Request: </h3>
-            <p>{this.props.conflict.MESSAGE}</p>
+                </Table>
+                <h3> Reason for Request: </h3>
+                <p>{this.props.conflict.MESSAGE}</p>
             </CardContent>
             <CardActions>
             

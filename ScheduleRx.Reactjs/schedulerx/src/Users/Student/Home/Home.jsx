@@ -78,6 +78,7 @@ class EmptyHome extends Component {
                     events={this.state.events}
                     handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
+                    defaultDate={new Date()}
                 />
                 <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>

@@ -84,25 +84,29 @@ class EventForm extends Component {
 
     handleCourseChange = event => {
         let sections = [];
-            this.props.sectionList.map(section => {
+            if(event && event.value != null){
+                this.props.sectionList.map(section => {
                 if(section.COURSE_ID === event.value) {
                   sections.push({label: section.SECTION_ID, value: section.SECTION_ID})
                 }
-            }) 
-            this.setState({sectionOptions: sections, course: event.value});
-            this.props.onChange('course', event.value);
+                }) 
+                this.setState({sectionOptions: sections, course: event.value});
+                this.props.onChange('course', event.value);
+            }else{
+                this.setState({sectionOptions: [], course: null});
+                this.props.onChange('course', null);
+            }
+            
     }
 
-    handleSectionChange = event => {
-        let sections = this.state.sections;
-        sections.push(event)
-        this.setState({sections})
-        this.props.onChange('sections', sections);
+    handleSectionChange = (event) => {
+        this.setState({sections: event})
+        this.props.onChange('sections', event);
     };
 
     handleRoomChange = event => {
-        this.setState({room: event.value})
-        this.props.onChange('room', event.value);
+        this.setState({room: event && event.value})
+        this.props.onChange('room', event && event.value ? event.value : null);
     };
 
     render() {

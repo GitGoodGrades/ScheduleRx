@@ -230,6 +230,24 @@ export function searchUsers() {
             )
 }
 
+export function searchMessages(user) {
+    let messages = [];
+    return (dispatch) =>
+        client.get(`Message/Index.php`)
+            .then(res => {
+                for(let obj of res.data.records){
+                    if(obj.USER_ID === user){
+                        messages.push(obj);
+                    }
+                }
+
+                dispatch({
+                    type: 'SEARCH_MESSAGES',
+                    data: messages
+                })    }
+            )
+}
+
 export function getConflictList(){
     let conflicts = [];
     let formattedConflictList = [];

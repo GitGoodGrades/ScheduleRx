@@ -16,7 +16,8 @@ const initialState = {
     redirected: false,
     redirect_date: null,
     redirect_event: null,
-    leadsCourses: null
+    leadsCourses: null,
+    messages: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -71,6 +72,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 conflictList: action.data
+            };
+        case 'SEARCH_MESSAGES':
+            return {
+                ...state,
+                messages: action.data
             };
         case 'ADMIN_CALENDAR':
             return {
