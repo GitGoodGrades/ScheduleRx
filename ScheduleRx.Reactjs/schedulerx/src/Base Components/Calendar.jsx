@@ -3,18 +3,50 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import './react-big-calendar.css';
 import {withStyles} from 'material-ui/styles';
+import ExpansionPanel, {
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
+} from 'material-ui/ExpansionPanel';
+import Typography from 'material-ui/Typography';
+import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
 // Setup the localizer by providing the moment Object
 
 BigCalendar.momentLocalizer(moment);
 
+const mapStateToProps = (state) => ({
+  current_schedule: state.currentSchedule,
+  registration_schedule: state.registrationSchedule,
+  user_role: state.user_role
+});
+
 const styles = theme => ({
+  icon: {
+
+  }
 });
 
 class Calendar extends Component {
   state = {
-    events: []
+    events: [],
+    date: new Date(),
+    years: []
   };
+
+  componentDidMount = () => {
+    let years = [];
+    let i = 0;
+    let year = 2017;
+    do {
+      year += i;
+      years.push[year];
+      i++;
+    } while (moment(year).isBefore(moment().add(2, 'y')));
+
+    this.setState({
+      years
+    })
+  }
 
   componentWillReceiveProps = (nextProps) => {
     let formattedEvents = [];
@@ -37,11 +69,28 @@ class Calendar extends Component {
   selectSlot = (slotInfo) => {
     this.props.handleSlotSelection(slotInfo)
   };
+  
+  handleAMonthChange = () => {
+
+  }
 
   render(){
+    const {classes} = this.props;
+
     return(
+    
     <div className="text-center">
-      <BigCalendar
+      <ExpansionPanel style={{background: 'rgba(0,0,0, .7)'}}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
+          <Typography style={{color: 'white', font: 'Open Sans'}}>Expansion Panel 1</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+            <Typography>
+            DROP DOWNS HERE
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <BigCalendar
         {...this.props}
         selectable
         style={{height: 500}}
@@ -49,27 +98,10 @@ class Calendar extends Component {
         titleAccessor="BOOKING_TITLE"
         startAccessor='START_TIME'
         endAccessor='END_TIME'
-        defaultDate={new Date()}
+        defaultDate={this.state.date}
         onSelectEvent={event => this.selectEvent(event)}
         onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
-        eventPropGetter={
-          (event, start, end, isSelected) => {
-            let newStyle = {
-              backgroundColor: "lightgrey",
-              color: 'black',
-              borderRadius: "1px",
-            };
-      
-            if (event.SCHEDULE_ID == null){
-              newStyle.backgroundColor = "red"
-            }
-      
-            return {
-              className: "",
-              style: newStyle
-            };
-          }
-        }
+
       />
     </div>
     )
