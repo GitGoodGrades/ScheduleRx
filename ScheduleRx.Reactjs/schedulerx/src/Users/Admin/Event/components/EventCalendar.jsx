@@ -27,7 +27,7 @@ class EventCalendar extends Component{
              step={5}
              timeslots={6}
              scrollToTime={time.setMinutes(0)}
-
+             conflictBookingId = {this.props.conflictBookingId}
           />
         )
     }
