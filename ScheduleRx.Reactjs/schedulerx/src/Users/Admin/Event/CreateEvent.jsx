@@ -19,8 +19,8 @@ const mapStateToProps = (state) => ({
     registration_schedule: state.registrationSchedule,
     events: state.adminCalendar,
     redirected: state.redirected,
-    redirected_date: state.redirected_date,
-    redirected_event: state.redirected_event,
+    redirect_date: state.redirect_date,
+    redirected_event: state.redirect_event,
     leadsCourses: state.leadsCourses
 
   });
@@ -60,7 +60,7 @@ class CreateEvent extends Component {
         sections: [],
         start: '',
         temp: {},
-        title: ""
+        title: "",
     };
 
     cancel = () => {
@@ -70,11 +70,19 @@ class CreateEvent extends Component {
     };
 
     componentWillReceiveProps = (nextProps) => {
+        if(nextProps.redirected) {
+            this.setState({
+                open: true,
+                event: nextProps.redirected_event
+            })
+        }
+
         this.setState({
             events: nextProps.events,
             registration: nextProps.registration_schedule,
             current: nextProps.current_schedule,
-            redirected: nextProps.redirected_date
+            redirect_date: nextProps.redirect_date,
+            redirected: nextProps.redirected
         })
     };
 
@@ -142,6 +150,7 @@ class CreateEvent extends Component {
 
     handleClose = () => {
         this.setState({ open: false})
+        this.props.clearGlobals();
     };
 
     handleConflict = (temp, event, flag, start) => {
@@ -424,7 +433,7 @@ class CreateEvent extends Component {
                     handleSelectSlot={this.selectSlot} 
                     style={{zIndex: 0}}
                     conflictBookingId={this.props.redirected_event && this.props.redirected_event.BOOKING_ID}
-                    date={this.state.redirected ? this.state.redirected : new Date()}
+                    date={this.props.redirected ? this.props.redirect_date : new Date()}
                 />
                 <EventDetailDialog 
                     start={this.state.start} 

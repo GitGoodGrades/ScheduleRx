@@ -17,6 +17,7 @@ import Select from 'react-select';
 import Option from './Option';
 import Save from 'material-ui-icons/Save';
 import 'react-select/dist/react-select.css';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   card: {
@@ -41,12 +42,17 @@ const styles = theme => ({
   }
 });
 
+const mapStateToProps = (state) => ({
+    redirect: state.redirected
+})
+
 class EventViewEditFull extends Component{
     state = {
         edit: false,
         date: null, 
         sectionChange: false,
-        originalEvent: {}
+        originalEvent: {},
+        redirection: false
     }
 
     handleClose = () => {
@@ -54,6 +60,13 @@ class EventViewEditFull extends Component{
     };
     
     componentWillReceiveProps = (nextProps) => {
+        if(nextProps.redirect){
+            this.setState({
+                edit: true,
+                redirection: true
+            })
+        }
+
         let sections = [];
         nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && this.props.sectionList.map(section => {
                 if(section.COURSE_ID === nextProps.event.SECTIONS.records[0].COURSE_ID) {
@@ -308,4 +321,4 @@ class EventViewEditFull extends Component{
   
 }
 
-export default withStyles(styles)(EventViewEditFull);
+export default connect(mapStateToProps)(withStyles(styles)(EventViewEditFull));

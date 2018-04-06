@@ -62,7 +62,9 @@ class Calendar extends Component {
             let newStyle = {
               backgroundColor: "lightgrey",
               color: 'black',
-              borderRadius: "1px",
+              borderRadius: "4px",
+              marginLeft: "3px",
+              marginRight: "2px"
             };
       
             if (event.SCHEDULE_ID == null){
