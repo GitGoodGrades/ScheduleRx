@@ -407,6 +407,13 @@ INSERT INTO nursing_database.leads_course
 VALUES	('N2000', 20000001),
 		('N2002', 20000001),
         ('N2004', 20000001);
+		
+CREATE TABLE IF NOT EXISTS `nursing_database`.`message` (
+  MSG_ID 		VARCHAR(36),
+  USER_ID 		INT(8),
+  MESSAGE		VARCHAR(300),
+  FOREIGN KEY (USER_ID) REFERENCES users(USER_ID)
+);
 
 CREATE SCHEMA IF NOT EXISTS banner_database;
 
