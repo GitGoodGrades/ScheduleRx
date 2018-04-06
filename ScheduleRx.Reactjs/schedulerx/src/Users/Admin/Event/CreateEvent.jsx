@@ -18,10 +18,10 @@ const mapStateToProps = (state) => ({
     current_schedule: state.currentSchedule,
     registration_schedule: state.registrationSchedule,
     events: state.adminCalendar,
-    redirected: state,
-    redirected_date: state,
-    redirected_event: state,
-    leadsCourses: state
+    redirected: state.redirected,
+    redirected_date: state.redirected_date,
+    redirected_event: state.redirected_event,
+    leadsCourses: state.leadsCourses
 
   });
 
@@ -82,6 +82,7 @@ class CreateEvent extends Component {
         this.props.loadRooms();
         this.props.loadSections();
         this.props.loadSchedules();
+        this.props.loadLeads();
     };
 
     createEvent = (event) => {
@@ -150,6 +151,7 @@ class CreateEvent extends Component {
     
     handleConflictSave = (message) => {
         let conflicts = [];
+        let { redirected, redirected_event, leadsCourses } = this.props;
         this.setState({
             message: message
         });
@@ -159,7 +161,25 @@ class CreateEvent extends Component {
         });
 
         let x = this.state.temp;
-        
+         
+        if(redirected){
+                let userId = null;
+                let oldEvent = redirected_event;
+                let course = redirected_event.SECTIONS && redirected_event.SECTIONS.records && redirected_event.SECTIONS.records[0].COURSE_ID;
+                leadsCourses && leadsCourses.map(lead => {
+                    if(lead.COURSE_ID === course){
+                        userId = lead.USER_ID;
+                    }
+                })
+                client.post('messages/create.php', {
+                    USER_ID: userId,
+                    MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
+                    ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
+                    edited. It is now in room ${this.state.temp.ROOM_ID} at  ${moment(this.state.temp.START_TIME).format('MMMM Do YYYY, h:mm:ss a')}`
+                });
+                this.props.clearGlobals();
+                this.props.history.push("/conflicts"); 
+            }
 
         client.post(`Bookings/Create.php`, {
             SCHEDULE_ID: null,
@@ -176,24 +196,7 @@ class CreateEvent extends Component {
                 console.log(error);
             });
 
-            if(this.props.redirected){
-                let userId = null;
-                let oldEvent = this.props.redirected_event;
-                let course = this.props.redirected_event.SECTIONS && this.props.redirected_event.SECTIONS.records && this.props.redirected_event.SECTIONS.records[0].COURSE_ID;
-                this.props.leadsCourses && this.props.leadsCourses.map(lead => {
-                    if(lead.COURSE_ID === course){
-                        userId = lead.USER_ID;
-                    }
-                })
-                client.post('messages/create.php', {
-                    USER_ID: userId,
-                    MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
-                    ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
-                    edited. It is now in room ${this.state.temp.ROOM_ID} at  ${moment(this.state.temp.START_TIME).format('MMMM Do YYYY, h:mm:ss a')}`
-                });
-                this.props.clearGlobals();
-                this.props.history.push("/conflicts"); 
-            }
+           
 
         this.setState({
             conflictDialogOpen: false
@@ -404,6 +407,8 @@ class CreateEvent extends Component {
                     handleSelectEvent={this.selectEvent}
                     handleSelectSlot={this.selectSlot} 
                     style={{zIndex: 0}}
+                    conflictBookingId={this.props.redirected_event && this.props.redirected_event.BOOKING_ID}
+                    date={this.props.redirected_date ? this.props.redirected_date : null}
                 />
                 <EventDetailDialog 
                     start={this.state.start} 
