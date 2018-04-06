@@ -138,7 +138,7 @@ export function searchRooms() {
     .then(res => {
         dispatch({
             type: 'SEARCH_ROOMS',
-            data: res.data.records
+            data: res.data
         })});
 }
 
