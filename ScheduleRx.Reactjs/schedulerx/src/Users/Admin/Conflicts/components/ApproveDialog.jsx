@@ -53,17 +53,6 @@ class ApproveDialog extends Component{
     };
 
     componentWillReceiveProps = (nextProps) => {
-        /*let temp = [];
-        nextProps.conflict && nextProps.conflict.EVENTS && nextProps.conflict.EVENTS.map(element => {
-            if(element.SCHEDULE_ID == null){
-                this.setState({
-                    conflictEvent: element
-                })
-            }else{
-                temp.push(element)
-            }
-        });
-        this.setState({events: temp})*/
         this.setState({
             conflictEvent: nextProps.conflict
         })

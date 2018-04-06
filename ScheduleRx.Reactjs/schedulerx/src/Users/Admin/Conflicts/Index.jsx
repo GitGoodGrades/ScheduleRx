@@ -27,11 +27,15 @@ class Conflicts extends Component {
         eventDetailsString: "",
         denyMessage: "",
         user: null,
-        approveOpen: false
+        approveOpen: false,
+        conflicts: null
     };
 
     componentWillReceiveProps = (nextProps) => {
-        this.setState({schedules: nextProps.schedules})
+        this.setState({
+            schedules: nextProps.schedules,
+            conflicts: nextProps.conflicts
+        })
     }
 
     componentDidMount() {
@@ -118,13 +122,22 @@ class Conflicts extends Component {
         })
     }
 
-    handleDenySend = () => {
+    handleDenySend = (conflictID) => {
+        let tempConflicts = this.state.conflicts;
+        let index = null;
+        tempConflicts && tempConflicts.map(conflict => {
+            if(conflict.CONFLICT_ID === conflictID) {
+                index = tempConflicts.IndexOf(conflict);
+            }
+        })
+        tempConflicts.splice(index, 1);
         client.post('Message/Create.php', {
             MESSAGE: this.state.denyMessage,
             USER_ID: this.state.user
         })
         this.setState({
-            denyDialogOpen: false
+            denyDialogOpen: false,
+            conflicts: tempConflicts
         })
     }
 

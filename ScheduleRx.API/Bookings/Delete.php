@@ -39,8 +39,9 @@ else {
         }
     }
 }
-$eventResponse =  DeleteRecord('booking',"BOOKING_ID", "'" . $data->BOOKING_ID . "'", $conn );
 $sectionResponse = DeleteRecord('event_section', 'BOOKING_ID', $data->BOOKING_ID, $conn);
+$eventResponse =  DeleteRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn );
+
 
 if ($eventResponse != null) {
     $log->info($eventResponse);

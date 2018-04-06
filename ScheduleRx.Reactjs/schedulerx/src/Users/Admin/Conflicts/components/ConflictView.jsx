@@ -22,6 +22,7 @@ import Edit from 'material-ui-icons/Edit';
 import Done from 'material-ui-icons/Done';
 import Clear from 'material-ui-icons/Clear';
 import Send from 'material-ui-icons/Send';
+import {client} from '../../../../configuration/client';
 
 
 const styles = theme => ({
@@ -89,7 +90,11 @@ class EventViewEditFull extends Component{
     }
 
     selectDenySend = () => {
-        this.props.onSelectDenySend();
+        client.post('bookings/delete.php', {
+            SCHEDULE_ID: this.state.conflictEvent.SCHEDULE_ID,
+            BOOKING_ID: this.state.conflictEvent.BOOKING_ID
+        })
+        this.props.onSelectDenySend(this.state.conflictEvent.CONFLICT_ID);
     }
 
     handleMessageBlur = (event) => {

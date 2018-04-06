@@ -408,7 +408,7 @@ class CreateEvent extends Component {
                     handleSelectSlot={this.selectSlot} 
                     style={{zIndex: 0}}
                     conflictBookingId={this.props.redirected_event && this.props.redirected_event.BOOKING_ID}
-                    date={this.props.redirected_date ? this.props.redirected_date : null}
+                    date={this.props.redirected_date ? this.props.redirected_date : new Date()}
                 />
                 <EventDetailDialog 
                     start={this.state.start} 
