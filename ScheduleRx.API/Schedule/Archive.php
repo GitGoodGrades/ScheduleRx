@@ -13,15 +13,7 @@ $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $log = Logger::getLogger("ScheduleLog");
 
-if ($data->IS_RELEASED == '0') {
-    $data->IS_RELEASED = 0;
-} else {
-    $data->IS_RELEASED = 1;
-};
-if ($data->IS_ARCHIVED == '0') {
-    $data->IS_ARCHIVED = 0;
-} else {
-    $data->IS_ARCHIVED = 1;
-};
-
-$log->debug(UpdateRecord('schedule',$data, 'SCHEDULE_ID', $conn));
+foreach ($data->ARCHIVES as $ID) {
+    $update = array( "SCHEDULE_ID" => $ID, "IS_ARCHIVED" => 1);
+    $log->debug(UpdateRecord('schedule',$update, 'SCHEDULE_ID', $conn));
+}
