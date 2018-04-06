@@ -12,7 +12,10 @@ const initialState = {
     scheduleList: [],
     userCalendar: [],
     myCourses: [],
-    conflicts: []
+    conflicts: [],
+    redirected: false,
+    redirect_date: null,
+    redirect_event: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -103,7 +106,21 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 conflicts: action.data
-            }
+            };
+        case 'SET_EDIT':
+            return {
+                ...state,
+                redirected: true,
+                redirect_date: action.redirect_date,
+                redirect_event: action.event
+            };
+        case 'CLEAR_EDIT':
+            return {
+                ...state,
+                redirected: false,
+                redirect_date: null,
+                redirect_event: null
+            };
         default:
             return state;
     }

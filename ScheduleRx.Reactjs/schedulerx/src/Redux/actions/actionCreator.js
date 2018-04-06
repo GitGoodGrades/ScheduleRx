@@ -162,6 +162,23 @@ export function setUser(name, role, sem) {
       });
 }
 
+export function setEditGlobals(event) {
+    let date = new Date(event.START_TIME);
+    return (dispatch) =>
+        dispatch({
+            type: 'SET_EDIT',
+            redirect_date: date,
+            event: event
+        });
+}
+
+export function clearEditGlobals() {
+    return (dispatch) =>
+        dispatch({
+            type: 'CLEAR_EDIT'
+        });
+}
+
 export function changeSchedules(registrationSchedule, currentSchedule) {
     return (dispatch) =>
         dispatch({
