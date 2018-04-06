@@ -28,7 +28,7 @@ class ScheduleTable extends Component {
   }
 
   handleClick = (event, id) => {
-    this.setState({id, open: true})
+    this.props.handleEdit(id)
   };
 
   handleChange = (event) => {

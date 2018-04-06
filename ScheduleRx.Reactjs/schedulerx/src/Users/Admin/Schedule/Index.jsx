@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { client } from '../../../configuration/client';
 import history from '../../../App/History';
 import ScheduleForm from './components/ScheduleForm';
+import ScheduleEditForm from './components/ScheduleEditForm';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -25,7 +26,9 @@ class Schedules extends Component {
         visible: false,
         endDate: moment().format("YYYY-MM-DD hh:mm:ss"),
         dialogOpen: false, 
-        schedules: []
+        schedules: [],
+        editDialogOpen: false,
+        schedule: null
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -36,16 +39,25 @@ class Schedules extends Component {
         this.props.onLoad();
     };
 
-    update = (id, released, currentDate) => {
+    handleUpdate = (schedule) => {
+        let tempScheduleList = [];
         client.post(`Schedule/Update.php`,
         {
-            SCHEDULE_ID: id,
-            IS_RELEASED: released,
-            END_REG_DATE: currentDate
+            ...schedule
+        })
+        .then(res => {
+            tempScheduleList = this.state.schedules;
+            this.state.schedules && this.state.schedules.map(sched => {
+                if(sched.SCHEDULE_ID === schedule.SCHEDULE_ID){
+                    tempScheduleList.splice(this.state.schedules.indexOf(sched, 1))
+                }
+
+            })
+            tempScheduleList.push(schedule)
+            this.setState({schedules: tempScheduleList, editDialogOpen: false})
         }
-        .then(
-            this.props.updateRegistration(id)
-        ))
+            
+        )
 
 
     }
@@ -53,13 +65,7 @@ class Schedules extends Component {
     reload = (schedule) => {
         let tempSchedule = this.state.schedules;
         const newSchedule = {
-            SCHEDULE_ID: schedule.SCHEDULE_ID,
-            START_REG_DATE: schedule.START_REG_DATE,
-            END_REG_DATE: schedule.END_REG_DATE,
-            START_SEM_DATE: schedule.START_SEM_DATE,
-            END_SEM_DATE: schedule.END_SEM_DATE,
-            IS_RELEASED: schedule.IS_RELEASED,
-            IS_ARCHIVED: schedule.IS_ARCHIVED
+            ...schedule
         }
         tempSchedule.push(newSchedule);
         this.setState({schedules: tempSchedule, dialogOpen: false})
@@ -71,21 +77,47 @@ class Schedules extends Component {
         })
     }
 
+    handleEditOpen = (id) => {
+        client.post('schedule/detail.php', {
+            SCHEDULE_ID: id
+        }).then(res => {
+            this.setState({
+                schedule: res.data,
+                editDialogOpen: true
+            })
+        })
+    }
+
     cancel = () => {
         this.setState({
-          dialogOpen: false
+          dialogOpen: false,
+          editDialogOpen: false
         })
       };
 
+      handleDelete = (schedule) => {
+        let tempScheduleList = [];
+        client.post(`Schedule/delete.php`,
+        {
+            SCHEDULE_ID: schedule.SCHEDULE_ID
+        })
+        .then(res => {
+            tempScheduleList = this.state.schedules;
+            this.state.schedules && this.state.schedules.map(sched => {
+                if(sched.SCHEDULE_ID === schedule.SCHEDULE_ID){
+                    tempScheduleList.splice(this.state.schedules.indexOf(sched, 1))
+                }
+
+            })
+            this.setState({schedules: tempScheduleList, editDialogOpen: false})
+        }
+            
+        )
+      }
+
       handleSave(schedule) {
         client.post(`Schedule/Create.php`, {
-            SCHEDULE_ID: schedule.SCHEDULE_ID,
-            START_REG_DATE: schedule.START_REG_DATE,
-            END_REG_DATE: schedule.END_REG_DATE,
-            START_SEM_DATE: schedule.START_SEM_DATE,
-            END_SEM_DATE: schedule.END_SEM_DATE,
-            IS_RELEASED: schedule.IS_RELEASED,
-            IS_ARCHIVED: schedule.IS_ARCHIVED
+            ...schedule
         })
             .then(function (response) {
                 console.log(response);
@@ -105,8 +137,9 @@ class Schedules extends Component {
     render(){
         return(
             <div style={{paddingTop: 35}}>
-                <ScheduleTable handleState={this.handleState} save={this.update} scheduleList={this.props.schedules} open={this.openDialog} />
-                <ScheduleForm onSave={this.handleSave} open={this.state.dialogOpen} onCancel={this.cancel} resubmit={this.reload}/>
+                <ScheduleTable handleEdit={this.handleEditOpen} handleState={this.handleState} save={this.update} scheduleList={this.props.schedules} open={this.openDialog} />
+                <ScheduleEditForm deleteSchedule={this.handleDelete} onSave={this.handleUpdate} open={this.state.editDialogOpen} onCancel={this.cancel} schedule={this.state.schedule} />
+                <ScheduleForm schedule={this.state.schedule} onSave={this.handleSave} open={this.state.dialogOpen} onCancel={this.cancel} resubmit={this.reload}/>
             </div>
         );
     };
