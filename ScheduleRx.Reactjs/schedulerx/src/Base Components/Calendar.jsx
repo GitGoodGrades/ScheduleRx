@@ -52,7 +52,24 @@ class Calendar extends Component {
         defaultDate={new Date()}
         onSelectEvent={event => this.selectEvent(event)}
         onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
-
+        eventPropGetter={
+          (event, start, end, isSelected) => {
+            let newStyle = {
+              backgroundColor: "lightgrey",
+              color: 'black',
+              borderRadius: "1px",
+            };
+      
+            if (event.SCHEDULE_ID == null){
+              newStyle.backgroundColor = "red"
+            }
+      
+            return {
+              className: "",
+              style: newStyle
+            };
+          }
+        }
       />
     </div>
     )

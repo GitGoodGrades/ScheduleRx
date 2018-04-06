@@ -206,6 +206,7 @@ button.rbc-input::-moz-focus-inner {
   background-color: lightblue;
   border-radius: 5px;
   color: #fff;
+  z-index: 10;
 }
 .rbc-event.rbc-selected {
   background-color: #265985;
@@ -522,7 +523,7 @@ button.rbc-input::-moz-focus-inner {
   text-align: center;
 }
 .rbc-slot-selection {
-  z-index: 10;
+  z-index: 9;
   position: absolute;
   cursor: default;
   background-color: rgba(0, 0, 0, 0.5);

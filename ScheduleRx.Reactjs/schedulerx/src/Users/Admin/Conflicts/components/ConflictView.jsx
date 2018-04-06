@@ -45,12 +45,24 @@ const styles = theme => ({
 
 class EventViewEditFull extends Component{
     state = {
-        edit: false,
-        date: null, 
-        sectionChange: false,
-        originalEvent: {}
+        conflictEvent: null,
+        events: null
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        let temp = [];
+        nextProps.conflict && nextProps.conflict.EVENTS && nextProps.conflict.EVENTS.forEach(element => {
+            if(element.SCHEDULE_ID == null){
+                this.setState({
+                    conflictEvent: element
+                })
+            }else{
+                temp.push(element)
+            }
+        });
+        this.setState({events: temp})
+    }
+    
     handleClose = () => {
     this.props.onClose();
     };
@@ -84,80 +96,84 @@ class EventViewEditFull extends Component{
                 <TableRow id={0} hover="false">
                         <TableCell>Event Title</TableCell>
                         <TableCell>{
-                            this.props.conflict.EVENTS && this.props.conflict.EVENTS.length > 2 && this.props.conflict.EVENTS.map((elem, index, array) => {
-                                if(index + 2 < array.length){
+                            this.state.events && this.state.events.length > 1 && this.state.events.map((elem, index, array) => {
+                                if(index + 1 < array.length){
                                     return<div>
-                                    {(index + 1)+ ". " + this.props.conflict.EVENTS[index].BOOKING_TITLE}
+                                    {(index + 1)+ ". " + this.state.events[index].BOOKING_TITLE}
                                     <br/>
                                     </div>
                                 }
-                                else if (index+1 == array.length){
-                                    return;
-                                }
                                 else{
-                                    return (index + 1)+ ". " + this.props.conflict.EVENTS[index].BOOKING_TITLE;
+                                    return (index + 1)+ ". " + this.state.events[index].BOOKING_TITLE;
                                 }
-                            }) ||   this.props.conflict.EVENTS && this.props.conflict.EVENTS[0].BOOKING_TITLE}
+                            }) ||   this.state.events && this.state.events[0] && this.state.events[0].BOOKING_TITLE}
         
                         </TableCell>
                         <TableCell>{    
-                            this.props.conflict.EVENTS && this.props.conflict.EVENTS[(this.props.conflict.EVENTS.length - 1)].BOOKING_TITLE }
+                            this.state.conflictEvent && this.state.conflictEvent.BOOKING_TITLE }
                         </TableCell>
                     </TableRow>
                     <TableRow id={1}>
                         <TableCell>Course</TableCell>
                         <TableCell>{
-                            this.props.conflict.COURSE_ID && this.props.conflict.COURSE_ID.length > 2 && this.props.conflict.COURSE_ID.map((elem, index, array) => {
-                                if(index+2 < array.length){
+                            this.state.events && this.state.events.length > 1 && this.state.events.map((elem, index, array) => {
+                                if(index+1 < array.length){
                                     return<div>
-                                    {(index+1)+ ". " + this.props.conflict.COURSE_ID[index]}
+                                    {(index+1)+ ". " + 
+                                        (this.state.events[index].SECTIONS &&
+                                        this.state.events[index].SECTIONS.records &&
+                                        this.state.events[index].SECTIONS.records[0].SECTION_ID)}
                                     <br/>
                                     </div>
                                 }
-                                else if (index+1 == array.length){
-                                    return;
-                                }
                                 else{
-                                    return (index+1)+ ". " + this.props.conflict.COURSE_ID[index];
+                                    return (index+1)+ ". " + 
+                                        (this.state.events[index].SECTIONS &&
+                                        this.state.events[index].SECTIONS.records &&
+                                        this.state.events[index].SECTIONS.records[0].SECTION_ID)
                                 }
-                            }) || this.props.conflict.COURSE_ID &&  this.props.conflict.COURSE_ID[0]
-                            }
+                            }) ||   this.state.events && this.state.events[0] &&
+                                    this.state.events[0].SECTIONS &&
+                                    this.state.events[0].SECTIONS.records &&
+                                    this.state.events[0].SECTIONS.records[0].SECTION_ID}
                         </TableCell>
-                        <TableCell >{this.props.conflict.COURSE_ID && this.props.conflict.COURSE_ID[(this.props.conflict.EVENTS.length - 1)]}</TableCell>
+                        <TableCell >{
+                            this.state.conflictEvent &&
+                            this.state.conflictEvent.SECTIONS &&
+                            this.state.conflictEvent.SECTIONS.records &&
+                            this.state.conflictEvent.SECTIONS.records[0].SECTION_ID}
+                        </TableCell>
                     </TableRow>
                     <TableRow id={2} hover="false">
                         <TableCell>Event Time</TableCell>
                         <TableCell>{
-                            this.props.conflict.EVENTS && this.props.conflict.EVENTS.length > 2 && this.props.conflict.EVENTS.map((elem, index, array) => {
-                                if(index + 2 < array.length){
+                            this.state.events && this.state.events.length > 1 && this.state.events.map((elem, index, array) => {
+                                if(index + 1 < array.length){
                                     return<div>
-                                    {(index + 1)+ ". " + moment(this.props.conflict.EVENTS[index].START_TIME).format('h:mm a') + "-" +  moment(this.props.conflict.EVENTS[index].END_TIME).format('h:mm a')}
+                                    {(index + 1)+ ". " + moment(this.state.events[index].START_TIME).format('h:mm a') + "-" +  moment(this.state.events[index].END_TIME).format('h:mm a')}
                                     <br/>
                                     </div>
                                 }
-                                else if (index+1 == array.length){
-                                    return;
-                                }
                                 else{
-                                    return (index+1)+ ". " + moment(this.props.conflict.EVENTS[index].START_TIME).format('h:mm a') + "-" +  moment(this.props.conflict.EVENTS[index].END_TIME).format('h:mm a');
+                                    return (index+1)+ ". " + moment(this.state.events[index].START_TIME).format('h:mm a') + "-" +  moment(this.state.events[index].END_TIME).format('h:mm a');
                                 }
-                            }) ||   this.props.conflict.EVENTS && 
-                                    moment(this.props.conflict.EVENTS[0].START_TIME).format('h:mm a') + "-" +  moment(this.props.conflict.EVENTS[0].END_TIME).format('h:mm a')}
+                            }) ||   this.state.events && this.state.events[0] && 
+                                    moment(this.state.events[0].START_TIME).format('h:mm a') + "-" +  moment(this.state.events[0].END_TIME).format('h:mm a')}
         
                         </TableCell>
                         <TableCell>{    
-                            this.props.conflict.EVENTS && 
-                            moment(this.props.conflict.EVENTS[(this.props.conflict.EVENTS.length - 1)].START_TIME).format('h:mm a') + "-" +  moment(this.props.conflict.EVENTS[(this.props.conflict.EVENTS.length - 1)].END_TIME).format('h:mm a')}
+                            this.state.conflictEvent && 
+                            moment(this.state.conflictEvent.START_TIME).format('h:mm a') + "-" +  moment(this.state.conflictEvent.END_TIME).format('h:mm a')}
                         </TableCell>
                     </TableRow>
                     {/* <TableRow id={3} hover="false">
                         <TableCell>Sections</TableCell>
                         <TableCell>{
-                            this.props.conflict.EVENTS && this.props.conflict.EVENTS.length > 2 && this.props.conflict.EVENTS.map((elem, index, array) => {
+                            this.state.events && this.state.events.length > 2 && this.state.events.map((elem, index, array) => {
                                 if(index+2 < array.length){
                                     return<div>
-                                    {(index+1)+ ". " + (this.props.conflict.EVENTS[index].SECTIONS &&
-                                                        this.props.conflict.EVENTS[index].SECTIONS.records.map((el, i, arr) => {
+                                    {(index+1)+ ". " + (this.state.events[index].SECTIONS &&
+                                                        this.state.events[index].SECTIONS.records.map((el, i, arr) => {
                                                         if (i+1 < arr.length) { 
                                                             return el.SECTION_ID + ", ";
                                                         } else {
@@ -170,17 +186,17 @@ class EventViewEditFull extends Component{
                                     return;
                                 }
                                 else{
-                                    return (index+1)+ ". " + (this.props.conflict.EVENTS[index].SECTIONS &&
-                                    this.props.conflict.EVENTS[index].SECTIONS.records.map((el, i, arr) => {
+                                    return (index+1)+ ". " + (this.state.events[index].SECTIONS &&
+                                    this.state.events[index].SECTIONS.records.map((el, i, arr) => {
                                         if (i+1 < arr.length) { 
                                             return el.SECTION_ID + ", ";
                                         } else {
                                             return el.SECTION_ID;
                                         }}))
                                 }
-                            }) ||   this.props.conflict.EVENTS &&
-                                    this.props.conflict.EVENTS[0].SECTIONS &&
-                                    this.props.conflict.EVENTS[0].SECTIONS.records.map((el, i, arr) => {
+                            }) ||   this.state.events &&
+                                    this.state.events[0].SECTIONS &&
+                                    this.state.events[0].SECTIONS.records.map((el, i, arr) => {
                                         if (i+1 < arr.length) { 
                                             return el.SECTION_ID + ", ";
                                         } else {
@@ -188,9 +204,9 @@ class EventViewEditFull extends Component{
                                         }
                         })}</TableCell>
                         <TableCell >{
-                            this.props.conflict.EVENTS &&
-                            this.props.conflict.EVENTS[this.props.conflict.EVENTS.length - 1].SECTIONS &&
-                            this.props.conflict.EVENTS[this.props.conflict.EVENTS.length - 1].SECTIONS.records.map((elem, index, array) => {
+                            this.state.events &&
+                            this.state.events[this.state.events.length - 1].SECTIONS &&
+                            this.state.events[this.state.events.length - 1].SECTIONS.records.map((elem, index, array) => {
                                 if (index+1 < array.length) { 
                                     return elem.SECTION_ID + ", ";
                                 } else {
