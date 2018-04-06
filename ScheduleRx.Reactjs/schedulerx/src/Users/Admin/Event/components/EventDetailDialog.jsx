@@ -14,6 +14,9 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { FormGroup, FormControlLabel } from "material-ui/Form";
+import Checkbox from "material-ui/Checkbox";
+import Repeat from "material-ui-icons/Repeat";
 
 
 const styles = theme => ({
@@ -45,7 +48,7 @@ class EventDetailDialog extends Component {
   state = {
     title: '',
     details: '',
-
+    repeat: false
   };
 
   cancel = () => {
@@ -57,8 +60,12 @@ class EventDetailDialog extends Component {
     //this.props.onChange(event.target.id, event.target.value);
   };
 
+  handleRepeat = (event) => {
+    this.setState({repeat: event.target.checked});
+  }
+
   handleSave = () => {
-    this.props.onSave(this.state.title, this.state.details);
+    this.props.onSave(this.state.title, this.state.details, this.state.repeat);
   };
 
   render() {
@@ -91,6 +98,17 @@ class EventDetailDialog extends Component {
         </div>
         </DialogContent>
         <DialogActions>
+        <FormControlLabel
+          control={
+            <Checkbox
+              icon={<Repeat />}
+              checkedIcon={<Repeat />}
+              id="repeat"
+              onClick={this.handleRepeat}
+            />
+          }
+          label="Weekly"
+        />
           <Button
               className={classes.btn}
               onClick={this.cancel}>
