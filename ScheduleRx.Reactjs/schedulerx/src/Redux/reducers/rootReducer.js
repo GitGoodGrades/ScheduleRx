@@ -15,7 +15,8 @@ const initialState = {
     conflicts: [],
     redirected: false,
     redirect_date: null,
-    redirect_event: null
+    redirect_event: null,
+    leadsCourses: null
 };
 
 const rootReducer = (state = initialState, action) => {

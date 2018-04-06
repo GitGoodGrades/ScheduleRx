@@ -18,7 +18,11 @@ const mapStateToProps = (state) => ({
     current_schedule: state.currentSchedule,
     registration_schedule: state.registrationSchedule,
     events: state.adminCalendar,
-    open: false
+    redirected: state,
+    redirected_date: state,
+    redirected_event: state,
+    leadsCourses: state
+
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -26,6 +30,8 @@ const mapDispatchToProps = (dispatch) => ({
     loadRooms: () => dispatch(action.searchRooms()),
     loadSections: () => dispatch(action.searchSections()),
     loadSchedules: () => dispatch(action.searchSchedules()),
+    loadLeads: () => dispatch(action.searchLeadsCourses()),
+    clearGlobals: () => dispatch(action.clearEditGlobals())
 });
 
 class CreateEvent extends Component {
@@ -170,6 +176,25 @@ class CreateEvent extends Component {
                 console.log(error);
             });
 
+            if(this.props.redirected){
+                let userId = null;
+                let oldEvent = this.props.redirected_event;
+                let course = this.props.redirected_event.SECTIONS && this.props.redirected_event.SECTIONS.records && this.props.redirected_event.SECTIONS.records[0].COURSE_ID;
+                this.props.leadsCourses && this.props.leadsCourses.map(lead => {
+                    if(lead.COURSE_ID === course){
+                        userId = lead.USER_ID;
+                    }
+                })
+                client.post('messages/create.php', {
+                    USER_ID: userId,
+                    MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
+                    ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
+                    edited. It is now in room ${this.state.temp.ROOM_ID} at  ${moment(this.state.temp.START_TIME).format('MMMM Do YYYY, h:mm:ss a')}`
+                });
+                this.props.clearGlobals();
+                this.props.history.push("/conflicts"); 
+            }
+
         this.setState({
             conflictDialogOpen: false
         })
@@ -198,23 +223,11 @@ class CreateEvent extends Component {
     }
 
     handleEdit = (event, originalEvent) => {
-        client.post(`Bookings/Delete.php`, {
-            BOOKING_ID: event.BOOKING_ID
-        }).then(res => {
-            let temp = this.state.events;
-            temp.map(old => {
-                if(old.BOOKING_ID === event.BOOKING_ID){
-                    temp.splice(temp.indexOf(old), 1);
-                }
-            })
-
-            this.save(event, false, event.START_TIME);
-
-            this.setState({
-                open: false,
-                events: temp,
-                original: originalEvent
-            })})
+        this.save(event, false, event.START_TIME);
+        this.setState({
+            open: false,
+            edit: true
+        })
     }
 
     handleSave = (title, details, repeat) => {
@@ -315,6 +328,39 @@ class CreateEvent extends Component {
             } else {
                 if(!conflictFlag){
                     this.createEvent(temp);
+                    if(this.state.edit === true){
+                        client.post(`Bookings/Delete.php`, {
+                            BOOKING_ID: event.BOOKING_ID
+                        }).then(res => {
+                            let temp = this.state.events;
+                            temp.map(old => {
+                                if(old.BOOKING_ID === event.BOOKING_ID){
+                                    temp.splice(temp.indexOf(old), 1);
+                                }
+                            })
+                            this.setState({
+                                dialogOpen: false,
+                                event: false
+                            })})
+                    }
+                    if(this.props.redirected){
+                        let userId = null;
+                        let oldEvent = this.props.redirected_event;
+                        let course = this.props.redirected_event.SECTIONS && this.props.redirected_event.SECTIONS.records && this.props.redirected_event.SECTIONS.records[0].COURSE_ID;
+                        this.props.leadsCourses && this.props.leadsCourses.map(lead => {
+                            if(lead.COURSE_ID === course){
+                                userId = lead.USER_ID;
+                            }
+                        })
+                        client.post('messages/create.php', {
+                            USER_ID: userId,
+                            MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
+                            ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
+                            edited. It is now in room ${event.ROOM_ID} at  ${moment(event.START_TIME).format('MMMM Do YYYY, h:mm:ss a')}`
+                        });
+                        this.props.clearGlobals();
+                        this.props.history.push("/conflicts"); 
+                    }
                 }
                 else {
                     this.handleConflict(temp, event, repeat, start)
