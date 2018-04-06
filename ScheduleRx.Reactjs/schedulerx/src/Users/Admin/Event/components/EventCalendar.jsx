@@ -22,6 +22,7 @@ class EventCalendar extends Component{
         return(
            <Calendar events={this.props.events} handleEventSelection={this.selectEvent} handleSlotSelection={this.selectSlot}
              defaultView={this.state.view}
+             defaultDate={new Date(this.props.date)}
              views={['month', 'week', 'day']}
              step={5}
              timeslots={6}

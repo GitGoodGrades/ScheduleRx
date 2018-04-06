@@ -27,12 +27,16 @@ class Calendar extends Component {
       }
     }
 
-    this.setState({events: formattedEvents})
+    this.setState({newDate: nextProps.date ? nextProps.date : new Date(), events: formattedEvents})
   };
 
   selectEvent = (event) => {
     this.props.handleEventSelection(event);
   };
+
+  handleNavigate(date, view, action) {
+    this.setState({newDate: moment(date).toDate()})
+  }
 
   selectSlot = (slotInfo) => {
     this.props.handleSlotSelection(slotInfo)
@@ -49,7 +53,8 @@ class Calendar extends Component {
         titleAccessor="BOOKING_TITLE"
         startAccessor='START_TIME'
         endAccessor='END_TIME'
-        defaultDate={new Date()}
+        date={this.state.date}
+        onNavigate={this.handleNavigate}
         onSelectEvent={event => this.selectEvent(event)}
         onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
         eventPropGetter={
@@ -61,9 +66,14 @@ class Calendar extends Component {
             };
       
             if (event.SCHEDULE_ID == null){
-              newStyle.backgroundColor = "red"
+              newStyle.backgroundColor = "tomato"
             }
-      
+
+            if (event.BOOKING_ID == this.props.conflictBookingId){
+              borderRadius: "2px",
+              newStyle.backgroundColor = "orange"
+            }
+
             return {
               className: "",
               style: newStyle

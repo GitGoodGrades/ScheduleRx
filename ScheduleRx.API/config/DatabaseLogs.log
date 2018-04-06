@@ -30,3 +30,34 @@
 2018-04-06T05:44:21+02:00 [SearchLog] No bookings found. ERROR CODE:42000
 2018-04-06T05:44:35+02:00 [SearchLog] No bookings found. ERROR CODE:42000
 2018-04-06T05:44:51+02:00 [SearchLog] No bookings found. ERROR CODE:42000
+2018-04-06T08:04:33+02:00 [EventLog] booking was created.
+2018-04-06T08:04:33+02:00 [EventLog] event_section was created.
+2018-04-06T08:04:33+02:00 [EventLog] ERROR CODE: 22001
+2018-04-06T08:04:33+02:00 [ConflictLog] conflict was created.
+2018-04-06T08:04:33+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:04:33+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:12:10+02:00 [EventLog] booking was created.
+2018-04-06T08:12:10+02:00 [EventLog] event_section was created.
+2018-04-06T08:12:10+02:00 [ConflictLog] conflict was created.
+2018-04-06T08:12:10+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:12:10+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:15:46+02:00 [EventLog] booking was created.
+2018-04-06T08:15:46+02:00 [EventLog] event_section was created.
+2018-04-06T08:15:46+02:00 [ConflictLog] conflict was created.
+2018-04-06T08:15:46+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:15:46+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:18:35+02:00 [EventLog] booking was created.
+2018-04-06T08:18:35+02:00 [EventLog] event_section was created.
+2018-04-06T08:18:35+02:00 [ConflictLog] conflict was created.
+2018-04-06T08:18:35+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:18:35+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:27:57+02:00 [EventLog] booking was created.
+2018-04-06T08:27:57+02:00 [EventLog] event_section was created.
+2018-04-06T08:27:57+02:00 [ConflictLog] conflict was created.
+2018-04-06T08:27:57+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:27:57+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:32:00+02:00 [EventLog] booking was created.
+2018-04-06T08:32:00+02:00 [EventLog] event_section was created.
+2018-04-06T08:32:00+02:00 [ConflictLog] conflict was created.
+2018-04-06T08:32:00+02:00 [ConflictLog] conflict_event was created.
+2018-04-06T08:32:00+02:00 [ConflictLog] conflict_event was created.
