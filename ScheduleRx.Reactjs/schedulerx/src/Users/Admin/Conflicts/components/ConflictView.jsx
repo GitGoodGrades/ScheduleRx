@@ -16,8 +16,12 @@ import Chip from 'material-ui/Chip';
 import Select from 'react-select';
 import Save from 'material-ui-icons/Save';
 import 'react-select/dist/react-select.css';
-import {Divider} from 'material-ui';
+import DialogActions, { Divider } from 'material-ui';
 import Table, { TableBody, TableCell, TableRow, TableHead } from 'material-ui/Table';
+import Edit from 'material-ui-icons/Edit';
+import Done from 'material-ui-icons/Done';
+import Clear from 'material-ui-icons/Clear';
+import Send from 'material-ui-icons/Send';
 
 
 const styles = theme => ({
@@ -46,7 +50,8 @@ const styles = theme => ({
 class EventViewEditFull extends Component{
     state = {
         conflictEvent: null,
-        events: null
+        events: null,
+        denyMessage: ""
     }
 
     componentWillReceiveProps = (nextProps) => {
@@ -66,6 +71,44 @@ class EventViewEditFull extends Component{
     handleClose = () => {
     this.props.onClose();
     };
+
+    selectDeny = () => {
+        this.props.onSelectDeny();
+    };
+
+    selectApprove = () => {
+        this.props.onSelectApprove();
+    }
+
+    selectEdit = () => {
+        this.props.onSelectEdit();
+    }
+
+    selectCancelDeny = () => {
+        this.props.onSelectCancelDeny();
+    }
+
+    selectDenySend = () => {
+        this.props.onSelectDenySend();
+    }
+
+    handleMessageBlur = (event) => {
+        this.props.handleMessage(
+            event.target.id, event.target.value
+        );
+        this.setState({
+            [event.target.id]: event.target.value
+        })
+    }
+
+    selectCancelDeny = () => {
+        this.props.onSelectDenyCancel();
+    }
+
+    exit = () => {
+        this.props.onExit();
+    }
+
     
 
   render(){
@@ -73,13 +116,18 @@ class EventViewEditFull extends Component{
     const bull = <span className={classes.bullet}>•</span>;
     
     return (
+      <div>
       <Dialog
           open={this.props.open}
           onClose={this.handleClose}
           onBackdropClick={this.handleClose}
       >
+        
         <div>
           <Card className={classes.card}>
+          <IconButton variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
+            <Clear></Clear>
+            </IconButton>
             <CardContent className={this.state.edit ? classes.hidden : ''}>
                 <h2>
                     Conflict in room {this.props.conflict.ROOM} on {moment(this.props.conflict.CONFLICT_START).format("MMM Do YYYY")}
@@ -216,20 +264,49 @@ class EventViewEditFull extends Component{
                     </TableRow> */}
                 </TableBody>
             </Table>
-            <h3> Reason: </h3>
+            <h3> Reason for Request: </h3>
             <p>{this.props.conflict.MESSAGE}</p>
             </CardContent>
-            <CardActions className={this.state.edit ? '' : classes.hidden}>
-                 <Button variant="raised" size="small" onClick={this.cancel}>
-                    Cancel
-                </Button> 
-                <Button variant="raised" size="small" onClick={this.handleSave}>
-                    Save
-                </Button>
+            <CardActions>
+            
+                <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectEdit}>
+                Edit Request
+                <Edit></Edit>
+              </Button>
+              <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectDeny}>
+                Deny Request
+                <Done></Done>
+              </Button>
+              <Button variant="raised" color="secondary"className={classes.button} onClick={this.selectApprove}>
+                Approve Request
+                <Done></Done>
+              </Button>
             </CardActions>
           </Card>
         </div>
-      </ Dialog>
+        </ Dialog>
+        <Dialog
+            open={this.props.denyOpen}
+        >
+            <CardContent>
+                <Typography>
+                 {this.props.eventDetails} 
+                </Typography>
+                <textarea onBlur={this.handleMessageBlur} id="denyMessage">
+                </textarea>
+            </CardContent>
+            <CardActions>
+                <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectCancelDeny}>
+                    Cancel Deny
+                    <Clear></Clear>
+                </Button>
+              <Button variant="raised" color="secondary"className={classes.button} onClick={this.selectDenySend}>
+                Deny and Send
+                <Send></Send>
+              </Button>
+            </CardActions>
+        </Dialog>          
+        </div>
   );
   }
   

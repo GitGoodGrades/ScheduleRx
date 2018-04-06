@@ -9,18 +9,23 @@ import ConflictView from './components/ConflictView';
 
 const mapStateToProps = (state) => ({
     conflicts: state.conflicts,
-    
+    leadsCourses: state.leadsCourses
   });
 
 const mapDispatchToProps = (dispatch) => ({
-    onLoad: () => dispatch(action.getConflictList())
+    onLoad: () => dispatch(action.getConflictList()),
+    getLeads: () => dispatch(action.searchLeadsCourses())
 });
 
 class Conflicts extends Component {
     state = {
         conflictId: null,
         dialogOpen: false,
-        conflict: {}
+        conflict: {},
+        denyDialogOpen: false,
+        eventDetailsString: "",
+        denyMessage: "",
+        user: null
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -29,6 +34,8 @@ class Conflicts extends Component {
 
     componentDidMount() {
         this.props.onLoad();
+        this.props.getLeads();
+
     };
 
     openDialog = (id, open) => {
@@ -54,12 +61,93 @@ class Conflicts extends Component {
         })
       };
 
+    handleEdit = () => {
+        //Edit Request Logic Here
+    }
+
+    handleApprove = () => {
+        //Approve Logic Here
+    }
+
+    handleDeny = () => {
+        let events = this.state.conflict.EVENTS;
+        let course = null;
+        let userId = null;
+        let str = "";
+        events && events.map(event => {
+            if(event.SCHEDULE_ID == null)
+            {
+                str = "This event titled \"" + event.BOOKING_TITLE;
+                str += "\" in room " + event.ROOM_ID;
+                str += " scheduled from " + event.START_TIME;
+                str += " to " + event.END_TIME + " will be deleted."
+                str += "To send reschedule suggestions to the event creator, fill out the field below.";
+                let sections = event.SECTIONS.records;
+                course = sections && sections[0].COURSE_ID;
+            }
+        });
+
+        this.props.leadsCourses && this.props.leadsCourses.map(lead => {
+            if(lead.COURSE_ID === course){
+                userId = lead.USER_ID;
+            }
+        })
+        this.setState({
+            dialogOpen: false,
+            denyDialogOpen: true,
+            user: userId,
+            eventDetailsString: str
+        })
+    }
+
+    saveMessage = (id, value) => {
+        this.setState({
+            [id]: value
+        })
+    }
+
+    handleDenySend = () => {
+        client.post('Message/Create.php', {
+            MESSAGE: this.state.denyMessage,
+            USER_ID: this.state.user
+        })
+        this.setState({
+            denyDialogOpen: false
+        })
+    }
+
+    handleSelectDenyCancel = () => {
+        this.setState({
+            denyDialogOpen: false
+        })
+    }
+
+    handleExit = () => {
+        this.setState({
+            dialogOpen: false
+        })
+    }
+
+
 
     render(){
         return(
             <div style={{paddingTop: 35}}>
                 <ConflictTable openConflict={this.openDialog} handleState={this.handleState} save={this.update} conflicts={this.props.conflicts} open={this.openDialog} />
-                <ConflictView open={this.state.dialogOpen} conflict={this.state.conflict} onClose={this.closeConflict}/>
+                <ConflictView open={this.state.dialogOpen} 
+                              conflict={this.state.conflict} 
+                              onClose={this.closeConflict}
+                              onSelectEdit={this.handleEdit}
+                              onSelectDeny={this.handleDeny}
+                              onSelectApprove={this.handleApprove}
+                              denyOpen={this.state.denyDialogOpen}
+                              eventDetails={this.state.eventDetailsString}
+                              userID={this.state.user}
+                              onSelectDenySend={this.handleDenySend}
+                              onSelectDenyCancel={this.handleSelectDenyCancel}
+                              handleMessage={this.saveMessage}
+                              onExit={this.handleExit}
+                />
             </div>
         );
     };
