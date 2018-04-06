@@ -22,6 +22,33 @@ class Logging extends React.Component {
         currentSchedule: {}
     };
 
+    getArchives = () => {
+        let archives = [];
+        let schedules = [];
+
+        client.get('Schedule/Index.php')
+        .then(res => {
+            schedules = res.data.records;
+
+            for(let obj of schedules){
+                if(new Date(obj.END_SEM_DATE) < new Date() && !obj.IS_ARCHIVED){
+                    archives.push(obj.SCHEDULE_ID);
+                }
+            }
+            this.setArchives(archives);
+        })
+    }
+
+    setArchives = (archives) => {
+        client.post('Schedule/Archived.php', {
+            ARCHIVES: archives
+        })
+    }
+
+    componentDidMount = () => {
+        this.getArchives();
+    }
+
     saveSession = (myID, myRole, mySem) => {
         sessionStorage.setItem('myID', myID);
         sessionStorage.setItem('myRole', myRole);
