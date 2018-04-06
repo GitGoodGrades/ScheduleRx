@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as action from "../../Redux/actions/actionCreator";
 import { Redirect, withRouter } from 'react-router-dom';
-import { Admin, Faculty, Student } from '../../configuration/variables';
+import { Admin, Faculty, Student, Lead } from '../../configuration/variables';
 import history from '../History';
 
 const mapStateToProps = (state) => ({
@@ -110,6 +110,11 @@ class TopNavMenu extends Component {
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/Conflicts"
                         className={this.props.role !== Admin ? classes.hidden : classes.seen}>
                         Conflicts/Requests
+                    </NavLink>
+                    <NavLink 
+                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/Messages"
+                        className={this.props.role !== Lead ? classes.hidden : classes.seen}>
+                        Messages
                     </NavLink>
                     <button 
                         className={classes.asText} onClick={this.LogOut}>
