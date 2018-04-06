@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { client } from '../../../configuration/client';
 import history from '../../../App/History';
 import ConflictView from './components/ConflictView';
+import ApproveDialog from './components/ApproveDialog';
 
 const mapStateToProps = (state) => ({
     conflicts: state.conflicts,
@@ -25,7 +26,8 @@ class Conflicts extends Component {
         denyDialogOpen: false,
         eventDetailsString: "",
         denyMessage: "",
-        user: null
+        user: null,
+        approveOpen: false
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -66,7 +68,17 @@ class Conflicts extends Component {
     }
 
     handleApprove = () => {
-        //Approve Logic Here
+        this.setState({
+            approveOpen: true,
+            dialogOpen: false
+        })
+    }
+
+    handleApproveClose = () => {
+        this.setState({
+            approveOpen: false,
+            dialogOpen: true
+        })
     }
 
     handleDeny = () => {
@@ -77,11 +89,11 @@ class Conflicts extends Component {
         events && events.map(event => {
             if(event.SCHEDULE_ID == null)
             {
-                str = "This event titled \"" + event.BOOKING_TITLE;
+                str = "The event \"" + event.BOOKING_TITLE;
                 str += "\" in room " + event.ROOM_ID;
-                str += " scheduled from " + event.START_TIME;
+                str += " from " + event.START_TIME;
                 str += " to " + event.END_TIME + " will be deleted."
-                str += "To send reschedule suggestions to the event creator, fill out the field below.";
+                str += "\nTo send reschedule suggestions to the event creator, fill out the field below.";
                 let sections = event.SECTIONS.records;
                 course = sections && sections[0].COURSE_ID;
             }
@@ -147,6 +159,12 @@ class Conflicts extends Component {
                               onSelectDenyCancel={this.handleSelectDenyCancel}
                               handleMessage={this.saveMessage}
                               onExit={this.handleExit}
+
+                />
+                <ApproveDialog
+                    conflict={this.state.conflict}
+                    open={this.state.approveOpen}
+                    onClose={this.handleApproveClose}
                 />
             </div>
         );

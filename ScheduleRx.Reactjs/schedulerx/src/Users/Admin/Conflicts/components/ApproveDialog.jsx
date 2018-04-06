@@ -18,6 +18,8 @@ import Save from 'material-ui-icons/Save';
 import 'react-select/dist/react-select.css';
 import {Divider} from 'material-ui';
 import Table, { TableBody, TableCell, TableRow, TableHead } from 'material-ui/Table';
+import Clear from 'material-ui-icons/Clear';
+import Send from 'material-ui-icons/Send';
 
 
 const styles = theme => ({
@@ -45,14 +47,14 @@ const styles = theme => ({
 
 class ApproveDialog extends Component{
     state = {
-        conflictEvent: null,
+        conflictEvent: {},
         events: null,
         message: ""
     };
 
     componentWillReceiveProps = (nextProps) => {
-        let temp = [];
-        nextProps.conflict && nextProps.conflict.EVENTS && nextProps.conflict.EVENTS.forEach(element => {
+        /*let temp = [];
+        nextProps.conflict && nextProps.conflict.EVENTS && nextProps.conflict.EVENTS.map(element => {
             if(element.SCHEDULE_ID == null){
                 this.setState({
                     conflictEvent: element
@@ -61,7 +63,11 @@ class ApproveDialog extends Component{
                 temp.push(element)
             }
         });
-        this.setState({events: temp})
+        this.setState({events: temp})*/
+        this.setState({
+            conflictEvent: nextProps.conflict
+        })
+        
     };
 
     handleClose = () => {
@@ -85,7 +91,7 @@ class ApproveDialog extends Component{
                     <Card className={classes.card}>
                         <CardContent className={this.state.edit ? classes.hidden : ''}>
                             <h2>
-                                Approve Requested Event for Room {this.props.conflict.ROOM_ID}
+                                Approve Requested Event for Room {this.state.conflictEvent && this.state.conflictEvent.ROOM}
                             </h2>
                             <h5>The Following Events will be Deleted:</h5>
                             <Table >
@@ -97,7 +103,7 @@ class ApproveDialog extends Component{
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {(this.props.conflict.EVENTS && this.props.conflict.EVENTS.length > 0 && this.props.conflict.EVENTS.map(row => {
+                                    {(this.state.conflictEvent && this.state.conflictEvent.EVENTS && this.state.conflictEvent.EVENTS.map(row => {
                                         return (
                                             <TableRow key={row.BOOKING_TITLE}>
                                                 <TableCell>{row.BOOKING_TITLE}</TableCell>
@@ -109,21 +115,22 @@ class ApproveDialog extends Component{
                                 </TableBody>
                             </Table>
                             <h5>Notify Faculty of changes? (Optional)</h5>
-                            <TextField
+                            <textarea
                                 id="message"
-                                multiline
                                 value={this.state.message}
                                 onChange={this.handleChange}
                                 onBlur={this.handleSave}
-                                margin="normal"
-                            />
+                            >
+                            </textarea>
                         </CardContent>
                         <CardActions>
-                            <Button variant="raised" size="small" onClick={this.handleClose}>
+                            <Button variant="raised" color="secondary" size="small" onClick={this.handleClose}>
                                 Cancel
+                                <Clear></Clear>
                             </Button>
-                            <Button variant="raised" size="small" onClick={this.handleSave}>
+                            <Button variant="raised" color="secondary" size="small" onClick={this.handleSave}>
                                 Save
+                                <Send></Send>
                             </Button>
                         </CardActions>
                     </Card>

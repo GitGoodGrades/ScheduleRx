@@ -297,11 +297,11 @@ class EventViewEditFull extends Component{
             </CardContent>
             <CardActions>
                 <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectCancelDeny}>
-                    Cancel Deny
+                    Cancel
                     <Clear></Clear>
                 </Button>
               <Button variant="raised" color="secondary"className={classes.button} onClick={this.selectDenySend}>
-                Deny and Send
+                Send
                 <Send></Send>
               </Button>
             </CardActions>
