@@ -43,7 +43,13 @@ class Schedules extends Component {
         let tempScheduleList = [];
         client.post(`Schedule/Update.php`,
         {
-            ...schedule
+            SCHEDULE_ID: schedule.SCHEDULE_ID,
+            START_REG_DATE: schedule.START_REG_DATE,
+            END_REG_DATE: schedule.END_REG_DATE,
+            START_SEM_DATE: schedule.START_SEM_DATE,
+            END_SEM_DATE: schedule.END_SEM_DATE,
+            IS_RELEASED: schedule.IS_RELEASED,
+            IS_ARCHIVED: schedule.IS_ARCHIVED
         })
         .then(res => {
             tempScheduleList = this.state.schedules;
@@ -65,7 +71,13 @@ class Schedules extends Component {
     reload = (schedule) => {
         let tempSchedule = this.state.schedules;
         const newSchedule = {
-            ...schedule
+            SCHEDULE_ID: schedule.SCHEDULE_ID,
+            START_REG_DATE: schedule.START_REG_DATE,
+            END_REG_DATE: schedule.END_REG_DATE,
+            START_SEM_DATE: schedule.START_SEM_DATE,
+            END_SEM_DATE: schedule.END_SEM_DATE,
+            IS_RELEASED: schedule.IS_RELEASED,
+            IS_ARCHIVED: schedule.IS_ARCHIVED
         }
         tempSchedule.push(newSchedule);
         this.setState({schedules: tempSchedule, dialogOpen: false})
@@ -117,7 +129,13 @@ class Schedules extends Component {
 
       handleSave(schedule) {
         client.post(`Schedule/Create.php`, {
-            ...schedule
+            SCHEDULE_ID: schedule.SCHEDULE_ID,
+            START_REG_DATE: schedule.START_REG_DATE,
+            END_REG_DATE: schedule.END_REG_DATE,
+            START_SEM_DATE: schedule.START_SEM_DATE,
+            END_SEM_DATE: schedule.END_SEM_DATE,
+            IS_RELEASED: schedule.IS_RELEASED,
+            IS_ARCHIVED: schedule.IS_ARCHIVED
         })
             .then(function (response) {
                 console.log(response);

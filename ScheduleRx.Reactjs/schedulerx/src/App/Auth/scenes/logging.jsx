@@ -5,6 +5,7 @@ import * as action from '../../../Redux/actions/actionCreator';
 import LoginForm from '../components/login';
 import { Redirect } from 'react-router-dom';
 import { Admin, Lead } from '../../../configuration/variables';
+import moment from 'moment';
 
 const mapDispatchToProps = (dispatch) => ({
     sendUser: (USER_ID, USER_ROLE, SEMESTER_ID) => dispatch(action.setUser(
@@ -31,7 +32,9 @@ class Logging extends React.Component {
             schedules = res.data.records;
 
             for(let obj of schedules){
-                if(new Date(obj.END_SEM_DATE) < new Date() && !obj.IS_ARCHIVED){
+                let semDate = moment(obj.END_SEM_DATE);
+                let today = moment();
+                if(today.isAfter(semDate)){
                     archives.push(obj.SCHEDULE_ID);
                 }
             }
