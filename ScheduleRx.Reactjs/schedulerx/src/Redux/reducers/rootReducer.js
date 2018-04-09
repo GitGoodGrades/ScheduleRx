@@ -125,7 +125,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 redirected: true,
                 redirect_date: action.redirect_date,
-                redirect_event: action.event
+                redirect_event: action.redirect_event
             };
         case 'CLEAR_EDIT':
             return {

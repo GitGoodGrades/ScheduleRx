@@ -7,10 +7,10 @@ header('Content-Type: application/json');
 
 include_once '../config/database.php';
 include_once '../SuperCRUD/Detail.php';
-include_once '../config/LogHandler.php';
+
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-print_r(FindRecord('schedule', 'SCHEDULE_ID', $data->SCHEDULE_ID, $conn));
+echo FindRecord('schedule', 'SCHEDULE_ID', $data->SCHEDULE_ID, $conn);

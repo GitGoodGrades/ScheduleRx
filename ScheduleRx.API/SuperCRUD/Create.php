@@ -1,5 +1,8 @@
 <?php
+include_once '../config/LogHandler.php';
+
 function CreateRecord ($tableName, $fields, $conn) {
+    $log = Logger::getLogger('Creating in table -' . $tableName);
     global $stmt;
     $query = ('INSERT INTO ' . $tableName ." SET ");
 
@@ -16,5 +19,12 @@ function CreateRecord ($tableName, $fields, $conn) {
         $stmt->bindValue($colonize, $value);
     }
 
-    return $stmt->execute() ? $tableName . ' was created.' : "ERROR CODE: " . $stmt->errorCode();
+    if ($stmt->execute()) {
+        $log->info("Record was Created CODE: " . $stmt->errorCode());
+        return $tableName . ' was created.';
+    }
+    else {
+      $log->error("Record Not Created ERROR CODE: " . $stmt->errorCode());
+      return $tableName . ' was not created.';
+    } 
 };

@@ -10,6 +10,7 @@ import EventViewFullEdit from '../../../Base Components/eventViewFullEdit';
 import ConflictDialog from './components/ConflictDialog';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import EventView from '../../../Base Components/eventView';
 
 const mapStateToProps = (state) => ({
     courses: state.courseList,
@@ -19,8 +20,8 @@ const mapStateToProps = (state) => ({
     registration_schedule: state.registrationSchedule,
     events: state.adminCalendar,
     redirected: state.redirected,
-    redirected_date: state.redirected_date,
-    redirected_event: state.redirected_event,
+    redirect_date: state.redirect_date,
+    redirected_event: state.redirect_event,
     leadsCourses: state.leadsCourses
 
   });
@@ -53,6 +54,7 @@ class CreateEvent extends Component {
         flag: false,
         message: "",
         open: false,
+        openEventView: false,
         original: {},
         registration: {},
         restart: null,
@@ -60,7 +62,7 @@ class CreateEvent extends Component {
         sections: [],
         start: '',
         temp: {},
-        title: ""
+        title: "",
     };
 
     cancel = () => {
@@ -70,11 +72,19 @@ class CreateEvent extends Component {
     };
 
     componentWillReceiveProps = (nextProps) => {
+        if(nextProps.redirected) {
+            this.setState({
+                open: true,
+                event: nextProps.redirected_event
+            })
+        }
+
         this.setState({
             events: nextProps.events,
             registration: nextProps.registration_schedule,
             current: nextProps.current_schedule,
-            redirected: nextProps.redirected_date
+            redirect_date: nextProps.redirect_date,
+            redirected: nextProps.redirected
         })
     };
 
@@ -142,6 +152,7 @@ class CreateEvent extends Component {
 
     handleClose = () => {
         this.setState({ open: false})
+        this.props.clearGlobals();
     };
 
     handleConflict = (temp, event, flag, start) => {
@@ -282,6 +293,12 @@ class CreateEvent extends Component {
         });
     }
 
+    handleViewClose = () => {
+        this.setState({
+            openEventView: false
+        })
+    }
+
     save = (event, repeat, start) => {
         let scheduleID = null;
         let schedule = this.getSchedule();
@@ -389,7 +406,17 @@ class CreateEvent extends Component {
     }
 
     selectEvent = (event) => {
-        this.setState({event, open: true})
+        let eventStartTime = moment(event.START_TIME);
+        let today = moment();
+        if(today.isAfter(eventStartTime)) {
+            this.setState({
+                event,
+                openEventView: true
+            })
+        }
+        else {
+            this.setState({event, open: true})
+        }
     };
 
     selectSlot = (slot) => {
@@ -408,6 +435,8 @@ class CreateEvent extends Component {
         return complete;
     };
 
+
+
     render(){
         return(
             <div style={{paddingTop: 35}}>
@@ -424,7 +453,7 @@ class CreateEvent extends Component {
                     handleSelectSlot={this.selectSlot} 
                     style={{zIndex: 0}}
                     conflictBookingId={this.props.redirected_event && this.props.redirected_event.BOOKING_ID}
-                    date={this.state.redirected ? this.state.redirected : new Date()}
+                    date={this.props.redirected ? this.props.redirect_date : new Date()}
                 />
                 <EventDetailDialog 
                     start={this.state.start} 
@@ -433,6 +462,14 @@ class CreateEvent extends Component {
                     onSave={this.handleSave}
                     onChange={this.handleChange}
                     onCancel={this.cancel}
+                />
+                <EventView
+                    event={this.state.event} 
+                    open={this.state.openEventView} 
+                    onClose={this.handleViewClose} 
+                    courseList={this.props.courses} 
+                    sectionList={this.props.sections} 
+                    roomList={this.props.rooms} />
                 />
                 <EventViewFullEdit 
                     event={this.state.event} 

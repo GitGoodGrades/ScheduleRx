@@ -5,6 +5,7 @@ import * as action from '../../../Redux/actions/actionCreator';
 import LoginForm from '../components/login';
 import { Redirect } from 'react-router-dom';
 import { Admin, Lead } from '../../../configuration/variables';
+import moment from 'moment';
 
 const mapDispatchToProps = (dispatch) => ({
     sendUser: (USER_ID, USER_ROLE, SEMESTER_ID) => dispatch(action.setUser(
@@ -21,6 +22,35 @@ class Logging extends React.Component {
         registrationSchedule: {},
         currentSchedule: {}
     };
+
+    getArchives = () => {
+        let archives = [];
+        let schedules = [];
+
+        client.get('Schedule/Index.php')
+        .then(res => {
+            schedules = res.data.records;
+
+            for(let obj of schedules){
+                let semDate = moment(obj.END_SEM_DATE);
+                let today = moment();
+                if(today.isAfter(semDate)){
+                    archives.push(obj.SCHEDULE_ID);
+                }
+            }
+            this.setArchives(archives);
+        })
+    }
+
+    setArchives = (archives) => {
+        client.post('Schedule/Archive.php', {
+            ARCHIVES: archives
+        })
+    }
+
+    componentDidMount = () => {
+        this.getArchives();
+    }
 
     saveSession = (myID, myRole, mySem) => {
         sessionStorage.setItem('myID', myID);

@@ -9,7 +9,6 @@ include '../config/database.php';
 include  '../SuperCRUD/Search.php';
 include '../SuperCRUD/Index.php';
 include '../Conflict/FindConflict.php';
-include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();

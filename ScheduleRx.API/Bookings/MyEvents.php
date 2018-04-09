@@ -19,16 +19,22 @@ $database = new Banner_DB();
 $conn2 = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
+
+
 if (!$current) { $log->warn("No Released Schedule"); exit(null); } //Stop if there is no released schedule
 
+
 /* Script
- * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events relevant to that particular user.
- * @param ROLE_ID | role of the user,
- * @param USER_ID | ID of the user,
+ * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events
+ *   relevant to that particular user.
+ *
  *     Student results are all events associated with sections that the student takes in the current schedule.
  *     Faculty results are all events associated with sections that the faculty teaches in the current schedule.
  *     Lead results include the events associated with the sections the lead teaches, and includes
  *     events associated with sections of courses that the lead manages. Conflicting events are not included.
+ *
+ * @param ROLE_ID | role of the user
+ * @param USER_ID | ID of the user
  */
 if ($data->ROLE_ID == '2' || $data->ROLE_ID == '3')
     $results = json_decode(Search( 'teacher_teaches','USER_ID',$data->USER_ID,  $conn2));

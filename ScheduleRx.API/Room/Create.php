@@ -6,13 +6,12 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
 include  '../SuperCRUD/Create.php';
-include_once '../config/LogHandler.php';
+
 
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
-$log = Logger::getLogger("RoomLog");
 
 
 /*  Script - Creates a Room and it's associations to the capabilities table in the database
@@ -28,11 +27,10 @@ $capabilities = $data->CAPABILITIES;
 unset($data->CAPABILITIES);
 
 $response = CreateRecord('room', $data, $conn);
-$log->info($response);
 
 foreach ($capabilities as $caps) {
     $newAssoc = array( "ROOM_ID" => $data->ROOM_ID, "CAPABILITY_ID" =>$caps);
-    $log->info(CreateRecord('room_capabilities', $newAssoc, $conn));
+    CreateRecord('room_capabilities', $newAssoc, $conn);
 }
 
 echo $response;

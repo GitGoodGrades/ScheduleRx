@@ -9,7 +9,6 @@ include_once '../config/database.php';
 include_once '../SuperCRUD/Index.php';
 include_once 'GetSections.php';
 include_once 'GetEventDetail.php';
-include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();

@@ -2,7 +2,8 @@
 include_once '../config/LogHandler.php';
 
 function Search($tableName, $searchKey, $whereValue, $conn) {
-    $log = Logger::getLogger("SearchLog");
+    $log = Logger::getLogger('Searching table -' . $tableName);
+
     $query = ('SELECT * FROM ' . $tableName . " WHERE " . $searchKey . '=' . $whereValue );
     $stmt = $conn->prepare($query);
 
@@ -10,6 +11,7 @@ function Search($tableName, $searchKey, $whereValue, $conn) {
     $num = $stmt->rowCount();
 
     if($num>0){
+        $log->info("Record(s) found. CODE:" . $stmt->errorCode());
         $recordList=array();
         $recordList["records"]=array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -19,7 +21,7 @@ function Search($tableName, $searchKey, $whereValue, $conn) {
         return json_encode($recordList);
     }
     else{
-        $log->info("No " . $tableName . "s found. ERROR CODE:" . $stmt->errorCode());
+        $log->info("No Record(s) found. ERROR CODE:" . $stmt->errorCode());
         return null;
     }
 }
