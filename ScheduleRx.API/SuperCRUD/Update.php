@@ -1,5 +1,8 @@
 <?php
+include_once '../config/LogHandler.php';
+
 function UpdateRecord ($tableName, $fields, $primaryKey, $conn) {
+    $log = Logger::getLogger('Updating in table -' . $tableName);
     global $stmt;
 
     $update = "UPDATE ". $tableName . " SET ";
@@ -19,8 +22,11 @@ function UpdateRecord ($tableName, $fields, $primaryKey, $conn) {
     }
 
     if ($stmt->execute()) {
-        return $tableName . ' was updated. CODE:' .  $stmt->errorCode() ;
-    } else {
-        return $tableName . ' was not updated ERROR CODE:' . $stmt->errorCode();
+        $log->info("Record was Updated CODE: " . $stmt->errorCode());
+        return $tableName . ' was updated.';
+    }
+    else {
+        $log->error("Record Not Updated ERROR CODE: " . $stmt->errorCode());
+        return $tableName . ' was not updated.';
     }
 }

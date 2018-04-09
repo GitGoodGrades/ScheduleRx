@@ -15,17 +15,14 @@ include_once '../config/LogHandler.php';
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
-$log = Logger::getLogger("RoomUpdateLog");
 
 if($data->CAPABILITIES) {
-    $log->info(DeleteRecord('room_capabilities', 'ROOM_ID', $data->ROOM_ID, $conn));
+    DeleteRecord('room_capabilities', 'ROOM_ID', $data->ROOM_ID, $conn);
     foreach ($data->CAPABILITIES as $capInt) {
         $newAssoc = array( "ROOM_ID" => $data->ROOM_ID, "CAPABILITY_ID" =>$capInt);
-        $log->info(CreateRecord('room_capabilities',$newAssoc, $conn));
+        CreateRecord('room_capabilities',$newAssoc, $conn);
     }
 }
 unset($data->CAPABILITIES);
 
-$update = UpdateRecord('room',$data, 'ROOM_ID', $conn);
-$log->info($update);
-echo $update;
+echo UpdateRecord('room',$data, 'ROOM_ID', $conn);
