@@ -13,4 +13,4 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-echo json_encode(FindRecord('schedule', 'SCHEDULE_ID', $data->SCHEDULE_ID, $conn));
+echo FindRecord('schedule', 'SCHEDULE_ID', $data->SCHEDULE_ID, $conn);
