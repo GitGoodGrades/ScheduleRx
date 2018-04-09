@@ -7,6 +7,7 @@ import Schedules from './Schedule/Index';
 import Home from './Home/Home';
 import Leads from './Leads/index';
 import Conflicts from './Conflicts/Index';
+import Rooms from './Room/Index';
 
 // We can add a Log-out Component Here
 
@@ -19,6 +20,7 @@ const AdminRoutes = (
         <Route path="/schedule/list" component={Schedules}/>
         <Route path="/users/leads" component={Leads}/>
         <Route path="/conflicts" component={Conflicts}/>
+        <Route path="/room/list" component={Rooms}/>
     </div>);
 
 export default AdminRoutes;

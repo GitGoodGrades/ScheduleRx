@@ -107,6 +107,11 @@ class TopNavMenu extends Component {
                         Manage Lead Faculty
                     </NavLink>
                     <NavLink 
+                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/room/list"
+                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
+                        Room List
+                    </NavLink>
+                    <NavLink 
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/Conflicts"
                         className={this.props.role !== Admin ? classes.hidden : classes.seen}>
                         Conflicts/Requests

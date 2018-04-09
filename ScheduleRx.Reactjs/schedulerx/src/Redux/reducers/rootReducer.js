@@ -17,7 +17,8 @@ const initialState = {
     redirect_date: null,
     redirect_event: null,
     leadsCourses: null,
-    messages: null
+    messages: null, 
+    capList: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -56,6 +57,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 roomList: action.data
+            };
+        case 'SEARCH_CAPABILITIES':
+            return {
+                ...state,
+                capList: action.data
             };
         case 'SEARCH_SECTIONS':
             return {
