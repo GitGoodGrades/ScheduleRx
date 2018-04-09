@@ -10,6 +10,7 @@ include  '../SuperCRUD/Create.php';
 include 'GetEventDetail.php';
 include '../models/getGUID.php';
 include '../Conflict/Create.php';
+include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();
@@ -17,6 +18,7 @@ $data = json_decode(file_get_contents("php://input"));
 $conflict = false;
 $message = "";
 $BIDs = [];
+$log = Logger::getLogger('EventCreation Detailed Log');
 
 /* Script
  * Creates a new Event in the 'booking' table of the nursing_database, A Unique Identifier generated for each new Event.
@@ -30,19 +32,26 @@ $newID = substr((string)getGUID(),1 , 36);
 $data->BOOKING_ID = $newID;
 
 if ($data->ROOM_ID != 'clinical' && ($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "")) {
-    $conflict = true;
-    $message = $data->MESSAGE;
-    $BIDs = $data->BOOKING_IDs;
-    unset($data->MESSAGE, $data->BOOKING_IDs);
+    if (isset($data->MESSAGE)) {
+        $conflict = true;
+        $message = $data->MESSAGE;
+        $BIDs = $data->BOOKING_IDs;
+    }
+    else { //Attempt Error Recovery
+        $log->warn("Null SCHEDULE_ID supplied with No Attached Message");
+        $log->warn("Adjusting SCHEDULE_ID to current");
+        $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
+        if (!$current) { $log->warn("No Released Schedule"); exit(null); }
+        $data->SCHEDULE_ID = $current->SCHEDULE_ID;
+    }
 }
 
 $sectionEntries = $data->SECTION_ID;
 $initialNote = $data->NOTES;
 $data->DETAILS = $data->NOTES;
 
-unset($data->SECTION_ID, $data->COURSE_ID, $data->NOTES);
+unset($data->SECTION_ID, $data->COURSE_ID, $data->NOTES, $data->MESSAGE, $data->BOOKING_IDs);
 
-//echo CreateRecord('booking', $data, $conn);
 CreateRecord('booking', $data, $conn);
 
 $LastEntry = json_decode(FindRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn));
