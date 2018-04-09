@@ -47,16 +47,39 @@ const styles = theme => ({
 
 class ApproveDialog extends Component{
     state = {
-        conflictEvent: {},
-        events: null,
-        message: ""
+        APPROVED: {},
+        EVENTS: null,
+        MESSAGE: "",
+        CONFLICT_ID:"",
     };
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({
-            conflictEvent: nextProps.conflict
+            conflictEvent: nextProps.conflict,
+            CONFLICT_ID: nextProps.conflict.CONFLICT_ID
         })
         
+    };
+
+    handleSave = () => {
+        let $temp = {
+            APPROVED: "",
+            MESSAGE: this.state.MESSAGE,
+            CONFLICT_ID: this.state.CONFLICT_ID,
+            EVENTS: []
+        };
+
+        (this.state.conflictEvent && this.state.conflictEvent.EVENTS && this.state.conflictEvent.EVENTS.map(row => {
+            if (row.SCHEDULE_ID !== null) {
+                $temp.EVENTS.push(row);
+            }
+            else {
+                $temp.APPROVED = row;
+            }
+        }));
+
+        this.props.onClose($temp);
+        this.props.onClose();
     };
 
     handleClose = () => {
@@ -64,7 +87,7 @@ class ApproveDialog extends Component{
     };
 
     handleChange = (event) => {
-        this.setState({ message: event.target.value })
+        this.setState({ MESSAGE: event.target.value })
     };
 
     render(){
@@ -93,13 +116,15 @@ class ApproveDialog extends Component{
                                 </TableHead>
                                 <TableBody>
                                     {(this.state.conflictEvent && this.state.conflictEvent.EVENTS && this.state.conflictEvent.EVENTS.map(row => {
-                                        return (
-                                            <TableRow key={row.BOOKING_TITLE}>
-                                                <TableCell>{row.BOOKING_TITLE}</TableCell>
-                                                <TableCell>{row.START_TIME}</TableCell>
-                                                <TableCell >{row.END_TIME}</TableCell>
-                                            </TableRow>
-                                        );
+                                        if (row.SCHEDULE_ID !== null) {
+                                            return (
+                                                <TableRow key={row.BOOKING_TITLE}>
+                                                    <TableCell>{row.BOOKING_TITLE}</TableCell>
+                                                    <TableCell>{row.START_TIME}</TableCell>
+                                                    <TableCell>{row.END_TIME}</TableCell>
+                                                </TableRow>
+                                            );
+                                        }
                                     })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
                                 </TableBody>
                             </Table>
@@ -118,7 +143,7 @@ class ApproveDialog extends Component{
                                 <Clear></Clear>
                             </Button>
                             <Button variant="raised" color="secondary" size="small" onClick={this.handleSave}>
-                                Save
+                                Confirm
                                 <Send></Send>
                             </Button>
                         </CardActions>

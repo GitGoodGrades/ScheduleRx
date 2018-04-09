@@ -10,6 +10,8 @@ function Search($tableName, $searchKey, $whereValue, $conn) {
     $stmt->execute();
     $num = $stmt->rowCount();
 
+    $log->debug($query);
+
     if($num>0){
         $log->info("Record(s) found. CODE:" . $stmt->errorCode());
         $recordList=array();

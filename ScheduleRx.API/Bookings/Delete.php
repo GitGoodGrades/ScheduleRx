@@ -15,13 +15,32 @@ $data = json_decode(file_get_contents("php://input"));
 
 /* Script
  * Deletes and event from the 'booking' table and it's associations from the event_sections if  any exist
+ * @param BOOKING_ID | the ID of the event to Delete
  */
-$recordsOfConflict = json_decode(Search('conflict_event', "BOOKING_ID" , "'" . $data->BOOKING_ID . "'" ,$conn));
+$recordsOfConflict = json_decode(Search('conflict_event', "BOOKING_ID" , "'" . $data->BOOKING_ID . "'" , $conn));
+
+echo $recordsOfConflict;
 
 if($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "") {
-    foreach ($recordsOfConflict->records as $cRecord) {
-        DeleteRecord('conflict_event',"CONFLICT_ID", $cRecord->CONFLICT_ID, $conn );
-        DeleteRecord('conflict',"CONFLICT_ID", $cRecord->CONFLICT_ID, $conn );
+    if ($recordsOfConflict != null) {
+        foreach ($recordsOfConflict->records as $cRecord) {
+            DeleteRecord('conflict_event', "CONFLICT_ID", $cRecord["CONFLICT_ID"], $conn);
+            DeleteRecord('conflict', "CONFLICT_ID", $cRecord["CONFLICT_ID"], $conn);
+        }
+    }
+
+    $eventSection = GetSections($data->BOOKING_ID, $conn);
+    $SectionInfo = null;
+    $leadID = null;
+
+    if ($eventSection) {
+        $SectionInfo = json_decode(FindRecord('section', 'SECTION_ID', $eventSection[0]->records->SECTION_ID, $conn));
+        $leadID = json_decode(FindRecord('leads_course natural join course', 'COURSE_ID', $SectionInfo->USER_ID, $conn));
+    }
+
+    if (isset($data->MESSAGE)) {
+        $newMessage = array("USER_ID" => $leadID->USER_ID, "MESSAGE" => $data->MESSAGE, "MSG_ID" => substr((string)getGUID(), 1, 36));
+        CreateRecord('message', $newMessage, $conn);
     }
 }
 else {

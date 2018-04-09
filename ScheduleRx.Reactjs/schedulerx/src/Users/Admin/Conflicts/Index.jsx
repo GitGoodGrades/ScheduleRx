@@ -38,7 +38,7 @@ class Conflicts extends Component {
             schedules: nextProps.schedules,
             conflicts: nextProps.conflicts
         })
-    }
+    };
 
     componentDidMount() {
         this.props.onLoad();
@@ -55,13 +55,13 @@ class Conflicts extends Component {
                 conflict: res.data
             })
         })
-    }
+    };
 
     closeConflict = () => {
         this.setState({
             dialogOpen: false
         })
-    }
+    };
 
     cancel = () => {
         this.setState({
@@ -81,21 +81,25 @@ class Conflicts extends Component {
 
         this.props.setGlobals(selectEvent);
         this.props.history.push('/event/create');
-    }
+    };
 
     handleApprove = () => {
         this.setState({
             approveOpen: true,
             dialogOpen: false
         })
-    }
+    };
 
-    handleApproveClose = () => {
-        this.setState({
-            approveOpen: false,
-            dialogOpen: true
+    handleApproveClose = (Approval) => {
+        client.post(`Bookings/ApproveDelete.php`, {
+            ...Approval
         })
-    }
+            .then(res => {
+                this.setState({conflicts:res.data.records});
+            });
+        this.handleApproveClose();
+        this.closeConflict();
+    };
 
     handleDeny = () => {
         let events = this.state.conflict.EVENTS;
@@ -119,20 +123,20 @@ class Conflicts extends Component {
             if(lead.COURSE_ID === course){
                 userId = lead.USER_ID;
             }
-        })
+        });
         this.setState({
             dialogOpen: false,
             denyDialogOpen: true,
             user: userId,
             eventDetailsString: str
         })
-    }
+    };
 
     saveMessage = (id, value) => {
         this.setState({
             [id]: value
         })
-    }
+    };
 
     handleDenySend = (conflictID) => {
         let tempConflicts = this.state.conflicts;
@@ -141,29 +145,29 @@ class Conflicts extends Component {
             if(conflict.CONFLICT_ID === conflictID) {
                 index = tempConflicts.IndexOf(conflict);
             }
-        })
+        });
         tempConflicts.splice(index, 1);
         client.post('Message/Create.php', {
             MESSAGE: this.state.denyMessage,
             USER_ID: this.state.user
-        })
+        });
         this.setState({
             denyDialogOpen: false,
             conflicts: tempConflicts
         })
-    }
+    };
 
     handleSelectDenyCancel = () => {
         this.setState({
             denyDialogOpen: false
         })
-    }
+    };
 
     handleExit = () => {
         this.setState({
             dialogOpen: false
         })
-    }
+    };
 
 
 
@@ -184,7 +188,6 @@ class Conflicts extends Component {
                               onSelectDenyCancel={this.handleSelectDenyCancel}
                               handleMessage={this.saveMessage}
                               onExit={this.handleExit}
-
                 />
                 <ApproveDialog
                     conflict={this.state.conflict}
