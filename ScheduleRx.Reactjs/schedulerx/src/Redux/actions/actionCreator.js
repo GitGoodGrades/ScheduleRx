@@ -91,7 +91,6 @@ export function searchSchedules() {
         })    
     })
 }
-
 export function searchLeadsCourses(){
     return (dispatch) =>
         client.get(`LeadsCourse/Index.php`) //client.get(`bookings/LeadIndex.php`)
@@ -140,6 +139,17 @@ export function searchRooms() {
             type: 'SEARCH_ROOMS',
             data: res.data
         })});
+}
+
+export function searchCapabilities(){
+    return (dispatch) =>
+        client.get(`Capabilities/Index.php`)
+            .then(res => {
+                dispatch({
+                    type: 'SEARCH_CAPABILITIES',
+                    data: res.data.records
+                })
+            });
 }
 
 export function searchCourses() {

@@ -9,5 +9,5 @@ include_once '../config/LogHandler.php';
 $database = new Database();
 $conn = $database->getConnection();
 
-print_r(GetAll('capability', 'CAPABILITY_ID', $conn));
+echo (GetAll('capabilities', 'CAPABILITY_ID', $conn));
 
