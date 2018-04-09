@@ -10,9 +10,7 @@ include  '../SuperCRUD/Create.php';
 include 'GetEventDetail.php';
 include '../models/getGUID.php';
 include '../Conflict/Create.php';
-include_once '../config/LogHandler.php';
 
-$log = Logger::getLogger('EventLog');
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
@@ -45,14 +43,14 @@ $data->DETAILS = $data->NOTES;
 unset($data->SECTION_ID, $data->COURSE_ID, $data->NOTES);
 
 //echo CreateRecord('booking', $data, $conn);
-$log->info(CreateRecord('booking', $data, $conn));
+CreateRecord('booking', $data, $conn);
 
 $LastEntry = json_decode(FindRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn));
 
 if ($LastEntry) {
     foreach ($sectionEntries as $sec_ID) {
         $newAssoc = array( "SECTION_ID" => $sec_ID, "BOOKING_ID" => $LastEntry->BOOKING_ID, "NOTES" => $initialNote );
-        $log->info(CreateRecord('event_section', $newAssoc, $conn));
+        CreateRecord('event_section', $newAssoc, $conn);
     }
     echo(json_encode(GetDetail($newID, $conn)));
 }

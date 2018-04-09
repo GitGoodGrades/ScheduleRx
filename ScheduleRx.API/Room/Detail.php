@@ -6,7 +6,6 @@ header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
 include_once '../config/database.php';
-include_once '../config/LogHandler.php';
 include_once 'GetRoomDetail.php';
 
 $database = new Database();

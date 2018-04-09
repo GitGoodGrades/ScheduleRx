@@ -28,4 +28,4 @@ foreach($data as $json) {
     UpdateRecord('users', $field2, "USER_ID", $conn);
     CreateRecord('leads_course', $json, $conn);
 }
-$log->debug("Select Level 3 Users Altered to Level 2");
+$log->debug("Selected Level 3 Users Altered to Level 2");

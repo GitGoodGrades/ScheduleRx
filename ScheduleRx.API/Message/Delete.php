@@ -6,7 +6,6 @@ header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../config/database.php';
 include '../SuperCRUD/Detail.php';
-include_once '../config/LogHandler.php';
 
 $database = new Database();
 $conn = $database->getConnection();

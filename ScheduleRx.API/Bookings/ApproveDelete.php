@@ -14,7 +14,7 @@ include_once '../config/LogHandler.php';
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
-$log = Logger::getLogger('EventAssociationsLog');
+$log = Logger::getLogger('ApproveLog');
 
 /* Script
  * Deletes multiple event by ID on approval and updates the requested SCHEDULE_ID of the approved event
@@ -25,12 +25,12 @@ $log = Logger::getLogger('EventAssociationsLog');
 $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
 if (!$current) { $log->warn("No Released Schedule"); exit(null); }
 
-$log->info(DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn ));
-$log->info(DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn ));
+DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
 
-$log->info(UpdateRecord('booking', "BOOKING_ID", $data->APPROVED, $conn));
+UpdateRecord('booking', "BOOKING_ID", $data->APPROVED, $conn);
 
 foreach ($data->EVENTS as $event){
-    $log->info(DeleteRecord('event_section', 'BOOKING_ID', $data->BOOKING_ID, $conn));
-    $log->info(DeleteRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn ));
+    DeleteRecord('event_section', 'BOOKING_ID', $data->BOOKING_ID, $conn);
+    DeleteRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn );
 }

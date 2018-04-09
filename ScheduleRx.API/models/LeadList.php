@@ -10,14 +10,11 @@ function GetList($course_id , $conn){
          INNER JOIN section ON section.SECTION_ID = event_section.SECTION_ID)
          WHERE section.COURSE_ID='" . $course_id ."'";
 
-    //echo "<br/>" . $query . "<br/>";
-
     $stmt = $conn->prepare($query);
 
     $stmt->execute();
     $num = $stmt->rowCount();
-
-    //echo $num;
+    
 
     if($num>0){
         $recordList=array();

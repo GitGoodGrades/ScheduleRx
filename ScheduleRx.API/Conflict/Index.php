@@ -7,7 +7,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../SuperCRUD/Search.php';
 include_once '../SuperCRUD/Index.php';
-include_once '../config/LogHandler.php';
 include_once 'GetConflictEvents.php';
 
 $database = new Database();

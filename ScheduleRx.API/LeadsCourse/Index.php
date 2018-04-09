@@ -5,7 +5,7 @@ header("Content-Type: application/json; charset=UTF-8");
 include_once '../config/database.php';
 include_once '../config/LogHandler.php';
 
-$log = Logger::getLogger('LeadsErrorLog');
+$log = Logger::getLogger('LeadsIndexLog');
 $database = new Database();
 $conn = $database->getConnection();
 
@@ -16,6 +16,7 @@ $stmt->execute();
 $num = $stmt->rowCount();
 
 if($num>0){
+    $log->info("course + leads_course Table Accessed." . "CODE:" . $stmt->errorCode());
     $recordList=array();
     $recordList["records"]=array();
 
@@ -23,6 +24,7 @@ if($num>0){
         extract($row);
         array_push($recordList["records"], $row);
     }
+    
     echo json_encode($recordList);
 }
 else{

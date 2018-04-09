@@ -1,5 +1,9 @@
 <?php
+include_once '../config/LogHandler.php';
+
 function GetAll($tableName, $primaryKey, $conn) {
+    $log = Logger::getLogger('Gathering Records from table -' . $tableName);
+    
     $query = ('SELECT * FROM ' . $tableName. ' ORDER BY ' . $primaryKey. ' DESC');
     $stmt = $conn->prepare($query);
 
@@ -7,6 +11,7 @@ function GetAll($tableName, $primaryKey, $conn) {
     $num = $stmt->rowCount();
 
     if($num>0){
+        $log->info("Records Accessed CODE:" . $stmt->errorCode());
         $recordList=array();
         $recordList["records"]=array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -16,6 +21,7 @@ function GetAll($tableName, $primaryKey, $conn) {
         return json_encode($recordList);
     }
     else{
-        return null; //json_encode( array("message" => "No " . $tableName . "s found.") ;
+        $log->info(" No Records Found ERROR CODE:" . $stmt->errorCode());
+        return null;
     }
 }
