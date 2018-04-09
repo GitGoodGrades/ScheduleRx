@@ -20,8 +20,9 @@ $conn2 = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
 
-
-if (!$current) { $log->warn("No Released Schedule"); exit(null); } //Stop if there is no released schedule
+if ($data->ROLE_ID == '4' || $data->ROLE_ID == '3') {
+    if (!$current) { $log->warn("No Released Schedule"); exit(null); }
+} //Stop if there is no released schedule
 
 
 /* Script

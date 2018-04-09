@@ -31,12 +31,7 @@ export function userCalendar(user, role) {
     let QUERY = null;
     return (dispatch) =>
     
-    {if(role === Lead){
-        QUERY = `Bookings/LeadIndex.php`;
-    } else{
-        QUERY = `Bookings/MyEvents.php`;
-    }    
-        client.post(QUERY,
+    {client.post(`Bookings/MyEvents.php`,
             {
                 USER_ID: user,
                 ROLE_ID: role
@@ -241,13 +236,15 @@ export function searchUsers() {
 }
 
 export function searchMessages(user) {
-    let messages = [];
+    let messages = null;
     return (dispatch) =>
         client.get(`Message/Index.php`)
             .then(res => {
-                for(let obj of res.data.records){
-                    if(obj.USER_ID === user){
-                        messages.push(obj);
+                if(res.data.records && res.data.records > 0){
+                    for(let obj of res.data.records){
+                        if(obj.USER_ID === user){
+                            messages.push(obj);
+                        }
                     }
                 }
 
