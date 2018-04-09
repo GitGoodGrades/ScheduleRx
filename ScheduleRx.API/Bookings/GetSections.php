@@ -27,6 +27,6 @@ function GetSections($bookingID, $conn1) {
         return ($relatedSections);
     }
     else{
-        return null;
+        return [null];
     }
 }
