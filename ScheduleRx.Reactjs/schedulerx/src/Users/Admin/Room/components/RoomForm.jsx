@@ -7,6 +7,8 @@ import  {Dialog,   DialogActions,
     DialogContent, } from 'material-ui';
 import Select from 'react-select';
 import Input, {InputLabel} from 'material-ui/Input';
+import Option from '../../../../Base Components/Option';
+
 
 const styles = theme => ({
   container: {
@@ -58,7 +60,7 @@ class RoomForm extends React.Component {
         this.setState({CAPABILITIES: event})
     };
     handleSave = () => {
-        this.props.onSave(this.state), this.props.resubmit(this.state);
+        this.props.onSave(this.state);
         this.cancel();
         
     };
@@ -125,7 +127,6 @@ return (
                                 onChange={this.handleCapChange}
                                 options={this.props.capabilityOptions}
                                 placeholder="Capabilities"
-                                simpleValue
                                 value={this.state.CAPABILITIES}
                                 optionComponent={Option}
                               />

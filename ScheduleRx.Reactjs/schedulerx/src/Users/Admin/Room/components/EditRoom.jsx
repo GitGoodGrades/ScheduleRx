@@ -42,7 +42,9 @@ class EditRoom extends React.Component {
       LOCATION: null,
       CAPABILITIES: [],
       DESCRIPTION: null,
+      capability_Labels: []
     };
+
     componentWillReceiveProps = (nextProps) => {
         this.setState({
             ROOM_ID: nextProps.room && nextProps.room.ROOM_ID,
@@ -54,26 +56,29 @@ class EditRoom extends React.Component {
             CAPABILITY_LIST: nextProps.capList
         })
     };
+
     handleChange = event => {
       this.setState({
         [event.target.id]: event.target.value,
       });
     };
-    handleCapChange = (event) => {
-        this.setState({CAPABILITIES: event})
-        
+
+    handleCapChange = event => {
+        this.setState({ CAPABILITIES: event })
     };
+
     handleSave = () => {
-        
         this.props.onUpdate(this.state);
-        
     };
+
     cancel = () => {
         this.props.onCancel();
     };
+
 render() {
     const room = this.props.room;
     const {classes} = this.props;
+
 return (
     
     <Dialog
@@ -116,20 +121,19 @@ return (
             />
         </div>
         <div className={classes.control}>
-                              <InputLabel htmlFor="select-multiple" className={classes.label}>Select Capabilities</InputLabel>
-                              <Select
-                                className={classes.Select}
-                                closeOnSelect={true}
-                                removeSelected={true}
-                                multi
-                                onChange={this.handleCapChange}
-                                options={this.props.capabilityOptions}
-                                placeholder="Capabilities"
-                                simpleValue
-                                value={this.state.CAPABILITIES}
-                                optionComponent={Option}
-                              />
-                        </div>
+            <InputLabel htmlFor="select-multiple" className={classes.label}>Select Capabilities</InputLabel>
+            <Select
+                className={classes.Select}
+                closeOnSelect={true}
+                removeSelected={true}
+                multi
+                onChange={this.handleCapChange}
+                options={this.props.capabilityOptions}
+                placeholder="Capabilities"
+                value={this.state.CAPABILITIES}
+                optionComponent={Option}
+            />
+        </div>
         <div>
             <TextField
                 id="DESCRIPTION"

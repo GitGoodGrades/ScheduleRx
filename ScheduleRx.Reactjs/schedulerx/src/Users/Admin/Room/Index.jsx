@@ -29,8 +29,10 @@ class Rooms extends Component{
 
     componentWillReceiveProps = (nextProps) => {
         let capabilityList = [];
+        let room = [];
+
         nextProps.capList && nextProps.capList.map(cap => {
-            capabilityList.push({label: cap.CAPABILITY, value: cap.CAPABILITY})
+            capabilityList.push({label: cap.CAPABILITY, value: cap.CAPABILITY_ID})
         })
 
         this.setState({rooms: nextProps.rooms, capOptions: capabilityList })
@@ -40,10 +42,6 @@ class Rooms extends Component{
         this.props.onLoad();
         this.props.getCapabilities();
     }
-
-    
-
-
 
     openDialog = () => {
         this.setState({
@@ -57,22 +55,15 @@ class Rooms extends Component{
         })
       };
 
-      
-      
-    
-
-
-      openEditDialog = (id) => {
-          client.post(`Room/Detail.php`, {
-              ROOM_ID: id
-          }).then(res => {
-              this.setState({
+    openEditDialog = (id) => {
+        client.post(`Room/Detail.php`, {
+            ROOM_ID: id
+        }).then(res => {
+            this.setState({
                 editDialogOpen: true,
                 room : res.data
             })
-          })
-          
-        
+        })     
     }
 
     cancelEdit = () => {
@@ -81,31 +72,49 @@ class Rooms extends Component{
         })
       };
 
-      reload = (room) => {
-        let tempRoom = this.state.rooms;
-        const newRoom = {
-            ROOM_ID: room.ROOM_ID,
-            CAPACITY: room.CAPACITY,
-            ROOM_NAME: room.ROOM_NAME,
-            LOCATION: room.LOCATION,
-            CAPABILITIES: room.CAPABILITIES,
-            DESCRIPTION: room.DESCRIPTION,
-        }
-        tempRoom.push(newRoom);
-        this.setState({rooms: tempRoom, dialogOpen: false});
+    // reload = (room) => {
+    //     let tempRoom = this.state.rooms;
+    //     const newRoom = {
+    //         ROOM_ID: room.ROOM_ID,
+    //         CAPACITY: room.CAPACITY,
+    //         ROOM_NAME: room.ROOM_NAME,
+    //         LOCATION: room.LOCATION,
+    //         CAPABILITIES: room.CAPABILITIES,
+    //         DESCRIPTION: room.DESCRIPTION,
+    //     }
 
+    //     tempRoom.push(newRoom);
+    //     this.setState({rooms: tempRoom, dialogOpen: false});
+    // }
 
+    handleSave = (room) => {
+        this.save(room);
     }
 
-      handleSave(room) {
+    save = (room) => {
         let capabilities = [];
+        let capLabel = [];
         if(!Array.isArray(room.CAPABILITIES)){
             capabilities = room.CAPABILITIES.split(', ');
         } else {
             room.CAPABILITIES && room.CAPABILITIES.map(element => {
-                capabilities.push(element.value)
+                capabilities.push(element.value);
+                capLabel.push(element.label);
             })
         }
+
+        let tempRooms = this.state.rooms;
+        let newRoomList = this.state.rooms;
+
+        let newRoom = {
+            ROOM_ID: room.ROOM_ID,
+            CAPACITY: room.CAPACITY,
+            ROOM_NAME: room.ROOM_NAME,
+            LOCATION: room.LOCATION,
+            CAPABILITIES: capLabel,
+            DESCRIPTION: room.DESCRIPTION,
+        }
+
         client.post(`Room/Create.php`, {
             ROOM_ID: room.ROOM_ID,
             CAPACITY: room.CAPACITY,
@@ -113,18 +122,37 @@ class Rooms extends Component{
             LOCATION: room.LOCATION,
             CAPABILITIES: capabilities,
             DESCRIPTION: room.DESCRIPTION,
-        })  
+        }).then(res => {
+            newRoomList && newRoomList.map(item => {
+                if(item.ROOM_ID === room.ROOM_ID){
+                    tempRooms.splice((newRoomList.indexOf(item)), 1, newRoom)
+                }
+            })
+            this.setState({rooms: tempRooms, dialogOpen: false})
+        })   
     }
 
     handleUpdate =(room) => {
 
         let capabilities = [];
+        let capLabel = [];
+
         if(!Array.isArray(room.CAPABILITIES)){
             capabilities = room.CAPABILITIES.split(', ');
         } else {
             room.CAPABILITIES && room.CAPABILITIES.map(element => {
-                capabilities.push(element.value)
+                capabilities.push(element.value);
+                capLabel.push(element.label);
             })
+        }
+
+        let newRoom = {
+            ROOM_ID: room.ROOM_ID,
+            CAPACITY: room.CAPACITY,
+            ROOM_NAME: room.ROOM_NAME,
+            LOCATION: room.LOCATION,
+            CAPABILITIES: capLabel,
+            DESCRIPTION: room.DESCRIPTION,
         }
         
         client.post(`Room/Update.php`, {
@@ -138,20 +166,18 @@ class Rooms extends Component{
             let tempRooms = this.state.rooms;
             this.state.rooms && this.state.rooms.map(item => {
                 if(item.ROOM_ID === room.ROOM_ID){
-                    tempRooms.splice((this.state.rooms.indexOf(item)), 1, room)
+                    tempRooms.splice((this.state.rooms.indexOf(item)), 1, newRoom)
                 }
             })
             this.setState({rooms: tempRooms, editDialogOpen: false})
-        })
-        
-        
+        })   
     }
         
     render(){
         return(
            
                 <div style={{paddingTop: 35}}> 
-                    <RoomTable handleState={this.handleState} save={this.update} roomList = {this.state.rooms} open={this.openDialog} openEdit={this.openEditDialog}/>
+                    <RoomTable capabilityOptions={this.state.capOptions} handleState={this.handleState} save={this.update} roomList = {this.state.rooms} open={this.openDialog} openEdit={this.openEditDialog}/>
                     <RoomForm capabilityOptions={this.state.capOptions} onCapChange={this.handleCapChange} onSave={this.handleSave} open={this.state.dialogOpen} onCancel={this.cancel} resubmit={this.reload}/>
                     <EditRoom capabilityOptions={this.state.capOptions} onCapChange={this.handleCapChange} room={this.state.room} onUpdate={this.handleUpdate} open={this.state.editDialogOpen} onCancel={this.cancelEdit} />
                </div>

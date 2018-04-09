@@ -57,6 +57,14 @@ handleChange = event => {
             </TableHead>
             <TableBody>
               {(RoomList && RoomList.length > 0 && RoomList.map(row => {
+                let cap = '';
+                row.CAPABILITIES && row.CAPABILITIES.length > 0 && row.CAPABILITIES.map((elem, index, array) => {
+                  if (index+1 < array.length) { 
+                     cap += elem + ", ";
+                  } else {
+                     cap += elem;
+                  }
+              })
                 return (
                   <TableRow
                      hover
@@ -67,7 +75,7 @@ handleChange = event => {
                     <TableCell>{row.CAPACITY}</TableCell>
                     <TableCell>{row.ROOM_NAME}</TableCell>
                     <TableCell>{row.LOCATION}</TableCell>
-                    <TableCell>{row.CAPABILITIES }
+                    <TableCell>{cap}
                     </TableCell>
                     <TableCell>{row.DESCRIPTION}</TableCell>
                   </TableRow>
