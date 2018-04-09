@@ -13,4 +13,4 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-echo json_encode(FindRecord('users', 'USER_ID', $data->USER_ID, $conn));
+echo FindRecord('users', 'USER_ID', $data->USER_ID, $conn);
