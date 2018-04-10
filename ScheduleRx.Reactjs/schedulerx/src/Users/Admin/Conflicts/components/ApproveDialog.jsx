@@ -62,7 +62,7 @@ class ApproveDialog extends Component{
     };
 
     handleSave = () => {
-        let $temp = {
+        let temp = {
             APPROVED: "",
             MESSAGE: this.state.MESSAGE,
             CONFLICT_ID: this.state.CONFLICT_ID,
@@ -71,19 +71,18 @@ class ApproveDialog extends Component{
 
         (this.state.conflictEvent && this.state.conflictEvent.EVENTS && this.state.conflictEvent.EVENTS.map(row => {
             if (row.SCHEDULE_ID !== null) {
-                $temp.EVENTS.push(row);
+                temp.EVENTS.push(row);
             }
             else {
-                $temp.APPROVED = row;
+                temp.APPROVED = row;
             }
         }));
 
-        this.props.onClose($temp);
-        this.props.onClose();
+        this.props.approve(temp);
     };
 
     handleClose = () => {
-        this.props.onClose();
+        this.props.close();
     };
 
     handleChange = (event) => {
@@ -132,8 +131,7 @@ class ApproveDialog extends Component{
                             <textarea
                                 id="message"
                                 value={this.state.message}
-                                onChange={this.handleChange}
-                                onBlur={this.handleSave}
+                                onBlur={this.handleChange}
                             >
                             </textarea>
                         </CardContent>

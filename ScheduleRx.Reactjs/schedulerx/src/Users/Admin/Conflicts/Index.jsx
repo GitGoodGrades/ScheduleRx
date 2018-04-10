@@ -95,10 +95,12 @@ class Conflicts extends Component {
             ...Approval
         })
             .then(res => {
-                this.setState({conflicts:res.data.records});
+                this.setState({
+                    conflicts:res.data.records,
+                    approveOpen: false,
+                    dialogOpen: true
+                });
             });
-        this.handleApproveClose();
-        this.closeConflict();
     };
 
     handleDeny = () => {
@@ -169,7 +171,12 @@ class Conflicts extends Component {
         })
     };
 
-
+    approveConfirmClose = () => {
+        this.setState({
+            approveOpen: false,
+            dialogOpen: true
+        })
+    };
 
     render(){
         return(
@@ -192,7 +199,8 @@ class Conflicts extends Component {
                 <ApproveDialog
                     conflict={this.state.conflict}
                     open={this.state.approveOpen}
-                    onClose={this.handleApproveClose}
+                    close={this.approveConfirmClose}
+                    approve={this.handleApproveClose}
                 />
             </div>
         );
