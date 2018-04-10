@@ -72,21 +72,6 @@ class Rooms extends Component{
         })
       };
 
-    // reload = (room) => {
-    //     let tempRoom = this.state.rooms;
-    //     const newRoom = {
-    //         ROOM_ID: room.ROOM_ID,
-    //         CAPACITY: room.CAPACITY,
-    //         ROOM_NAME: room.ROOM_NAME,
-    //         LOCATION: room.LOCATION,
-    //         CAPABILITIES: room.CAPABILITIES,
-    //         DESCRIPTION: room.DESCRIPTION,
-    //     }
-
-    //     tempRoom.push(newRoom);
-    //     this.setState({rooms: tempRoom, dialogOpen: false});
-    // }
-
     handleSave = (room) => {
         this.save(room);
     }
@@ -123,11 +108,8 @@ class Rooms extends Component{
             CAPABILITIES: capabilities,
             DESCRIPTION: room.DESCRIPTION,
         }).then(res => {
-            newRoomList && newRoomList.map(item => {
-                if(item.ROOM_ID === room.ROOM_ID){
-                    tempRooms.splice((newRoomList.indexOf(item)), 1, newRoom)
-                }
-            })
+            tempRooms.push(newRoom)
+
             this.setState({rooms: tempRooms, dialogOpen: false})
         })   
     }
