@@ -8,5 +8,5 @@ include  '../SuperCRUD/Index.php';
 $database = new Database();
 $conn = $database->getConnection();
 
-echo json_encode(GetAll('message', 'USER_ID', $conn));
+echo GetAll('message', 'USER_ID', $conn);
 

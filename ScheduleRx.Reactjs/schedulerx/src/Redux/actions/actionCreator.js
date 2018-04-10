@@ -236,11 +236,11 @@ export function searchUsers() {
 }
 
 export function searchMessages(user) {
-    let messages = null;
+    let messages = [];
     return (dispatch) =>
         client.get(`Message/Index.php`)
             .then(res => {
-                if(res.data.records && res.data.records > 0){
+                if(res.data.records && res.data.records.length > 0){
                     for(let obj of res.data.records){
                         if(obj.USER_ID === user){
                             messages.push(obj);
