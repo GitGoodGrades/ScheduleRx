@@ -63,14 +63,14 @@ class ApproveDialog extends Component{
 
     handleSave = () => {
         let temp = {
-            APPROVED: "",
+            APPROVED: {},
             MESSAGE: this.state.MESSAGE,
             CONFLICT_ID: this.state.CONFLICT_ID,
             EVENTS: []
         };
 
         (this.state.conflictEvent && this.state.conflictEvent.EVENTS && this.state.conflictEvent.EVENTS.map(row => {
-            if (row.SCHEDULE_ID !== null) {
+            if (row.SCHEDULE_ID != null) {
                 temp.EVENTS.push(row);
             }
             else {
