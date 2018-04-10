@@ -98,7 +98,7 @@ class Conflicts extends Component {
                 this.setState({
                     conflicts:res.data.records,
                     approveOpen: false,
-                    dialogOpen: true
+                    dialogOpen: false
                 });
             });
     };
