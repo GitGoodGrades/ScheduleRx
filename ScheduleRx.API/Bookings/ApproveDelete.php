@@ -34,20 +34,23 @@ if (!isset($data->EVENTS, $data->APPROVED, $data->CONFLICT_ID, $data->MESSAGE)) 
 DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
 DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
 
-foreach ($data->EVENTS as $event){
+foreach ($data->EVENTS as $event) {
+    $log->info("Deleting Event with ID: " . $event->BOOKING_ID);
     $eventSection = GetSections($event->BOOKING_ID, $conn);
+    $log->info("Getting Sections for Event " . $event->BOOKING_ID);
     $SectionInfo = null;
     $leadID = null;
 
     if ($eventSection) {
-        $SectionInfo = json_decode(FindRecord('section', 'SECTION_ID', $eventSection[0]->records->SECTION_ID, $conn));
-        $leadID = json_decode(FindRecord('leads_course natural join course', 'COURSE_ID', $SectionInfo->USER_ID, $conn));
+        $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
+        if ($leadID != null) {
+            $newMessage = array("USER_ID" => $leadID->USER_ID, "MESSAGE" => $data->MESSAGE, "MSG_ID" => substr((string)getGUID(), 1, 36));
+            CreateRecord('message', $newMessage, $conn);
+        }
     }
-    $newMessage = array( "USER_ID" => $leadID->USER_ID, "MESSAGE" => $data->MESSAGE, "MSG_ID" => substr((string)getGUID(),1 , 36) );
 
-    CreateRecord('message', $newMessage, $conn);
-    DeleteRecord('event_section', 'BOOKING_ID', $event->BOOKING_ID, $conn);
-    DeleteRecord('booking',"BOOKING_ID", $event->BOOKING_ID , $conn );
+    DeleteRecord('event_section', 'BOOKING_ID',  "'" . $event->BOOKING_ID . "'" , $conn);
+    DeleteRecord('booking',"BOOKING_ID",  "'" . $event->BOOKING_ID . "'"  , $conn );
 
     $data->APPROVED->SCHEDULE_ID = $event->SCHEDULE_ID;
 }
