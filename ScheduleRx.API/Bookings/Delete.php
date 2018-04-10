@@ -16,10 +16,10 @@ $data = json_decode(file_get_contents("php://input"));
 /* Script
  * Deletes and event from the 'booking' table and it's associations from the event_sections if  any exist
  * @param BOOKING_ID | the ID of the event to Delete
+ * @param SCHEDULE_ID | the SCHEDULE_ID if the Delete is for a Requested Event
  */
 $recordsOfConflict = json_decode(Search('conflict_event', "BOOKING_ID" , "'" . $data->BOOKING_ID . "'" , $conn));
 
-echo $recordsOfConflict;
 
 if(isset($data->SCHEDULE_ID) && ($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "")) {
     if ($recordsOfConflict != null) {
@@ -56,5 +56,6 @@ else {
         }
     }
 }
+
 DeleteRecord('event_section', 'BOOKING_ID', $data->BOOKING_ID, $conn);
 DeleteRecord('booking',"BOOKING_ID", $data->BOOKING_ID , $conn );
