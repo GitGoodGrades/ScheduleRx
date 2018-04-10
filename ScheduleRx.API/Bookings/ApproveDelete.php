@@ -44,6 +44,7 @@ foreach ($data->EVENTS as $event) {
     if ($eventSection) {
         $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
         if ($leadID != null) {
+            $log->info("Lead ID is : " . $leadID);
             $newMessage = array("USER_ID" => $leadID->USER_ID, "MESSAGE" => $data->MESSAGE, "MSG_ID" => substr((string)getGUID(), 1, 36));
             CreateRecord('message', $newMessage, $conn);
         }

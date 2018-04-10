@@ -11,7 +11,6 @@ function FindRecord($tableName, $PrimaryKey, $value, $conn) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($stmt->execute()) {
-        $log->info("Record Found CODE: " . $stmt->errorCode());
         return json_encode($row);
     }
     else {
