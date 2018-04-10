@@ -114,12 +114,12 @@ class CreateEvent extends Component {
     };
 
     getSchedule = () => {
-        if(moment(this.state.START_TIME).isBetween(
+        if(moment(this.state.start).isBetween(
             this.props.current_schedule.START_SEM_DATE,
             this.props.current_schedule.END_SEM_DATE)){
                 return this.props.current_schedule;
         }
-        else if(moment(this.state.START_TIME).isBetween(
+        else if(moment(this.state.start).isBetween(
             this.props.registration_schedule.START_SEM_DATE,
             this.props.registration_schedule.END_SEM_DATE)){
                 return this.props.registration_schedule;
@@ -311,7 +311,7 @@ class CreateEvent extends Component {
         })
         .then(res => {
             if(res.data == "" || (res.data && res.data.length == 1 && res.data[0].BOOKING_ID === this.state.original.BOOKING_ID)){
-                if(moment(this.start).isBetween(
+                if(moment(start).isBetween(
                     this.props.current_schedule.START_SEM_DATE,
                     this.props.current_schedule.END_SEM_DATE)){
 
