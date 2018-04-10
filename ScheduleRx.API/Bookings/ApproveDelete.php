@@ -18,7 +18,6 @@ $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $log = Logger::getLogger('ApproveLog');
-
 /* Script
  * Deletes multiple event by ID on approval and updates the requested SCHEDULE_ID of the approved event
  * @param EVENTS | list of events ID's to delete
@@ -40,21 +39,22 @@ foreach ($data->EVENTS as $event) {
     $log->info("Getting Sections for Event " . $event->BOOKING_ID);
     $SectionInfo = null;
     $leadID = null;
-
+    $log->info("EventSection " . $eventSection['records'][0]['COURSE_ID']);
     if ($eventSection) {
         $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
         if ($leadID != null) {
             $log->info("Here's the lead " . $leadID);
             $newMessage = array("USER_ID" => $leadID->USER_ID, "MESSAGE" => $data->MESSAGE, "MSG_ID" => substr((string)getGUID(), 1, 36));
+            $log->info("EventSection " . $eventSection['records'][0]['COURSE_ID']);
             CreateRecord('message', $newMessage, $conn);
         }
     }
 
-    DeleteRecord('event_section', 'BOOKING_ID',  "'" . $event->BOOKING_ID . "'" , $conn);
-    DeleteRecord('booking',"BOOKING_ID",  "'" . $event->BOOKING_ID . "'"  , $conn );
-
+    DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
+    DeleteRecord('booking',"BOOKING_ID",   $event->BOOKING_ID , $conn );
     $data->APPROVED->SCHEDULE_ID = $event->SCHEDULE_ID;
 }
 
-UpdateRecord('booking', "BOOKING_ID", $data->APPROVED, $conn);
+unset($data->APPROVED->SECTIONS);
+UpdateRecord('booking', $data->APPROVED ,"BOOKING_ID", $conn);
 echo GetAll('conflict', "CONFLICT_ID", $conn);
