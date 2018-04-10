@@ -39,7 +39,7 @@ if ($data->ROOM_ID != 'clinical' && ($data->SCHEDULE_ID == null || $data->SCHEDU
     else { //Attempt Error Recovery
         $log->warn("Null SCHEDULE_ID supplied with No Attached Message");
         $log->warn("Adjusting SCHEDULE_ID to current");
-        $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
+        $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn));
         if (!$current) { $log->warn("No Released Schedule"); exit(null); }
         $data->SCHEDULE_ID = $current->SCHEDULE_ID;
     }
