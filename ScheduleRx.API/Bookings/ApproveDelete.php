@@ -44,8 +44,17 @@ foreach ($data->EVENTS as $event) {
     if ($eventSection) {
         $log->info("Searching for Lead of This Course");
         $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
+<<<<<<< HEAD
         $log->info("Lead of Course FoundXXXXXXX: " . $leadID->USER_ID);
         CreateMessage($data->MESSAGE, $leadID->USER_ID, $conn);
+=======
+        if ($leadID != null) {
+            $log->info("Here's the lead " . $leadID);
+            $newMessage = array("USER_ID" => $leadID->USER_ID, "MESSAGE" => $data->MESSAGE, "MSG_ID" => substr((string)getGUID(), 1, 36));
+            $log->info("EventSection " . $eventSection['records'][0]['COURSE_ID']);
+            CreateRecord('message', $newMessage, $conn);
+        }
+>>>>>>> 1b02c5aa3ee71a1076bfa8029f0d44d08b52581f
     }
 
     DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
