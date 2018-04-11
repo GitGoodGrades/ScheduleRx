@@ -9,6 +9,7 @@ include_once '../config/Banner_DB.php';
 include_once '../SuperCRUD/Search.php';
 include_once 'LeadIndex.php';
 include_once 'GetEventDetail.php';
+
 include_once '../config/LogHandler.php';
 
 $log = Logger::getLogger('EventLog');
@@ -16,7 +17,8 @@ $database = new Database();
 $conn1 = $database->getConnection();
 $database = new Banner_DB();
 $conn2 = $database->getConnection();
-$data = json_decode(file_get_contents("php://input"));
+$data1 = json_decode(file_get_contents("php://input"));
+$data =  json_decode(FindRecord("users", "USER_ID", $data1->USER_ID, $conn1));
 $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
 
 if ($data->ROLE_ID == '4' || $data->ROLE_ID == '3') {
