@@ -32,7 +32,8 @@ const mapDispatchToProps = (dispatch) => ({
     loadSections: () => dispatch(action.searchSections()),
     loadSchedules: () => dispatch(action.searchSchedules()),
     loadLeads: () => dispatch(action.searchLeadsCourses()),
-    clearGlobals: () => dispatch(action.clearEditGlobals())
+    clearGlobals: () => dispatch(action.clearEditGlobals()),
+    adminCal: () => dispatch(action.adminCalendar())
 });
 
 class CreateEvent extends Component {
@@ -94,6 +95,7 @@ class CreateEvent extends Component {
         this.props.loadSections();
         this.props.loadSchedules();
         this.props.loadLeads();
+        this.props.adminCal();
     };
 
     createEvent = (event) => {
