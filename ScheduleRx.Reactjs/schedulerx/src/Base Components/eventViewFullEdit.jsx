@@ -18,6 +18,8 @@ import Option from './Option';
 import Save from 'material-ui-icons/Save';
 import 'react-select/dist/react-select.css';
 import { connect } from 'react-redux';
+import {client} from "../configuration/client";
+import EditConflictContinueDialog from '../Users/Admin/Event/components/EditConflictContinueDialog';
 
 const styles = theme => ({
   card: {
@@ -43,7 +45,8 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state) => ({
-    redirect: state.redirected
+    redirect: state.redirected,
+    registrationSchedule: state.registrationSchedule
 })
 
 class EventViewEditFull extends Component{
@@ -52,11 +55,96 @@ class EventViewEditFull extends Component{
         date: null, 
         sectionChange: false,
         originalEvent: {},
-        redirection: false
+        redirection: false,
+        confirm: false,
+        conflictDialogOpen: false,
+        conflicts: [],
+        isConflict: false,
+        isRequest: false,
+        message: ""
     }
 
     handleClose = () => {
     this.props.onClose();
+    };
+
+    handleSave = () => {
+        let now = moment();
+        let regStart = this.props.registrationSchedule.START_REG_DATE;
+        let regEnd = this.props.registrationSchedule.END_REG_DATE;
+        let regSemStart = this.props.registrationSchedule.START_SEM_DATE;
+        let regSemEnd = this.props.registrationSchedule.END_SEM_DATE;
+        if(now.isBetween(regStart, regEnd)){
+            if(this.state.start.isBetween(regSemStart, regSemEnd)) {
+                this.setState({
+                    isRequest: false
+                })
+                this.checkForConflicts();
+            }
+            else{
+                this.setState({
+                    isConflict: false,
+                    isRequest: true,
+                    conflictDialogOpen: true
+                })
+            }
+            //if event is between reg semester
+                //and there are no conflicts
+                    //createevent with new info and the regschedule id
+                //if there are conflicts
+                    //create conflict with message, conflictList, scheduleid is null
+            //if event is not between reg semester 
+                //create request
+            
+        }
+        else {
+            this.setState({
+                isRequest: true,
+                isConflict: false,
+                conflictDialogOpen: true
+            })
+            //create request
+        }
+        
+    }
+
+     
+
+    checkForConflicts = () => {
+        let conflicts = [];
+        let room = this.state.room;
+        let end = moment(this.state.end).format('YYYY-MM-DD HH:mm:ss');
+        let start = moment(this.state.start).format('YYYY-MM-DD HH:mm:ss');
+
+        client.post('Bookings/Conflict.php', {
+            START_TIME:  moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+            END_TIME:   moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+            ROOM_ID: this.state.room
+        })
+            .then(res => {
+                if (res.data === "" || this.state.confirm) {
+                    this.setState({
+                        conflicts: conflicts,
+                        isConflict: false
+                    })
+                    this.handleDelete(this.state.originalEvent.BOOKING_ID);
+                    this.setState({confirm:  false});
+                    this.createEditedEvent();
+                   // this.handleSave();
+                   //createEvent with new info and schedule ID
+                }
+                else {
+                    res.data && res.data.map(event => {
+                        conflicts.push(event.BOOKING_ID);
+                    })
+                    this.setState({
+                        conflictDialogOpen: true,
+                        conflicts: conflicts,
+                        isConflict: true,
+                        isRequest: false
+                    })
+                }
+            });
     };
     
     componentWillReceiveProps = (nextProps) => {
@@ -129,8 +217,21 @@ class EventViewEditFull extends Component{
     handleBlur = (event) => {
         this.setState({[event.target.id]: event.target.value});
     };
+
+    handleContinue = () => {
+
+        this.props.delete(this.state.originalEvent.BOOKING_ID);
+        this.createEditedEvent();
+    }
+
+    handleConflictCancel = () => {
+        this.setState({
+            conflictDialogOpen: false
+        })
+    }
     
-    handleSave = () => {
+    
+    createEditedEvent = () => {
         let sections = [];
         let check = this.state.sections;
         if(!Array.isArray(check)){
@@ -140,23 +241,57 @@ class EventViewEditFull extends Component{
                 sections.push(element.value)
             })
         }
-        
 
-        let tempEvent = {
-            BOOKING_ID: this.state.BOOKING_ID,
-            title: this.state.title,
-            room: this.state.room,
-            course: this.state.course,
-            sections: sections,
-            START_TIME: moment(this.state.start).format("YYYY-MM-DD HH:mm:ss"),
-            END_TIME: moment(this.state.end).format("YYYY-MM-DD HH:mm:ss"),
-            details: this.state.details
+        if(this.state.isConflict == false && this.state.isRequest == false) {
+            client.post(`Bookings/Create.php`, {
+                SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+                COURSE_ID: this.state.course,
+                SECTION_ID: sections,
+                ROOM_ID: this.state.room,
+                START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+                END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+                BOOKING_TITLE: this.state.title,
+                NOTES: this.state.details
+            })
         }
+        else if(this.state.isConflict == true && this.state.isRequest == false) {
+            client.post(`Bookings/Create.php`, {
+                SCHEDULE_ID: null,
+                COURSE_ID: this.state.course,
+                SECTION_ID: sections,
+                ROOM_ID: this.state.room,
+                START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+                END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+                BOOKING_TITLE: this.state.title,
+                NOTES: this.state.details,
+                BOOKING_ID: this.state.conflicts,
+                MESSAGE: this.state.message
+            })
+        }
+        else if(this.state.isConflict == false && this.state.isRequest == true) {
+            client.post(`Bookings/Create.php`, {
+                SCHEDULE_ID: null,
+                COURSE_ID: this.state.course,
+                SECTION_ID: sections,
+                ROOM_ID: this.state.room,
+                START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+                END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+                BOOKING_TITLE: this.state.title,
+                NOTES: this.state.details,
+                BOOKING_ID: this.state.conflicts,
+                MESSAGE: this.state.message
+            })
+        }
+        this.setState({
+            conflictDialogOpen: false
+        })
+    }
 
-        this.setState({edit: false})
-
-        this.props.onSave(tempEvent, this.state.originalEvent);
-    };
+    handleMessageBlur = (message) => {
+        this.setState({
+            message: message
+        })
+    }
 
     selectEdit = () => {
         this.setState({ edit: true })
@@ -193,6 +328,7 @@ class EventViewEditFull extends Component{
     const bull = <span className={classes.bullet}>•</span>;
     
     return (
+    <div>
       <Dialog
           open={this.props.open}
           onClose={this.handleClose}
@@ -244,6 +380,7 @@ class EventViewEditFull extends Component{
                     <InputLabel htmlFor="section-helper" className={classes.label}>Select Room</InputLabel>
                     <Select
                         className={classes.Select}
+                        onChange={this.handleRoomChange}
                         closeOnSelect
                         options={this.props.roomList && this.props.roomList.map( row => 
                             row = {label: row.ROOM_ID, value: row.ROOM_ID}
@@ -316,6 +453,14 @@ class EventViewEditFull extends Component{
           </Card>
         </div>
       </ Dialog>
+        <EditConflictContinueDialog
+            onContinue={this.handleContinue}
+            onCancel={this.handleConflictCancel}
+            open={this.state.conflictDialogOpen}
+            onMessageBlur={this.handleMessageBlur}
+            
+        />
+    </div>
   );
   }
   
