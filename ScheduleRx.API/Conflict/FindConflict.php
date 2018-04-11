@@ -23,11 +23,12 @@ function findConflict( $tableName, $booking_ID ,$start, $end, $room , $conn) {
             ($record->START_TIME < $end && $end < $record->END_TIME) ||        //End in Your Time Frame
             ($record->START_TIME == $start && $record->END_TIME == $end)
         ) {
-            if ($booking_ID && ($booking_ID != $record->BOOKING_ID)) {
-                array_push($conflicts, $record);
-            } else {
-                array_push($conflicts, $record);
+            if ($booking_ID) {
+                if ($booking_ID == $record->BOOKING_ID) {
+                    continue;
+                }
             }
+            array_push($conflicts, $record);
         }
 
     }
