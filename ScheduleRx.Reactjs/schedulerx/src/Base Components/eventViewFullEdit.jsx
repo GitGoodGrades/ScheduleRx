@@ -178,13 +178,13 @@ class EventViewEditFull extends Component{
         
         let original = {
             BOOKING_ID: nextProps.event.BOOKING_ID,
-            room: nextProps.event.ROOM_ID,
-            course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
-            sections: selectSections,
-            title: nextProps.event.BOOKING_TITLE,
-            details: nextProps.event.NOTES ? nextProps.event.NOTES : '',
-            start: nextProps.event.START_TIME,
-            end: nextProps.event.END_TIME,
+            ROOM_ID: nextProps.event.ROOM_ID,
+            COURSE_ID: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
+            SECTION_ID: selectSections,
+            BOOKING_TITLE: nextProps.event.BOOKING_TITLE,
+            NOTES: nextProps.event.NOTES ? nextProps.event.NOTES : '',
+            START_TIME: nextProps.event.START_TIME,
+            END_TIME: nextProps.event.END_TIME,
             sectionOptions: sections,
             date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD")
         };
@@ -199,7 +199,7 @@ class EventViewEditFull extends Component{
             //start: nextProps.event.START_TIME,
             //end: nextProps.event.END_TIME,
             sectionOptions: sections,
-            date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD"),
+            //date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD"),
             originalEvent: original
         })
     }
@@ -223,7 +223,19 @@ class EventViewEditFull extends Component{
     };
 
     cancel = () => {
-        this.setState({edit: false})
+        const event = this.state.originalEvent;
+        this.setState({
+            edit: false,            
+            edit: true,
+            room: event.ROOM_ID,
+            course: event.COURSE_ID,
+            sections: event.SECTION_ID,
+            title: event.BOOKING_TITLE,
+            details: event.NOTES ? event.NOTES : '',
+            start: event.START_TIME,
+            end: event.END_TIME,
+            date: moment(event.START_TIME).format("YYYY-MM-DD")
+        })
     };
     
     handleBlur = (event) => {
@@ -306,7 +318,18 @@ class EventViewEditFull extends Component{
     }
 
     selectEdit = () => {
-        this.setState({ edit: true })
+        const event = this.state.originalEvent;
+        this.setState({ 
+            edit: true,
+            room: event.ROOM_ID,
+            course: event.COURSE_ID,
+            sections: event.SECTION_ID,
+            title: event.BOOKING_TITLE,
+            details: event.NOTES ? event.NOTES : '',
+            start: event.START_TIME,
+            end: event.END_TIME,
+            date: moment(event.START_TIME).format("YYYY-MM-DD")
+        })
     }
 
     handleDuplicate = () => {

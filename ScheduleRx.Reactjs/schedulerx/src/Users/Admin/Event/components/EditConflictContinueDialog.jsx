@@ -44,7 +44,8 @@ class EditConflictContinueDialog extends Component {
                 <Card>
                     <CardContent>
                         <Typography>
-                            The changes you have made to this event will cause a conflict. 
+                            The changes you made to this event will cause a conflict, or you are trying
+                            to edit outside of registration. 
                             If you continue, your event will be deleted, and an event request with
                             an optional message will be sent to the administrator.
                         </Typography>
