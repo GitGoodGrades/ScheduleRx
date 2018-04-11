@@ -52,7 +52,8 @@ const mapStateToProps = (state) => ({
 class EventViewEditFull extends Component{
     state = {
         edit: false,
-        date: null, 
+        date: null,
+        sectionOptions: [],
         sectionChange: false,
         originalEvent: {},
         redirection: false,
@@ -61,6 +62,13 @@ class EventViewEditFull extends Component{
         conflicts: [],
         isConflict: false,
         isRequest: false,
+        room: '',
+        course: '',
+        sections: [],
+        title: "",
+        details: '',
+        start: '',
+        end: '',
         message: ""
     }
 
@@ -75,7 +83,7 @@ class EventViewEditFull extends Component{
         let regSemStart = this.props.registrationSchedule.START_SEM_DATE;
         let regSemEnd = this.props.registrationSchedule.END_SEM_DATE;
         if(now.isBetween(regStart, regEnd)){
-            if(this.state.start.isBetween(regSemStart, regSemEnd)) {
+            if(moment(this.state.start).isBetween(regSemStart, regSemEnd)) {
                 this.setState({
                     isRequest: false
                 })
@@ -95,7 +103,6 @@ class EventViewEditFull extends Component{
                     //create conflict with message, conflictList, scheduleid is null
             //if event is not between reg semester 
                 //create request
-            
         }
         else {
             this.setState({
@@ -126,16 +133,15 @@ class EventViewEditFull extends Component{
                     this.setState({
                         conflicts: conflicts,
                         isConflict: false
-                    })
-                    this.handleDelete(this.state.originalEvent.BOOKING_ID);
-                    this.setState({confirm:  false});
-                    this.createEditedEvent();
+                    }, this.handleContinue())
+                    
                    // this.handleSave();
                    //createEvent with new info and schedule ID
                 }
                 else {
                     res.data && res.data.map(event => {
-                        conflicts.push(event.BOOKING_ID);
+                        if(event.BOOKING_ID !== this.state.originalEvent.BOOKING_ID)
+                        {conflicts.push(event.BOOKING_ID)};
                     })
                     this.setState({
                         conflictDialogOpen: true,
@@ -147,6 +153,12 @@ class EventViewEditFull extends Component{
             });
     };
     
+    componentDidMount = () => {
+        this.setState({
+            room: this.state.originalEvent.ROOM_ID
+        })
+    }
+
     componentWillReceiveProps = (nextProps) => {
         if(nextProps.redirect){
             this.setState({
@@ -178,14 +190,14 @@ class EventViewEditFull extends Component{
         };
 
         this.setState({ 
-            BOOKING_ID: nextProps.event.BOOKING_ID,
-            room: nextProps.event.ROOM_ID,
-            course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
-            sections: selectSections,
-            title: nextProps.event.BOOKING_TITLE,
-            details: nextProps.event.NOTES ? nextProps.event.NOTES : '',
-            start: nextProps.event.START_TIME,
-            end: nextProps.event.END_TIME,
+            //BOOKING_ID: nextProps.event.BOOKING_ID,
+            //room: nextProps.event.ROOM_ID,
+            //course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
+            //sections: selectSections,
+            //title: nextProps.event.BOOKING_TITLE,
+            //details: nextProps.event.NOTES ? nextProps.event.NOTES : '',
+            //start: nextProps.event.START_TIME,
+            //end: nextProps.event.END_TIME,
             sectionOptions: sections,
             date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD"),
             originalEvent: original
