@@ -3,7 +3,7 @@
 /*
  * Function for Determining if an event conflicts with an existing event in the database
  */
-function findConflict( $tableName,$start, $end, $room , $conn) {
+function findConflict( $tableName, $booking_ID ,$start, $end, $room , $conn) {
     $allBookings = json_decode(Search($tableName, 'ROOM_ID', $room . " AND SCHEDULE_ID IS NOT NULL", $conn));
     $conflicts = [];
     if ($allBookings == null) {
@@ -22,7 +22,13 @@ function findConflict( $tableName,$start, $end, $room , $conn) {
             ($record->START_TIME < $start && $start < $record->END_TIME) || //Start in Your Time Frame
             ($record->START_TIME < $end && $end < $record->END_TIME) ||        //End in Your Time Frame
             ($record->START_TIME == $start && $record->END_TIME == $end)
-        ) array_push($conflicts,$record);                              //if so, add this record conflict array
+        ) {
+            if ($booking_ID && ($booking_ID != $record->BOOKING_ID)) {
+                array_push($conflicts, $record);
+            } else {
+                array_push($conflicts, $record);
+            }
+        }
 
     }
 

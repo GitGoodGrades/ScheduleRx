@@ -18,4 +18,9 @@ $data = json_decode(file_get_contents("php://input"));
  * Determines if there is a conflict and returns the event(s) for witch the given Room information conflicts
  * (This is only conflict Detection) no data is added to the database. and no records are altered
  */
-echo findConflict( 'booking',$data->START_TIME, $data->END_TIME, $data->ROOM_ID, $conn);
+if (isset($data->BOOKING_ID)) {
+    echo findConflict( 'booking', $data->BOOKING_ID, $data->START_TIME, $data->END_TIME, $data->ROOM_ID, $conn);
+}
+else {
+    echo findConflict( 'booking', null, $data->START_TIME, $data->END_TIME, $data->ROOM_ID, $conn);
+}
