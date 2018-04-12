@@ -226,8 +226,7 @@ class EventViewEditFull extends Component{
     cancel = () => {
         const event = this.state.originalEvent;
         this.setState({
-            edit: false,            
-            edit: true,
+            edit: false,
             room: event.ROOM_ID,
             course: event.COURSE_ID,
             sections: event.SECTION_ID,
@@ -338,7 +337,7 @@ class EventViewEditFull extends Component{
     }
 
     handleDelete = () => {
-        this.props.delete(this.state.BOOKING_ID)
+        this.props.delete(this.state.originalEvent.BOOKING_ID)
     }
 
     handleChangeDate = (event) => {
