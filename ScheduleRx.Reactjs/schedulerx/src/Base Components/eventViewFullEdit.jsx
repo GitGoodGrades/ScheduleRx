@@ -20,6 +20,7 @@ import 'react-select/dist/react-select.css';
 import { connect } from 'react-redux';
 import {client} from "../configuration/client";
 import EditConflictContinueDialog from '../Users/Admin/Event/components/EditConflictContinueDialog';
+import ReactToPrint from "react-to-print";
 
 const styles = theme => ({
   card: {

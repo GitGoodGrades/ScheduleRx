@@ -3,6 +3,7 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import './react-big-calendar.css';
 import {withStyles} from 'material-ui/styles';
+import ReactToPrint from "react-to-print";
 
 // Setup the localizer by providing the moment Object
 
@@ -44,45 +45,53 @@ class Calendar extends Component {
 
   render(){
     return(
-    <div className="text-center">
-      <BigCalendar
-        {...this.props}
-        selectable
-        style={{height: 500}}
-        events={this.props.events.length > 0 ? this.props.events : [] }
-        titleAccessor="BOOKING_TITLE"
-        startAccessor='START_TIME'
-        endAccessor='END_TIME'
-        date={this.state.date}
-        onNavigate={this.handleNavigate}
-        onSelectEvent={event => this.selectEvent(event)}
-        onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
-        eventPropGetter={
-          (event, start, end, isSelected) => {
-            let newStyle = {
-              backgroundColor: "lightgrey",
-              color: 'black',
-              borderRadius: "4px",
-              marginLeft: "3px",
-              marginRight: "2px"
-            };
-      
-            if (event.SCHEDULE_ID == null){
-              newStyle.backgroundColor = "tomato"
-            }
+      <div>
+        <ReactToPrint
+            trigger={() => <a href="#">Print</a>}
+            content={() => this.componentRef}
+        />
+        <div className="text-center"
+          ref={el => (this.componentRef = el)}
+        >
+        <BigCalendar
+          {...this.props}
+          selectable
+          style={{height: 500}}
+          events={this.props.events.length > 0 ? this.props.events : [] }
+          titleAccessor="BOOKING_TITLE"
+          startAccessor='START_TIME'
+          endAccessor='END_TIME'
+          date={this.state.date}
+          onNavigate={this.handleNavigate}
+          onSelectEvent={event => this.selectEvent(event)}
+          onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
+          eventPropGetter={
+            (event, start, end, isSelected) => {
+              let newStyle = {
+                backgroundColor: "lightgrey",
+                color: 'black',
+                borderRadius: "4px",
+                marginLeft: "3px",
+                marginRight: "2px"
+              };
+        
+              if (event.SCHEDULE_ID == null){
+                newStyle.backgroundColor = "tomato"
+              }
 
-            if (event.BOOKING_ID == this.props.conflictBookingId){
-              borderRadius: "2px",
-              newStyle.backgroundColor = "yellow"
-            }
+              if (event.BOOKING_ID == this.props.conflictBookingId){
+                borderRadius: "2px",
+                newStyle.backgroundColor = "yellow"
+              }
 
-            return {
-              className: "",
-              style: newStyle
-            };
+              return {
+                className: "",
+                style: newStyle
+              };
+            }
           }
-        }
-      />
+        />
+      </div>
     </div>
     )
   }

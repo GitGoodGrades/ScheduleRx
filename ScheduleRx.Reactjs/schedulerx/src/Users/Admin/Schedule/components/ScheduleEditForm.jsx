@@ -124,6 +124,7 @@ class ScheduleEditForm extends React.Component {
                     margin="normal"
                     required={true}
                     defaultValue={this.state.SCHEDULE_ID}
+                    disabled
                 />
             </div>
             <div>

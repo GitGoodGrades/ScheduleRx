@@ -6,6 +6,8 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import moment from 'moment';
 import Dialog from 'material-ui/Dialog';
+import ReactToPrint from "react-to-print";
+
 
 const styles = theme => ({
   card: {
@@ -61,7 +63,13 @@ class EventView extends Component{
           onClose={this.handleClose}
           onBackdropClick={this.handleClose}
       >
-        <div>
+      <ReactToPrint
+            trigger={() => <a href="#">Print</a>}
+            content={() => this.componentRef}
+        />
+        <div className="text-center"
+          ref={el => (this.componentRef = el)}
+        >
           <Card className={classes.card}>
             <CardContent>
               <Typography className={classes.title}>Room: {event && event.ROOM_ID}</Typography>
@@ -82,7 +90,7 @@ class EventView extends Component{
                 </Typography>
             </CardContent>
           </Card>
-        </div>
+      </div>
       </ Dialog>
   );
   }
