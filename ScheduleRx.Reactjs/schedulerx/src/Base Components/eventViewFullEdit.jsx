@@ -126,7 +126,8 @@ class EventViewEditFull extends Component{
         client.post('Bookings/Conflict.php', {
             START_TIME:  moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
             END_TIME:   moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
-            ROOM_ID: this.state.room
+            ROOM_ID: this.state.room,
+            BOOKING_ID: this.state.originalEvent.BOOKING_ID
         })
             .then(res => {
                 if (res.data === "" || this.state.confirm) {
