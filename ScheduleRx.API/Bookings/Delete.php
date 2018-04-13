@@ -7,10 +7,12 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once  '../SuperCRUD/Delete.php';
 include_once  '../SuperCRUD/Search.php';
+include_once '../SuperCRUD/Update.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
+$current = json_decode(Search("schedule", "IS_RELEASED", "0 AND IS_ARCHIVED=0", $conn));
 
 /* Script
  * Deletes and event from the 'booking' table and it's associations from the event_sections if  any exist
@@ -46,9 +48,11 @@ else {
     if ($recordsOfConflict) {
         foreach ($recordsOfConflict->records as $cRecord) {
             DeleteRecord('conflict_event',"BOOKING_ID", $data->BOOKING_ID, $conn );
-            $temp = json_decode(Search('conflict_event', "CONFLICT_ID" , "'" . $cRecord->CONFLICT_ID . "'" ,$conn));
+            $temp = json_decode(Search('conflict_event', "CONFLICT_ID" , "'" . $cRecord->CONFLICT_ID . "'" , $conn));
 
             if(count($temp->records) < 2) {
+                $updateInfo = array("BOOKING_ID" => $temp->records[0]->BOOKING_ID, "SCHEDULE_ID" => $current->records[0]->SCHEDULE_ID );
+                UpdateRecord('booking', $updateInfo, 'BOOKING_ID', $conn);
                 DeleteRecord('conflict_event',"CONFLICT_ID", $cRecord->CONFLICT_ID, $conn );
                 DeleteRecord('conflict',"CONFLICT_ID", $cRecord->CONFLICT_ID, $conn );
             }
