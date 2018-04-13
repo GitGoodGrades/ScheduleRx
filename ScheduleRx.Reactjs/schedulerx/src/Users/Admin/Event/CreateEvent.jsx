@@ -22,8 +22,8 @@ const mapStateToProps = (state) => ({
     redirected: state.redirected,
     redirect_date: state.redirect_date,
     redirected_event: state.redirect_event,
-    leadsCourses: state.leadsCourses
-
+    leadsCourses: state.leadsCourses,
+    users: state.userList
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -33,7 +33,8 @@ const mapDispatchToProps = (dispatch) => ({
     loadSchedules: () => dispatch(action.searchSchedules()),
     loadLeads: () => dispatch(action.searchLeadsCourses()),
     clearGlobals: () => dispatch(action.clearEditGlobals()),
-    adminCal: () => dispatch(action.adminCalendar())
+    adminCal: () => dispatch(action.adminCalendar()),
+    getUsers: () => dispatch(action.searchUsers())
 });
 
 class CreateEvent extends Component {
@@ -96,6 +97,7 @@ class CreateEvent extends Component {
         this.props.loadSchedules();
         this.props.loadLeads();
         this.props.adminCal();
+        this.props.getUsers();
     };
 
     createEvent = (event) => {
@@ -456,6 +458,8 @@ class CreateEvent extends Component {
                     style={{zIndex: 0}}
                     conflictBookingId={this.props.redirected_event && this.props.redirected_event.BOOKING_ID}
                     date={this.props.redirected ? this.props.redirect_date : new Date()}
+                    users={this.props.users}
+                    rooms={this.props.rooms}
                 />
                 <EventDetailDialog 
                     start={this.state.start} 
@@ -471,7 +475,7 @@ class CreateEvent extends Component {
                     onClose={this.handleViewClose} 
                     courseList={this.props.courses} 
                     sectionList={this.props.sections} 
-                    roomList={this.props.rooms} />
+                    roomList={this.props.rooms} 
                 />
                 <EventViewFullEdit 
                     event={this.state.event} 

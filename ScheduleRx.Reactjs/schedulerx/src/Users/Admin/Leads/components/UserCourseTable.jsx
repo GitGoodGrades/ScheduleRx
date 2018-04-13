@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableRow, TableHead } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import Select from 'material-ui/Select';
 import {MenuItem} from 'material-ui/Menu';
@@ -43,6 +43,12 @@ class UserCourseTable extends Component {
         return (
         <Paper>
             <Table >
+                <TableHead>
+                    <TableRow>
+                        <TableCell><h2>Courses</h2></TableCell>
+                        <TableCell><h2>Leads</h2></TableCell>
+                    </TableRow>
+                </TableHead>
                 <TableBody>
                 {leads && leads.length > 0 && leads.map(row => {
                     return (

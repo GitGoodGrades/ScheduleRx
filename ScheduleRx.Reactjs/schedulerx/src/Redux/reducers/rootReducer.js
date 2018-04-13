@@ -18,7 +18,8 @@ const initialState = {
     redirect_event: null,
     leadsCourses: null,
     messages: null, 
-    capList: null
+    capList: null,
+    userList: null
 };
 
 const rootReducer = (state = initialState, action) => {

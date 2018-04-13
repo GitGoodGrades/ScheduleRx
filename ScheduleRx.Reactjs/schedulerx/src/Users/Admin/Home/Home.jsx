@@ -4,6 +4,8 @@ import EventView from '../../../Base Components/eventView';
 import {connect} from 'react-redux';
 import * as action from '../../../Redux/actions/actionCreator';
 import { withStyles } from 'material-ui/styles';
+import { client } from '../../../configuration/client';
+import CalendarFilter from '../../../Base Components/CalendarFilter'
 
 
 const styles = theme => ({
@@ -29,6 +31,7 @@ const mapStateToProps = (state) => ({
     courses: state.courseList,
     rooms: state.roomList,
     sections: state.sectionList,
+    users: state.userList
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -36,16 +39,22 @@ const mapDispatchToProps = (dispatch) => ({
     loadCourses: () => dispatch(action.searchCourses()),
     loadRooms: () => dispatch(action.searchRooms()),
     loadSections: () => dispatch(action.searchSections()),
+    getUsers: () => dispatch(action.searchUsers())
 });
 
 class EmptyHome extends Component {
     state = { events: [], event: {}, open: false};
 
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({events: nextProps.events})
+    }
+
     componentDidMount() {
         this.props.onLoad(),
         this.props.loadCourses(),
         this.props.loadRooms(),
-        this.props.loadSections()
+        this.props.loadSections(), 
+        this.props.getUsers()
     };
     handleSelectSlot = () => {
         console.log();
@@ -58,6 +67,37 @@ class EmptyHome extends Component {
     handleClose = () => {
         this.setState({ open: false})
     }
+
+    filterEvents = (filter, option) => {
+        if(filter === 'user' && option != null){
+            client.post(`Bookings/MyEvents.php`,
+                {
+                    USER_ID: option,
+                })
+                .then(res => {
+                    this.setState({events: res.data});
+                })
+        } else if (filter === 'room' && option != null){
+            client.post(`Bookings/indexFilter.php`,
+                {
+                    FIELD: 'ROOM_ID',
+                    VALUE: option
+                })
+                .then(res => {
+                    this.setState({events: res.data});
+                })
+        } else if (filter === 'semester' && option != null){
+            client.post(`Bookings/indexFilter.php`,
+                {
+                    FIELD: 'SEMESTER_ID',
+                    VALUE: option
+                })
+                .then(res => {
+                    this.setState({events: res.data});
+                })
+        } 
+      }
+
     render() {
         const {classes} = this.props;
         return (
@@ -65,9 +105,14 @@ class EmptyHome extends Component {
                 className={classes.root}
             >
                 <div className={classes.container}>
+                <CalendarFilter
+                userList={this.props.users}
+                roomList={this.props.rooms}
+                selectFilter={this.filterEvents}
+            />    
                 <Calendar
                     className={classes.cal}
-                    events={this.props.events}
+                    events={this.state.events}
                     handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
                     views={['month', 'week', 'day']}

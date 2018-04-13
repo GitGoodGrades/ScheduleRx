@@ -46,10 +46,7 @@ class Calendar extends Component {
   render(){
     return(
       <div>
-        <ReactToPrint
-            trigger={() => <a href="#">Print</a>}
-            content={() => this.componentRef}
-        />
+        
         <div className="text-center"
           ref={el => (this.componentRef = el)}
         >
@@ -57,7 +54,7 @@ class Calendar extends Component {
           {...this.props}
           selectable
           style={{height: 500}}
-          events={this.props.events.length > 0 ? this.props.events : [] }
+          events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
           titleAccessor="BOOKING_TITLE"
           startAccessor='START_TIME'
           endAccessor='END_TIME'
@@ -92,6 +89,10 @@ class Calendar extends Component {
           }
         />
       </div>
+      <ReactToPrint
+            trigger={() => <a href="#">Print</a>}
+            content={() => this.componentRef}
+        />
     </div>
     )
   }
