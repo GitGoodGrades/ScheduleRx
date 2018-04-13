@@ -159,9 +159,30 @@ class Rooms extends Component{
         return(
            
                 <div style={{paddingTop: 35}}> 
-                    <RoomTable capabilityOptions={this.state.capOptions} handleState={this.handleState} save={this.update} roomList = {this.state.rooms} open={this.openDialog} openEdit={this.openEditDialog}/>
-                    <RoomForm capabilityOptions={this.state.capOptions} onCapChange={this.handleCapChange} onSave={this.handleSave} open={this.state.dialogOpen} onCancel={this.cancel} resubmit={this.reload}/>
-                    <EditRoom capabilityOptions={this.state.capOptions} onCapChange={this.handleCapChange} room={this.state.room} onUpdate={this.handleUpdate} open={this.state.editDialogOpen} onCancel={this.cancelEdit} />
+                    <RoomTable 
+                        capabilityOptions={this.state.capOptions} 
+                        handleState={this.handleState} 
+                        save={this.update} 
+                        roomList = {this.state.rooms} 
+                        open={this.openDialog} 
+                        openEdit={this.openEditDialog}
+                    />
+                    <RoomForm 
+                        capabilityOptions={this.state.capOptions} 
+                        onCapChange={this.handleCapChange} 
+                        onSave={this.handleSave} 
+                        open={this.state.dialogOpen} 
+                        onCancel={this.cancel} 
+                        resubmit={this.reload}
+                    />
+                    <EditRoom 
+                        capabilityOptions={this.state.capOptions} 
+                        onCapChange={this.handleCapChange} 
+                        room={this.state.room} 
+                        onUpdate={this.handleUpdate} 
+                        open={this.state.editDialogOpen} 
+                        onCancel={this.cancelEdit} 
+                    />
                </div>
             
         );
