@@ -16,7 +16,7 @@ $conn = $database->getConnection();
 $con = $banner->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 
-$RxInfo = json_decode(FindRecord('users', 'USER_ID', $data->USER_ID, $con));
+$RxInfo = json_decode(FindRecord('users', 'USER_ID', $data->USER_ID, $conn));
 $bannerInfo = json_decode(FindRecord('users', 'USER_ID', $data->USER_ID, $con));
 
 

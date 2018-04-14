@@ -49,7 +49,7 @@ class UserCourseTable extends Component {
                 UserRole: event.value,
             };
         }
-        client.post(`Users/Promote`, {
+        client.post(`Users/Promote.php`, {
             USER_ID: row,
             PROMOTE: event.value
         });
