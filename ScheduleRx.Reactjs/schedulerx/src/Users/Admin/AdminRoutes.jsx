@@ -8,7 +8,7 @@ import Home from './Home/Home';
 import Leads from './Leads/index';
 import Conflicts from './Conflicts/Index';
 import Rooms from './Room/Index';
-
+import Roles from './Roles/index'
 // We can add a Log-out Component Here
 
 const AdminRoutes = (
@@ -21,6 +21,7 @@ const AdminRoutes = (
         <Route path="/users/leads" component={Leads}/>
         <Route path="/conflicts" component={Conflicts}/>
         <Route path="/room/list" component={Rooms}/>
+        <Route path="/faculty/list" component={Roles}/>
     </div>);
 
 export default AdminRoutes;
