@@ -1,6 +1,6 @@
 //import axios from 'axios';
 import {client} from '../../configuration/client';
-import { Lead, Faculty } from '../../configuration/variables';
+import { Lead, Faculty, Admin } from '../../configuration/variables';
 
 export function adminCalendar() {
     return (dispatch) =>
@@ -209,7 +209,7 @@ export function searchUsers() {
 
 
                 for(let obj of userList){
-                    if(obj.ROLE_ID === Lead || obj.ROLE_ID === Faculty){
+                    if(obj.ROLE_ID === Admin ||obj.ROLE_ID === Lead || obj.ROLE_ID === Faculty){
                         facultyList.push(obj);
                     }
                 }
