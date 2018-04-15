@@ -1,6 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/database.php';
@@ -14,11 +15,14 @@ $conn = $database->getConnection();
 /* Script
  * Returns the All conflict records and appends event details
  */
-$tableSql = "conflict";
 
-$results = json_decode((GetAll($tableSql, 'CONFLICT_ID',  $conn)));
+$results = json_decode(GetAll('conflict', 'CONFLICT_ID',  $conn));
 
-foreach ($results->records as $record) {
+if (!$results) {
+    exit(null);
+}
+
+foreach ($results['records'] as $record) {
     $record->COURSE_ID = [];
     $record->ROOM = null;
     $record->TYPE = "Conflict";
