@@ -102,6 +102,7 @@ class EventEditView extends Component{
             onBlur={this.handleSave}
             margin="normal"
             defaultValue={this.findNote(event && event.SECTIONS)}
+            inputProps={{maxLength: 250}}
         />
         </CardContent>
       </Card>

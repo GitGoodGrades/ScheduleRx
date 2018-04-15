@@ -43,7 +43,7 @@ class CreateEvent extends Component {
         conflictDialogOpen: false,
         conflictFlag: false,
         conflictRequestString: "",
-        course: '',
+        course: null,
         courses: [],
         current: {},
         details: "",
@@ -60,8 +60,8 @@ class CreateEvent extends Component {
         original: {},
         registration: {},
         restart: null,
-        room: '',
-        sections: [],
+        room: null,
+        sections: null,
         start: '',
         temp: {},
         title: "",
@@ -424,11 +424,14 @@ class CreateEvent extends Component {
     };
 
     selectSlot = (slot) => {
-        this.setState({
-          start: moment(slot.start).format('YYYY-MM-DD HH:mm:ss'),
-          end: moment(slot.end).format('YYYY-MM-DD HH:mm:ss'),
-          dialogOpen: true
-        });
+        if(this.state.room && this.state.course && this.state.sections && moment(slot.start).isAfter(moment())){
+            this.setState({
+                start: moment(slot.start).format('YYYY-MM-DD HH:mm:ss'),
+                end: moment(slot.end).format('YYYY-MM-DD HH:mm:ss'),
+                dialogOpen: true
+            });
+        }
+        
     };
 
     valid = () => {

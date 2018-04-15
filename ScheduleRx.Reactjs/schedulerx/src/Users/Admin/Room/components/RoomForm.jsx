@@ -85,6 +85,7 @@ return (
                 onChange={this.handleChange}
                 margin="normal"
                 required={true}
+                inputProps={{maxLength: 250}}
             />
         </div>
         <div>
@@ -95,6 +96,8 @@ return (
                 onChange={this.handleChange}
                 margin="normal"
                 required={true}
+                type="number"
+                inputProps={{maxLength: 3}}
             />
         </div>
         <div>
@@ -114,7 +117,7 @@ return (
                 className={classes.textField}
                 onChange={this.handleChange}
                 margin="normal"
-                required={false}
+                required={true}
             />
         </div>
         <div className={classes.control}>
