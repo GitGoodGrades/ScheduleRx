@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import Select from 'react-select';
 import {MenuItem} from 'material-ui/Menu';
 import {client} from '../../../../configuration/client';
+import {SystemAdminIDs} from '../../../../configuration/variables';
 import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 class UserCourseTable extends Component {
@@ -15,20 +16,22 @@ class UserCourseTable extends Component {
         let facList = nextProps.users;
         let temp = [];
         facList && facList.map(fac => {
-            if(fac.ROLE_ID == 1) {
+            if(SystemAdminIDs.indexOf(fac.USER_ID) == -1){
+                if(fac.ROLE_ID == 1) {
                 temp.push({
                     UserID: fac.USER_ID,
                     // UserName: fac.FIRSTNAME + " " + fac.LASTNAME,
                     UserRole: 1
                 })
+                } else if(fac.ROLE_ID == 2 || fac.ROLE_ID == 3){
+                    temp.push({
+                        UserID: fac.USER_ID,
+                        // UserName: fac.FIRSTNAME + " " + fac.LASTNAME,
+                        UserRole: 0
+                    })
+                }
             }
-            else if(fac.ROLE_ID == 2 || fac.ROLE_ID == 3){
-                temp.push({
-                    UserID: fac.USER_ID,
-                    // UserName: fac.FIRSTNAME + " " + fac.LASTNAME,
-                    UserRole: 0
-                })
-            }
+           
         })
 
         this.setState({faculty: temp});

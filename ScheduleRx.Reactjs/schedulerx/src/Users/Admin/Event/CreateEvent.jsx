@@ -315,9 +315,13 @@ class CreateEvent extends Component {
         })
         .then(res => {
             if(res.data == "" || (res.data && res.data.length == 1 && res.data[0].BOOKING_ID === this.state.original.BOOKING_ID)){
-                if(moment(start).isBetween(
-                    this.props.current_schedule.START_SEM_DATE,
-                    this.props.current_schedule.END_SEM_DATE)){
+                if((!moment(start).isBetween(
+                    this.props.registration_schedule.START_SEM_DATE,
+                    this.props.registration_schedule.END_SEM_DATE)) 
+                    || 
+                    (!moment().isBetween(
+                        this.props.registration_schedule.START_REG_DATE,
+                        this.props.registration_schedule.END_REG_DATE))){
 
                     scheduleID = null;
                     conflictFlag = true;

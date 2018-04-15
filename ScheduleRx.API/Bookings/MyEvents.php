@@ -67,6 +67,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 $myEvents = [];
 
 foreach ($allBookings['records'] as $record ) {
+    if (!$results) break;
     foreach ($results->records as $myRecord ) {
 
         if ($record['SECTION_ID'] == $myRecord->SECTION_ID) {
