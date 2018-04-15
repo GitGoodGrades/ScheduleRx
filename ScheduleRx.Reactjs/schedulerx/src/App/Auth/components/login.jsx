@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import { NavLink } from 'react-router-dom';
+import TextField from 'material-ui/TextField';
 
 const styles = theme => ({
     container: {
@@ -27,6 +28,7 @@ const styles = theme => ({
         border: '1px solid #767676',
         borderRadius: '2px',
         paddingLeft: '.2em',
+        background: 'white'
     },
     title: {
         color: 'white',
@@ -63,6 +65,10 @@ const styles = theme => ({
 
 class LoginForm extends React.Component {
 
+    state = {
+        valid: true
+    };
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -70,6 +76,12 @@ class LoginForm extends React.Component {
   handleSave = () => {
       this.props.onSave(this.state);
   };
+
+  handleValidate = () => {
+      this.setState({
+          valid: false
+      })
+  }
 
   render() {
     const { classes } = this.props;
@@ -80,24 +92,42 @@ class LoginForm extends React.Component {
             <div className={classes.title}><h1 className={classes.title}>SCHEDULERx</h1></div>
             <h2 className={classes.subTitle}>A Scheduling app for ULM nursing</h2>
             <form>
-
+                    <p
+                        hidden={this.props.validLogin ? true : false}
+                    >
+                        *Username or password is incorrect
+                    </p>
                     <div>
-                        <input placeholder={"CAMPUS WIDE ID"}
-                               className={classes.loginfo}
-                               name="USER_ID"
-                               onChange={this.handleChange}
-                               />
+                        <TextField  placeholder={this.state.USER_ID || this.state.valid ? "CAMPUS WIDE ID" : "*REQUIRED"}
+                                style={this.state.USER_ID || this.state.valid ? {} : {border: "1px solid red"}}
+                                className={classes.loginfo}
+                                name="USER_ID"
+                                onChange={this.handleChange}
+                                InputProps={{disableUnderline: 'true'}}
+                                inputProps={{maxLength: 8}}
+                                required
+                                />
                     </div>
+                    
                     <div>
-                        <input placeholder="PASSWORD"
-                               className={classes.loginfo}
-                               name="USER_PASSWORD"
-                               type="password"
-                               onChange={this.handleChange}
-                               />
+                        <TextField placeholder={this.state.USER_PASSWORD || this.state.valid ? "PASSWORD" : "*REQUIRED"}
+                                style={this.state.USER_PASSWORD || this.state.valid? {} : {border: "1px solid red"}}
+                                className={classes.loginfo}
+                                name="USER_PASSWORD"
+                                type="password"
+                                onChange={this.handleChange}
+                                InputProps={{disableUnderline: 'true'}}
+                                inputProps={{maxLength: 20}}
+                                required
+                                />
                     </div>
-                 <button type="button" className={classes.LoginButton} onClick={this.handleSave}>login</button>
-                 <div className={classes.regbutton}>
+                    
+                <button 
+                    type="button" 
+                    className={classes.LoginButton} 
+                    onClick={this.state.USER_ID && this.state.USER_PASSWORD ? this.handleSave : this.handleValidate}
+                >login</button>
+                <div className={classes.regbutton}>
                     <NavLink
                         style={{color: 'white', fontSize: '14px', marginLeft: '4px'}}
                         to="/register">

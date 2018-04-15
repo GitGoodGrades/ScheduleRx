@@ -10,6 +10,7 @@ import Dialog, { DialogContent, DialogTitle } from 'material-ui/Dialog';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Select from 'material-ui/Select';
+import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 const styles = theme => ({
   dialogSelect: {
@@ -42,7 +43,7 @@ handleChange = event => {
           const {classes} = this.props;
           return(
               <Paper>
-                
+              <LoadWrapper open={this.props.roomList && this.props.roomList.length > 0 ? false : true} />
           <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>List Of Rooms</h1>
                 <Table>
             <TableHead>

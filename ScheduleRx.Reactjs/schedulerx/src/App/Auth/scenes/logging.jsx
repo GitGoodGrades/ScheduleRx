@@ -20,7 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
 class Logging extends React.Component {
     state = {
         registrationSchedule: {},
-        currentSchedule: {}
+        currentSchedule: {},
+        validLogin: true
     };
 
     getArchives = () => {
@@ -76,6 +77,11 @@ class Logging extends React.Component {
                 this.props && this.props.sendUser(USER, ROLE, SEMESTER);
                 this.saveSession(USER, ROLE, SEMESTER);
             }
+            else {
+                this.setState({
+                    validLogin: false
+                })
+            }
         });
 
 
@@ -96,7 +102,10 @@ class Logging extends React.Component {
         }
         return(
             <div style={{height: '100%'}}>
-                <LoginForm onSave={this.handleSave}/>
+                <LoginForm 
+                    onSave={this.handleSave}
+                    validLogin={this.state.validLogin}
+                    />
             </div>
         );
     };

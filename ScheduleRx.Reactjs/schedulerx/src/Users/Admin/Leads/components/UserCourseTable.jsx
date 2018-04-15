@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import Select from 'material-ui/Select';
 import {MenuItem} from 'material-ui/Menu';
 import {client} from '../../../../configuration/client';
+import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 class UserCourseTable extends Component {
     state = {
@@ -42,6 +43,7 @@ class UserCourseTable extends Component {
         const {leads, faculty} = this.props;  
         return (
         <Paper>
+            <LoadWrapper open={leads && leads.length > 0 ? false : true} />
             <Table >
                 <TableHead>
                     <TableRow>

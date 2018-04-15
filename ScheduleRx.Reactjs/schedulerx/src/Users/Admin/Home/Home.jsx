@@ -22,7 +22,7 @@ const styles = theme => ({
         overflow: 'hidden',
     },
     cal: {
-        height: '50%',
+        height: '90%',
     }
 });
 

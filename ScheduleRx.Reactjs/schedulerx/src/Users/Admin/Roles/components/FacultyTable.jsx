@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import Select from 'react-select';
 import {MenuItem} from 'material-ui/Menu';
 import {client} from '../../../../configuration/client';
+import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 class UserCourseTable extends Component {
     state = {
@@ -65,6 +66,7 @@ class UserCourseTable extends Component {
                         ];
         return (
         <Paper>
+            <LoadWrapper open={faculty.length > 0 ? false : true} />
             <Table >
                 <TableHead>
                     <TableRow>

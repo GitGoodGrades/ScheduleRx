@@ -4,6 +4,7 @@ import moment from 'moment';
 import './react-big-calendar.css';
 import {withStyles} from 'material-ui/styles';
 import ReactToPrint from "react-to-print";
+import LoadWrapper from './LoadWrapper';
 
 // Setup the localizer by providing the moment Object
 
@@ -14,7 +15,9 @@ const styles = theme => ({
 
 class Calendar extends Component {
   state = {
-    events: []
+    events: null,
+    width: window.innerWidth,
+    height: window.innerHeight
   };
 
   componentWillReceiveProps = (nextProps) => {
@@ -44,20 +47,27 @@ class Calendar extends Component {
   };
 
   render(){
+    const height = this.state.height * .8;
+    const min = new Date();
+    const max = new Date();
+    min.setHours(6, 0, 0);
+    max.setHours(20, 0, 0);
     return(
       <div>
-        
+        <LoadWrapper open={this.state.events == null ? true : false}/>
         <div className="text-center"
           ref={el => (this.componentRef = el)}
         >
         <BigCalendar
           {...this.props}
           selectable
-          style={{height: 500}}
+          style={{height: height}}
           events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
           titleAccessor="BOOKING_TITLE"
           startAccessor='START_TIME'
           endAccessor='END_TIME'
+          min={min}
+          max={max} 
           date={this.state.date}
           onNavigate={this.handleNavigate}
           onSelectEvent={event => this.selectEvent(event)}

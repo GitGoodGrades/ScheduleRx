@@ -10,6 +10,7 @@ import { withStyles } from 'material-ui/styles';
 import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
 import IconButton from 'material-ui/IconButton';
+import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 const styles = theme => ({
   dialogSelect: {
@@ -19,7 +20,7 @@ const styles = theme => ({
 
 class ConflictTable extends Component {
     state = {
-        conflicts: [],
+        conflicts: null,
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,6 +48,7 @@ class ConflictTable extends Component {
         const {conflicts} = this.state;
         return (
         <Paper>
+            <LoadWrapper open={this.state.conflicts == null ? true : false}/>
             <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>Conflicts/Room Requests</h1>
             <Table>
                 <TableHead>
