@@ -32,6 +32,13 @@ const styles = theme => ({
         borderRadius: 2,
         marginTop: 5,
     },
+    invalid: {
+      fontFamily: 'Open Sans',
+      minWidth: 200,
+      border: '1px solid red',
+      borderRadius: 2,
+      marginTop: 5,
+  },
     btn: {
         fontFamily: 'Open Sans'
     },
@@ -48,7 +55,8 @@ class EventDetailDialog extends Component {
   state = {
     title: '',
     details: '',
-    repeat: false
+    repeat: false,
+    valid: true
   };
 
   cancel = () => {
@@ -56,16 +64,23 @@ class EventDetailDialog extends Component {
   };
 
   handleBlur = (event) => {
-    this.setState({[event.target.id]: event.target.value})
-    //this.props.onChange(event.target.id, event.target.value);
+    this.setState({[event.target.id]: event.target.value});
   };
 
   handleRepeat = (event) => {
     this.setState({repeat: event.target.checked});
   }
 
+  validate = () => {
+    this.setState({valid: true})
+  }
+
   handleSave = () => {
-    this.props.onSave(this.state.title, this.state.details, this.state.repeat);
+    if(this.state.title && this.state.title !== ''){
+      this.props.onSave(this.state.title, this.state.details, this.state.repeat);
+    }else{
+      this.setState({valid: false})
+    }
   };
 
   render() {
@@ -80,21 +95,22 @@ class EventDetailDialog extends Component {
               <h1 className={classes.title}>EVENT DETAILS</h1>
         <div>
           <input
-            className={classes.field}
+            className={this.state.valid ? classes.field : classes.invalid}
             id="title"
             onBlur={this.handleBlur}
-            placeholder="EVENT TITLE"
-          >
-      </input>
+            onChange={this.validate}
+            placeholder={this.state.valid ? "EVENT TITLE" : "*REQUIRED"}
+            maxLength={50}
+          />
         </div>
         <div>
           <textarea
             className={classes.field}
             id="details"
             onBlur={this.handleBlur}
-          >
-      </textarea>
-  </div>
+            maxLength={50}
+          />
+        </div>
         </div>
         </DialogContent>
         <DialogActions>

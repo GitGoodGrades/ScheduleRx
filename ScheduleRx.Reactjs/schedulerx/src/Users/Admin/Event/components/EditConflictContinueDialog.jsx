@@ -52,6 +52,7 @@ class EditConflictContinueDialog extends Component {
                         <textarea
                             onBlur={this.handleBlur}
                             id="message"
+                            maxLength={250}
                         >
                         </textarea>
                     </CardContent>

@@ -402,6 +402,7 @@ class EventViewEditFull extends Component{
                         className={classes.field}
                         id="title"
                         onBlur={this.handleBlur}
+                        maxLength={50}
                         placeholder={event && event.BOOKING_TITLE}
                     >
                     </input>
@@ -409,6 +410,7 @@ class EventViewEditFull extends Component{
                     id="details"
                     onBlur={this.handleBlur}
                     placeholder={event && event.DETAILS}
+                    maxLength={50}
                     >
                     </input>
               </Typography>

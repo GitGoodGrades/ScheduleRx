@@ -36,13 +36,14 @@ const styles = theme => ({
 
 class EditRoom extends React.Component {
     state = {
-      ROOM_ID: '',
+      ROOM_ID: null,
       CAPACITY: null,
       ROOM_NAME: null,
       LOCATION: null,
       CAPABILITIES: [],
       DESCRIPTION: null,
-      capability_Labels: []
+      capability_Labels: [], 
+      valid: true
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -68,7 +69,11 @@ class EditRoom extends React.Component {
     };
 
     handleSave = () => {
-        this.props.onUpdate(this.state);
+        if(this.state.CAPACITY && this.state.LOCATION){
+            this.props.onUpdate(this.state);
+        } else {
+            this.setState({valid: false})
+        }
     };
 
     cancel = () => {
@@ -90,10 +95,12 @@ return (
         <div>
             <TextField
                 id="CAPACITY"
-                label="Capacity"
                 defaultValue = {this.state.CAPACITY}
+                label={this.state.valid || this.state.CAPACITY ? "Capacity" : "*REQUIRED"}
                 className={classes.textField}
                 onChange={this.handleChange}
+                type="number"
+                error={!(this.state.valid || this.state.CAPACITY)}
                 margin="normal"
                 required={true}
             />
@@ -112,10 +119,11 @@ return (
         <div>
         <TextField
                 id="LOCATION"
-                label="Location"
                 defaultValue = {this.state.LOCATION}
                 className={classes.textField}
+                label={this.state.valid || this.state.LOCATION ? "Location" : "*REQUIRED"}
                 onChange={this.handleChange}
+                error={!(this.state.valid || this.state.LOCATION)}
                 margin="normal"
                 required={false}
             />

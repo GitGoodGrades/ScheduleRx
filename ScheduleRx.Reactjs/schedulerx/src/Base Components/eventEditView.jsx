@@ -7,6 +7,7 @@ import Typography from 'material-ui/Typography';
 import moment from 'moment';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+import ReactToPrint from "react-to-print";
 
 const styles = theme => ({
   card: {
@@ -79,7 +80,11 @@ class EventEditView extends Component{
       onBackdropClick={this.handleClose}
   >
     <div>
-      <Card className={classes.card}>
+    <ReactToPrint
+            trigger={() => <a href="#">Print</a>}
+            content={() => this.componentRef}
+        />
+      <Card className={classes.card} ref={el => (this.componentRef = el)}>
         <CardContent>
           <Typography className={classes.title}>Room: {event && event.ROOM_ID}</Typography>
           <Typography variant="headline" component="h2">
@@ -102,6 +107,8 @@ class EventEditView extends Component{
             onBlur={this.handleSave}
             margin="normal"
             defaultValue={this.findNote(event && event.SECTIONS)}
+            inputProps={{maxLength: 250}}
+            disabled={moment(event.START_TIME).isBefore(moment())}
         />
         </CardContent>
       </Card>

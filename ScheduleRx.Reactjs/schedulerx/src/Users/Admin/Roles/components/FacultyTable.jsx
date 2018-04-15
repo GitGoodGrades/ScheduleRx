@@ -87,11 +87,13 @@ class UserCourseTable extends Component {
                                 onChange={(e) => this.handleChange(row.UserID, e)}
                                 value={row.UserRole}
                                 options={options}
+                                clearable={false}
                             />
                         </TableCell>
                     </TableRow>
                     );
                 })}
+                <br/><br/><br/>
                 </TableBody>
             </Table>
         </Paper>

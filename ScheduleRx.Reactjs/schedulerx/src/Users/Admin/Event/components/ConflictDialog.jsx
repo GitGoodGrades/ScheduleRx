@@ -75,6 +75,7 @@ class ConflictDialog extends Component {
             className={classes.field}
             id="message"
             onBlur={this.handleBlur}
+            maxLength={250}
           ></textarea>
         </div>
         </div>

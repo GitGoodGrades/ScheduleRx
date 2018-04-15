@@ -127,8 +127,9 @@ class ScheduleEditForm extends React.Component {
                     disabled
                 />
             </div>
-            <div>
-                <Button onClick={this.setRegOpen} style={{height: 15}}>
+            <div> 
+                <Button onClick={this.setRegOpen} style={this.state.valid || (this.state.START_REG_DATE && this.state.END_REG_DATE) ?
+                    {height: 15}:{height: 15, color: 'red'}}>
                     {
                         (this.state.START_REG_DATE && this.state.END_REG_DATE) ?
                         `${moment(this.state.START_REG_DATE).format("MM/DD/YYYY")} - ${moment(this.state.END_REG_DATE).format("MM/DD/YYYY")}` :
@@ -148,7 +149,8 @@ class ScheduleEditForm extends React.Component {
                 </ Dialog>
                 </div>
                 <div>
-                <Button onClick={this.setSemOpen} style={{height: 15}}>
+                <Button onClick={this.setSemOpen} style={this.state.valid || (this.state.START_SEM_DATE && this.state.END_SEM_DATE) ?
+                    {height: 15}:{height: 15, color: 'red'}}>
                     {
                         (this.state.START_SEM_DATE && this.state.END_SEM_DATE) ?
                         `${moment(this.state.START_SEM_DATE).format("MM/DD/YYYY")} - ${moment(this.state.END_SEM_DATE).format("MM/DD/YYYY")}`  :
