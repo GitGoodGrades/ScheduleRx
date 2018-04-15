@@ -67,6 +67,12 @@ class CreateEvent extends Component {
         title: "",
     };
 
+    handleAddEvent = (event) => {
+        let temp = this.state.events;
+        temp.push(event);
+        this.setState({events: temp})
+    }
+
     cancel = () => {
       this.setState({
         dialogOpen: false
@@ -212,7 +218,7 @@ class CreateEvent extends Component {
                 this.props.history.push("/conflicts"); 
             }
 
-        client.post(`Bookings/Create.php`, {
+        let temp = {
             SCHEDULE_ID: null,
             COURSE_ID: this.state.temp.COURSE_ID,
             SECTION_ID: this.state.temp.SECTION_ID,
@@ -223,11 +229,15 @@ class CreateEvent extends Component {
             NOTES: this.state.temp.NOTES,
             BOOKING_IDs: conflicts,
             MESSAGE: message
+        }    
+
+        client.post(`Bookings/Create.php`, {
+            ...temp
         }).catch(function (error) {
                 console.log(error);
             });
 
-           
+        this.handleAddEvent(temp);
 
         this.setState({
             conflictDialogOpen: false
@@ -492,7 +502,8 @@ class CreateEvent extends Component {
                     sectionList={this.props.sections} 
                     roomList={this.props.rooms} 
                     onSave={this.handleEdit}
-                    delete={this.handleDelete}/>
+                    delete={this.handleDelete}
+                    addEvent={this.handleAddEvent}/>
                 <ConflictDialog
                     onConflictSave={this.handleConflictSave}
                     onConflictChange={this.handleConflictChange}

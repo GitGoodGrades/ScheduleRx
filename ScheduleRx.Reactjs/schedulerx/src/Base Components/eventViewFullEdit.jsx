@@ -289,7 +289,7 @@ class EventViewEditFull extends Component{
                 END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
                 BOOKING_TITLE: this.state.title,
                 NOTES: this.state.details,
-                BOOKING_ID: this.state.conflicts,
+                BOOKING_IDs: this.state.conflicts,
                 MESSAGE: this.state.message
             })
         }
@@ -303,10 +303,23 @@ class EventViewEditFull extends Component{
                 END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
                 BOOKING_TITLE: this.state.title,
                 NOTES: this.state.details,
-                BOOKING_ID: this.state.conflicts,
+                BOOKING_IDs: this.state.conflicts,
                 MESSAGE: this.state.message
             })
         }
+        let temp = {
+            SCHEDULE_ID: this.state.message ? null : this.props.registrationSchedule.SCHEDULE_ID,
+            COURSE_ID: this.state.course,
+            SECTION_ID: sections,
+            ROOM_ID: this.state.room,
+            START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+            END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+            BOOKING_TITLE: this.state.title,
+            NOTES: this.state.details
+        }
+
+        this.props.addEvent(temp);
+
         this.setState({
             conflictDialogOpen: false
         })
