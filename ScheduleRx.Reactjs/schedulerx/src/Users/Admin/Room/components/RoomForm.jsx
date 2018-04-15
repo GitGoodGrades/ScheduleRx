@@ -37,12 +37,13 @@ const styles = theme => ({
 
 class RoomForm extends React.Component {
     state = {
-      ROOM_ID: '',
+      ROOM_ID: null,
       CAPACITY: null,
       ROOM_NAME: null,
       LOCATION: null,
       CAPABILITIES: [],
-      DESCRIPTION: null
+      DESCRIPTION: null, 
+      valid: true
     };
   
     handleChange = event => {
@@ -60,9 +61,12 @@ class RoomForm extends React.Component {
         this.setState({CAPABILITIES: event})
     };
     handleSave = () => {
-        this.props.onSave(this.state);
-        this.cancel();
-        
+        if(this.state.ROOM_ID && this.state.CAPACITY && this.state.LOCATION){
+           this.props.onSave(this.state);
+            this.cancel(); 
+        } else {
+            this.setState({valid: false})
+        }
     };
     cancel = () => {
         this.props.onCancel();
@@ -80,22 +84,24 @@ return (
         <div>
             <TextField
                 id="ROOM_ID"
-                label="Room Number"
+                label={this.state.valid || (this.state.ROOM_ID && this.state.ROOM_ID != '') ? "Room Number" : "*REQUIRED"}
                 className={classes.textField}
                 onChange={this.handleChange}
                 margin="normal"
                 required={true}
+                error={!(this.state.valid || this.state.ROOM_ID)}
                 inputProps={{maxLength: 250}}
             />
         </div>
         <div>
             <TextField
                 id="CAPACITY"
-                label="Capacity"
+                label={this.state.valid || this.state.CAPACITY ? "Capacity" : "*REQUIRED"}
                 className={classes.textField}
                 onChange={this.handleChange}
                 margin="normal"
                 required={true}
+                error={!(this.state.valid || this.state.CAPACITY)}
                 type="number"
                 inputProps={{maxLength: 3}}
             />
@@ -113,9 +119,10 @@ return (
         <div>
         <TextField
                 id="LOCATION"
-                label="Location"
+                label={this.state.valid || this.state.LOCATION ? "Location" : "*REQUIRED"}
                 className={classes.textField}
                 onChange={this.handleChange}
+                error={!(this.state.valid || this.state.LOCATION)}
                 margin="normal"
                 required={true}
             />

@@ -282,7 +282,7 @@ class EventViewEditFull extends Component{
                 <Typography>
                  {this.props.eventDetails} 
                 </Typography>
-                <textarea onBlur={this.handleMessageBlur} id="denyMessage">
+                <textarea maxLength={300} onBlur={this.handleMessageBlur} id="denyMessage">
                 </textarea>
             </CardContent>
             <CardActions>

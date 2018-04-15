@@ -132,6 +132,7 @@ class ApproveDialog extends Component{
                                 id="message"
                                 value={this.state.message}
                                 onBlur={this.handleChange}
+                                maxLength={300}
                             >
                             </textarea>
                         </CardContent>

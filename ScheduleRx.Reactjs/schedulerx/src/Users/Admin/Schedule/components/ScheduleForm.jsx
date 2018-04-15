@@ -35,7 +35,7 @@ const styles = theme => ({
 
 class ScheduleForm extends React.Component {
   state = {
-    SCHEDULE_ID: '',
+    SCHEDULE_ID: null,
     START_REG_DATE: null,
     END_REG_DATE: null,
     START_SEM_DATE: null,
@@ -43,7 +43,8 @@ class ScheduleForm extends React.Component {
     IS_RELEASED: "0",
     IS_ARCHIVED: "0",
     reg_open: false,
-    sem_open: false
+    sem_open: false, 
+    valid: true
   };
 
   handleChange = event => {
@@ -81,7 +82,12 @@ class ScheduleForm extends React.Component {
     }
 
     handleSave = () => {
-        this.props.onSave(this.state), this.props.resubmit(this.state);
+        if(this.state.SCHEDULE_ID && this.state.START_REG_DATE && this.state.START_SEM_DATE && this.state.END_REG_DATE && this.state.END_SEM_DATE){
+           this.props.onSave(this.state), this.props.resubmit(this.state); 
+        }else {
+            this.setState({valid: false})
+        }
+        
         
   };
 
@@ -103,10 +109,13 @@ class ScheduleForm extends React.Component {
                     onChange={this.handleChange}
                     margin="normal"
                     required={true}
+                    inputProps={{maxLength: 10}}
+                    error={!(this.state.valid || (this.state.SCHEDULE_ID && this.state.SCHEDULE_ID != ''))}
                 />
             </div>
             <div>
-                <Button onClick={this.setRegOpen} style={{height: 15}}>
+                <Button onClick={this.setRegOpen} style={this.state.valid || (this.state.START_REG_DATE && this.state.END_REG_DATE) ?
+                    {height: 15}:{height: 15, color: 'red'}}>
                     {
                         (this.state.START_REG_DATE && this.state.END_REG_DATE) ?
                         `${moment(this.state.START_REG_DATE).format("MM/DD/YYYY")} - ${moment(this.state.END_REG_DATE).format("MM/DD/YYYY")}` :
@@ -126,7 +135,8 @@ class ScheduleForm extends React.Component {
                 </ Dialog>
                 </div>
                 <div>
-                <Button onClick={this.setSemOpen} style={{height: 15}}>
+                <Button onClick={this.setSemOpen} style={this.state.valid || (this.state.START_SEM_DATE && this.state.END_SEM_DATE) ?
+                    {height: 15}:{height: 15, color: 'red'}}>
                     {
                         (this.state.START_SEM_DATE && this.state.END_SEM_DATE) ?
                         `${moment(this.state.START_SEM_DATE).format("MM/DD/YYYY")} - ${moment(this.state.END_SEM_DATE).format("MM/DD/YYYY")}`  :
