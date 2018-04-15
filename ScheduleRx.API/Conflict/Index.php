@@ -21,7 +21,7 @@ if (!$results) {
     exit(null);
 }
 
-foreach ($results['records'] as $record) {
+foreach ($results->records as $record) {
     $record->COURSE_ID = [];
     $record->ROOM = null;
     $record->TYPE = "Conflict";
