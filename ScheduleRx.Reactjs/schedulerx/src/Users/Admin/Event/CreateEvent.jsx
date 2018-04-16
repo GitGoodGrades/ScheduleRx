@@ -23,7 +23,8 @@ const mapStateToProps = (state) => ({
     redirect_date: state.redirect_date,
     redirected_event: state.redirect_event,
     leadsCourses: state.leadsCourses,
-    users: state.userList
+    users: state.userList, 
+    user: state.userName
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -65,6 +66,7 @@ class CreateEvent extends Component {
         start: '',
         temp: {},
         title: "",
+        myCourses: null
     };
 
     handleAddEvent = (event) => {
@@ -80,6 +82,22 @@ class CreateEvent extends Component {
     };
 
     componentWillReceiveProps = (nextProps) => {
+        let myCourses = [];
+        nextProps.leadsCourses && 
+        nextProps.leadsCourses.length > 0 && 
+        nextProps.leadsCourses.map(row => {
+            if(row.USER_ID === nextProps.user){
+                myCourses.push({COURSE_ID: row.COURSE_ID})
+            }
+        })
+
+        if(myCourses.length > 0){
+            this.setState({
+                myCourses: myCourses
+            })
+        }
+
+
         if(nextProps.redirected) {
             this.setState({
                 open: true,
@@ -462,7 +480,7 @@ class CreateEvent extends Component {
         return(
             <div style={{paddingTop: 35}}>
                 <EventForm
-                  courseList={this.props.courses}
+                  courseList={this.state.myCourses ? this.state.myCourses : this.props.courses}
                   roomList={this.props.rooms}
                   sectionList={this.props.sections}
                   onChange={this.handleChange}
@@ -490,7 +508,7 @@ class CreateEvent extends Component {
                     event={this.state.event} 
                     open={this.state.openEventView} 
                     onClose={this.handleViewClose} 
-                    courseList={this.props.courses} 
+                    courseList={this.state.myCourses ? this.state.myCourses : this.props.courses} 
                     sectionList={this.props.sections} 
                     roomList={this.props.rooms} 
                 />
