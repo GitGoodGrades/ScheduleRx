@@ -179,7 +179,7 @@ class ScheduleEditForm extends React.Component {
                         icon={<VisibilityOff />}
                         checkedIcon={<Visibility />}
                         onChange={this.handleCheck}
-                        defaultChecked={this.state.IS_RELEASED ? 'yes' : 'no'}
+                        checked={this.state.IS_RELEASED == 1}
                     />
                     }
                     label=" Schedule visibility" />

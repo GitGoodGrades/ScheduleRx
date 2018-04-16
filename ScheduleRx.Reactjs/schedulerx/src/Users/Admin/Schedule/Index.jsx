@@ -55,7 +55,7 @@ class Schedules extends Component {
             tempScheduleList = this.state.schedules;
             this.state.schedules && this.state.schedules.map(sched => {
                 if(sched.SCHEDULE_ID === schedule.SCHEDULE_ID){
-                    tempScheduleList.splice(this.state.schedules.indexOf(sched, 1))
+                    tempScheduleList.splice((tempScheduleList.indexOf(sched)), 1)
                 }
 
             })
