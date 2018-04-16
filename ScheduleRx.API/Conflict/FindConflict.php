@@ -12,7 +12,7 @@ function findConflict( $tableName, $booking_ID ,$start, $end, $room , $conn) {
     foreach ($allBookings->records as $record ) {
         /*
          * A 'Conflict' can occur in 4 ways, Assuming we want the same room.
-         * 1) Another Start time falls between my given time frame
+         * 1) Another Start time  falls between my given time frame
          * 2) Another End time falls between my given time frame
          * 3) My Start time falls within another's time frame
          * 4) My End time falls within another's time frame

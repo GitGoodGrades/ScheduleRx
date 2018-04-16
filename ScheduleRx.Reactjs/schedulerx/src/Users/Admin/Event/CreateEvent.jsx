@@ -233,11 +233,11 @@ class CreateEvent extends Component {
 
         client.post(`Bookings/Create.php`, {
             ...temp
-        }).catch(function (error) {
-                console.log(error);
-            });
-
-        this.handleAddEvent(temp);
+        }).then(res => {
+            let temp = this.state.events;
+            temp.push(res.data);
+            this.setState({events: temp})
+        })
 
         this.setState({
             conflictDialogOpen: false

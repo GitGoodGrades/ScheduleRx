@@ -27,6 +27,8 @@ class Calendar extends Component {
       if (obj !== "") {
           obj.START_TIME = new Date(obj.START_TIME);
           obj.END_TIME = new Date(obj.END_TIME);
+          obj.TITLE = `${obj.BOOKING_TITLE}\n ${obj.ROOM_ID}\n ${obj.SECTIONS && obj.SECTIONS.records && obj.SECTIONS.records[0].COURSE_ID}`;
+
           formattedEvents.push(obj);
       }
     }
@@ -63,7 +65,7 @@ class Calendar extends Component {
           selectable
           style={{height: height}}
           events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
-          titleAccessor="BOOKING_TITLE"
+          titleAccessor="TITLE" 
           startAccessor='START_TIME'
           endAccessor='END_TIME'
           min={min}
