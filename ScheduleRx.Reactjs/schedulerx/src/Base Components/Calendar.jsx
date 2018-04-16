@@ -5,6 +5,7 @@ import './react-big-calendar.css';
 import {withStyles} from 'material-ui/styles';
 import ReactToPrint from "react-to-print";
 import LoadWrapper from './LoadWrapper';
+import { roomColors } from '../configuration/variables';
 
 // Setup the localizer by providing the moment Object
 
@@ -90,9 +91,17 @@ class Calendar extends Component {
                 marginLeft: "3px",
                 marginRight: "2px"
               };
+
+              roomColors && roomColors.length > 0 && roomColors.map(row => {
+                if(event.ROOM_ID == row.Room){
+                  newStyle.backgroundColor = row.color
+                }
+              })
         
               if (event.SCHEDULE_ID == null){
-                newStyle.backgroundColor = "tomato"
+                newStyle.backgroundColor = "rgb(255,0,0)",
+                newStyle.border = "2px solid black";
+                newStyle.color = 'white'
               }
 
               if (event.BOOKING_ID == this.props.conflictBookingId){
