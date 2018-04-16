@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once '../SuperCRUD/Delete.php';
 include_once '../config/database.php';
-include  '../SuperCRUD/Delete.php';
+include_once  '../SuperCRUD/Delete.php';
 include_once '../config/LogHandler.php';
 
 $database = new Database();

@@ -7,6 +7,8 @@ include_once '../config/database.php';
 include_once '../SuperCRUD/Search.php';
 include_once '../SuperCRUD/Index.php';
 include_once 'GetConflictEvents.php';
+include_once '../config/LogHandler.php';
+$log = Logger::getLogger('ConflictIndex');
 
 $database = new Database();
 $conn = $database->getConnection();
@@ -14,12 +16,14 @@ $conn = $database->getConnection();
 /* Script
  * Returns the All conflict records and appends event details
  */
-
 $results = json_decode(GetAll('conflict', 'CONFLICT_ID',  $conn));
-
+//echo print_r($results);
 if (!$results) {
     exit(null);
 }
+//$log->info("Indexing Conflicts ------------------------<br/>");
+//$log->info("Conflicts:" . count($results->records)) . "<br/>";
+//print_r($results);
 
 foreach ($results->records as $record) {
     $record->COURSE_ID = [];
@@ -30,6 +34,10 @@ foreach ($results->records as $record) {
     $earliestStart = "9999-99-99 23:59:59";
     $latestEnd = "0000-00-00 00:00:00";
 
+    //$log->info("Conflict_ID:" . $record->CONFLICT_ID . "<br/>");
+    //$log->info("EVENTS: <br/>");
+    // print_r($record->EVENTS);
+    if (!$record->EVENTS) continue;
     foreach ($record->EVENTS as $booking) {
 
         if ($booking->START_TIME < $earliestStart) {

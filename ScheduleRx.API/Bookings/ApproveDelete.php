@@ -14,11 +14,31 @@ include_once '../SuperCRUD/Detail.php';
 include_once '../SuperCRUD/Index.php';
 include_once 'CreateMessage.php';
 include_once '../SuperCRUD/Create.php';
+//include_once '../Schedule/findByTime.php';
 
 $database = new Database();
 $conn = $database->getConnection();
 $data = json_decode(file_get_contents("php://input"));
 $log = Logger::getLogger('ApproveLog');
+
+function findByTime( $start, $conn, $logger) {
+    $allSchedules = json_decode(GetAll('schedule', 'SCHEDULE_ID', $conn));
+    if (!$allSchedules) {
+        return null;
+    }
+    $logger->info("given start format: " . $start);
+    //return 'obtained urainium';
+    foreach ($allSchedules->records as $record ) {
+        if (($record->START_SEM_DATE <= $start) && ($start >= $record->END_SEM_DATE)) {
+            $logger->info("matching time frame found: " . $start);
+            return $record->SCHEDULE_ID;
+        }
+    }
+
+    $logger->info("no matching time found");
+    return null;          //json_encode(array("message" => "No Conflicts found."));
+}
+
 /* Script
  * Deletes multiple event by ID on approval and updates the requested SCHEDULE_ID of the approved event
  * @param EVENTS | list of events ID's to delete
@@ -27,9 +47,13 @@ $log = Logger::getLogger('ApproveLog');
  * @param MESSAGE | The to Send to the Deleted Event Leads
  */
 
-if (!isset($data->EVENTS, $data->APPROVED, $data->CONFLICT_ID, $data->MESSAGE)) {
-    $log->warn("Improper Parameters Supplied"); exit(null);
-}
+//if (!isset($data->EVENTS, $data->APPROVED, $data->CONFLICT_ID)) {
+//   $log->warn("Improper Parameters Supplied");
+//   exit(null);
+//}
+
+$data->APPROVED->SCHEDULE_ID = findByTime($data->APPROVED->START_TIME, $conn, $log);
+$log->info('SCHEDULE_ID changed to: ' . $data->APPROVED->SCHEDULE_ID);
 
 DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
 DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
@@ -41,7 +65,7 @@ foreach ($data->EVENTS as $event) {
     $SectionInfo = null;
     $leadID = null;
     $log->info("Has a Section of COURSE: " . $eventSection['records'][0]['COURSE_ID']);
-    if ($eventSection) {
+    if ($eventSection && isset($data->MESSAGE)) {
         $log->info("Searching for Lead of This Course");
         $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
 
@@ -51,7 +75,6 @@ foreach ($data->EVENTS as $event) {
 
     DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
     DeleteRecord('booking',"BOOKING_ID",   $event->BOOKING_ID , $conn );
-    $data->APPROVED->SCHEDULE_ID = $event->SCHEDULE_ID;
 }
 
 unset($data->APPROVED->SECTIONS);

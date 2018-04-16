@@ -25,8 +25,8 @@ $recordsOfConflict = json_decode(Search('conflict_event', "BOOKING_ID" , "'" . $
 if(isset($data->SCHEDULE_ID) && ($data->SCHEDULE_ID == null || $data->SCHEDULE_ID == "")) {
     if ($recordsOfConflict) {
         foreach ($recordsOfConflict->records as $cRecord) {
-            DeleteRecord('conflict_event', "CONFLICT_ID", $cRecord["CONFLICT_ID"], $conn);
-            DeleteRecord('conflict', "CONFLICT_ID", $cRecord["CONFLICT_ID"], $conn);
+            DeleteRecord('conflict_event', "CONFLICT_ID", $cRecord->CONFLICT_ID, $conn);
+            DeleteRecord('conflict', "CONFLICT_ID", $cRecord->CONFLICT_ID, $conn);
         }
     }
 
