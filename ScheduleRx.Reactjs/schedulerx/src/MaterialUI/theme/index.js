@@ -6,21 +6,20 @@ const baseTheme = {
         fontFamily: 'Open Sans'
     },
     typography: {
-        fontWeight: 'normal'
-    },
-    MuiChip: {
-        fontFamily: 'Open Sans'
-    },
-    MuiInputLabel: {
         fontFamily: 'Open Sans'
     }
-
 };
 
 
 const schoolPalette = {
-
-
+    palette: {
+        secondary: {
+            main: '#700e2f'
+        },
+        primary: {
+            main: '#2a1215'
+        }
+    }
 };
 
 
