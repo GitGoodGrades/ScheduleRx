@@ -30,7 +30,7 @@ class Conflicts extends Component {
         denyMessage: "",
         user: null,
         approveOpen: false,
-        conflicts: null
+        conflicts: []
     };
 
     componentWillReceiveProps = (nextProps) => {

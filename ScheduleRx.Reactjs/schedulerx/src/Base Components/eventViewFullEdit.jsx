@@ -78,7 +78,8 @@ class EventViewEditFull extends Component{
     };
 
     handleSave = () => {
-        let now = moment();
+        if(this.state.start && this.state.end && this.state.room && this.state.course && this.state.sections && this.state.title){
+            let now = moment();
         let regStart = this.props.registrationSchedule.START_REG_DATE;
         let regEnd = this.props.registrationSchedule.END_REG_DATE;
         let regSemStart = this.props.registrationSchedule.START_SEM_DATE;
@@ -111,6 +112,8 @@ class EventViewEditFull extends Component{
                 isConflict: false,
                 conflictDialogOpen: true
             })
+        }
+        
             //create request
         }
         
@@ -289,7 +292,7 @@ class EventViewEditFull extends Component{
                 END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
                 BOOKING_TITLE: this.state.title,
                 NOTES: this.state.details,
-                BOOKING_ID: this.state.conflicts,
+                BOOKING_IDs: this.state.conflicts,
                 MESSAGE: this.state.message
             })
         }
@@ -303,10 +306,23 @@ class EventViewEditFull extends Component{
                 END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
                 BOOKING_TITLE: this.state.title,
                 NOTES: this.state.details,
-                BOOKING_ID: this.state.conflicts,
+                BOOKING_IDs: this.state.conflicts,
                 MESSAGE: this.state.message
             })
         }
+        let temp = {
+            SCHEDULE_ID: this.state.message ? null : this.props.registrationSchedule.SCHEDULE_ID,
+            COURSE_ID: this.state.course,
+            SECTION_ID: sections,
+            ROOM_ID: this.state.room,
+            START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+            END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+            BOOKING_TITLE: this.state.title,
+            NOTES: this.state.details
+        }
+
+        this.props.addEvent(temp);
+
         this.setState({
             conflictDialogOpen: false
         })
@@ -426,6 +442,7 @@ class EventViewEditFull extends Component{
                         value={this.state.room}
                         optionComponent={Option}
                         placeholder={event && event.ROOM_ID}
+                        clearable={false}
                     />
                 </div>
               
@@ -440,6 +457,7 @@ class EventViewEditFull extends Component{
                         value={this.state.course}
                         placeholder={(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}
                         optionComponent={Option}
+                        clearable={false}
                     />
                 </div>
                 <div className={classes.control}>
