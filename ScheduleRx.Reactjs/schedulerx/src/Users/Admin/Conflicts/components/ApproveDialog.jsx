@@ -64,7 +64,7 @@ class ApproveDialog extends Component{
     handleSave = () => {
         let temp = {
             APPROVED: {},
-            MESSAGE: this.state.MESSAGE,
+            MESSAGE: this.state.MESSAGE == "",
             CONFLICT_ID: this.state.CONFLICT_ID,
             EVENTS: []
         };
@@ -104,6 +104,11 @@ class ApproveDialog extends Component{
                             <h2>
                                 Approve Requested Event for Room {this.state.conflictEvent && this.state.conflictEvent.ROOM}
                             </h2>
+                            <div 
+                                hidden={
+                                    this.state.conflictEvent && 
+                                    this.state.conflictEvent.EVENTS && 
+                                    this.state.conflictEvent.EVENTS.length > 1 ? false : true  }>
                             <h5>The Following Events will be Deleted:</h5>
                             <Table >
                                 <TableHead>
@@ -135,6 +140,14 @@ class ApproveDialog extends Component{
                                 maxLength={300}
                             >
                             </textarea>
+                            </div>
+                            <div 
+                                hidden={
+                                    this.state.conflictEvent && 
+                                    this.state.conflictEvent.EVENTS &&  
+                                    this.state.conflictEvent.EVENTS.length > 1 ? true : false} >
+                                <h4> Are you sure? </h4>
+                            </div>
                         </CardContent>
                         <CardActions>
                             <Button variant="raised" color="secondary" size="small" onClick={this.handleClose}>
