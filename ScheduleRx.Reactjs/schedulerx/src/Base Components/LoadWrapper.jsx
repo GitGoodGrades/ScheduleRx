@@ -25,20 +25,26 @@ class Loading extends Component{
     render(){
         const { classes } = this.props;
         return (
-            <div>
+            
                 <Dialog 
                     open={this.state.open}
                     onBackdropClick={this.close}
+                    fullScreen
+                    PaperProps={{style: {background: 'rgba(255, 255, 255, .8)', padding: 'none'}}}
                 >
-                    <DialogContent>
+                    
+                    
                         <LinearProgress color='secondary'/>
                         <LinearProgress color='secondary'/>
                         <LinearProgress color='secondary'/>
                         <Divider />
-                        Loading...
-                    </DialogContent>
+                        <DialogContent style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                        <div style={{margin: 'auto'}}>Loading...</div>
+                        </DialogContent>
+                    
+                    
                 </ Dialog>
-            </div>
+            
         );
     }
   
