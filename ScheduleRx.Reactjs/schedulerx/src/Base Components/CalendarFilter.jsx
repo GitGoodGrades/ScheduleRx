@@ -8,6 +8,10 @@ import Option from './Option';
 import FilterListIcon from 'material-ui-icons/FilterList';
 import DateRangeIcon from 'material-ui-icons/DateRange';
 import { withStyles } from 'material-ui/styles';
+import MonthPicker from 'react-simple-month-picker';
+import { connect } from 'react-redux';
+import { Admin } from '../configuration/variables';
+import moment from 'moment';
 
 const styles = theme => ({
     hidden: {
@@ -18,6 +22,10 @@ const styles = theme => ({
       },
 
 });
+
+const mapStateToProps = (state) => ({
+    role: state.userRole
+})
 
 class CalendarFilter extends Component{
     state = {
@@ -71,6 +79,15 @@ class CalendarFilter extends Component{
         this.setState({open: false, anchorEl: null, filterChoice: this.state.filterChoice + " = " + this.state[this.state.filterChoice]});
     }
 
+    setCalendarDate = (date) => {
+        this.setState({monthPicker: false})
+        this.props.changeCalendarDate(new Date(moment(date).subtract(5, 'd')));
+    }
+
+    handleMonthPick  = () => {
+        this.setState({monthPicker: true})
+    }
+
     render(){
         const { anchorEl } = this.state;
         const {classes} = this.props;
@@ -78,7 +95,22 @@ class CalendarFilter extends Component{
 
         return(
             <div>
+                
+
                 <Button
+                variant="raised"
+                size="small"
+                color="secondary"
+                aria-owns={anchorEl ? 'simple-menu' : null}
+                aria-haspopup="true"
+                onClick={this.handleMonthPick}
+                className={classes.button}
+                >
+                 <DateRangeIcon/> 
+                </Button>
+                
+                <Button
+                style={this.props.role != Admin ? {display: 'none'} : {}}
                 variant="raised"
                 size="small"
                 color="secondary"
@@ -90,17 +122,6 @@ class CalendarFilter extends Component{
                  <FilterListIcon/> 
                 </Button>
 
-                <Button
-                variant="raised"
-                size="small"
-                color="secondary"
-                aria-owns={anchorEl ? 'simple-menu' : null}
-                aria-haspopup="true"
-                onClick={this.handleClick}
-                className={classes.button}
-                >
-                 <DateRangeIcon/> 
-                </Button>
                 <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
@@ -161,6 +182,7 @@ class CalendarFilter extends Component{
                             optionComponent={Option}
                         />
                     </DialogContent>
+                    
                     <DialogActions>
                     <Button onClick={this.handleClose} color="primary">
                         Cancel
@@ -170,11 +192,15 @@ class CalendarFilter extends Component{
                     </Button>
                     </DialogActions>
                 </Dialog>
-                
+                <Dialog open={this.state.monthPicker} >
+                    <DialogContent>
+                        <MonthPicker onChange={(date)=>this.setCalendarDate(date)}/>
+                    </DialogContent>
+                </Dialog>
             </div>
         )
     }
 
 }
 
-export default withStyles(styles)(CalendarFilter);
+export default withStyles(styles)(connect(mapStateToProps)(CalendarFilter)) ;

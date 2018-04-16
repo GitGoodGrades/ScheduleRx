@@ -5,8 +5,7 @@ import moment from 'moment';
 import EventView from '../../../Base Components/eventView';
 import * as action from '../../../Redux/actions/actionCreator';
 import { withStyles } from 'material-ui/styles';
-
-
+import CalendarFilter from '../../../Base Components/CalendarFilter';
 
 const styles = theme => ({
     root: {
@@ -44,7 +43,8 @@ class EmptyHome extends Component {
     state = {
         events: [],
         event: {},
-        open: false
+        open: false,
+        date: new Date()
     };
 
     componentDidMount() {
@@ -67,6 +67,11 @@ class EmptyHome extends Component {
     handleClose = () => {
         this.setState({ open: false})
     };
+
+    changeMonth = (newDate) => {
+        this.setState({date: newDate})
+    }
+
     render() {
         const {classes} = this.props;
         return (
@@ -74,11 +79,17 @@ class EmptyHome extends Component {
                 className={classes.root}
             >
                 <div className={classes.container}>
+                <CalendarFilter
+                userList={this.props.users}
+                roomList={this.props.rooms}
+                selectFilter={this.filterEvents}
+                changeCalendarDate={this.changeMonth}
+            />    
                 <Calendar
                     events={this.state.events}
                     handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
-                    defaultDate={new Date()}
+                    defaultDate={this.state.date}
                 />
                 <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>

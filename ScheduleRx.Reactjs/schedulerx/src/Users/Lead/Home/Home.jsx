@@ -6,6 +6,7 @@ import EventView from '../../../Base Components/eventView';
 import { withStyles } from 'material-ui/styles';
 import moment from 'moment';
 import { client } from '../../../configuration/client';
+import CalendarFilter from '../../../Base Components/CalendarFilter'
 
 
 const styles = theme => ({
@@ -54,7 +55,8 @@ class EmptyHome extends Component {
     state = {
         events: [],
         event: {},
-        open: false
+        open: false,
+        date: new Date()
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -85,61 +87,9 @@ class EmptyHome extends Component {
         this.save(event);
     }
 
-    save = (event) => {
-        let scheduleID = null;
-        this.props.getConflictEvents(event.START_TIME, event.END_TIME);
-        let conflicts = this.props.conflict_List;
-
-        client.post(`Bookings/Delete.php`, {
-            BOOKING_ID: event.BOOKING_ID
-        });
-
-        let temp = this.state.events;
-        temp.map(old => {
-            if(old.BOOKING_ID === event.BOOKING_ID){
-                temp.splice(temp.indexOf(old), 1);
-            }
-        })
-
-        if(conflicts == null){
-            if(moment(event.START_TIME).isBetween(
-                this.props.current_schedule.START_SEM_DATE,
-                this.props.current_schedule.END_SEM_DATE)){
-
-                scheduleID = null;
-                // CREATE REQUEST LOGIC HERE
-
-            } else if (moment(event.START_TIME).isBetween(
-                this.props.registration_schedule.START_SEM_DATE,
-                this.props.registration_schedule.END_SEM_DATE)){
-                    scheduleID = this.props.registration_schedule.SCHEDULE_ID;
-            }
-        } else {
-            //conflict logic
-        }
-
-        client.post(`Bookings/Create.php`, {
-            SCHEDULE_ID: scheduleID,
-            COURSE_ID: event.course,
-            SECTION_ID: event.sections,
-            ROOM_ID: event.room,
-            START_TIME: event.START_TIME,
-            END_TIME: event.END_TIME,
-            BOOKING_TITLE: event.title,
-            NOTES: event.details
-        })
-            .then(res => {
-                temp.push(res.data);
-                this.setState({events: temp})
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        this.setState({
-          open: false
-        });
-    };
+    changeMonth = (newDate) => {
+        this.setState({date: newDate})
+      }
 
     render() {
         const {classes} = this.props;
@@ -148,13 +98,19 @@ class EmptyHome extends Component {
                 className={classes.root}
             >
                 <div className={classes.container}>
+                <CalendarFilter
+                    userList={this.props.users}
+                    roomList={this.props.rooms}
+                    selectFilter={this.filterEvents}
+                    changeCalendarDate={this.changeMonth}
+                />   
                 <Calendar
                     className={classes.cal}
                     events={this.state.events}
                     handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
                     views={['month', 'week', 'day']}
-                    defaultDate={new Date()}
+                    defaultDate={this.state.date}
                 />
                 <EventView 
                     event={this.state.event} 

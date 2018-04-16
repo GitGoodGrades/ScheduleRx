@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class EmptyHome extends Component {
-    state = { events: [], event: {}, open: false};
+    state = { events: [], event: {}, open: false, date: new Date()};
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({events: nextProps.events})
@@ -97,6 +97,9 @@ class EmptyHome extends Component {
                 })
         } 
       }
+      changeMonth = (newDate) => {
+        this.setState({date: newDate})
+      }
 
     render() {
         const {classes} = this.props;
@@ -109,6 +112,7 @@ class EmptyHome extends Component {
                 userList={this.props.users}
                 roomList={this.props.rooms}
                 selectFilter={this.filterEvents}
+                changeCalendarDate={this.changeMonth}
             />    
                 <Calendar
                     className={classes.cal}
@@ -116,7 +120,7 @@ class EmptyHome extends Component {
                     handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
                     views={['month', 'week', 'day']}
-                    defaultDate={new Date()}
+                    defaultDate={this.state.date}
                 />
                 <EventView
                     event={this.state.event} 

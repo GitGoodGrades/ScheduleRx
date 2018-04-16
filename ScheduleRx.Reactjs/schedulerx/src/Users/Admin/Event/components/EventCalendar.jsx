@@ -8,11 +8,11 @@ import { client } from '../../../../configuration/client';
 
 class EventCalendar extends Component{
     state = {
-      view: 'week', anchorEl: null,
+      view: 'week', anchorEl: null, date: new Date()
     };
 
     componentWillReceiveProps = (nextProps) => {
-        this.setState({events: nextProps.events})
+        this.setState({events: nextProps.events, date: nextProps.date})
     }
 
     selectEvent = (event) => {
@@ -61,6 +61,10 @@ class EventCalendar extends Component{
                 })
         } 
       }
+
+      changeMonth = (newDate) => {
+        this.setState({date: newDate})
+      }
     
 
     render(){
@@ -73,14 +77,14 @@ class EventCalendar extends Component{
                 userList={this.props.users}
                 roomList={this.props.rooms}
                 selectFilter={this.filterEvents}
+                changeCalendarDate={this.changeMonth}
             />    
            <Calendar events={this.state.events} handleEventSelection={this.selectEvent} handleSlotSelection={this.selectSlot}
              defaultView={this.state.view}
-             defaultDate={new Date(this.props.date)}
+             defaultDate={new Date(this.state.date)}
              views={['month', 'week', 'day']}
              step={5}
              timeslots={6}
-             scrollToTime={time.setMinutes(0)}
              conflictBookingId = {this.props.conflictBookingId}
           /></div>
         )

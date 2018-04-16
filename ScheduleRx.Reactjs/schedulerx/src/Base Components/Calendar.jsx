@@ -33,7 +33,11 @@ class Calendar extends Component {
       }
     }
 
-    this.setState({newDate: nextProps.date ? nextProps.date : new Date(), events: formattedEvents})
+    this.setState({
+      date: nextProps.defaultDate ? nextProps.defaultDate : new Date(), 
+      events: formattedEvents
+    })
+
   };
 
   selectEvent = (event) => {
@@ -71,7 +75,10 @@ class Calendar extends Component {
           min={min}
           max={max} 
           date={this.state.date}
-          onNavigate={this.handleNavigate}
+          onNavigate={(date) => {
+            this.setState({
+              date,
+            })}}
           onSelectEvent={event => this.selectEvent(event)}
           onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
           eventPropGetter={

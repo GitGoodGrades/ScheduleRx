@@ -5,6 +5,7 @@ import * as action from '../../../Redux/actions/actionCreator';
 import EventEditView from '../../../Base Components/eventEditView';
 import { client } from '../../../configuration/client';
 import { withStyles } from 'material-ui/styles';
+import CalendarFilter from '../../../Base Components/CalendarFilter'
 
 const styles = theme => ({
     root: {
@@ -40,7 +41,8 @@ class EmptyHome extends Component {
     state = {
         events: [],
         event: {},
-        open: false
+        open: false,
+        date: new Date()
     };
 
     componentDidMount() {
@@ -75,6 +77,10 @@ class EmptyHome extends Component {
             });
     };
 
+    changeMonth = (newDate) => {
+        this.setState({date: newDate})
+      }
+
     render() {
         const {classes} = this.props;
         return (
@@ -82,12 +88,18 @@ class EmptyHome extends Component {
                 className={classes.root}
             >
                 <div className={classes.container}>
+                <CalendarFilter
+                    userList={this.props.users}
+                    roomList={this.props.rooms}
+                    selectFilter={this.filterEvents}
+                    changeCalendarDate={this.changeMonth}
+                />    
                 <Calendar
                     className={classes.cal}
                     events={this.state.events}
                     handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
-                    defaultDate={new Date()}
+                    defaultDate={this.state.date}
                 />
                 <EventEditView onSave={this.handleSave} event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>
