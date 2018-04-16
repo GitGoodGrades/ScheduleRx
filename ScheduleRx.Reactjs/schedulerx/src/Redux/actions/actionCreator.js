@@ -250,7 +250,7 @@ export function getConflictList(){
             .then(res => {
                 conflicts = res.data.records;
                 if(!Array.isArray(conflicts)){
-                    conflicts = null;
+                    conflicts = [];
                 }
                 dispatch({
                     type: 'SEARCH_CONFLICT_LIST',

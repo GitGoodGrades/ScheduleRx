@@ -27,7 +27,7 @@ class Calendar extends Component {
       if (obj !== "") {
           obj.START_TIME = new Date(obj.START_TIME);
           obj.END_TIME = new Date(obj.END_TIME);
-          obj.TITLE = `${obj.BOOKING_TITLE}\n ${obj.ROOM_ID}\n ${obj.SECTIONS && obj.SECTIONS.records && obj.SECTIONS.records[0].COURSE_ID}`;
+          obj.TITLE = `${obj.BOOKING_TITLE}\n ${obj.ROOM_ID}\n ${obj.SECTIONS && obj.SECTIONS.records && obj.SECTIONS.records.length > 0 && obj.SECTIONS.records[0].COURSE_ID}`;
 
           formattedEvents.push(obj);
       }

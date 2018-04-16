@@ -21,10 +21,11 @@ const styles = theme => ({
 class ConflictTable extends Component {
     state = {
         conflicts: null,
+        loading: true
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({conflicts: nextProps.conflicts});
+        this.setState({conflicts: nextProps.conflicts,});
     }
 
     handleClick = (event, id) => {
@@ -44,12 +45,25 @@ class ConflictTable extends Component {
     //     this.props.open();
     // }
 
+    openBULLSHITDIALOG = () => {
+        if(this.state.conflicts == null){
+            return true
+        }
+        else {return false}
+    }
+
     render() {
-        const {conflicts} = this.state;
+        const {conflicts, loading} = this.state;
         return (
+        <div>
+     
+        
+      
         <Paper>
-            <LoadWrapper open={this.state.conflicts == null ? true : false}/>
+        <LoadWrapper open={this.props.conflicts ? false : true } />
             <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>Conflicts/Room Requests</h1>
+            
+            
             <Table>
                 <TableHead>
                 <TableRow>
@@ -85,6 +99,7 @@ class ConflictTable extends Component {
                 </TableBody>
             </Table>
         </Paper>
+        </div>
         );
     }
 }
