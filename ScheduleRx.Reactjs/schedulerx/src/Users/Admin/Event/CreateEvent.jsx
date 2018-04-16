@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as action from '../../../Redux/actions/actionCreator';
 import moment from 'moment';
 import { client } from '../../../configuration/client';
+import { Admin } from '../../../configuration/variables';
 import EventCalendar from './components/EventCalendar';
 import EventDetailDialog from './components/EventDetailDialog';
 import EventViewFullEdit from '../../../Base Components/eventViewFullEdit';
@@ -24,7 +25,8 @@ const mapStateToProps = (state) => ({
     redirected_event: state.redirect_event,
     leadsCourses: state.leadsCourses,
     users: state.userList, 
-    user: state.userName
+    user: state.userName,
+    myRole: state.userRole
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -83,6 +85,7 @@ class CreateEvent extends Component {
 
     componentWillReceiveProps = (nextProps) => {
         let myCourses = [];
+        nextProps.myRole !== Admin &&
         nextProps.leadsCourses && 
         nextProps.leadsCourses.length > 0 && 
         nextProps.leadsCourses.map(row => {
