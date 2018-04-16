@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
 import Select from 'react-select';
 import Option from './Option';
+import FilterListIcon from 'material-ui-icons/FilterList';
+import DateRangeIcon from 'material-ui-icons/DateRange';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
     hidden: {
         display: 'none',
     },
+    button: {
+        margin: theme.spacing.unit,
+      },
 
 });
 
@@ -73,11 +79,27 @@ class CalendarFilter extends Component{
         return(
             <div>
                 <Button
+                variant="raised"
+                size="small"
+                color="secondary"
                 aria-owns={anchorEl ? 'simple-menu' : null}
                 aria-haspopup="true"
                 onClick={this.handleClick}
+                className={classes.button}
                 >
-                Filter by: {this.state.filterChoice}
+                 <FilterListIcon/> 
+                </Button>
+
+                <Button
+                variant="raised"
+                size="small"
+                color="secondary"
+                aria-owns={anchorEl ? 'simple-menu' : null}
+                aria-haspopup="true"
+                onClick={this.handleClick}
+                className={classes.button}
+                >
+                 <DateRangeIcon/> 
                 </Button>
                 <Menu
                 id="simple-menu"
