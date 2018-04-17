@@ -11,18 +11,19 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-Family: 'Open Sans';
 }
 
 body {
   height: 100%;
-  
+  font-Family: 'Open Sans';
   text-transform: uppercase;
 
 }
 
 #root {
     height: 100%;
-    
+    font-Family: 'Open Sans'
 }
 
 button {
