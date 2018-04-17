@@ -9,12 +9,19 @@ import Select from 'material-ui/Select';
 import { withStyles } from 'material-ui/styles';
 import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
-import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
 import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 const styles = theme => ({
   dialogSelect: {
     width: '80%',
+  },
+  header: {
+    backgroundColor: 'rgba(0,0,0, 0.7)',
+    color: "white"
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
 });
 
@@ -49,7 +56,7 @@ class ScheduleTable extends Component {
     const ScheduleList = this.props.scheduleList;
     const {classes} = this.props;
     return (
-      <Paper>
+      <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
         <LoadWrapper open={this.props.scheduleList ? false : true } />
         <Dialog
         width={500}
@@ -77,19 +84,18 @@ class ScheduleTable extends Component {
           </form>
         </DialogContent>
       </Dialog>
-          <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>List Of Schedules</h1>
           <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Semester</TableCell>
-                <TableCell>Event Registration Begin Date</TableCell>
-                <TableCell>Event Registration End Date</TableCell>
-                <TableCell>Semester Begin Date</TableCell>
-                <TableCell>Semester End Date</TableCell>
-                <TableCell>Schedule is Visible?</TableCell>
+            <TableHead className={classes.header}>
+              <TableRow >
+                <TableCell style={{color: "white"}}>Semester</TableCell>
+                <TableCell style={{color: "white"}}>Event Registration Begin Date</TableCell>
+                <TableCell style={{color: "white"}}>Event Registration End Date</TableCell>
+                <TableCell style={{color: "white"}}>Semester Begin Date</TableCell>
+                <TableCell style={{color: "white"}}>Semester End Date</TableCell>
+                <TableCell style={{color: "white"}}>Schedule is Visible?</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody style={{backgroundColor: "white"}}>
               {(ScheduleList && ScheduleList.length > 0 && ScheduleList.map(row => {
                 return (
                   <TableRow
@@ -105,19 +111,19 @@ class ScheduleTable extends Component {
                     <TableCell >{row.IS_RELEASED === "0"?"No":"Yes"}</TableCell>
                   </TableRow>
                 );
-              })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
+              }))}
             </TableBody>
             <TableFooter height="auto" padding={5}>
-            <IconButton 
-              variant="fab" 
-              mini color="secondary" 
+            <Button 
+              variant="raised" 
+              color="primary" 
               aria-label="add" 
               className={classes.button}
               onClick={this.openDialog}>
               <AddIcon />
               
-            </IconButton>
-            Add new schedule
+            </Button>
+            
             </TableFooter>
           </Table>
       </Paper>

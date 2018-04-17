@@ -42,16 +42,16 @@ class UserCourseTable extends Component {
     render() {
         const {leads, faculty} = this.props;  
         return (
-        <Paper>
+        <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
             <LoadWrapper open={leads && leads.length > 0 ? false : true} />
             <Table >
-                <TableHead>
+                <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                     <TableRow>
-                        <TableCell><h2>Courses</h2></TableCell>
-                        <TableCell><h2>Leads</h2></TableCell>
+                        <TableCell style={{color: "white"}}>Courses</TableCell>
+                        <TableCell style={{color: "white"}}>Leads</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody style={{backgroundColor: "white"}}>
                 {leads && leads.length > 0 && leads.map(row => {
                     return (
                     <TableRow key={row.COURSE_ID}>
