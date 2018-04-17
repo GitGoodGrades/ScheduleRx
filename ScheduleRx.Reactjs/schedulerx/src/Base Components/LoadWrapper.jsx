@@ -27,7 +27,7 @@ class Loading extends Component{
         return (
             
                 <Dialog 
-                    open={this.state.open}
+                    open={this.props.open}
                     onBackdropClick={this.close}
                     fullScreen
                     PaperProps={{style: {background: 'rgba(255, 255, 255, .8)', padding: 'none'}}}

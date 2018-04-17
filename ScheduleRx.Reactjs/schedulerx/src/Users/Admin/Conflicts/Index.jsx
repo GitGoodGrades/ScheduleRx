@@ -30,7 +30,8 @@ class Conflicts extends Component {
         denyMessage: "",
         user: null,
         approveOpen: false,
-        conflicts: []
+        conflicts: [], 
+        loading: true
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -43,7 +44,9 @@ class Conflicts extends Component {
     componentDidMount() {
         this.props.onLoad();
         this.props.getLeads();
-
+        this.setState({
+            loading: false
+        })
     };
 
     openDialog = (id, open) => {
@@ -181,21 +184,31 @@ class Conflicts extends Component {
     render(){
         return(
             <div style={{paddingTop: 35}}>
-                <ConflictTable openConflict={this.openDialog} handleState={this.handleState} save={this.update} conflicts={this.props.conflicts} open={this.openDialog} />
-                <ConflictView open={this.state.dialogOpen} 
-                              conflict={this.state.conflict} 
-                              onClose={this.closeConflict}
-                              onSelectEdit={this.handleEdit}
-                              onSelectDeny={this.handleDeny}
-                              onSelectApprove={this.handleApprove}
-                              denyOpen={this.state.denyDialogOpen}
-                              eventDetails={this.state.eventDetailsString}
-                              userID={this.state.user}
-                              onSelectDenySend={this.handleDenySend}
-                              onSelectDenyCancel={this.handleSelectDenyCancel}
-                              handleMessage={this.saveMessage}
-                              onExit={this.handleExit}
+                <ConflictTable 
+                    openConflict={this.openDialog} 
+                    handleState={this.handleState} 
+                    save={this.update} 
+                    conflicts={this.props.conflicts} 
+                    open={this.openDialog} 
+                    loading={this.state.loading}
                 />
+
+                <ConflictView 
+                    open={this.state.dialogOpen} 
+                    conflict={this.state.conflict} 
+                    onClose={this.closeConflict}
+                    onSelectEdit={this.handleEdit}
+                    onSelectDeny={this.handleDeny}
+                    onSelectApprove={this.handleApprove}
+                    denyOpen={this.state.denyDialogOpen}
+                    eventDetails={this.state.eventDetailsString}
+                    userID={this.state.user}
+                    onSelectDenySend={this.handleDenySend}
+                    onSelectDenyCancel={this.handleSelectDenyCancel}
+                    handleMessage={this.saveMessage}
+                    onExit={this.handleExit}
+                />
+
                 <ApproveDialog
                     conflict={this.state.conflict}
                     open={this.state.approveOpen}

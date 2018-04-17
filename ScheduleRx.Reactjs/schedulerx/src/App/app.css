@@ -15,18 +15,18 @@ html {
 
 body {
   height: 100%;
-  font-family: 'Open Sans', sans-serif;
+  
   text-transform: uppercase;
 
 }
 
 #root {
     height: 100%;
-    font-family: 'Open Sans';
+    
 }
 
 button {
-    font-family: 'Open Sans', sans-serif;
+    
     text-transform: uppercase;
 
 }
@@ -56,10 +56,10 @@ a:hover{
 }
 
 input {
-    font-family: 'Open Sans';
+    
 }
 
 #App {
   height: 100%;
-  font-family: 'Open Sans';
+  
 }
