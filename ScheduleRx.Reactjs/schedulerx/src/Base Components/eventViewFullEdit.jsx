@@ -70,7 +70,9 @@ class EventViewEditFull extends Component{
         details: '',
         start: '',
         end: '',
-        message: ""
+        message: "",
+        timeChange: 'false',
+        roomChange: 'false'
     }
 
     handleClose = () => {
@@ -85,18 +87,23 @@ class EventViewEditFull extends Component{
         let regSemStart = this.props.registrationSchedule.START_SEM_DATE;
         let regSemEnd = this.props.registrationSchedule.END_SEM_DATE;
         if(now.isBetween(regStart, regEnd)){
-            if(moment(this.state.start).isBetween(regSemStart, regSemEnd)) {
-                this.setState({
-                    isRequest: false
-                })
-                this.checkForConflicts();
+            if(this.state.roomChange == 'true' || this.state.timeChange == 'true') {
+                if(moment(this.state.start).isBetween(regSemStart, regSemEnd)) {
+                    this.setState({
+                        isRequest: false
+                    })
+                    this.checkForConflicts();
+                }
+                else{
+                    this.setState({
+                        isConflict: false,
+                        isRequest: true,
+                        conflictDialogOpen: true
+                    })
+                }
             }
-            else{
-                this.setState({
-                    isConflict: false,
-                    isRequest: true,
-                    conflictDialogOpen: true
-                })
+            else {
+                this.updateEvent();
             }
             //if event is between reg semester
                 //and there are no conflicts
@@ -107,11 +114,16 @@ class EventViewEditFull extends Component{
                 //create request
         }
         else {
-            this.setState({
-                isRequest: true,
-                isConflict: false,
-                conflictDialogOpen: true
-            })
+            if(this.state.timeChange == 'true' || this.state.roomChange == 'true') {
+                this.setState({
+                    isRequest: true,
+                    isConflict: false,
+                    conflictDialogOpen: true
+                })
+            }
+            else {
+                this.updateEvent();
+            }
         }
         
             //create request
@@ -195,16 +207,7 @@ class EventViewEditFull extends Component{
         };
 
         this.setState({ 
-            //BOOKING_ID: nextProps.event.BOOKING_ID,
-            //room: nextProps.event.ROOM_ID,
-            //course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
-            //sections: selectSections,
-            //title: nextProps.event.BOOKING_TITLE,
-            //details: nextProps.event.NOTES ? nextProps.event.NOTES : '',
-            //start: nextProps.event.START_TIME,
-            //end: nextProps.event.END_TIME,
             sectionOptions: sections,
-            //date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD"),
             originalEvent: original
         })
     }
@@ -224,7 +227,7 @@ class EventViewEditFull extends Component{
     };
 
     handleRoomChange = event => {
-        this.setState({room: event.value})
+        this.setState({room: event.value, roomChange: 'true'})
     };
 
     cancel = () => {
@@ -314,7 +317,7 @@ class EventViewEditFull extends Component{
             SCHEDULE_ID: this.state.message ? null : this.props.registrationSchedule.SCHEDULE_ID,
             COURSE_ID: this.state.course,
             SECTION_ID: sections,
-            ROOM_ID: this.state.room,
+            room: this.state.room,
             START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
             END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
             BOOKING_TITLE: this.state.title,
@@ -361,18 +364,69 @@ class EventViewEditFull extends Component{
         this.setState({
             date: moment(event._d).format("YYYY-MM-DD"),
             start: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.start).format('h:mm a'),
-            end: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.end).format('h:mm a')
+            end: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.end).format('h:mm a'),
+            timeChange: 'true'
     })
     }
 
     handleChangeStart = (event) => {
         let date = this.state.date;
-        this.setState({start: date + " " + moment(event._d).format('h:mm a')})
+        this.setState({
+            start: date + " " + moment(event._d).format('h:mm a'),
+            timeChange: 'true'
+        })
     }
 
     handleChangeEnd = (event) => {
         let date = this.state.date;
-        this.setState({end: date + " " + moment(event._d).format('h:mm a')})
+        this.setState({
+            end: date + " " + moment(event._d).format('h:mm a'),
+            timeChange: 'true'
+        })
+    }
+
+    updateEvent = () => {
+        let sections = [];
+        let check = this.state.sections;
+        if(!Array.isArray(check)){
+            sections = this.state.sections.split(',');
+        } else {
+            this.state.sections && this.state.sections.map(element => {
+                sections.push(element.value)
+            })
+        }
+
+        client.post(`Bookings/Update.php`, {
+            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+            SECTIONS: sections,
+            BOOKING_ID: this.state.originalEvent.BOOKING_ID,
+            //ROOM_ID: this.state.room,
+            //START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+            //END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+            BOOKING_TITLE: this.state.title,
+            DETAILS: this.state.details
+        })
+        this.setState({
+            edit: 'false'
+        })
+
+        this.handleClose();
+
+        let newEvent = {
+            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+            SECTIONS: {records: [{
+                COURSE_ID: this.state.course
+            }]},
+            SECTION_ID: sections,
+            ROOM_ID: this.state.room,
+            START_TIME: this.state.start,
+            END_TIME: this.state.end,
+            BOOKING_TITLE: this.state.title,
+            NOTES: this.state.details,
+
+        }
+
+        this.props.addEvent(newEvent);
     }
 
   render(){

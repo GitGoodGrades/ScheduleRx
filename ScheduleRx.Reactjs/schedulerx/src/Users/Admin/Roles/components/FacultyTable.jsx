@@ -68,17 +68,17 @@ class UserCourseTable extends Component {
                          {value: 0, label: 'Faculty'}
                         ];
         return (
-        <Paper>
+        <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
             <LoadWrapper open={faculty.length > 0 ? false : true} />
             <Table >
-                <TableHead>
+                <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                     <TableRow>
-                        <TableCell><h2>User Id</h2></TableCell>
+                        <TableCell style={{color: "white"}}>User Id</TableCell>
                         {/* <TableCell><h2>User Name</h2></TableCell> */}
-                        <TableCell><h2>Role</h2></TableCell>
+                        <TableCell style={{color: "white"}}>Role</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody style={{backgroundColor: "white"}}>
                 {faculty && faculty.length > 0 && faculty.map(row => {
                     return (
                     <TableRow key={row.UserID}>
@@ -96,8 +96,8 @@ class UserCourseTable extends Component {
                     </TableRow>
                     );
                 })}
-                <br/><br/><br/>
-                </TableBody>
+                
+                </TableBody><br/><br/><br/>
             </Table>
         </Paper>
         );

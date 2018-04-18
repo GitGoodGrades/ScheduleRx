@@ -287,6 +287,12 @@ class CreateEvent extends Component {
           });
     }
 
+    handleEditClose = () => {
+        this.setState({
+            open: false
+        })
+    }
+
     handleEdit = (event, originalEvent) => {
         this.save(event, false, event.START_TIME);
         this.setState({
