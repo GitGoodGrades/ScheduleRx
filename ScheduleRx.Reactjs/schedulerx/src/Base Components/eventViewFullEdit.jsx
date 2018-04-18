@@ -398,7 +398,7 @@ class EventViewEditFull extends Component{
         }
 
         client.post(`Bookings/Update.php`, {
-            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+            SCHEDULE_ID: this.state.originalEvent.SCHEDULE_ID,
             SECTIONS: sections,
             BOOKING_ID: this.state.originalEvent.BOOKING_ID,
             //ROOM_ID: this.state.room,
