@@ -459,7 +459,7 @@ class CreateEvent extends Component {
     };
 
     selectSlot = (slot) => {
-        if(this.state.room && this.state.course && this.state.sections && moment(slot.start).isAfter(moment())){
+        if(this.state.room && this.state.course && this.state.sections && this.state.sections != '' && moment(slot.start).isAfter(moment())){
             this.setState({
                 start: moment(slot.start).format('YYYY-MM-DD HH:mm:ss'),
                 end: moment(slot.end).format('YYYY-MM-DD HH:mm:ss'),
