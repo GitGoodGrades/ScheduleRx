@@ -480,13 +480,13 @@ class EventViewEditFull extends Component{
                         id="title"
                         onBlur={this.handleBlur}
                         maxLength={50}
-                        placeholder={event && event.BOOKING_TITLE}
+                        value={event && event.BOOKING_TITLE}
                     >
                     </input>
                     <input
                     id="details"
                     onBlur={this.handleBlur}
-                    placeholder={event && event.DETAILS}
+                    value={event && event.DETAILS}
                     maxLength={50}
                     >
                     </input>
@@ -502,7 +502,7 @@ class EventViewEditFull extends Component{
                         )}
                         value={this.state.room}
                         optionComponent={Option}
-                        placeholder={event && event.ROOM_ID}
+                        value={event && event.ROOM_ID}
                         clearable={false}
                     />
                 </div>
@@ -516,7 +516,7 @@ class EventViewEditFull extends Component{
                             row = {label: row.COURSE_ID, value: row.COURSE_ID}
                         )}
                         value={this.state.course}
-                        placeholder={(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}
+                        value={(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}
                         optionComponent={Option}
                         clearable={false}
                     />
