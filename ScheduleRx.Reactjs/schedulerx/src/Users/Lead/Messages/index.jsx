@@ -42,7 +42,7 @@ class Messages extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 35}}>
+            <div style={{paddingTop: 40}}>
                 <MessageTable  messages={this.props.messages} openMessage={this.openMessageDialog}/>
                 <MessageView open={this.state.open} 
                               message={this.state.message} 

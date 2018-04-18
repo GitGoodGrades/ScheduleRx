@@ -39,7 +39,7 @@ class MessageTable extends Component {
             <Table>
                 <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                 <TableRow>
-                    <TableCell style={{color: "white"}}>Messages</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Messages</TableCell>
                     {/* <TableCell>Type</TableCell>
                     <TableCell>Date</TableCell> */}
                 </TableRow>

@@ -20,13 +20,13 @@ class UserCourseTable extends Component {
                 if(fac.ROLE_ID == 1) {
                 temp.push({
                     UserID: fac.USER_ID,
-                    // UserName: fac.FIRSTNAME + " " + fac.LASTNAME,
+                    UserName: fac.EMAIL,
                     UserRole: 1
                 })
                 } else if(fac.ROLE_ID == 2 || fac.ROLE_ID == 3){
                     temp.push({
                         UserID: fac.USER_ID,
-                        // UserName: fac.FIRSTNAME + " " + fac.LASTNAME,
+                        UserName:  fac.EMAIL,
                         UserRole: 0
                     })
                 }
@@ -73,9 +73,9 @@ class UserCourseTable extends Component {
             <Table >
                 <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                     <TableRow>
-                        <TableCell style={{color: "white"}}>User Id</TableCell>
-                        {/* <TableCell><h2>User Name</h2></TableCell> */}
-                        <TableCell style={{color: "white"}}>Role</TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>User Id</TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>User Name</TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>Role</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody style={{backgroundColor: "white"}}>
@@ -83,7 +83,7 @@ class UserCourseTable extends Component {
                     return (
                     <TableRow key={row.UserID}>
                         <TableCell>{row.UserID}</TableCell>
-                        {/* <TableCell>{row.UserName}</TableCell> */}
+                        <TableCell>{row.UserName}</TableCell>
                         <TableCell >
                             <Select
                                 name={row.UserID}

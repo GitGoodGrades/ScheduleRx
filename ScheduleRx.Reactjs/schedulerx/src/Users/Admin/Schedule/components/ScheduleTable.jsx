@@ -11,6 +11,7 @@ import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
 import Button from 'material-ui/Button';
 import LoadWrapper from '../../../../Base Components/LoadWrapper';
+import Tooltip from 'material-ui/Tooltip';
 
 const styles = theme => ({
   dialogSelect: {
@@ -87,12 +88,12 @@ class ScheduleTable extends Component {
           <Table>
             <TableHead className={classes.header}>
               <TableRow >
-                <TableCell style={{color: "white"}}>Semester</TableCell>
-                <TableCell style={{color: "white"}}>Event Registration Begin Date</TableCell>
-                <TableCell style={{color: "white"}}>Event Registration End Date</TableCell>
-                <TableCell style={{color: "white"}}>Semester Begin Date</TableCell>
-                <TableCell style={{color: "white"}}>Semester End Date</TableCell>
-                <TableCell style={{color: "white"}}>Schedule is Visible?</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Semester</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Registration Start</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Registration End</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Semester Start</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Semester End</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Schedule is Visible?</TableCell>
               </TableRow>
             </TableHead>
             <TableBody style={{backgroundColor: "white"}}>
@@ -114,6 +115,7 @@ class ScheduleTable extends Component {
               }))}
             </TableBody>
             <TableFooter height="auto" padding={5}>
+            <Tooltip title="Add new semester">
             <Button 
               variant="raised" 
               color="primary" 
@@ -123,7 +125,7 @@ class ScheduleTable extends Component {
               <AddIcon />
               
             </Button>
-            
+            </Tooltip>
             </TableFooter>
           </Table>
       </Paper>

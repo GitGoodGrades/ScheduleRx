@@ -6,7 +6,7 @@ import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
 import Button from 'material-ui/Button';
 import Dialog, { DialogContent, DialogTitle } from 'material-ui/Dialog';
-
+import Tooltip from 'material-ui/Tooltip';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Select from 'material-ui/Select';
@@ -50,12 +50,12 @@ handleChange = event => {
                 <Table>
             <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
               <TableRow>
-                <TableCell style={{color: "white"}}>Room Number</TableCell>
-                <TableCell style={{color: "white"}}>Capacity</TableCell>
-                <TableCell style={{color: "white"}}>Room Name</TableCell>
-                <TableCell style={{color: "white"}}>Location</TableCell>
-                <TableCell style={{color: "white"}}>Capability</TableCell>
-                <TableCell style={{color: "white"}}>Description</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Room Number</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Capacity</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Room Name</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Location</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Capability</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Description</TableCell>
               </TableRow>
             </TableHead>
             <TableBody style={{backgroundColor: "white"}}>
@@ -86,6 +86,7 @@ handleChange = event => {
               })) || <TableRow><TableCell/><TableCell/><TableCell>No Results</TableCell><TableCell/><TableCell/></TableRow>}
             </TableBody>
             <TableFooter height="auto" padding={5}>
+            <Tooltip title="Add New Room">
             <Button 
               variant="raised" 
               color="primary" 
@@ -95,7 +96,7 @@ handleChange = event => {
               <AddIcon />
               
             </Button>
-           
+           </Tooltip>
             </TableFooter>
           </Table>
               </Paper>

@@ -47,8 +47,8 @@ class UserCourseTable extends Component {
             <Table >
                 <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                     <TableRow>
-                        <TableCell style={{color: "white"}}>Courses</TableCell>
-                        <TableCell style={{color: "white"}}>Leads</TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>Courses</TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>Leads</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody style={{backgroundColor: "white"}}>

@@ -60,11 +60,11 @@ class ConflictTable extends Component {
             <Table>
                 <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                 <TableRow>
-                    <TableCell style={{color: "white"}}>Room</TableCell>
-                    <TableCell style={{color: "white"}}>Date</TableCell>
-                    <TableCell style={{color: "white"}}>Begin Time</TableCell>
-                    <TableCell style={{color: "white"}}>End Time</TableCell>
-                    <TableCell style={{color: "white"}}>Courses</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Room</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Date</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Begin Time</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>End Time</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Courses</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody style={{backgroundColor: "white"}}>

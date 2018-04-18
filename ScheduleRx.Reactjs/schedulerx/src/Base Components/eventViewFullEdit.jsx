@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import {client} from "../configuration/client";
 import EditConflictContinueDialog from '../Users/Admin/Event/components/EditConflictContinueDialog';
 import ReactToPrint from "react-to-print";
+import Tooltip from 'material-ui/Tooltip';
 
 const styles = theme => ({
   card: {
@@ -456,15 +457,21 @@ class EventViewEditFull extends Component{
               <Typography component="p">
                 {event && event.DETAILS}
               </Typography>
+              <Tooltip title="Edit">
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
                 <Icon>edit_icon</Icon>
               </IconButton>
+            </Tooltip>
+            <Tooltip title="Copy Event">
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDuplicate}>
                 <Icon>queue_icon</Icon>
               </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete">
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDelete}>
                 <Icon>delete_forever_icon</Icon>
               </IconButton>
+            </Tooltip>
             </CardContent>
             <CardContent className={this.state.edit ? '' : classes.hidden}>
                 <Typography variant="headline" component="h2">
