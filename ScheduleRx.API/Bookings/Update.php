@@ -4,10 +4,10 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-require_once dirname(__FILE__) . '../config/database.php';
-require_once dirname(__FILE__) .  '../SuperCRUD/Update.php';
-require_once dirname(__FILE__) .  '../SuperCRUD/Delete.php';
-require_once dirname(__FILE__) .  '../SuperCRUD/Create.php';
+include_once '../config/database.php';
+include_once  '../SuperCRUD/Update.php';
+include_once  '../SuperCRUD/Delete.php';
+include_once  '../SuperCRUD/Create.php';
 
 $database = new Database();
 $conn = $database->getConnection();
@@ -20,9 +20,9 @@ $data = json_decode(file_get_contents("php://input"));
 if (isset($data->SECTIONS)) {
     DeleteRecord('event_section', "BOOKING_ID", $data->BOOKING_ID, $conn);
     foreach ($data->SECTIONS as $section_id) {
-        $new = array("BOOKING_ID" => $data->BOOKING_ID, "SECTION_ID" => $section_id );
+        $new = array("BOOKING_ID" => $data->BOOKING_ID, "SECTION_ID" => $section_id, "NOTES" => $data->DETAILS );
         CreateRecord('event_section', $new, $conn );
     }
 }
-unset($data->SECITONS);
+unset($data->SECTIONS);
 echo UpdateRecord('booking',$data, 'BOOKING_ID', $conn);
