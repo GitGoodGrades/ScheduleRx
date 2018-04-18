@@ -1,9 +1,9 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: access, Content-Type");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Credentials: true");
-header('Content-Type: application/json');
+header('Content-Type: application/json, text/plain');
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/ScheduleRx.API/rxapi.php";
 
