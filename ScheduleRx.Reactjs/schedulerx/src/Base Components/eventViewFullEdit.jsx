@@ -475,19 +475,14 @@ class EventViewEditFull extends Component{
             </CardContent>
             <CardContent className={this.state.edit ? '' : classes.hidden}>
                 <Typography variant="headline" component="h2">
+                <InputLabel className={classes.label} htmlFor="course-helper">Title</InputLabel>
                     <input
-                        className={classes.field}
+                        style={{height: '36px', width: '98%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
                         id="title"
                         onBlur={this.handleBlur}
                         maxLength={50}
-                        value={event && event.BOOKING_TITLE}
-                    >
-                    </input>
-                    <input
-                    id="details"
-                    onBlur={this.handleBlur}
-                    value={event && event.DETAILS}
-                    maxLength={50}
+                        defaultValue={event && event.BOOKING_TITLE}
+                        
                     >
                     </input>
               </Typography>
@@ -535,28 +530,46 @@ class EventViewEditFull extends Component{
                         optionComponent={Option}
                     />
                 </div>
-              <Typography component="p">
-                <DatePicker
+                <div>
+                <InputLabel htmlFor="select-multiple" className={classes.label}>Date</InputLabel>
+                <DatePicker 
+                    dialogContainerStyle={{alignContent: 'center'}}
                     id="date"
+                    style={{height: '36px', width: '98%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    InputProps={{disableUnderline: true }}
                     value={this.state.date}
                     placeholder="select a date"
                     onChange={this.handleChangeDate}
                 />
-                <br />
                 <TimePicker
                     id="start"
+                    style={{height: '36px', width: '47.5%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    InputProps={{disableUnderline: true }}
                     value={this.state.start}
                     onChange={this.handleChangeStart}
                     disabled={this.state.date == null}
                 />
+                &nbsp;
                 <TimePicker
                     id="end"
+                    style={{height: '36px', width: '47.5%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    InputProps={{disableUnderline: true }}
                     value={this.state.end}
                     onChange={this.handleChangeEnd}
                     disabled={this.state.date == null}
                 />
-              </Typography>
               
+              </div>
+              <InputLabel  htmlFor="select-multiple" className={classes.label}>Details</InputLabel>
+              <textarea
+                    id="details"
+                    onChange={this.handleBlur}
+                    defaultValue={event && event.DETAILS}
+                    maxLength={250}
+                    style={{height: '75px', width: '97%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    >
+                </textarea>         
+       
                
             </CardContent>
             <CardActions className={this.state.edit ? '' : classes.hidden}>
