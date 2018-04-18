@@ -1,6 +1,4 @@
 <?php
-include_once 'GetSections.php';
-include_once '../SuperCrud/Detail.php';
 
 /* Function
  * Finds an event by the given BOOKING_ID, the retrieved event object is appended it's associated section information as an array

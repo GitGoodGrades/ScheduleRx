@@ -1,5 +1,4 @@
 <?php
-include_once '../config/LogHandler.php';
 
 function Search($tableName, $searchKey, $whereValue, $conn) {
     $log = Logger::getLogger('Searching table -' . $tableName);

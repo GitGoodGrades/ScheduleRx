@@ -1,5 +1,4 @@
 <?php
-include_once '../config/LogHandler.php';
 
 function UpdateRecord ($tableName, $fields, $primaryKey, $conn) {
     $log = Logger::getLogger('Updating in table -' . $tableName);

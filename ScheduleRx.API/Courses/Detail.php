@@ -5,8 +5,7 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json');
 
-include_once '../config/database.php';
-include_once '../SuperCRUD/Detail.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API/rxapi.php";
 
 
 $database = new Database();

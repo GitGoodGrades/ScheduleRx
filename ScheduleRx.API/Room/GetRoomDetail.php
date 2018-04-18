@@ -1,6 +1,5 @@
 <?php
-include_once 'GetCapabilities.php';
-include_once '../SuperCRUD/Detail.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . "/ScheduleRx.API/rxapi.php";
 
 /* Function
  * Finds an event by the given ROOM_ID, the retrieved event object is appended it's associated section information as an array

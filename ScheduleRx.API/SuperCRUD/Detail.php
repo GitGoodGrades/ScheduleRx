@@ -1,5 +1,4 @@
 <?php
-include_once '../config/LogHandler.php';
 
 function FindRecord($tableName, $PrimaryKey, $value, $conn) {
     $log = Logger::getLogger('Finding in table -' . $tableName);

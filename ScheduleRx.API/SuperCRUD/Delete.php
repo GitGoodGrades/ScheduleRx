@@ -1,5 +1,4 @@
 <?php
-include_once '../config/LogHandler.php';
 
 function DeleteRecord ($tableName, $PrimaryKey, $value, $conn) {
     $log = Logger::getLogger('Deleting from table -' . $tableName);

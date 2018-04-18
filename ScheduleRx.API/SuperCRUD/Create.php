@@ -1,5 +1,4 @@
 <?php
-include_once '../config/LogHandler.php';
 
 function CreateRecord ($tableName, $fields, $conn) {
     $log = Logger::getLogger('Creating in table -' . $tableName);

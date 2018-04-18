@@ -1,8 +1,4 @@
 <?php
-include_once '../SuperCRUD/Create.php';
-include_once '../models/getGUID.php';
-
-
 /* Function
  * Creates a new conflict record in the 'conflict' table and builds associations to the given BOOKING_IDs in the
  * event_conflict table

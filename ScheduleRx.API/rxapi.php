@@ -1,0 +1,23 @@
+<?php
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/config/LogHandler.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/config/database.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/models/getGUID.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/config/Banner_DB.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/SuperCRUD/Delete.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/SuperCRUD/Search.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/SuperCRUD/Detail.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/SuperCRUD/Index.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/SuperCRUD/Create.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/SuperCRUD/Update.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/models/LeadList.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Bookings/GetSections.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Bookings/GetEventDetail.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Bookings/CreateMessage.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Bookings/LeadIndex.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Schedule/findByTime.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Conflict/FindConflict.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Conflict/Create.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Conflict/GetConflictEvents.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/EventSection/SwapNote.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Room/GetCapabilities.php';
+include_once  $_SERVER["DOCUMENT_ROOT"] . "/ScheduleRx.API" . '/Room/GetRoomDetail.php';

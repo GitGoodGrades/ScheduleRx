@@ -4,8 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-include_once '../config/database.php';
-include  '../SuperCRUD/Create.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . "/ScheduleRx.API/rxapi.php";
 
 $database = new Database();
 $conn = $database->getConnection();

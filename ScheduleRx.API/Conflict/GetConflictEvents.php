@@ -1,7 +1,5 @@
 <?php
 
-include_once '../Bookings/GetEventDetail.php';
-
 function GetConflictEvents( $conflict_ID, $conn) {
 
     $query =

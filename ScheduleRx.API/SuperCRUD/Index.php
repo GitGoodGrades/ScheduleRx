@@ -1,5 +1,4 @@
 <?php
-include_once '../config/LogHandler.php';
 
 function GetAll($tableName, $primaryKey, $conn) {
     $log = Logger::getLogger('Gathering Records from table -' . $tableName);

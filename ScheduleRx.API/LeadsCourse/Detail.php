@@ -2,12 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-include_once '../config/database.php';
-include_once '../SuperCRUD/Create.php';
-include_once '../SuperCRUD/Detail.php';
-include_once '../SuperCRUD/Search.php';
-include_once '../SuperCRUD/Delete.php';
-include_once '../config/LogHandler.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . "/ScheduleRx.API/rxapi.php";
 
 $database = new Database();
 $conn = $database->getConnection();
