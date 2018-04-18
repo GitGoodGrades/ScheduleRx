@@ -18,6 +18,9 @@ const schoolPalette = {
         },
         primary: {
             main: '#2a1215'
+        },
+        acccent: {
+            main: 'rgba(0,0,0,.8)'
         }
     }
 };

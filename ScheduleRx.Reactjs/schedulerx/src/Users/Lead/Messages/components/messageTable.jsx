@@ -10,6 +10,7 @@ import { withStyles } from 'material-ui/styles';
 import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
 import IconButton from 'material-ui/IconButton';
+import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 const styles = theme => ({
   dialogSelect: {
@@ -19,7 +20,7 @@ const styles = theme => ({
 
 class MessageTable extends Component {
     state = {
-        messages: [],
+        messages: null,
     }
 
     componentWillReceiveProps(nextProps) {
@@ -33,17 +34,17 @@ class MessageTable extends Component {
     render() {
         const {messages} = this.state;
         return (
-        <Paper>
-            <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>Messages from the Admin</h1>
+        <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
+            <LoadWrapper open={messages ? false : true} />
             <Table>
-                <TableHead>
+                <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                 <TableRow>
-                    <TableCell>Message</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Messages</TableCell>
                     {/* <TableCell>Type</TableCell>
                     <TableCell>Date</TableCell> */}
                 </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody style={{backgroundColor: "white"}}>
                 {(messages && messages.length > 0 && messages.map(row => {
                     return (
                     <TableRow

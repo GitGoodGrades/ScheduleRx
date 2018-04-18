@@ -11,22 +11,23 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-Family: 'Open Sans';
 }
 
 body {
   height: 100%;
-  font-family: 'Open Sans', sans-serif;
+  font-Family: 'Open Sans';
   text-transform: uppercase;
 
 }
 
 #root {
     height: 100%;
-    font-family: 'Open Sans';
+    font-Family: 'Open Sans'
 }
 
 button {
-    font-family: 'Open Sans', sans-serif;
+    
     text-transform: uppercase;
 
 }
@@ -56,10 +57,10 @@ a:hover{
 }
 
 input {
-    font-family: 'Open Sans';
+    
 }
 
 #App {
   height: 100%;
-  font-family: 'Open Sans';
+  
 }

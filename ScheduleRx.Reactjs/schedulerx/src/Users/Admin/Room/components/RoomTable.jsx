@@ -4,9 +4,9 @@ import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
-import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
 import Dialog, { DialogContent, DialogTitle } from 'material-ui/Dialog';
-
+import Tooltip from 'material-ui/Tooltip';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import Select from 'material-ui/Select';
@@ -15,6 +15,9 @@ import LoadWrapper from '../../../../Base Components/LoadWrapper';
 const styles = theme => ({
   dialogSelect: {
     width: '80%',
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
 });
 
@@ -42,21 +45,20 @@ handleChange = event => {
           const RoomList = this.props.roomList;
           const {classes} = this.props;
           return(
-              <Paper>
+              <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
               <LoadWrapper open={this.props.roomList && this.props.roomList.length > 0 ? false : true} />
-          <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>List Of Rooms</h1>
                 <Table>
-            <TableHead>
+            <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
               <TableRow>
-                <TableCell>Room Number</TableCell>
-                <TableCell>Capacity</TableCell>
-                <TableCell>Room Name</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Capability</TableCell>
-                <TableCell>Description</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Room Number</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Capacity</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Room Name</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Location</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Capability</TableCell>
+                <TableCell style={{color: "white", fontSize:16}}>Description</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody style={{backgroundColor: "white"}}>
               {(RoomList && RoomList.length > 0 && RoomList.map(row => {
                 let cap = '';
                 row.CAPABILITIES && row.CAPABILITIES.length > 0 && row.CAPABILITIES.map((elem, index, array) => {
@@ -81,19 +83,20 @@ handleChange = event => {
                     <TableCell>{row.DESCRIPTION}</TableCell>
                   </TableRow>
                 );
-              })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
+              })) || <TableRow><TableCell/><TableCell/><TableCell>No Results</TableCell><TableCell/><TableCell/></TableRow>}
             </TableBody>
             <TableFooter height="auto" padding={5}>
-            <IconButton 
-              variant="fab" 
-              mini color="secondary" 
+            <Tooltip title="Add New Room">
+            <Button 
+              variant="raised" 
+              color="primary" 
               aria-label="add" 
               className={classes.button}
               onClick={this.openDialog}>
               <AddIcon />
               
-            </IconButton>
-            Add new Room
+            </Button>
+           </Tooltip>
             </TableFooter>
           </Table>
               </Paper>

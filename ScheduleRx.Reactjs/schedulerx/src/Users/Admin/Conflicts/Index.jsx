@@ -183,7 +183,7 @@ class Conflicts extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 35}}>
+            <div style={{paddingTop: 40}}>
                 <ConflictTable 
                     openConflict={this.openDialog} 
                     handleState={this.handleState} 

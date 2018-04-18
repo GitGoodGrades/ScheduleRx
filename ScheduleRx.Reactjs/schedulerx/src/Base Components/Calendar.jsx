@@ -89,18 +89,23 @@ class Calendar extends Component {
                 color: 'black',
                 borderRadius: "4px",
                 marginLeft: "3px",
-                marginRight: "2px"
+                marginRight: "2px",
+                fontWeight: 500
               };
 
               roomColors && roomColors.length > 0 && roomColors.map(row => {
-                if(event.ROOM_ID == row.Room){
-                  newStyle.backgroundColor = row.color
+                if(event.SECTIONS && 
+                    event.SECTIONS.records && 
+                    event.SECTIONS.records.length > 0 &&
+                    event.SECTIONS.records[0].COURSE_ID == row.Course){
+                      newStyle.backgroundColor = row.color
                 }
               })
         
               if (event.SCHEDULE_ID == null){
-                newStyle.backgroundColor = "rgb(255,0,0)",
-                newStyle.border = "2px solid black";
+                newStyle.backgroundColor = "red",
+                newStyle.border = ".7px solid black";
+                newStyle.fontWeight = '550'
                 newStyle.color = 'white'
               }
 

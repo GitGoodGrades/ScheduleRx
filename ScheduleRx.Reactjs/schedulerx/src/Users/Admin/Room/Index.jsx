@@ -158,7 +158,7 @@ class Rooms extends Component{
     render(){
         return(
            
-                <div style={{paddingTop: 35}}> 
+                <div style={{paddingTop: 40}}> 
                     <RoomTable 
                         capabilityOptions={this.state.capOptions} 
                         handleState={this.handleState} 

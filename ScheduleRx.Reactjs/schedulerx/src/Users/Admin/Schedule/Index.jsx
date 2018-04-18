@@ -154,7 +154,7 @@ class Schedules extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 35}}>
+            <div style={{paddingTop: 40}}>
                 <ScheduleTable handleEdit={this.handleEditOpen} handleState={this.handleState} save={this.update} scheduleList={this.props.schedules} open={this.openDialog} />
                 <ScheduleEditForm deleteSchedule={this.handleDelete} onSave={this.handleUpdate} open={this.state.editDialogOpen} onCancel={this.cancel} schedule={this.state.schedule} />
                 <ScheduleForm schedule={this.state.schedule} onSave={this.handleSave} open={this.state.dialogOpen} onCancel={this.cancel} resubmit={this.reload}/>

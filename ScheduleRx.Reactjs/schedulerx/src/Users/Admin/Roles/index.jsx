@@ -20,7 +20,7 @@ class Roles extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 35}}>
+            <div style={{paddingTop: 40}}>
                 <FacultyTable  users={this.props.users} user={this.props.user}/>
             </div>
         );

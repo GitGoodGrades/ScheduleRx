@@ -55,26 +55,19 @@ class ConflictTable extends Component {
     render() {
         const {conflicts, loading} = this.state;
         return (
-        <div>
-     
-        
-      
-        <Paper>
+        <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
         <LoadWrapper open={this.props.conflicts ? false : true } />
-            <h1 style={{color: 'rgb(111, 0, 41)', textAlign: 'center', paddingTop: 5}}>Conflicts/Room Requests</h1>
-            
-            
             <Table>
-                <TableHead>
+                <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                 <TableRow>
-                    <TableCell>Room</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Begin Time</TableCell>
-                    <TableCell>End Time</TableCell>
-                    <TableCell>Courses</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Room</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Date</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Begin Time</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>End Time</TableCell>
+                    <TableCell style={{color: "white", fontSize:16}}>Courses</TableCell>
                 </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody style={{backgroundColor: "white"}}>
                 {(conflicts && conflicts.length > 0 && conflicts.map(row => {
                     return (
                     <TableRow
@@ -95,11 +88,13 @@ class ConflictTable extends Component {
                         })}</TableCell>
                     </TableRow>
                     );
-                })) || <TableRow><TableCell>No conflicts at this time</TableCell></TableRow>}
+                })) || <TableRow><TableCell/><TableCell/>
+                    <TableCell>No conflicts at this time</TableCell>
+                    <TableCell/><TableCell/></TableRow>}
                 </TableBody>
             </Table>
         </Paper>
-        </div>
+      
         );
     }
 }

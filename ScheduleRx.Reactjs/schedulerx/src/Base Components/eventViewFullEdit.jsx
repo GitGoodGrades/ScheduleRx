@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import {client} from "../configuration/client";
 import EditConflictContinueDialog from '../Users/Admin/Event/components/EditConflictContinueDialog';
 import ReactToPrint from "react-to-print";
+import Tooltip from 'material-ui/Tooltip';
 
 const styles = theme => ({
   card: {
@@ -70,7 +71,9 @@ class EventViewEditFull extends Component{
         details: '',
         start: '',
         end: '',
-        message: ""
+        message: "",
+        timeChange: 'false',
+        roomChange: 'false'
     }
 
     handleClose = () => {
@@ -85,18 +88,23 @@ class EventViewEditFull extends Component{
         let regSemStart = this.props.registrationSchedule.START_SEM_DATE;
         let regSemEnd = this.props.registrationSchedule.END_SEM_DATE;
         if(now.isBetween(regStart, regEnd)){
-            if(moment(this.state.start).isBetween(regSemStart, regSemEnd)) {
-                this.setState({
-                    isRequest: false
-                })
-                this.checkForConflicts();
+            if(this.state.roomChange == 'true' || this.state.timeChange == 'true') {
+                if(moment(this.state.start).isBetween(regSemStart, regSemEnd)) {
+                    this.setState({
+                        isRequest: false
+                    })
+                    this.checkForConflicts();
+                }
+                else{
+                    this.setState({
+                        isConflict: false,
+                        isRequest: true,
+                        conflictDialogOpen: true
+                    })
+                }
             }
-            else{
-                this.setState({
-                    isConflict: false,
-                    isRequest: true,
-                    conflictDialogOpen: true
-                })
+            else {
+                this.updateEvent();
             }
             //if event is between reg semester
                 //and there are no conflicts
@@ -107,11 +115,16 @@ class EventViewEditFull extends Component{
                 //create request
         }
         else {
-            this.setState({
-                isRequest: true,
-                isConflict: false,
-                conflictDialogOpen: true
-            })
+            if(this.state.timeChange == 'true' || this.state.roomChange == 'true') {
+                this.setState({
+                    isRequest: true,
+                    isConflict: false,
+                    conflictDialogOpen: true
+                })
+            }
+            else {
+                this.updateEvent();
+            }
         }
         
             //create request
@@ -195,16 +208,7 @@ class EventViewEditFull extends Component{
         };
 
         this.setState({ 
-            //BOOKING_ID: nextProps.event.BOOKING_ID,
-            //room: nextProps.event.ROOM_ID,
-            //course: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
-            //sections: selectSections,
-            //title: nextProps.event.BOOKING_TITLE,
-            //details: nextProps.event.NOTES ? nextProps.event.NOTES : '',
-            //start: nextProps.event.START_TIME,
-            //end: nextProps.event.END_TIME,
             sectionOptions: sections,
-            //date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD"),
             originalEvent: original
         })
     }
@@ -224,7 +228,7 @@ class EventViewEditFull extends Component{
     };
 
     handleRoomChange = event => {
-        this.setState({room: event.value})
+        this.setState({room: event.value, roomChange: 'true'})
     };
 
     cancel = () => {
@@ -314,7 +318,7 @@ class EventViewEditFull extends Component{
             SCHEDULE_ID: this.state.message ? null : this.props.registrationSchedule.SCHEDULE_ID,
             COURSE_ID: this.state.course,
             SECTION_ID: sections,
-            ROOM_ID: this.state.room,
+            room: this.state.room,
             START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
             END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
             BOOKING_TITLE: this.state.title,
@@ -361,18 +365,69 @@ class EventViewEditFull extends Component{
         this.setState({
             date: moment(event._d).format("YYYY-MM-DD"),
             start: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.start).format('h:mm a'),
-            end: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.end).format('h:mm a')
+            end: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.end).format('h:mm a'),
+            timeChange: 'true'
     })
     }
 
     handleChangeStart = (event) => {
         let date = this.state.date;
-        this.setState({start: date + " " + moment(event._d).format('h:mm a')})
+        this.setState({
+            start: date + " " + moment(event._d).format('h:mm a'),
+            timeChange: 'true'
+        })
     }
 
     handleChangeEnd = (event) => {
         let date = this.state.date;
-        this.setState({end: date + " " + moment(event._d).format('h:mm a')})
+        this.setState({
+            end: date + " " + moment(event._d).format('h:mm a'),
+            timeChange: 'true'
+        })
+    }
+
+    updateEvent = () => {
+        let sections = [];
+        let check = this.state.sections;
+        if(!Array.isArray(check)){
+            sections = this.state.sections.split(',');
+        } else {
+            this.state.sections && this.state.sections.map(element => {
+                sections.push(element.value)
+            })
+        }
+
+        client.post(`Bookings/Update.php`, {
+            SCHEDULE_ID: this.state.originalEvent.SCHEDULE_ID,
+            SECTIONS: sections,
+            BOOKING_ID: this.state.originalEvent.BOOKING_ID,
+            //ROOM_ID: this.state.room,
+            //START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+            //END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+            BOOKING_TITLE: this.state.title,
+            DETAILS: this.state.details
+        })
+        this.setState({
+            edit: 'false'
+        })
+
+        this.handleClose();
+
+        let newEvent = {
+            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+            SECTIONS: {records: [{
+                COURSE_ID: this.state.course
+            }]},
+            SECTION_ID: sections,
+            ROOM_ID: this.state.room,
+            START_TIME: this.state.start,
+            END_TIME: this.state.end,
+            BOOKING_TITLE: this.state.title,
+            NOTES: this.state.details,
+
+        }
+
+        this.props.addEvent(newEvent);
     }
 
   render(){
@@ -402,31 +457,32 @@ class EventViewEditFull extends Component{
               <Typography component="p">
                 {event && event.DETAILS}
               </Typography>
+              <Tooltip title="Edit">
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
                 <Icon>edit_icon</Icon>
               </IconButton>
+            </Tooltip>
+            <Tooltip title="Copy Event">
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDuplicate}>
                 <Icon>queue_icon</Icon>
               </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete">
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDelete}>
                 <Icon>delete_forever_icon</Icon>
               </IconButton>
+            </Tooltip>
             </CardContent>
             <CardContent className={this.state.edit ? '' : classes.hidden}>
                 <Typography variant="headline" component="h2">
+                <InputLabel className={classes.label} htmlFor="course-helper">Title</InputLabel>
                     <input
-                        className={classes.field}
+                        style={{height: '36px', width: '98%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
                         id="title"
                         onBlur={this.handleBlur}
                         maxLength={50}
-                        placeholder={event && event.BOOKING_TITLE}
-                    >
-                    </input>
-                    <input
-                    id="details"
-                    onBlur={this.handleBlur}
-                    placeholder={event && event.DETAILS}
-                    maxLength={50}
+                        defaultValue={event && event.BOOKING_TITLE}
+                        
                     >
                     </input>
               </Typography>
@@ -441,7 +497,7 @@ class EventViewEditFull extends Component{
                         )}
                         value={this.state.room}
                         optionComponent={Option}
-                        placeholder={event && event.ROOM_ID}
+                        value={event && event.ROOM_ID}
                         clearable={false}
                     />
                 </div>
@@ -455,7 +511,7 @@ class EventViewEditFull extends Component{
                             row = {label: row.COURSE_ID, value: row.COURSE_ID}
                         )}
                         value={this.state.course}
-                        placeholder={(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}
+                        value={(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}
                         optionComponent={Option}
                         clearable={false}
                     />
@@ -474,28 +530,46 @@ class EventViewEditFull extends Component{
                         optionComponent={Option}
                     />
                 </div>
-              <Typography component="p">
-                <DatePicker
+                <div>
+                <InputLabel htmlFor="select-multiple" className={classes.label}>Date</InputLabel>
+                <DatePicker 
+                    dialogContainerStyle={{alignContent: 'center'}}
                     id="date"
+                    style={{height: '36px', width: '98%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    InputProps={{disableUnderline: true }}
                     value={this.state.date}
                     placeholder="select a date"
                     onChange={this.handleChangeDate}
                 />
-                <br />
                 <TimePicker
                     id="start"
+                    style={{height: '36px', width: '47.5%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    InputProps={{disableUnderline: true }}
                     value={this.state.start}
                     onChange={this.handleChangeStart}
                     disabled={this.state.date == null}
                 />
+                &nbsp;
                 <TimePicker
                     id="end"
+                    style={{height: '36px', width: '47.5%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    InputProps={{disableUnderline: true }}
                     value={this.state.end}
                     onChange={this.handleChangeEnd}
                     disabled={this.state.date == null}
                 />
-              </Typography>
               
+              </div>
+              <InputLabel  htmlFor="select-multiple" className={classes.label}>Details</InputLabel>
+              <textarea
+                    id="details"
+                    onChange={this.handleBlur}
+                    defaultValue={event && event.DETAILS}
+                    maxLength={250}
+                    style={{height: '75px', width: '97%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
+                    >
+                </textarea>         
+       
                
             </CardContent>
             <CardActions className={this.state.edit ? '' : classes.hidden}>

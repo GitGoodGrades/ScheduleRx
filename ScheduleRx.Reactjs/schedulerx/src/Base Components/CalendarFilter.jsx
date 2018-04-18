@@ -12,6 +12,7 @@ import MonthPicker from 'react-simple-month-picker';
 import { connect } from 'react-redux';
 import { Admin } from '../configuration/variables';
 import moment from 'moment';
+import Tooltip from 'material-ui/Tooltip';
 
 const styles = theme => ({
     hidden: {
@@ -80,7 +81,7 @@ class CalendarFilter extends Component{
     }
 
     setCalendarDate = (date) => {
-        this.setState({monthPicker: false})
+        // this.setState({monthPicker: false})
         this.props.changeCalendarDate(new Date(moment(date).subtract(5, 'd')));
     }
 
@@ -96,11 +97,11 @@ class CalendarFilter extends Component{
         return(
             <div>
                 
-
+                <Tooltip title="Select Month">
                 <Button
                 variant="raised"
                 size="small"
-                color="secondary"
+                style={{backgroundColor: 'rgba(0,0,0,.7)', color: 'white'}}
                 aria-owns={anchorEl ? 'simple-menu' : null}
                 aria-haspopup="true"
                 onClick={this.handleMonthPick}
@@ -108,12 +109,13 @@ class CalendarFilter extends Component{
                 >
                  <DateRangeIcon/> 
                 </Button>
-                
+                </Tooltip>
+                <Tooltip title="Filter Events">
                 <Button
                 style={this.props.role != Admin ? {display: 'none'} : {}}
                 variant="raised"
                 size="small"
-                color="secondary"
+                style={{backgroundColor: 'rgba(0,0,0,.7)', color: 'white'}}
                 aria-owns={anchorEl ? 'simple-menu' : null}
                 aria-haspopup="true"
                 onClick={this.handleClick}
@@ -121,6 +123,7 @@ class CalendarFilter extends Component{
                 >
                  <FilterListIcon/> 
                 </Button>
+                </Tooltip>
 
                 <Menu
                 id="simple-menu"

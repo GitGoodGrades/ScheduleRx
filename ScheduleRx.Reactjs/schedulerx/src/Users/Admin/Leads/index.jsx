@@ -26,7 +26,7 @@ class Leads extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 35}}>
+            <div style={{paddingTop: 40}}>
                 <UserCourseTable  faculty={this.props.faculty} leads={this.props.leads} courses={this.props.courses} user={this.props.user}/>
             </div>
         );

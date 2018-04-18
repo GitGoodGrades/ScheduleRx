@@ -6,24 +6,24 @@ export const Student = "4";
 export const SystemAdminIDs = ['10000001', ];
 
 export const roomColors = [
-    {Room: '100', color: 'rgb(2,63,165)'},
-    {Room: '215', color: 'rgb(125,135,185)'},
-    {Room: '218', color: 'rgb(190,193,212)'},
-    {Room: '221', color: 'rgb(214,188,192)'},
-    {Room: '236a', color: 'rgb(187,119,132)'},
-    {Room: '236b', color: 'rgb(142,6,59)'},
-    {Room: '236c', color: 'rgb(74,111,227)'},
-    {Room: '242', color: 'rgb(133,149,225)'},
-    {Room: '243', color: 'rgb(181,187,227)'},
-    {Room: '320', color: 'rgb(230,175,185)'},
-    {Room: '322', color: 'rgb(224,123,145)'},
-    {Room: '325', color: 'rgb(211,63,106)'},
-    {Room: '327', color: 'rgb(17,198,56)'},
-    {Room: '338', color: 'rgb(141,213,147)'},
-    {Room: '339', color: 'rgb(198,222,199)'},
-    {Room: '340', color: 'rgb(234,211,198)'},
-    {Room: '341', color: 'rgb(240,185,141)'},
-    {Room: '343', color: 'rgb(239,151,8)'},
-    {Room: 'clinical', color: 'rgb(15,207,192)'}
+    {Course: 'N2004' , color: 'rgb(210, 238, 226)'},
+    {Course: 'N2009' , color: 'rgb(248, 227, 211)'},
+    {Course: 'N2011' , color: 'rgb(249, 240, 217)'},
+    {Course: 'N2013' , color: 'rgb(234, 241, 205)'},
+
+    {Course: 'N3009' , color: 'rgb(184, 227, 209)'},
+    {Course: 'N3010' , color: 'rgb(244, 212, 187)'},
+    {Course: 'N3011' , color: 'rgb(223, 234, 180)'},
+
+    {Course: 'N3028' , color: 'rgb(168, 221, 199)'}, //teal
+    {Course: 'N3029' , color: 'rgb(240, 201, 168)'}, //red
+    {Course: 'N3030' , color: 'rgb(213, 227, 155)'}, //gold
+
+    {Course: 'N4000' , color: 'rgb(151, 214, 188)'},
+    {Course: 'N4001' , color: 'rgb(237, 190, 151)'},
+    {Course: 'N4002' , color: 'rgb(202, 220, 129)'},
+
+    {Course: 'N4066' , color: 'rgb(232, 173, 125)'},
+    {Course: 'N4067' , color: 'rgb(193, 215, 106)'}
 ]
     

@@ -9,6 +9,7 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        fontFamily: 'Open Sans'
     },
     logcontainer: {
         display: 'flex',
@@ -18,6 +19,7 @@ const styles = theme => ({
         width: 350,
         height: 350,
         position: 'fixed',
+        fontFamily: 'Open Sans'
     },
     loginfo: {
         marginBottom: '.5em',
@@ -28,7 +30,8 @@ const styles = theme => ({
         border: '1px solid #767676',
         borderRadius: '2px',
         paddingLeft: '.2em',
-        background: 'white'
+        background: 'white',
+        fontFamily: 'Open Sans'
     },
     title: {
         color: 'white',
@@ -37,6 +40,7 @@ const styles = theme => ({
         fontSize: '60px',
         marginBottom: '0',
         letterSpacing: '5px',
+        fontFamily: 'Open Sans'
     },
     subTitle: {
         color: 'white',
@@ -44,6 +48,7 @@ const styles = theme => ({
         fontSize: '18px',
         fontWeight: 'normal',
         marginTop: '0',
+        fontFamily: 'Open Sans'
     },
     LoginButton: {
         marginBottom: '.5em',
@@ -53,13 +58,15 @@ const styles = theme => ({
         color: 'white',
         height: 30,
         width: 305,
+        fontFamily: 'Open Sans'
     },
     regbutton: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         color: 'white',
-        fontSize: '14px'
+        fontSize: '14px',
+        fontFamily: 'Open Sans'
     }
 });
 

@@ -20,13 +20,13 @@ class UserCourseTable extends Component {
                 if(fac.ROLE_ID == 1) {
                 temp.push({
                     UserID: fac.USER_ID,
-                    // UserName: fac.FIRSTNAME + " " + fac.LASTNAME,
+                    UserName: fac.EMAIL,
                     UserRole: 1
                 })
                 } else if(fac.ROLE_ID == 2 || fac.ROLE_ID == 3){
                     temp.push({
                         UserID: fac.USER_ID,
-                        // UserName: fac.FIRSTNAME + " " + fac.LASTNAME,
+                        UserName:  fac.EMAIL,
                         UserRole: 0
                     })
                 }
@@ -68,22 +68,22 @@ class UserCourseTable extends Component {
                          {value: 0, label: 'Faculty'}
                         ];
         return (
-        <Paper>
+        <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
             <LoadWrapper open={faculty.length > 0 ? false : true} />
             <Table >
-                <TableHead>
+                <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                     <TableRow>
-                        <TableCell><h2>User Id</h2></TableCell>
-                        {/* <TableCell><h2>User Name</h2></TableCell> */}
-                        <TableCell><h2>Role</h2></TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>User Id</TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>User Name</TableCell>
+                        <TableCell style={{color: "white", fontSize:16}}>Role</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody style={{backgroundColor: "white"}}>
                 {faculty && faculty.length > 0 && faculty.map(row => {
                     return (
                     <TableRow key={row.UserID}>
                         <TableCell>{row.UserID}</TableCell>
-                        {/* <TableCell>{row.UserName}</TableCell> */}
+                        <TableCell>{row.UserName}</TableCell>
                         <TableCell >
                             <Select
                                 name={row.UserID}
@@ -96,8 +96,8 @@ class UserCourseTable extends Component {
                     </TableRow>
                     );
                 })}
-                <br/><br/><br/>
-                </TableBody>
+                
+                </TableBody><br/><br/><br/>
             </Table>
         </Paper>
         );

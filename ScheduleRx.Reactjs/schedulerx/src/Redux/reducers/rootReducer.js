@@ -17,7 +17,7 @@ const initialState = {
     redirect_date: null,
     redirect_event: null,
     leadsCourses: null,
-    messages: null, 
+    messages: [], 
     capList: null,
     userList: null
 };
