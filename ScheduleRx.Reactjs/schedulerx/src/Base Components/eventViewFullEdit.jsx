@@ -32,17 +32,22 @@ const styles = theme => ({
     margin: '0 2px',
     transform: 'scale(0.8)',
   },
+  label: {
+    
+    color: 'black'
+  },
   title: {
-    marginBottom: 16,
-    fontSize: 14,
-    color: theme.palette.text.secondary,
+    marginBottom: 5
   },
   pos: {
-    marginBottom: 12,
-    color: theme.palette.text.secondary,
+    
   },
   hidden: {
       display: 'none'
+  },
+  content: {
+      marginBottom: 5,
+      fontSize: 15
   }
 });
 
@@ -444,18 +449,21 @@ class EventViewEditFull extends Component{
         <div>
           <Card className={classes.card}>
             <CardContent className={this.state.edit ? classes.hidden : ''}>
-              <Typography className={classes.title}>Room: {event && event.ROOM_ID}</Typography>
+              
               <Typography variant="headline" component="h2">
                 {event && event.BOOKING_TITLE}
               </Typography>
-              <Typography className={classes.pos}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
-              <Typography component="p">
-                {event && moment(event.START_TIME).format('MMMM Do YYYY')} <br />
-                {event && moment(event.START_TIME).format('h:mm a')} - 
+              <Typography className={classes.content}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
+              <Typography className={classes.content}>In Room {event && event.ROOM_ID}</Typography>
+              <Typography className={classes.content} component="p">
+                On {event && moment(event.START_TIME).format('MMMM Do YYYY')}
+              </Typography>
+              <Typography className={classes.content} component="p">
+                From {event && moment(event.START_TIME).format('h:mm a')} - 
                 {event && moment(event.END_TIME).format('h:mm a')}
               </Typography>
-              <Typography component="p">
-                {event && event.DETAILS}
+              <Typography className={classes.content} component="p">
+                Details: {event && event.DETAILS}
               </Typography>
               <Tooltip title="Edit">
               <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
@@ -475,7 +483,7 @@ class EventViewEditFull extends Component{
             </CardContent>
             <CardContent className={this.state.edit ? '' : classes.hidden}>
                 <Typography variant="headline" component="h2">
-                <InputLabel className={classes.label} htmlFor="course-helper">Title</InputLabel>
+                <InputLabel className={classes.label} htmlFor="course-helper">Title:</InputLabel>
                     <input
                         style={{height: '36px', width: '98%', borderRadius: "4px", border: '1px solid #ccc', position: 'relative', paddingLeft: '10px'}}
                         id="title"
@@ -487,7 +495,7 @@ class EventViewEditFull extends Component{
                     </input>
               </Typography>
               <div className={classes.control}>
-                    <InputLabel htmlFor="section-helper" className={classes.label}>Select Room</InputLabel>
+                    <InputLabel htmlFor="section-helper" className={classes.label}>Select Room:</InputLabel>
                     <Select
                         className={classes.Select}
                         onChange={this.handleRoomChange}
@@ -503,7 +511,7 @@ class EventViewEditFull extends Component{
                 </div>
               
                 <div className={classes.control}  style={{zIndex: 100}}>
-                    <InputLabel className={classes.label} htmlFor="course-helper">Select Course</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="course-helper">Select Course:</InputLabel>
                     <Select
                         className={classes.Select}
                         onChange={this.handleCourseChange}
@@ -517,7 +525,7 @@ class EventViewEditFull extends Component{
                     />
                 </div>
                 <div className={classes.control}>
-                    <InputLabel htmlFor="select-multiple" className={classes.label}>Select Section(s)</InputLabel>
+                    <InputLabel htmlFor="select-multiple" className={classes.label}>Select Section(s):</InputLabel>
                     <Select
                         className={classes.Select}
                         closeOnSelect={true}
@@ -531,7 +539,7 @@ class EventViewEditFull extends Component{
                     />
                 </div>
                 <div>
-                <InputLabel htmlFor="select-multiple" className={classes.label}>Date</InputLabel>
+                <InputLabel htmlFor="select-multiple" className={classes.label}>Date:</InputLabel>
                 <DatePicker 
                     dialogContainerStyle={{alignContent: 'center'}}
                     id="date"
@@ -560,7 +568,7 @@ class EventViewEditFull extends Component{
                 />
               
               </div>
-              <InputLabel  htmlFor="select-multiple" className={classes.label}>Details</InputLabel>
+              <InputLabel  htmlFor="select-multiple" className={classes.label}>Details:</InputLabel>
               <textarea
                     id="details"
                     onChange={this.handleBlur}
