@@ -180,7 +180,6 @@ class EventViewEditFull extends Component{
     componentWillReceiveProps = (nextProps) => {
         if(nextProps.redirect){
             this.setState({
-                edit: true,
                 redirection: true
             })
         }
@@ -211,6 +210,10 @@ class EventViewEditFull extends Component{
             sectionOptions: sections,
             originalEvent: original
         })
+
+        if(nextProps.redirect){
+            this.selectEdit();
+        }
     }
   
     handleCourseChange = event => {
