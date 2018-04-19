@@ -325,7 +325,7 @@ class EventViewEditFull extends Component{
             NOTES: this.state.details
         }
 
-        this.props.addEvent(temp);
+        this.props.spliceEvent(temp);
 
         this.setState({
             conflictDialogOpen: false
@@ -401,9 +401,6 @@ class EventViewEditFull extends Component{
             SCHEDULE_ID: this.state.originalEvent.SCHEDULE_ID,
             SECTIONS: sections,
             BOOKING_ID: this.state.originalEvent.BOOKING_ID,
-            //ROOM_ID: this.state.room,
-            //START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
-            //END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
             BOOKING_TITLE: this.state.title,
             DETAILS: this.state.details
         })
