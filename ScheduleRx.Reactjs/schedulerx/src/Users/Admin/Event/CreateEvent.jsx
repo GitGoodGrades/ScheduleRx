@@ -77,6 +77,19 @@ class CreateEvent extends Component {
         this.setState({events: temp})
     }
 
+    handleSpliceEvent = (event) => {
+        let temp = this.state.events;
+        
+        temp.map(old => {
+            if(old.BOOKING_ID === event.BOOKING_ID){
+                temp.splice(temp.indexOf(old), 1);
+            }
+        });
+        
+        temp.push(event);
+        this.setState({events: temp})
+    }
+
     cancel = () => {
       this.setState({
         dialogOpen: false
@@ -530,7 +543,7 @@ class CreateEvent extends Component {
                     roomList={this.props.rooms} 
                     onSave={this.handleEdit}
                     delete={this.handleDelete}
-                    addEvent={this.handleAddEvent}/>
+                    spliceEvent={this.handleSpliceEvent}/>
                 <ConflictDialog
                     onConflictSave={this.handleConflictSave}
                     onConflictChange={this.handleConflictChange}

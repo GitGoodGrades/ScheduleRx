@@ -203,7 +203,7 @@ export function searchUsers() {
     let userList = [];
     let facultyList = [];
     return (dispatch) =>
-        client.get(`users/Index.php`)
+        client.get(`users/index.php`)
             .then(res => {
                 userList = res.data.records
 

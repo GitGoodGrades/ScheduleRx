@@ -330,7 +330,7 @@ class EventViewEditFull extends Component{
             NOTES: this.state.details
         }
 
-        this.props.addEvent(temp);
+        this.props.spliceEvent(temp);
 
         this.setState({
             conflictDialogOpen: false
@@ -403,12 +403,9 @@ class EventViewEditFull extends Component{
         }
 
         client.post(`Bookings/Update.php`, {
-            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+            SCHEDULE_ID: this.state.originalEvent.SCHEDULE_ID,
             SECTIONS: sections,
             BOOKING_ID: this.state.originalEvent.BOOKING_ID,
-            //ROOM_ID: this.state.room,
-            //START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
-            //END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
             BOOKING_TITLE: this.state.title,
             DETAILS: this.state.details
         })
@@ -419,7 +416,7 @@ class EventViewEditFull extends Component{
         this.handleClose();
 
         let newEvent = {
-            SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
+            SCHEDULE_ID: this.state.originalEvent.SCHEDULE_ID,
             SECTIONS: {records: [{
                 COURSE_ID: this.state.course
             }]},
@@ -428,11 +425,11 @@ class EventViewEditFull extends Component{
             START_TIME: this.state.start,
             END_TIME: this.state.end,
             BOOKING_TITLE: this.state.title,
-            NOTES: this.state.details,
-
+            DETAILS: this.state.details,
+            BOOKING_ID: this.state.originalEvent.BOOKING_ID
         }
 
-        this.props.addEvent(newEvent);
+        this.props.spliceEvent(newEvent);
     }
 
   render(){
