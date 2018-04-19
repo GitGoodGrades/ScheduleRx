@@ -47,7 +47,9 @@ foreach ($data->EVENTS as $event) {
         $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
 
         $log->info("Lead of Course Found: " . $leadID->USER_ID);
-        CreateMessage($data->MESSAGE, $leadID->USER_ID, $conn);
+        $toMessage = "Your Event in Room [" . $event->ROOM_ID . "] at [" . $event->START_TIME . "]" . " Was Removed. ";
+        $toMessage .= "From Admin:" . $data->MESSAGE;
+        CreateMessage($toMessage, $leadID->USER_ID, $conn);
     }
 
     DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
@@ -58,4 +60,4 @@ UpdateRecord('booking', $data->APPROVED ,"BOOKING_ID", $conn);
 echo GetAll('conflict', "CONFLICT_ID", $conn);
 
 $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $approvedCourse, $conn));
-if ($leadID) { CreateMessage("Your Event Has Been Approved", $leadID->USER_ID, $conn); }
+if ($leadID) { CreateMessage("Your Event in Room [". $data->APPROVED->ROOM_ID . "] Has Been Approved.", $leadID->USER_ID, $conn); }
