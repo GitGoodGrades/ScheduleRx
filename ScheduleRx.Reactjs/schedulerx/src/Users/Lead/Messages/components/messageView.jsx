@@ -5,7 +5,14 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import moment from 'moment';
-import Dialog from 'material-ui/Dialog';
+import IconButton from 'material-ui/IconButton';
+import Icon from 'material-ui/Icon';
+import Tooltip from 'material-ui/Tooltip';
+import Dialog, {   
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,} from 'material-ui/Dialog';
 
 const styles = theme => ({
   card: {
@@ -36,6 +43,9 @@ class MessageView extends Component{
   this.props.onClose();
   };
 
+  handleDelete = () => {
+    this.props.deleteMessage(this.state.message)
+  }
     componentWillReceiveProps = (nextProps) => {
         this.setState({
             message: nextProps.message
@@ -52,16 +62,19 @@ class MessageView extends Component{
           onClose={this.handleClose}
           onBackdropClick={this.handleClose}
       >
-        <div>
-          <Card className={classes.card}>
-            <CardContent>
-              <Typography variant="headline" component="h2">
-                {this.state.message && this.state.message.MESSAGE}
-              </Typography>
-
-            </CardContent>
-          </Card>
-        </div>
+      <DialogTitle id="alert-dialog-title">Message From the Admin</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              {this.state.message && this.state.message.MESSAGE}
+            </DialogContentText>
+          </DialogContent>
+      <DialogActions>
+      <Tooltip title="Delete">
+              <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDelete}>
+                <Icon>delete_forever_icon</Icon>
+              </IconButton>
+            </Tooltip>
+      </DialogActions>
       </ Dialog>
   );
   }
