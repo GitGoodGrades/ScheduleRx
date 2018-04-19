@@ -85,7 +85,6 @@ class CreateEvent extends Component {
                 temp.splice(temp.indexOf(old), 1);
             }
         });
-        
         temp.push(event);
         this.setState({events: temp})
     }

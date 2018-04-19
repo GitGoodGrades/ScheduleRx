@@ -1,6 +1,7 @@
 //import axios from 'axios';
 import {client} from '../../configuration/client';
 import { Lead, Faculty, Admin } from '../../configuration/variables';
+import moment from 'moment';
 
 export function adminCalendar() {
     return (dispatch) =>
@@ -12,7 +13,7 @@ export function adminCalendar() {
             data: events
         })
     });
-}
+} 
 
 export function userCalendar(user, role) {
     let QUERY = null;
@@ -156,11 +157,18 @@ export function setUser(name, role, sem) {
 
 export function setEditGlobals(event) {
     let date = new Date(event.START_TIME);
+    const newEvent = {
+        ...event,
+        start: event.START_TIME,
+        end: event.END_TIME,
+        date: moment(event.START_TIME).format("YYYY-MM-DD"),
+        sections: event.SECTIONS
+    }
     return (dispatch) =>
         dispatch({
             type: 'SET_EDIT',
             redirect_date: date,
-            redirect_event: event
+            redirect_event: newEvent
         });
 }
 
