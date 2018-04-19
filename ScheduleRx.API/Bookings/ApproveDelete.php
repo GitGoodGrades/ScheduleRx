@@ -13,7 +13,7 @@ $log = Logger::getLogger('ApproveLog');
 
 /* Script
  * Deletes multiple event by ID on approval and updates the requested SCHEDULE_ID of the approved event
- * @param EVENTS | list of events ID's to delete
+ * @param EVENTS | list of Event Objects to delete
  * @param APPROVED | event object to update with current ScheduleID
  * @param CONFLICT_ID | The conflict ID for the approval
  * @param MESSAGE | The to Send to the Deleted Event Leads
@@ -22,8 +22,8 @@ $data->APPROVED->SCHEDULE_ID = findByTime($data->APPROVED->START_TIME, $conn, $l
 $log->info("SCHEDULE_ID FOUND TO BE WITHIN FRAME OF: " .  $data->APPROVED->SCHEDULE_ID );
 $approvedCourse =  $data->APPROVED->SECTIONS->records[0]->COURSE_ID;
 
-//DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
-//DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
 
 foreach ($data->EVENTS as $event) {
     $log->info("Deleting Event with ID: " . $event->BOOKING_ID);
@@ -38,15 +38,17 @@ foreach ($data->EVENTS as $event) {
         $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
 
         $log->info("Lead of Course Found: " . $leadID->USER_ID);
-        //CreateMessage($data->MESSAGE, $leadID->USER_ID, $conn);
+        $toMessage = "Your Event in Room [" . $event->ROOM_ID . "] at [" . $event->START_TIME . "]" . " Was Removed. ";
+        $toMessage .= "<br/> From Admin: <br.>" . $data->MESSAGE;
+        CreateMessage( $toMessage, $leadID->USER_ID, $conn);
     }
 
-    //DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
-    //DeleteRecord('booking',"BOOKING_ID",   $event->BOOKING_ID , $conn );
+    DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
+    DeleteRecord('booking',"BOOKING_ID",   $event->BOOKING_ID , $conn );
 }
 unset($data->APPROVED->SECTIONS);
-//UpdateRecord('booking', $data->APPROVED ,"BOOKING_ID", $conn);
+UpdateRecord('booking', $data->APPROVED ,"BOOKING_ID", $conn);
 echo GetAll('conflict', "CONFLICT_ID", $conn);
 
 $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $approvedCourse, $conn));
-if ($leadID) { /*CreateMessage("Your Event Has Been Approved", $leadID->USER_ID, $conn);*/ }
+if ($leadID) { CreateMessage("Your Event in room [ " . $data->APPROVE->ROOM_ID . " ] Been Approved", $leadID->USER_ID, $conn); }

@@ -36,7 +36,7 @@ if(isset($data->SCHEDULE_ID) && ($data->SCHEDULE_ID == null || $data->SCHEDULE_I
         $leadID = json_decode(FindRecord('leads_course natural join course', 'COURSE_ID', $SectionInfo->USER_ID, $conn));
     }
 
-    if (isset($data->MESSAGE)) {
+    if (isset($data->MESSAGE) && isset($leadID)) {
         $newMessage = array("USER_ID" => $leadID->USER_ID, "MESSAGE" => $data->MESSAGE, "MSG_ID" => substr((string)getGUID(), 1, 36));
         CreateRecord('message', $newMessage, $conn);
     }
