@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import zIndex from 'material-ui/styles/zIndex';
 
 class Option extends React.Component {
 
@@ -64,7 +65,7 @@ class Option extends React.Component {
 			</div>
 		) : (
 			<div className={className}
-				style={option.style}
+				style={{zIndex: 30}}
 				role="option"
 				aria-label={option.label}
 				onMouseUp={this.handleMouseUp}

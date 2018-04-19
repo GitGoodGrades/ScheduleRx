@@ -44,7 +44,7 @@ class UserCourseTable extends Component {
         return (
         <Paper elevation="0" style={{backgroundColor: 'transparent'}}>
             <LoadWrapper open={leads && leads.length > 0 ? false : true} />
-            <Table >
+            <Table>
                 <TableHead style={{backgroundColor: 'rgba(0,0,0, 0.7)'}}>
                     <TableRow>
                         <TableCell style={{color: "white", fontSize:16}}>Courses</TableCell>
@@ -56,11 +56,14 @@ class UserCourseTable extends Component {
                     return (
                     <TableRow key={row.COURSE_ID}>
                         <TableCell>{row.COURSE_ID}</TableCell>
-                        <TableCell >
+                        <TableCell>
                             <Select
+                                disableUnderline='true'
+                                style={{border: '1px solid rgb(204, 204, 204)', borderRadius: '4px', paddingLeft: '10px', }}
                                 name={row.COURSE_ID}
                                 onChange={this.handleChange}
                                 value={row.USER_ID}
+                                
                                 >
                                     {(faculty && faculty.length > 0 && faculty.map(inside => {
                                         return (
