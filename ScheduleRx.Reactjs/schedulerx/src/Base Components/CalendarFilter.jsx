@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { Admin } from '../configuration/variables';
 import moment from 'moment';
 import Tooltip from 'material-ui/Tooltip';
+import Clear from 'material-ui-icons/Clear';
 
 const styles = theme => ({
     hidden: {
@@ -89,6 +90,10 @@ class CalendarFilter extends Component{
         this.setState({monthPicker: true})
     }
 
+    exit = () => {
+        this.setState({monthPicker: false})
+    }
+
     render(){
         const { anchorEl } = this.state;
         const {classes} = this.props;
@@ -136,13 +141,17 @@ class CalendarFilter extends Component{
                 <MenuItem id="room" onClick={this.handleSelect}>Room</MenuItem>
                 </Menu>
                 <Dialog
+
                     onEntering={this.handleEntering}
                     aria-labelledby="confirmation-dialog-title"
                     open={this.state.open}
                     style={{display: 'flex'}}
+                    PaperProps={{style: {overflow: 'visible'}}}
+                    
                 >
-                    <DialogTitle id="confirmation-dialog-title">Select {this.state.filterChoice}</DialogTitle>
+                    <DialogTitle style={{width: 300}} id="confirmation-dialog-title">Select {this.state.filterChoice}</DialogTitle>
                     <DialogContent
+                        style={{width: 300, overflow: 'visible', zIndex: 20}}                        
                         className={this.state.filterChoice !== "room" ? classes.hidden : ''}
                     >
                         <Select
@@ -156,6 +165,7 @@ class CalendarFilter extends Component{
                         />
                     </DialogContent>
                     <DialogContent
+                        style={{width: 300, overflow: 'visible', zIndex: 20}}
                         className={this.state.filterChoice !== "user" ? classes.hidden : ''}
                     >
                         <Select
@@ -169,6 +179,7 @@ class CalendarFilter extends Component{
                         />
                     </DialogContent>
                     <DialogContent
+                        style={{width: 300, overflow: 'visible', zIndex: 20}}
                         className={this.state.filterChoice !== "semester" ? classes.hidden : ''}
                     >
                         <Select
@@ -196,7 +207,11 @@ class CalendarFilter extends Component{
                     </DialogActions>
                 </Dialog>
                 <Dialog open={this.state.monthPicker} >
+                        <IconButton variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
+                            <Clear></Clear>
+                        </IconButton>
                     <DialogContent>
+                        
                         <MonthPicker onChange={(date)=>this.setCalendarDate(date)}/>
                     </DialogContent>
                 </Dialog>

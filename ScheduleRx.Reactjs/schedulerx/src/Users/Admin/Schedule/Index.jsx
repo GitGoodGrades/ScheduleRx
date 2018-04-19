@@ -90,7 +90,7 @@ class Schedules extends Component {
     }
 
     handleEditOpen = (id) => {
-        client.post('Schedule/Detail.php', {
+        client.post('schedule/detail.php', {
             SCHEDULE_ID: id
         }).then(res => {
             this.setState({
@@ -109,7 +109,7 @@ class Schedules extends Component {
 
       handleDelete = (schedule) => {
         let tempScheduleList = [];
-        client.post(`Schedule/Delete.php`,
+        client.post(`Schedule/delete.php`,
         {
             SCHEDULE_ID: schedule.SCHEDULE_ID
         })
@@ -143,7 +143,7 @@ class Schedules extends Component {
                     alert("Invalid Times or Dates, Please Try Again...");     
                 }
                 else {
-                    history.push("/schedule/list");
+                    history.push("/schedule/List");               
                 }  
             })
             .catch(function (error) {

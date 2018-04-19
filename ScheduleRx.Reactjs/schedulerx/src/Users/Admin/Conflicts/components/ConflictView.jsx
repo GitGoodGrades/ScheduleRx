@@ -45,6 +45,17 @@ const styles = theme => ({
   },
   hidden: {
       display: 'none'
+  },
+  approve: {
+      backgroundColor: 'rgba(255, 0, 0, .5)',
+      borderColor: 'transparent'
+  },
+  noApprove: {
+      backgroundColor: 'white'
+  },
+  deny: {
+      backgroundColor: 'rgba(0, 255, 0, .5)',
+      borderColor: 'transparent'
   }
 });
 
@@ -52,8 +63,14 @@ class EventViewEditFull extends Component{
     state = {
         conflictEvent: null,
         events: null,
-        denyMessage: ""
+        denyMessage: "",
+        denyHighlight: false,
+        approveHighlight: false
     }
+
+    approveEnter = () => {this.setState({approveHighlight: true})}
+   
+    approveLeave = () => {this.setState({approveHighlight: false})}
 
     componentWillReceiveProps = (nextProps) => {
         let temp = [];
@@ -68,6 +85,10 @@ class EventViewEditFull extends Component{
         });
         this.setState({events: temp})
     }
+
+    denyEnter = () => {this.setState({denyHighlight: true})}
+    
+    denyLeave = () => {this.setState({denyHighlight: false})}
     
     handleClose = () => {
     this.props.onClose();
@@ -90,7 +111,7 @@ class EventViewEditFull extends Component{
     }
 
     selectDenySend = () => {
-        client.post('Bookings/Delete.php', {
+        client.post('bookings/delete.php', {
             SCHEDULE_ID: this.state.conflictEvent.SCHEDULE_ID,
             BOOKING_ID: this.state.conflictEvent.BOOKING_ID
         })
@@ -105,6 +126,8 @@ class EventViewEditFull extends Component{
             [event.target.id]: event.target.value
         })
     }
+
+    
 
     selectCancelDeny = () => {
         this.props.onSelectDenyCancel();
@@ -140,8 +163,9 @@ class EventViewEditFull extends Component{
                 <Table>
                 <TableBody>
                 <TableRow id={0} hover="false">
-                        <TableCell>Event Title</TableCell>
-                        <TableCell>{    
+                        <TableCell >Event Title</TableCell>
+                        <TableCell 
+                        >{    
                             this.state.conflictEvent && this.state.conflictEvent.BOOKING_TITLE }
                         </TableCell>
                     </TableRow>
@@ -181,7 +205,7 @@ class EventViewEditFull extends Component{
                 <TableBody>
                 <TableRow id={0} hover="false">
                         <TableCell>Event Title</TableCell>
-                        <TableCell>{
+                        <TableCell className={this.state.approveHighlight? classes.approve : this.state.denyHighlight? classes.deny : classes.noApprove}>{
                             this.state.events && this.state.events.length > 1 && this.state.events.map((elem, index, array) => {
                                 if(index + 1 < array.length){
                                     return<div>
@@ -195,13 +219,13 @@ class EventViewEditFull extends Component{
                             }) ||   this.state.events && this.state.events[0] && this.state.events[0].BOOKING_TITLE}
         
                         </TableCell>
-                        <TableCell>{    
+                        <TableCell className={this.state.approveHighlight? classes.deny : this.state.denyHighlight? classes.approve : classes.noApprove} >{    
                             this.state.conflictEvent && this.state.conflictEvent.BOOKING_TITLE }
                         </TableCell>
                     </TableRow>
                     <TableRow id={1}>
                         <TableCell>Course</TableCell>
-                        <TableCell>{
+                        <TableCell  className={this.state.approveHighlight? classes.approve : this.state.denyHighlight? classes.deny : classes.noApprove} >{
                             this.state.events && this.state.events.length > 1 && this.state.events.map((elem, index, array) => {
                                 if(index+1 < array.length){
                                     return<div>
@@ -223,7 +247,7 @@ class EventViewEditFull extends Component{
                                     this.state.events[0].SECTIONS.records &&
                                     this.state.events[0].SECTIONS.records[0].SECTION_ID}
                         </TableCell>
-                        <TableCell >{
+                        <TableCell className={this.state.approveHighlight? classes.deny : this.state.denyHighlight? classes.approve : classes.noApprove}>{
                             this.state.conflictEvent &&
                             this.state.conflictEvent.SECTIONS &&
                             this.state.conflictEvent.SECTIONS.records &&
@@ -232,7 +256,7 @@ class EventViewEditFull extends Component{
                     </TableRow>
                     <TableRow id={2} hover="false">
                         <TableCell>Event Time</TableCell>
-                        <TableCell>{
+                        <TableCell className={this.state.approveHighlight? classes.approve : this.state.denyHighlight? classes.deny : classes.noApprove}>{
                             this.state.events && this.state.events.length > 1 && this.state.events.map((elem, index, array) => {
                                 if(index + 1 < array.length){
                                     return<div>
@@ -247,7 +271,7 @@ class EventViewEditFull extends Component{
                                     moment(this.state.events[0].START_TIME).format('h:mm a') + "-" +  moment(this.state.events[0].END_TIME).format('h:mm a')}
         
                         </TableCell>
-                        <TableCell>{    
+                        <TableCell className={this.state.approveHighlight? classes.deny : this.state.denyHighlight? classes.approve : classes.noApprove}>{    
                             this.state.conflictEvent && 
                             moment(this.state.conflictEvent.START_TIME).format('h:mm a') + "-" +  moment(this.state.conflictEvent.END_TIME).format('h:mm a')}
                         </TableCell>
@@ -259,15 +283,15 @@ class EventViewEditFull extends Component{
             </CardContent>
             <CardActions>
             
-                <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectEdit}>
+                <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectEdit}  >
                 Edit Request
                 <Edit></Edit>
               </Button>
-              <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectDeny}>
+              <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectDeny} onMouseEnter={this.denyEnter} onMouseLeave={this.denyLeave} >
                 Deny Request
                 <Done></Done>
               </Button>
-              <Button variant="raised" color="secondary"className={classes.button} onClick={this.selectApprove}>
+              <Button variant="raised" color="secondary"className={classes.button} onClick={this.selectApprove} onMouseEnter={this.approveEnter} onMouseLeave={this.approveLeave} >
                 Approve Request
                 <Done></Done>
               </Button>

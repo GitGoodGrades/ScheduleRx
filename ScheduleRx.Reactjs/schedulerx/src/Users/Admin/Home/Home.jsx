@@ -78,7 +78,7 @@ class EmptyHome extends Component {
                     this.setState({events: res.data});
                 })
         } else if (filter === 'room' && option != null){
-            client.post(`Bookings/IndexFilter.php`,
+            client.post(`Bookings/indexFilter.php`,
                 {
                     FIELD: 'ROOM_ID',
                     VALUE: option
@@ -87,7 +87,7 @@ class EmptyHome extends Component {
                     this.setState({events: res.data});
                 })
         } else if (filter === 'semester' && option != null){
-            client.post(`Bookings/IndexFilter.php`,
+            client.post(`Bookings/indexFilter.php`,
                 {
                     FIELD: 'SEMESTER_ID',
                     VALUE: option

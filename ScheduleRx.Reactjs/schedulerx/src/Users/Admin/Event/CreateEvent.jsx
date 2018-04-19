@@ -85,7 +85,6 @@ class CreateEvent extends Component {
                 temp.splice(temp.indexOf(old), 1);
             }
         });
-        
         temp.push(event);
         this.setState({events: temp})
     }
@@ -446,7 +445,7 @@ class CreateEvent extends Component {
                                 userId = lead.USER_ID;
                             }
                         })
-                        client.post('Messages/Create.php', {
+                        client.post('messages/create.php', {
                             USER_ID: userId,
                             MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
                             ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
