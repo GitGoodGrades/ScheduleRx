@@ -241,7 +241,7 @@ class CreateEvent extends Component {
                         userId = lead.USER_ID;
                     }
                 })
-                client.post('messages/create.php', {
+                client.post('Messages/Create.php', {
                     USER_ID: userId,
                     MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
                     ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
@@ -445,7 +445,7 @@ class CreateEvent extends Component {
                                 userId = lead.USER_ID;
                             }
                         })
-                        client.post('messages/create.php', {
+                        client.post('Messages/Create.php', {
                             USER_ID: userId,
                             MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
                             ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been

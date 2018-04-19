@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const client = axios.create({
-    baseURL: 'http://localhost:63342/ScheduleRx/ScheduleRx.API/'
-})
+    baseURL: 'http://76.107.46.211:8081/ScheduleRx.API/'
+});
