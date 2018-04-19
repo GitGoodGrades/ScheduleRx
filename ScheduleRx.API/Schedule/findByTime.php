@@ -8,7 +8,7 @@ function findByTime( $start, $conn, $logger) {
     $logger->info("given start format: " . $start);
 
     foreach ($allSchedules->records as $record ) {
-        if (($record->START_SEM_DATE <= $start) && ($start >= $record->END_SEM_DATE)) {
+        if (($record->START_SEM_DATE <= $start) && ($start <= $record->END_SEM_DATE)) {
             $logger->info("matching time frame found: " . $start);
             return $record->SCHEDULE_ID;
         }

@@ -91,44 +91,46 @@ return (
         open={this.props.open}
     >
     <DialogContent className={classes.content}>
-      <h2 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Edit room: {this.state.ROOM_ID}</h2>
+      <h2 style={{color: 'rgb(111, 0, 41)', textAlign: 'center'}}>Edit room: {this.state.ROOM_ID}</h2>
         <div>
+            <InputLabel>Capacity:</InputLabel>
             <TextField
                 id="CAPACITY"
                 defaultValue = {this.state.CAPACITY}
-                label={this.state.valid || this.state.CAPACITY ? "Capacity" : "*REQUIRED"}
+                placeholder={this.state.valid || this.state.CAPACITY ? "Capacity" : "*REQUIRED"}
                 className={classes.textField}
                 onChange={this.handleChange}
                 type="number"
                 error={!(this.state.valid || this.state.CAPACITY)}
-                margin="normal"
                 required={true}
+                inputProps={{max: 999, style: {paddingLeft: '10px'}}}
+                InputProps={{disableUnderline: 'true'}}
+                style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
-        </div>
-        <div>
+            <InputLabel>Room Name:</InputLabel>
             <TextField
                 id="ROOM_NAME"
-                label="Room Name"
                 defaultValue = {this.state.ROOM_NAME}
                 className={classes.textField}
                 onChange={this.handleChange}
-                margin="normal"
                 required={false}
+                inputProps={{maxLength: 10, style: {paddingLeft: '10px'}}}
+                InputProps={{disableUnderline: 'true'}}
+                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
-        </div>
-        <div>
+        <InputLabel>Location:</InputLabel>
         <TextField
                 id="LOCATION"
                 defaultValue = {this.state.LOCATION}
                 className={classes.textField}
-                label={this.state.valid || this.state.LOCATION ? "Location" : "*REQUIRED"}
+                placeholder={this.state.valid || this.state.LOCATION ? "Location" : "*REQUIRED"}
                 onChange={this.handleChange}
                 error={!(this.state.valid || this.state.LOCATION)}
-                margin="normal"
                 required={false}
+                inputProps={{maxLength: 15, style: {paddingLeft: '10px'}}}
+                InputProps={{disableUnderline: 'true'}}
+                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
-        </div>
-        <div className={classes.control}>
             <InputLabel htmlFor="select-multiple" className={classes.label}>Select Capabilities</InputLabel>
             <Select
                 className={classes.Select}
@@ -137,20 +139,21 @@ return (
                 multi
                 onChange={this.handleCapChange}
                 options={this.props.capabilityOptions}
-                placeholder="Capabilities"
                 value={this.state.CAPABILITIES}
                 optionComponent={Option}
+                InputProps={{disableUnderline: 'true', paddingLeft: '10px'}}
+                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
-        </div>
-        <div>
+            <InputLabel>Description:</InputLabel>
             <TextField
                 id="DESCRIPTION"
-                label="Description"
                 defaultValue = {this.state.DESCRIPTION}
                 className={classes.textField}
                 onChange={this.handleChange}
-                margin="normal"
                 required={false}
+                inputProps={{maxLength: 25, style: {paddingLeft: '10px'}}}
+                InputProps={{disableUnderline: 'true'}}
+                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
         </div>
         </DialogContent>

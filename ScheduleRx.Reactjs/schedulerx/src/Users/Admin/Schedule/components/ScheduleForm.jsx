@@ -4,9 +4,9 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import { DateRange } from 'react-date-range';
-import  {Dialog,   DialogActions,
-    DialogContent, } from 'material-ui';
+import { Dialog, DialogActions, DialogContent, } from 'material-ui';
 import moment from 'moment';
+import {InputLabel} from 'material-ui/Input';
 
 const styles = theme => ({
   container: {
@@ -101,15 +101,18 @@ class ScheduleForm extends React.Component {
         >
          <DialogContent className={classes.content}>
           <h2 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Create New Schedule</h2>
-            <div>
+            <div style={{width: 'auto'}}>
+                <InputLabel className={classes.label}>Semester Name:</InputLabel>
                 <TextField
                     id="SCHEDULE_ID"
-                    label="Semester"
+                    InputProps={{disableUnderline: 'true'}}
+                    placeholder="i.e. FALL2018"
+                    
                     className={classes.textField}
                     onChange={this.handleChange}
-                    margin="normal"
                     required={true}
-                    inputProps={{maxLength: 10}}
+                    inputProps={{maxLength: 10, style:{paddingLeft: '10px', marginLeft: '0px'}}}
+                    style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px'}}
                     error={!(this.state.valid || (this.state.SCHEDULE_ID && this.state.SCHEDULE_ID != ''))}
                 />
             </div>

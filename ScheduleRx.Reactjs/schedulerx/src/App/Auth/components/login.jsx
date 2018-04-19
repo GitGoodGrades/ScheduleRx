@@ -110,7 +110,7 @@ class LoginForm extends React.Component {
                                 className={classes.loginfo}
                                 name="USER_ID"
                                 onChange={this.handleChange}
-                                InputProps={{disableUnderline: 'true'}}
+                                InputProps={{disableUnderline: 'true', }}
                                 inputProps={{maxLength: 8}}
                                 required
                                 />
