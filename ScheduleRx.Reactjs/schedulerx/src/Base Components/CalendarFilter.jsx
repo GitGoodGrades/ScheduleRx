@@ -136,13 +136,17 @@ class CalendarFilter extends Component{
                 <MenuItem id="room" onClick={this.handleSelect}>Room</MenuItem>
                 </Menu>
                 <Dialog
+
                     onEntering={this.handleEntering}
                     aria-labelledby="confirmation-dialog-title"
                     open={this.state.open}
                     style={{display: 'flex'}}
+                    PaperProps={{style: {overflow: 'visible'}}}
+                    
                 >
-                    <DialogTitle id="confirmation-dialog-title">Select {this.state.filterChoice}</DialogTitle>
+                    <DialogTitle style={{width: 300}} id="confirmation-dialog-title">Select {this.state.filterChoice}</DialogTitle>
                     <DialogContent
+                        style={{width: 300, overflow: 'visible', zIndex: 20}}                        
                         className={this.state.filterChoice !== "room" ? classes.hidden : ''}
                     >
                         <Select
@@ -156,6 +160,7 @@ class CalendarFilter extends Component{
                         />
                     </DialogContent>
                     <DialogContent
+                        style={{width: 300, overflow: 'visible', zIndex: 20}}
                         className={this.state.filterChoice !== "user" ? classes.hidden : ''}
                     >
                         <Select
@@ -169,6 +174,7 @@ class CalendarFilter extends Component{
                         />
                     </DialogContent>
                     <DialogContent
+                        style={{width: 300, overflow: 'visible', zIndex: 20}}
                         className={this.state.filterChoice !== "semester" ? classes.hidden : ''}
                     >
                         <Select
