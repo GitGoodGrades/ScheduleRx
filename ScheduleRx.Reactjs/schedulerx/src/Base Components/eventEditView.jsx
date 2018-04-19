@@ -92,13 +92,14 @@ class EventEditView extends Component{
           </Typography>
           <Typography className={classes.pos}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
           <Typography component="p">
-            {event && moment(event.START_TIME).format('MMMM Do YYYY')} <br />
-            {event && moment(event.START_TIME).format('h:mm a')} - 
+            On {event && moment(event.START_TIME).format('MMMM Do YYYY')} <br />
+            From {event && moment(event.START_TIME).format('h:mm a')} - 
             {event && moment(event.END_TIME).format('h:mm a')}
           </Typography>
           <Typography component="p">
             {event && event.DETAILS}
           </Typography>
+          NOTES
           <TextField
             id="details"
             multiline

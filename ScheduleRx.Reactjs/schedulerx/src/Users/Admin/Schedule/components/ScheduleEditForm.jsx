@@ -4,8 +4,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import { DateRange } from 'react-date-range';
-import  {Dialog,   DialogActions,
-    DialogContent, } from 'material-ui';
+import  { Dialog, DialogActions, DialogContent, } from 'material-ui';
     import { FormControlLabel } from 'material-ui/Form';
 import moment from 'moment';
 import Icon from 'material-ui/Icon';
@@ -13,6 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import Checkbox from 'material-ui/Checkbox';
 import Visibility from "material-ui-icons/Visibility";
 import VisibilityOff from "material-ui-icons/VisibilityOff";
+import Typography from "material-ui/Typography";
 
 const styles = theme => ({
   container: {
@@ -114,20 +114,10 @@ class ScheduleEditForm extends React.Component {
             open={this.props.open}
         >
          <DialogContent className={classes.content}>
-          <h2 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Update Schedule</h2>
-            <div>
-                <TextField
-                    id="SCHEDULE_ID"
-                    label="Semester"
-                    className={classes.textField}
-                    onChange={this.handleChange}
-                    margin="normal"
-                    required={true}
-                    defaultValue={this.state.SCHEDULE_ID}
-                    disabled
-                />
-            </div>
-            <div> 
+          <h2 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Edit {this.state.SCHEDULE_ID}</h2>
+          
+            <div style={{textAlign: 'center', marginBottom: 8}}> 
+                Registration Start-End:
                 <Button onClick={this.setRegOpen} style={this.state.valid || (this.state.START_REG_DATE && this.state.END_REG_DATE) ?
                     {height: 15}:{height: 15, color: 'red'}}>
                     {
@@ -137,18 +127,21 @@ class ScheduleEditForm extends React.Component {
                     }
                 </ Button>
                 <Dialog 
+                    
                     open={this.state.reg_open} 
                     onBackdropClick={this.setRegClose}    
                 >
                         <DateRange
                             onChange={this.handleRegSelect}
                         />
+                        
                         <Button onClick={this.setRegClose}>
                             Save
                         </Button>
                 </ Dialog>
                 </div>
-                <div>
+                <div style={{textAlign: 'center', fontSize: '15', marginTop: 30}} >
+                Semester Start-End:
                 <Button onClick={this.setSemOpen} style={this.state.valid || (this.state.START_SEM_DATE && this.state.END_SEM_DATE) ?
                     {height: 15}:{height: 15, color: 'red'}}>
                     {
@@ -158,6 +151,7 @@ class ScheduleEditForm extends React.Component {
                     }
                 </ Button>
                     <Dialog 
+                        
                         open={this.state.sem_open}
                         onBackdropClick={this.setSemClose}    
                     >
