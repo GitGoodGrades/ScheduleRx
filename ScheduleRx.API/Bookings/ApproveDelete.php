@@ -19,10 +19,11 @@ $log = Logger::getLogger('ApproveLog');
  * @param MESSAGE | The to Send to the Deleted Event Leads
  */
 $data->APPROVED->SCHEDULE_ID = findByTime($data->APPROVED->START_TIME, $conn, $log);
+$log->info("SCHEDULE_ID FOUND TO BE WITHIN FRAME OF: " .  $data->APPROVED->SCHEDULE_ID );
 $approvedCourse =  $data->APPROVED->SECTIONS->records[0]->COURSE_ID;
 
-DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
-DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+//DeleteRecord('conflict_event',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
+//DeleteRecord('conflict',"CONFLICT_ID", $data->CONFLICT_ID, $conn );
 
 foreach ($data->EVENTS as $event) {
     $log->info("Deleting Event with ID: " . $event->BOOKING_ID);
@@ -37,15 +38,15 @@ foreach ($data->EVENTS as $event) {
         $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $eventSection['records'][0]['COURSE_ID'], $conn));
 
         $log->info("Lead of Course Found: " . $leadID->USER_ID);
-        CreateMessage($data->MESSAGE, $leadID->USER_ID, $conn);
+        //CreateMessage($data->MESSAGE, $leadID->USER_ID, $conn);
     }
 
-    DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
-    DeleteRecord('booking',"BOOKING_ID",   $event->BOOKING_ID , $conn );
+    //DeleteRecord('event_section', 'BOOKING_ID',   $event->BOOKING_ID , $conn);
+    //DeleteRecord('booking',"BOOKING_ID",   $event->BOOKING_ID , $conn );
 }
 unset($data->APPROVED->SECTIONS);
-UpdateRecord('booking', $data->APPROVED ,"BOOKING_ID", $conn);
+//UpdateRecord('booking', $data->APPROVED ,"BOOKING_ID", $conn);
 echo GetAll('conflict', "CONFLICT_ID", $conn);
 
 $leadID = json_decode(FindRecord('leads_course', 'COURSE_ID', $approvedCourse, $conn));
-if ($leadID) { CreateMessage("Your Event Has Been Approved", $leadID->USER_ID, $conn); }
+if ($leadID) { /*CreateMessage("Your Event Has Been Approved", $leadID->USER_ID, $conn);*/ }
