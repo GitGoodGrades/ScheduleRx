@@ -39,7 +39,7 @@ foreach ($data->EVENTS as $event) {
 
         $log->info("Lead of Course Found: " . $leadID->USER_ID);
         $toMessage = "Your Event in Room [" . $event->ROOM_ID . "] at [" . $event->START_TIME . "]" . " Was Removed. ";
-        $toMessage .= "<br/> From Admin: <br.>" . $data->MESSAGE;
+        $toMessage .= "From Admin:" . $data->MESSAGE;
         CreateMessage( $toMessage, $leadID->USER_ID, $conn);
     }
 

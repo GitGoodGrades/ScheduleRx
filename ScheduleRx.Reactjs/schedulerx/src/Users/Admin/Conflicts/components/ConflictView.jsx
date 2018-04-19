@@ -90,7 +90,7 @@ class EventViewEditFull extends Component{
     }
 
     selectDenySend = () => {
-        client.post('bookings/delete.php', {
+        client.post('Bookings/Delete.php', {
             SCHEDULE_ID: this.state.conflictEvent.SCHEDULE_ID,
             BOOKING_ID: this.state.conflictEvent.BOOKING_ID
         })
