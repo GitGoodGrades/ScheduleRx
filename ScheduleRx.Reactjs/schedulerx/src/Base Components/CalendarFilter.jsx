@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { Admin } from '../configuration/variables';
 import moment from 'moment';
 import Tooltip from 'material-ui/Tooltip';
+import Clear from 'material-ui-icons/Clear';
 
 const styles = theme => ({
     hidden: {
@@ -87,6 +88,10 @@ class CalendarFilter extends Component{
 
     handleMonthPick  = () => {
         this.setState({monthPicker: true})
+    }
+
+    exit = () => {
+        this.setState({monthPicker: false})
     }
 
     render(){
@@ -202,7 +207,11 @@ class CalendarFilter extends Component{
                     </DialogActions>
                 </Dialog>
                 <Dialog open={this.state.monthPicker} >
+                        <IconButton variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
+                            <Clear></Clear>
+                        </IconButton>
                     <DialogContent>
+                        
                         <MonthPicker onChange={(date)=>this.setCalendarDate(date)}/>
                     </DialogContent>
                 </Dialog>
