@@ -5,13 +5,16 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import moment from 'moment';
-import Dialog from 'material-ui/Dialog';
+import Dialog, {DialogContent, DialogActions} from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import ReactToPrint from "react-to-print";
+import {InputLabel} from "material-ui/Input";
+import Save from "material-ui-icons/Save";
 
 const styles = theme => ({
   card: {
     minWidth: 275,
+    height: 'auto'
   },
   bullet: {
     display: 'inline-block',
@@ -27,6 +30,13 @@ const styles = theme => ({
     marginBottom: 12,
     color: theme.palette.text.secondary,
   },
+  content: {
+    fontSize: 15,
+    marginBottom: 5
+  },
+  hidden: {
+    display: 'none'
+  }
 });
 
 const mapStateToProps = (state) => ({
@@ -35,7 +45,8 @@ const mapStateToProps = (state) => ({
 
 class EventEditView extends Component{
   state = {
-    details: ''
+    details: '',
+    noteChange: false
   };
 
   handleClose = () => {
@@ -46,16 +57,21 @@ class EventEditView extends Component{
     this.setState({ 
       BOOKING_ID: nextProps.event.BOOKING_ID,
       SECTION_ID: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.length > 0 ? nextProps.event.SECTIONS.records[0].SECTION_ID : '', 
-      details: nextProps.event.DETAILS 
+      details: this.findNote(nextProps.event && nextProps.event.SECTIONS)
     })
   };
 
   handleChange = (event) => {
-    this.setState({ details: event.target.value })
+    this.setState({ details: event.target.value, noteChange: true})
   };
 
   handleSave = () => {
-    this.props.onSave(this.state)
+    let sectionDetail = {
+        BOOKING_ID: this.state.BOOKING_ID,
+        SECTION_ID: this.state.SECTION_ID,
+        details: this.state.details
+    }
+    this.props.onSave(sectionDetail)
   };
 
 
@@ -84,35 +100,53 @@ class EventEditView extends Component{
             trigger={() => <a href="#">Print</a>}
             content={() => this.componentRef}
         />
-      <Card className={classes.card} ref={el => (this.componentRef = el)}>
-        <CardContent>
-          <Typography className={classes.title}>Room: {event && event.ROOM_ID}</Typography>
-          <Typography variant="headline" component="h2">
+      <DialogContent className={classes.card} ref={el => (this.componentRef = el)}>
+          
+          <Typography align='center' variant="headline" component="h2">
             {event && event.BOOKING_TITLE}
           </Typography>
-          <Typography className={classes.pos}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
-          <Typography component="p">
-            On {event && moment(event.START_TIME).format('MMMM Do YYYY')} <br />
+          <Typography className={classes.content}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
+          <Typography className={classes.content} component="p">
+              Sections: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records.map(sec => sec.SECTION_ID + ' ') : " "
+              }
+          </Typography>
+          <Typography className={classes.content} component="p">
+            In Room {event && event.ROOM_ID}
+          </Typography>        
+          <Typography component="p" className={classes.content}>
+            On {event && moment(event.START_TIME).format('MMMM Do YYYY')}
+          </Typography>
+          <Typography component="p" className={classes.content}>
             From {event && moment(event.START_TIME).format('h:mm a')} - 
             {event && moment(event.END_TIME).format('h:mm a')}
           </Typography>
-          <Typography component="p">
-            {event && event.DETAILS}
-          </Typography>
-          NOTES
-          <TextField
+          <InputLabel style={{color: 'black', fontSize: 15}}>DETAILS:</InputLabel>
+          <div><TextField
             id="details"
+            className={classes.content}
             multiline
             value={this.state.details}
             onChange={this.handleChange}
-            onBlur={this.handleSave}
-            margin="normal"
             defaultValue={this.findNote(event && event.SECTIONS)}
+            
             inputProps={{maxLength: 250}}
             disabled={moment(event.START_TIME).isBefore(moment())}
-        />
-        </CardContent>
-      </Card>
+            InputProps={{disableUnderline: true}}
+            
+            style={{border: '1px solid rgb(204, 204, 204)', width: '98%', borderRadius: '4px', paddingLeft: '2%' }}
+          /></div>
+
+            <Button variant="raised"
+                    color="secondary" 
+                    size="small" 
+                    style={{float: 'right'}} 
+                    className={this.state.noteChange? classes.button : classes.hidden}
+                    onClick={this.handleSave}
+            >
+                    Save
+                    <Save style={{paddingLeft: 5}}/>
+            </Button>
+        </DialogContent> 
     </div>
   </ Dialog>
   );
