@@ -54,10 +54,12 @@ class EventEditView extends Component{
   };
 
   componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps.event);
+    
     this.setState({ 
       BOOKING_ID: nextProps.event.BOOKING_ID,
       SECTION_ID: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.length > 0 ? nextProps.event.SECTIONS.records[0].SECTION_ID : '', 
-      details: this.findNote(nextProps.event && nextProps.event.SECTIONS)
+      details: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records.length > 0 ? nextProps.event.SECTIONS.records[0].NOTES : '',
     })
   };
 
@@ -72,17 +74,14 @@ class EventEditView extends Component{
         details: this.state.details
     }
     this.props.onSave(sectionDetail)
+    this.setState({
+      noteChange: false
+    })
   };
 
 
   findNote(sectionList) {
-      let arrayLength = sectionList && sectionList.records.length;
-      for (let i = 0; i < arrayLength; i++) {
-          if (sectionList.records[i].SECTION_ID == this.state.SECTION_ID) {
-              return sectionList.records[i].NOTES;
-          }
-      }
-      return "";
+      
   };
   
   render(){
@@ -123,18 +122,20 @@ class EventEditView extends Component{
           <InputLabel style={{color: 'black', fontSize: 15}}>DETAILS:</InputLabel>
           <div><TextField
             id="details"
-            className={classes.content}
+            className={moment(event.START_TIME).isBefore(moment())? classes.hidden : classes.content}
             multiline
             value={this.state.details}
             onChange={this.handleChange}
-            defaultValue={this.findNote(event && event.SECTIONS)}
+           
             
             inputProps={{maxLength: 250}}
             disabled={moment(event.START_TIME).isBefore(moment())}
             InputProps={{disableUnderline: true}}
             
             style={{border: '1px solid rgb(204, 204, 204)', width: '98%', borderRadius: '4px', paddingLeft: '2%' }}
-          /></div>
+          />
+          </div>
+          <Typography className={moment(event.START_TIME).isBefore(moment())? classes.content : classes.hidden}>{this.state.details}</Typography>
 
             <Button variant="raised"
                     color="secondary" 

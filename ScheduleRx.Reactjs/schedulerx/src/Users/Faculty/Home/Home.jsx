@@ -66,6 +66,7 @@ class EmptyHome extends Component {
     };
 
     handleSave = (sectionDetail) => {
+        this.setState({open: false})
         client.post(`EventSection/EditNote.php`,
             {
                 BOOKING_ID: sectionDetail.BOOKING_ID,
