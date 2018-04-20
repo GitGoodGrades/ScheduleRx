@@ -211,7 +211,8 @@ class EventViewEditFull extends Component{
             START_TIME: nextProps.event.START_TIME,
             END_TIME: nextProps.event.END_TIME,
             sectionOptions: sections,
-            date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD")
+            date: moment(nextProps.event.START_TIME).format("YYYY-MM-DD"),
+            SCHEDULE_ID: nextProps.event.SCHEDULE_ID
         };
 
         this.setState({ 
