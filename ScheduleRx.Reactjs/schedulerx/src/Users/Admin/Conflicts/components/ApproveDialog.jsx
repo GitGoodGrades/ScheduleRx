@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Dialog, {DialogContent } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
@@ -11,7 +11,6 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui-pickers/DatePicker';
 import TimePicker from 'material-ui-pickers/TimePicker';
 import moment from 'moment';
-import Dialog from 'material-ui/Dialog';
 import Chip from 'material-ui/Chip';
 import Select from 'react-select';
 import Save from 'material-ui-icons/Save';
@@ -99,23 +98,22 @@ class ApproveDialog extends Component{
                 onBackdropClick={this.handleClose}
             >
                 <div>
-                    <Card className={classes.card}>
-                        <CardContent className={this.state.edit ? classes.hidden : ''}>
-                            <h2>
-                                Approve Requested Event for Room {this.state.conflictEvent && this.state.conflictEvent.ROOM}
-                            </h2>
+                        <DialogContent className={this.state.edit ? classes.hidden : ''}>
+                            <Typography style={{fontWeight: 'bold'}}>
+                                The event for room {this.state.conflictEvent && this.state.conflictEvent.ROOM} will be created
+                            </Typography>
                             <div 
                                 hidden={
                                     this.state.conflictEvent && 
                                     this.state.conflictEvent.EVENTS && 
                                     this.state.conflictEvent.EVENTS.length > 1 ? false : true  }>
-                            <h5>The Following Events will be Deleted:</h5>
+                            <Typography style={{fontWeight: 'bold'}}>And the Following Event(s) will be Deleted:</Typography>
                             <Table >
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Title</TableCell>
-                                        <TableCell>Begin Time</TableCell>
-                                        <TableCell>End Time</TableCell>
+                                        <TableCell padding="none" style={{paddingRight: 15}}><Typography style={{fontWeight: 'bold'}}>Title:</Typography></TableCell>
+                                        <TableCell padding="none" style={{paddingRight: 15}}><Typography style={{fontWeight: 'bold'}}>Begin Time:</Typography></TableCell>
+                                        <TableCell padding="none" style={{paddingRight: 15}}><Typography style={{fontWeight: 'bold'}}>End Time:</Typography></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -123,43 +121,44 @@ class ApproveDialog extends Component{
                                         if (row.SCHEDULE_ID !== null) {
                                             return (
                                                 <TableRow key={row.BOOKING_TITLE}>
-                                                    <TableCell>{row.BOOKING_TITLE}</TableCell>
-                                                    <TableCell>{row.START_TIME}</TableCell>
-                                                    <TableCell>{row.END_TIME}</TableCell>
+                                                    <TableCell padding="none" style={{paddingRight: 15}}>{row.BOOKING_TITLE}</TableCell>
+                                                    <TableCell padding="none" style={{paddingRight: 15}}>{row.START_TIME}</TableCell>
+                                                    <TableCell padding="none" style={{paddingRight: 15}}>{row.END_TIME}</TableCell>
                                                 </TableRow>
                                             );
                                         }
-                                    })) || <TableRow><TableCell>No Results</TableCell></TableRow>}
+                                    })) || <TableRow><TableCell padding="none" style={{paddingRight: 15}}>No Results</TableCell></TableRow>}
                                 </TableBody>
                             </Table>
-                            <h5>Notify Faculty of changes? (Optional)</h5>
-                            <textarea
+                            <Typography style={{fontWeight: 'bold', marginTop: 15}}>Notify Faculty of changes? (Optional)</Typography>
+                            <TextField
                                 id="message"
+                                multiline
                                 value={this.state.message}
                                 onBlur={this.handleChange}
-                                maxLength={300}
-                            >
-                            </textarea>
+                                inputProps={{maxLength: 250}}
+                                InputProps={{disableUnderline: true, paddingLeft: '3%', paddingRight: '3%', inputProps: {style:{fontSize: '12px'}}}}
+                                style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
+                            />
                             </div>
                             <div 
                                 hidden={
                                     this.state.conflictEvent && 
                                     this.state.conflictEvent.EVENTS &&  
                                     this.state.conflictEvent.EVENTS.length > 1 ? true : false} >
-                                <h4> Are you sure? </h4>
+                                <Typography>Would you like to continue?</Typography>
                             </div>
-                        </CardContent>
-                        <CardActions>
-                            <Button variant="raised" color="secondary" size="small" onClick={this.handleClose}>
+                            <div style={{float: 'right', marginTop: 10}}>
+                            <Button style={{fontSize: 12}} variant="raised" color="secondary" size="small" onClick={this.handleClose}>
                                 Cancel
-                                <Clear></Clear>
+                                <Clear fontSize='12px'></Clear>
                             </Button>
-                            <Button variant="raised" color="secondary" size="small" onClick={this.handleSave}>
+                            <Button  style={{marginLeft: 5, fontSize: 12}} variant="raised" color="secondary" size="small" onClick={this.handleSave}>
                                 Confirm
-                                <Send></Send>
+                                <Send fontSize='12px' ></Send>
                             </Button>
-                        </CardActions>
-                    </Card>
+                            </div>
+                        </DialogContent>
                 </div>
             </ Dialog>
         );
