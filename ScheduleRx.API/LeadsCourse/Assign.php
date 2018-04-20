@@ -25,6 +25,7 @@ foreach ($toLevel3->records as $record) {
 $log->debug("All Level 2 Users Reset to Level 3");
 foreach($data as $json) {
     $field2 = array( "ROLE_ID" => 2, "USER_ID" => $json->USER_ID);
+    if ($json->ROLE_ID == 1) { $field2['ROLE_ID'] = 1;}
     UpdateRecord('users', $field2, "USER_ID", $conn);
     CreateRecord('leads_course', $json, $conn);
 }
