@@ -69,7 +69,6 @@ $myEvents = [];
 foreach ($allBookings['records'] as $record ) {
     if (!$results) break;
     foreach ($results->records as $myRecord ) {
-
         if ($record['SECTION_ID'] == $myRecord->SECTION_ID) {
             array_push($myEvents, GetDetail($record['BOOKING_ID'], $conn1));
         }
@@ -79,12 +78,40 @@ foreach ($allBookings['records'] as $record ) {
 if ($data->ROLE_ID == '2') {
     $myEvents = GetLeadIndex($myEvents, $data->USER_ID, $conn1);
 }
+else {
+    $log->info("Removing Other Sections");
+    foreach ($myEvents as $event) {
+        $mySections = [];
+        $log->info("Removing Sections for Event with ID: " . $event->BOOKING_ID, $log);
+        $log->info("Number of Sections:" . count($event->SECTIONS['records']) );
+        $log->info($event);
+        for ($counter = 0; $counter < count($event->SECTIONS['records']) ; $counter++) {
+            $log->info("counter value: " . $counter);
+            if (isIn($event->SECTIONS['records'][$counter]['SECTION_ID'], $results->records, $log)) {
+                array_push($mySections , $event->SECTIONS['records'][$counter]);
+            }
+        }
+        $event->SECTIONS['records'] = $mySections;
+    }
+}
 
 if($myEvents){
+    $log->info($myEvents);
     echo json_encode($myEvents);
 }
 else{
     echo null;
+}
+
+function isIn($value, $array, $log) {
+    foreach ($array as $arrayVal) {
+        $log->info("Comparing Section:" . $value . " | to User_Section:" . $arrayVal->SECTION_ID);
+        if ($arrayVal->SECTION_ID == $value) {
+            return true;
+        }
+    }
+    $log->info("Section not on list");
+    return false;
 }
 /*
  *      WARNING: THIS FILE DOES NOT TEST IF A FACULTY IS PRESENT IN THE 'leads_course' TABLE, IF THE GIVEN INFORMATION IS INCORRECT
