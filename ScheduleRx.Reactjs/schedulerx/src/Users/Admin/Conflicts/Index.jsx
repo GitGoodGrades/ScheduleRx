@@ -116,9 +116,10 @@ class Conflicts extends Component {
             {
                 str = "The event \"" + event.BOOKING_TITLE;
                 str += "\" in room " + event.ROOM_ID;
-                str += " from " + event.START_TIME;
-                str += " to " + event.END_TIME + " will be deleted."
-                str += "\nTo send reschedule suggestions to the event creator, fill out the field below.";
+                str += " on " + moment(event.START_TIME).format('MMMM Do, YYYY');
+                str += " from " + moment(event.START_TIME).format('h:mm A');
+                str += " to " + moment(event.END_TIME).format('h:mm A') + " will be deleted."
+                str += "\nYou may enter reschedule suggestions below:";
                 let sections = event.SECTIONS.records;
                 course = sections && sections[0].COURSE_ID;
             }

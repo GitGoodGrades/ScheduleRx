@@ -6,6 +6,9 @@ import * as action from "../../Redux/actions/actionCreator";
 import { Redirect, withRouter } from 'react-router-dom';
 import { Admin, Faculty, Student, Lead } from '../../configuration/variables';
 import history from '../History';
+import { Hidden } from 'material-ui';
+import compose from 'recompose/compose';
+import withWidth from 'material-ui/utils/withWidth';
 
 const mapStateToProps = (state) => ({
     role: state.userRole,
@@ -91,25 +94,11 @@ class TopNavMenu extends Component {
                         className={classes.Home} to="/">
                         Home
                     </NavLink>
+                    <Hidden only='xs'>
                     <NavLink  
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/event/create" 
                         className={(this.props.role === Faculty || this.props.role === Student) ? classes.hidden : classes.seen}>
                         Manage Events
-                    </NavLink>
-                    <NavLink 
-                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
-                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
-                        Manage Schedules
-                    </NavLink>
-                    <NavLink 
-                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/users/leads"
-                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
-                        Manage Lead Faculty
-                    </NavLink>
-                    <NavLink 
-                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/room/list"
-                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
-                        Room List
                     </NavLink>
                     <NavLink 
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/Conflicts"
@@ -121,11 +110,32 @@ class TopNavMenu extends Component {
                         className={this.props.role !== Lead ? classes.hidden : classes.seen}>
                         Messages
                     </NavLink>
+                    </Hidden>
+                    <Hidden only={['sm', 'xs']}>
                     <NavLink 
+                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/schedule/List"
+                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
+                        Manage Schedules
+                    </NavLink>
+                    <NavLink 
+                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/users/leads"
+                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
+                        Set Course leaders
+                    </NavLink>
+                     <NavLink 
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/faculty/list"
                         className={this.props.role !== Admin ? classes.hidden : classes.seen}>
-                        Faculty 
+                        Faculty Roles
                     </NavLink>
+                    <NavLink 
+                        activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/room/list"
+                        className={this.props.role !== Admin ? classes.hidden : classes.seen}>
+                        Manage Rooms
+                    </NavLink>
+                    </Hidden>
+                    
+                    
+                   
                     <button 
                         className={classes.asText} onClick={this.LogOut}>
                         Log Out
@@ -141,4 +151,4 @@ class TopNavMenu extends Component {
 
 const EmptyTopNavMenu = withRouter(connect(mapStateToProps, mapDispatchToProps)(TopNavMenu));
 
-export default withStyles(styles, {withTheme: true})(EmptyTopNavMenu);
+export default compose(withStyles(styles, {withTheme: true}), withWidth())(EmptyTopNavMenu);

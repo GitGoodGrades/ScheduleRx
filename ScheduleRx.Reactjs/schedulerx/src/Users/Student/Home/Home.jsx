@@ -90,6 +90,7 @@ class EmptyHome extends Component {
                     handleEventSelection={this.handleSelectEvent}
                     handleSlotSelection={this.handleSelectSlot}
                     defaultDate={this.state.date}
+                    views={['month', 'week', 'day']}
                 />
                 <EventView event={this.state.event} open={this.state.open} onClose={this.handleClose} />
             </div>

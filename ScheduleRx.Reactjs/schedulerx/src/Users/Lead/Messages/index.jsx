@@ -17,10 +17,15 @@ const mapDispatchToProps = (dispatch) => ({
 class Messages extends Component {
     state = {
         message: null,
-        open: false
+        open: false,
+        messages: null
     }
     componentDidMount() {
         this.props.getMessages(this.props.user);
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({messages: nextProps.messages})
     }
 
     openMessageDialog = (id) => {
@@ -40,13 +45,26 @@ class Messages extends Component {
         })
     }
 
+    delete = (message) => {
+        client.post('Message/Delete.php', {
+            MSG_ID: message.MSG_ID
+        })
+
+        let tempList = this.state.messages;
+        const tempIndex = tempList.indexOf(message);
+        tempList.splice(tempIndex, 1);
+        
+        this.setState({messages: tempList, open: false})
+    }
+
     render(){
         return(
             <div style={{paddingTop: 40}}>
-                <MessageTable  messages={this.props.messages} openMessage={this.openMessageDialog}/>
+                <MessageTable  messages={this.state.messages} openMessage={this.openMessageDialog}/>
                 <MessageView open={this.state.open} 
-                              message={this.state.message} 
-                              onClose={this.closeMessage}
+                    message={this.state.message} 
+                    onClose={this.closeMessage}
+                    deleteMessage={this.delete}
                 />
             </div>
         );

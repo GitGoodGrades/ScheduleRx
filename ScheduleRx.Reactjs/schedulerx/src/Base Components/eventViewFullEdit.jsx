@@ -439,7 +439,7 @@ class EventViewEditFull extends Component{
     }
 
   render(){
-    const { classes, event, onClose } = this.props;
+    const { classes, event, onClose, mine, past } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
     
     return (
@@ -468,8 +468,9 @@ class EventViewEditFull extends Component{
               <Typography className={classes.content} component="p">
                 Details: {event && event.DETAILS}
               </Typography>
-              <Tooltip title="Edit">
-              <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
+              <div hidden={!mine}>
+              <Tooltip title="Edit" hidden={past}>
+              <IconButton hidden={past} variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.selectEdit}>
                 <Icon>edit_icon</Icon>
               </IconButton>
             </Tooltip>
@@ -478,11 +479,12 @@ class EventViewEditFull extends Component{
                 <Icon>queue_icon</Icon>
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDelete}>
+            <Tooltip title="Delete" hidden={past}>
+              <IconButton hidden={past} variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDelete}>
                 <Icon>delete_forever_icon</Icon>
               </IconButton>
             </Tooltip>
+            </div>
             </CardContent>
             <CardContent className={this.state.edit ? '' : classes.hidden}>
                 <Typography variant="headline" component="h2" align='center' >Edit Event</Typography>
