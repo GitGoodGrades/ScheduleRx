@@ -112,9 +112,12 @@ class EventDetailDialog extends Component {
         <div>
           <InputLabel>Event Details:</InputLabel>
           <TextField
-            InputProps={{disableUnderline: true, inputProps: {style:{fontSize: '12px'}}}}
+            InputProps={{disableUnderline: true, inputProps:   {maxLength: 205, style:{fontSize: '12px'}}}}
             style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
+<<<<<<< HEAD
             
+=======
+>>>>>>> 8714fe0bfe2fa340127ff0c5b85cfea4f321c1b1
             className={classes.field}
             multiline
             id="details"
