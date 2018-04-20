@@ -115,16 +115,16 @@ class CalendarFilter extends Component{
                  <DateRangeIcon/> 
                 </Button>
                 </Tooltip>
-                <Tooltip title="Filter Events">
+                <Tooltip title="Filter Events" style={this.props.hide ? {display: 'none'} : {}}>
                 <Button
-                style={this.props.role != Admin ? {display: 'none'} : {}}
-                variant="raised"
-                size="small"
-                style={{backgroundColor: 'rgba(0,0,0,.7)', color: 'white'}}
-                aria-owns={anchorEl ? 'simple-menu' : null}
-                aria-haspopup="true"
-                onClick={this.handleClick}
-                className={classes.button}
+                    style={this.props.hide ? {display: 'none'} : {}}
+                    variant="raised"
+                    size="small"
+                    style={{backgroundColor: 'rgba(0,0,0,.7)', color: 'white'}}
+                    aria-owns={anchorEl ? 'simple-menu' : null}
+                    aria-haspopup="true"
+                    onClick={this.handleClick}
+                    className={classes.button}
                 >
                  <FilterListIcon/> 
                 </Button>

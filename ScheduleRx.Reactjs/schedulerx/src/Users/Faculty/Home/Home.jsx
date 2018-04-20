@@ -93,6 +93,7 @@ class EmptyHome extends Component {
                     roomList={this.props.rooms}
                     selectFilter={this.filterEvents}
                     changeCalendarDate={this.changeMonth}
+                    hide
                 />    
                 <Calendar
                     className={classes.cal}
