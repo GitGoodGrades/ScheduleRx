@@ -156,42 +156,40 @@ class EventViewEditFull extends Component{
       >
         
         <div>
-          <IconButton variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
-            <Clear></Clear>
+          <IconButton size="small" style={{marginTop: 10, marginLeft: 10}} variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
+            <Clear/>
             </IconButton>
             <DialogContent className={this.props.conflict.TYPE === "Conflict" ? classes.hidden : ''}>
-                <h2>
+                <Typography align="center" component="h2" variant="headline" style={{fontWeight: 'bold'}}>
                     Request for room {this.props.conflict.ROOM} on {moment(this.props.conflict.CONFLICT_START).format("MMM Do YYYY")}
-                </h2>
+                </Typography>
                 <Table>
                 <TableBody>
-                <TableRow id={0} hover="false">
-                        <TableCell >Event Title</TableCell>
-                        <TableCell 
-                        >{    
-                            this.state.conflictEvent && this.state.conflictEvent.BOOKING_TITLE }
-                        </TableCell>
+                <TableRow id={0}>
+                        <TableCell padding="none" style={{width: "30%"}}><Typography style={{fontWeight: 'bold'}}>Event Title:</Typography></TableCell>
+                        <TableCell padding="none" style={{width: "30%"}}><Typography style={{fontWeight: 'bold'}}>Course:</Typography></TableCell>
+                        <TableCell padding="none" style={{width: "30%"}}><Typography style={{fontWeight: 'bold'}}>Event Time:</Typography></TableCell>
                     </TableRow>
-                    <TableRow id={1}>
-                        <TableCell>Course</TableCell>
-                        <TableCell >{
-                            this.state.conflictEvent &&
-                            this.state.conflictEvent.SECTIONS &&
-                            this.state.conflictEvent.SECTIONS.records &&
-                            this.state.conflictEvent.SECTIONS.records[0].COURSE_ID}
-                        </TableCell>
-                    </TableRow>
-                    <TableRow id={2} hover="false">
-                        <TableCell padding="none" >Event Time</TableCell>
-                        <TableCell >{    
-                            this.state.conflictEvent && 
-                            moment(this.state.conflictEvent.START_TIME).format('h:mm a') + "-" +  moment(this.state.conflictEvent.END_TIME).format('h:mm a')}
-                        </TableCell>
-                    </TableRow>
+                <TableRow id={1}>
+                    <TableCell padding="none"
+                    >{    
+                        this.state.conflictEvent && this.state.conflictEvent.BOOKING_TITLE }
+                    </TableCell>
+                    <TableCell padding="none">{
+                        this.state.conflictEvent &&
+                        this.state.conflictEvent.SECTIONS &&
+                        this.state.conflictEvent.SECTIONS.records &&
+                        this.state.conflictEvent.SECTIONS.records[0].COURSE_ID}
+                    </TableCell>
+                    <TableCell padding="none" >{    
+                        this.state.conflictEvent && 
+                        moment(this.state.conflictEvent.START_TIME).format('h:mm a') + "-" +  moment(this.state.conflictEvent.END_TIME).format('h:mm a')}
+                    </TableCell>
+                </TableRow>
                 </TableBody>
                 </Table>
-                <h3> Reason for Request: </h3>
-                <p>{this.props.conflict.MESSAGE}</p>
+                <Typography style={{fontWeight: 'bold', marginTop: 15}}>Reason for Request: </Typography>
+                <Typography style={{textTransform: 'none'}}>{this.props.conflict.MESSAGE? this.props.conflict.MESSAGE : "None"}</Typography>
             </DialogContent>
             <DialogContent className={this.props.conflict.TYPE === "Conflict" ? '' : classes.hidden}>
                 <Typography component="h2" align="center" variant="headline" style={{fontWeight: 'bold'}} >
@@ -281,12 +279,14 @@ class EventViewEditFull extends Component{
                     </TableRow>
                 </TableBody>
                 </Table>
-                <Typography style={{fontWeight: 'bold'}} >
+                <Typography style={{fontWeight: 'bold', marginTop: 15}} >
                     Reason for Request: 
                 </Typography>
-                <Typography>
+                <Typography style={{textTransform: 'none'}}>
                     {this.props.conflict.MESSAGE? this.props.conflict.MESSAGE : "None" }
                 </Typography>
+                </DialogContent>
+                <DialogContent>
                 <div style={{display: 'inline', float: 'right'}}>
                 <Button style={{marginLeft: 5, marginTop: 15}} 
                         variant="raised" 
@@ -326,23 +326,30 @@ class EventViewEditFull extends Component{
         <Dialog
             open={this.props.denyOpen}
         >
-            <CardContent>
+            <DialogContent>
                 <Typography>
                  {this.props.eventDetails} 
                 </Typography>
-                <textarea maxLength={300} onBlur={this.handleMessageBlur} id="denyMessage">
-                </textarea>
-            </CardContent>
-            <CardActions>
-                <Button variant="raised" color="secondary" className={classes.button} onClick={this.selectCancelDeny}>
+                <TextField inputProps={{maxLength: 250}}
+                            InputProps={{disableUnderline: true, paddingLeft: '3%', paddingRight: '3%', fontSize: '5px', inputProps: {style:{fontSize: '12px'}}}}
+                            onBlur={this.handleMessageBlur} 
+                            id="denyMessage"
+                            multiline
+                            style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
+                            />
+                
+            
+                <div style={{float: 'right', marginTop: 10}}>
+                <Button variant="raised" size="small" color="secondary" className={classes.button} onClick={this.selectCancelDeny}>
                     Cancel
                     <Clear></Clear>
                 </Button>
-              <Button variant="raised" color="secondary"className={classes.button} onClick={this.selectDenySend}>
+              <Button style={{marginLeft: 5}} variant="raised" size="small" color="secondary"className={classes.button} onClick={this.selectDenySend}>
                 Send
                 <Send></Send>
               </Button>
-            </CardActions>
+              </div>
+              </DialogContent>
         </Dialog>          
         </div>
   );
