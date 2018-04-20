@@ -46,7 +46,7 @@ class Messages extends Component {
     }
 
     delete = (message) => {
-        client.post('message/delete.php', {
+        client.post('Message/Delete.php', {
             MSG_ID: message.MSG_ID
         })
 

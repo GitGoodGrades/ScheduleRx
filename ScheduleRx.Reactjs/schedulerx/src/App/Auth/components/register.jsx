@@ -4,6 +4,9 @@ import { div } from 'material-ui/Form';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import TextField from 'material-ui/TextField';
+import { Typography, Hidden } from 'material-ui';
+import compose from 'recompose/compose';
+import withWidth from 'material-ui/utils/withWidth';
 
 const styles = theme => ({
     container: {
@@ -17,8 +20,9 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        alignItems: 'center',
         width: 350,
-        height: 400,
+        height: 350,
         position: 'fixed',
         fontFamily: 'Open Sans'
     },
@@ -44,10 +48,27 @@ const styles = theme => ({
         letterSpacing: '5px',
         fontFamily: 'Open Sans'
     },
+    smallerTitle: {
+        color: 'white',
+        textTransform: 'none',
+        fontWeight: 'bold',
+        fontSize: '30px',
+        marginBottom: '0',
+        letterSpacing: '5px',
+        fontFamily: 'Open Sans'
+    },
     subTitle: {
         color: 'white',
         textTransform: 'uppercase',
         fontSize: '18px',
+        fontWeight: 'normal',
+        marginTop: '0',
+        fontFamily: 'Open Sans'
+    },
+    smallerSubTitle: {
+        color: 'white',
+        textTransform: 'uppercase',
+        fontSize: '12px',
         fontWeight: 'normal',
         marginTop: '0',
         fontFamily: 'Open Sans'
@@ -144,8 +165,16 @@ class RegisterForm extends React.Component {
     return (
         <div className={classes.container}>
             <div className={classes.regcontainer}>
-                <div className={classes.title}><h1 className={classes.title}>SCHEDULERx</h1></div>
-                <h2 className={classes.subTitle}>A Scheduling app for ULM nursing</h2>
+            <Hidden only='xs'>
+                <Typography className={classes.title}>SCHEDULERx</Typography>
+                <Typography className={classes.subTitle}>A Scheduling app for ULM nursing</Typography>
+        </Hidden>
+        <Hidden only={['sm', 'md', 'lg', 'xl']}>
+            <div>
+                <Typography className={classes.smallerTitle}>SCHEDULERx</Typography>
+                <Typography className={classes.smallerSubTitle}>A Scheduling app for ULM nursing</Typography>
+            </div>
+        </Hidden>
                     <form>
                     <div>
                         <p hidden={this.state.validEmail && this.state.validID ? true : false}
@@ -204,4 +233,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(RegisterForm);
+export default compose(withStyles(styles), withWidth())(RegisterForm);

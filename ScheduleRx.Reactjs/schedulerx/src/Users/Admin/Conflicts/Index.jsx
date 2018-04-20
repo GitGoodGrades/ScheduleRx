@@ -50,7 +50,7 @@ class Conflicts extends Component {
     };
 
     openDialog = (id, open) => {
-        client.post(`Conflict/detail.php`, {
+        client.post(`Conflict/Detail.php`, {
             CONFLICT_ID: id
         }).then(res => {
             this.setState({
