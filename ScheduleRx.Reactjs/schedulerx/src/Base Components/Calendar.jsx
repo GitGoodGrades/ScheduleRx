@@ -93,8 +93,8 @@ class Calendar extends Component {
           eventPropGetter={
             (event, start, end, isSelected) => {
               let newStyle = {
-                backgroundColor: "lightgrey",
-                color: 'black',
+                backgroundColor: '#2a1215',
+                color: 'white',
                 borderRadius: "4px",
                 marginLeft: "3px",
                 marginRight: "2px",
@@ -106,7 +106,8 @@ class Calendar extends Component {
                     event.SECTIONS.records && 
                     event.SECTIONS.records.length > 0 &&
                     event.SECTIONS.records[0].COURSE_ID == row.Course){
-                      newStyle.backgroundColor = row.color
+                      newStyle.borderBottom = `5px solid ${row.color}`
+                      
                 }
               })
         
@@ -154,8 +155,8 @@ class Calendar extends Component {
           eventPropGetter={
             (event, start, end, isSelected) => {
               let newStyle = {
-                backgroundColor: "lightgrey",
-                color: 'black',
+                backgroundColor: "#2a1215",
+                color: 'white',
                 borderRadius: "4px",
                 marginLeft: "3px",
                 marginRight: "2px",
@@ -168,7 +169,7 @@ class Calendar extends Component {
                     event.SECTIONS.records && 
                     event.SECTIONS.records.length > 0 &&
                     event.SECTIONS.records[0].COURSE_ID == row.Course){
-                      newStyle.backgroundColor = row.color
+                      newStyle.borderBottom = `5px solid ${row.color}`
                 }
               })
         
@@ -217,8 +218,8 @@ class Calendar extends Component {
           eventPropGetter={
             (event, start, end, isSelected) => {
               let newStyle = {
-                backgroundColor: "lightgrey",
-                color: 'black',
+                backgroundColor: "#2a1215",
+                color: 'white',
                 borderRadius: "4px",
                 marginLeft: "3px",
                 marginRight: "2px",
@@ -230,7 +231,7 @@ class Calendar extends Component {
                     event.SECTIONS.records && 
                     event.SECTIONS.records.length > 0 &&
                     event.SECTIONS.records[0].COURSE_ID == row.Course){
-                      newStyle.backgroundColor = row.color
+                      newStyle.borderBottom = `5px solid ${row.color}`
                 }
               })
         
