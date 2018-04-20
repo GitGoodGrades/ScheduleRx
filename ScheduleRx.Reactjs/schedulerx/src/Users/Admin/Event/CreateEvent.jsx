@@ -243,7 +243,7 @@ class CreateEvent extends Component {
                         userId = lead.USER_ID;
                     }
                 })
-                client.post('messages/create.php', {
+                client.post('Messages/Create.php', {
                     USER_ID: userId,
                     MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
                     ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
@@ -377,7 +377,7 @@ class CreateEvent extends Component {
                     scheduleID = null;
                     conflictFlag = true;
                     this.setState({
-                        conflictRequestString: "You are attempting to create an event outside of the semester's registration period. To continue, enter a message below explaining why you need to create this event, and click \"Send Request\" to send your schedule request to the administrator.",
+                        conflictRequestString: "You are attempting to create an event outside of the semester's registration period. You may send a note to the admin with your request.",
                         conflictFlag: true,
                         conflict_List: []
                     });
@@ -389,7 +389,7 @@ class CreateEvent extends Component {
                 }
             } else {
                 this.setState({
-                    conflictRequestString: "This event's time and room conflicts with an existing event. To continue, enter a message below explaining why you need this room at this time, and click \"Send Request\" to send your schedule request to the administrator.",
+                    conflictRequestString: "This event's time and room conflicts with an existing event. You may send a note the admin with your request.",
                     conflictFlag: true,
                     conflict_List: res.data
                 });
@@ -447,7 +447,7 @@ class CreateEvent extends Component {
                                 userId = lead.USER_ID;
                             }
                         })
-                        client.post('messages/create.php', {
+                        client.post('Messages/Create.php', {
                             USER_ID: userId,
                             MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
                             ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been

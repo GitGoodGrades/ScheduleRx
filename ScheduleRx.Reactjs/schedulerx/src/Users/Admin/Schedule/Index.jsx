@@ -90,7 +90,7 @@ class Schedules extends Component {
     }
 
     handleEditOpen = (id) => {
-        client.post('schedule/detail.php', {
+        client.post('Schedule/Detail.php', {
             SCHEDULE_ID: id
         }).then(res => {
             this.setState({
@@ -109,7 +109,7 @@ class Schedules extends Component {
 
       handleDelete = (schedule) => {
         let tempScheduleList = [];
-        client.post(`Schedule/delete.php`,
+        client.post(`Schedule/Delete.php`,
         {
             SCHEDULE_ID: schedule.SCHEDULE_ID
         })

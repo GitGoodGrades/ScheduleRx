@@ -12,6 +12,7 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Clear from 'material-ui-icons/Clear';
 import Send from 'material-ui-icons/Send';
 import { Typography } from 'material-ui';
+import TextField from 'material-ui/TextField';
 
 const styles = theme => {
 
@@ -41,22 +42,22 @@ class EditConflictContinueDialog extends Component {
             <Dialog
                 open={this.props.open}
             >
-                <Card>
-                    <CardContent>
+                
+                    <DialogContent>
                         <Typography>
                             The changes you made to this event will cause a conflict, or you are trying
                             to edit outside of registration. 
                             If you continue, your event will be deleted, and an event request with
                             an optional message will be sent to the administrator.
                         </Typography>
-                        <textarea
+                        <TextField
                             onBlur={this.handleBlur}
                             id="message"
-                            maxLength={250}
-                        >
-                        </textarea>
-                    </CardContent>
-                    <CardActions>
+                            style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
+                            inputProps={{maxLength: 250}}
+                            InputProps={{disableUnderline: true, inputProps: {style:{fontSize: '12px'}}}}
+                        />
+                        <div style={{float: 'right', marginTop: 10}}>
                         <Button
                             variant="raised"
                             size="small"
@@ -65,14 +66,15 @@ class EditConflictContinueDialog extends Component {
                             <Clear/>
                         </Button>
                         <Button
+                            style={{marginLeft: 5}}
                             variant="raised"
                             size="small"
                             onClick={this.handleSend}>
                             Continue
                             <Send/>
                         </Button>
-                    </CardActions>
-                </Card>
+                        </div>
+                    </DialogContent>
             </Dialog>
         )
     }
