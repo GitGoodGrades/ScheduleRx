@@ -50,6 +50,7 @@ class UserCourseTable extends Component {
         if (index !== -1) {
             temp[index] = {
                 UserID:  row ,
+                UserName: temp[index].UserName,
                 UserRole: event.value,
             };
         }
