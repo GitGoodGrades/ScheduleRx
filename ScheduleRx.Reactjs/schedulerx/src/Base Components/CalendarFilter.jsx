@@ -31,7 +31,8 @@ const mapStateToProps = (state) => ({
 
 class CalendarFilter extends Component{
     state = {
-      filterChoice:""
+      filterChoice:"",
+      date: new Date()
     };
 
     selectEvent = (event) => {
@@ -81,9 +82,9 @@ class CalendarFilter extends Component{
         this.setState({open: false, anchorEl: null, filterChoice: this.state.filterChoice + " = " + this.state[this.state.filterChoice]});
     }
 
-    setCalendarDate = (date) => {
-        // this.setState({monthPicker: false})
-        this.props.changeCalendarDate(new Date(moment(date).subtract(5, 'd')));
+    setCalendarDate = () => {
+        this.setState({monthPicker: false})
+        this.props.changeCalendarDate(new Date(moment(this.state.date).subtract(5, 'd')));
     }
 
     handleMonthPick  = () => {
@@ -141,7 +142,7 @@ class CalendarFilter extends Component{
                 <MenuItem id="room" onClick={this.handleSelect}>Room</MenuItem>
                 </Menu>
                 <Dialog
-
+                    onBackdropClick={()=> this.setState({open: false})}
                     onEntering={this.handleEntering}
                     aria-labelledby="confirmation-dialog-title"
                     open={this.state.open}
@@ -206,14 +207,17 @@ class CalendarFilter extends Component{
                     </Button>
                     </DialogActions>
                 </Dialog>
-                <Dialog open={this.state.monthPicker} >
+                <Dialog open={this.state.monthPicker} onBackdropClick={()=> this.setState({monthPicker: false})}>
                         <IconButton variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
                             <Clear></Clear>
                         </IconButton>
                     <DialogContent>
                         
-                        <MonthPicker onChange={(date)=>this.setCalendarDate(date)}/>
+                        <MonthPicker onChange={(date)=>this.setState({date: date})}/>
                     </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.setCalendarDate}>OK</Button>
+                    </DialogActions>
                 </Dialog>
             </div>
         )

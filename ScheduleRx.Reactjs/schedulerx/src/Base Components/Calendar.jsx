@@ -22,7 +22,8 @@ class Calendar extends Component {
   state = {
     events: null,
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
+    date: new Date()
   };
 
   componentWillReceiveProps = (nextProps) => {
@@ -39,7 +40,7 @@ class Calendar extends Component {
     }
 
     this.setState({
-      date: nextProps.defaultDate ? nextProps.defaultDate : new Date(), 
+      date: nextProps.defaultDate ? nextProps.defaultDate : this.state.date,
       events: formattedEvents
     })
 
@@ -69,13 +70,12 @@ class Calendar extends Component {
         <div className="text-center"
           ref={el => (this.componentRef = el)}
         >
-        <Hidden only={['sm', 'xs']}>
         <BigCalendar
           {...this.props}
           selectable
           style={{height: height}}
           events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
-          titleAccessor="TITLE" 
+          titleAccessor={window.innerWidth < 960 ? "SMALL" : "TITLE"} 
           startAccessor='START_TIME'
           endAccessor='END_TIME'
           min={min}
@@ -98,8 +98,13 @@ class Calendar extends Component {
                 borderRadius: "4px",
                 marginLeft: "3px",
                 marginRight: "2px",
-                fontWeight: 500
+                fontWeight: 500,
+                fontSize: 12
               };
+
+              if(window.innerWidth < 600){
+                newStyle.fontSize = 8
+              }
 
               roomColors && roomColors.length > 0 && roomColors.map(row => {
                 if(event.SECTIONS && 
@@ -130,131 +135,7 @@ class Calendar extends Component {
             }
           }
         />
-        </Hidden>
-        <Hidden only={['md', 'sm', 'lg', 'xl']}>
-        <BigCalendar
-          {...this.props}
-          selectable
-          style={{height: height}}
-          events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
-          titleAccessor="SMALL" 
-          startAccessor='START_TIME'
-          endAccessor='END_TIME'
-          min={min}
-          max={max} 
-          date={this.state.date}
-          components={{
-            toolbar: Toolbar
-          }}
-          onNavigate={(date) => {
-            this.setState({
-              date,
-            })}}
-          onSelectEvent={event => this.selectEvent(event)}
-          onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
-          eventPropGetter={
-            (event, start, end, isSelected) => {
-              let newStyle = {
-                backgroundColor: "#2a1215",
-                color: 'white',
-                borderRadius: "4px",
-                marginLeft: "3px",
-                marginRight: "2px",
-                fontWeight: 500,
-                fontSize: 9
-              };
 
-              roomColors && roomColors.length > 0 && roomColors.map(row => {
-                if(event.SECTIONS && 
-                    event.SECTIONS.records && 
-                    event.SECTIONS.records.length > 0 &&
-                    event.SECTIONS.records[0].COURSE_ID == row.Course){
-                      newStyle.borderBottom = `5px solid ${row.color}`
-                }
-              })
-        
-              if (event.SCHEDULE_ID == null){
-                newStyle.backgroundColor = "red",
-                newStyle.border = ".7px solid black";
-                newStyle.fontWeight = '550'
-                newStyle.color = 'white'
-              }
-
-              if (event.BOOKING_ID == this.props.conflictBookingId){
-                borderRadius: "2px",
-                newStyle.backgroundColor = "yellow"
-              }
-
-              return {
-                className: "",
-                style: newStyle
-              };
-            }
-          }
-        />
-        </Hidden>
-        
-        <Hidden only={['md', 'xs', 'lg', 'xl']}>
-        <BigCalendar
-          {...this.props}
-          selectable
-          style={{height: height}}
-          events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
-          titleAccessor="SMALL" 
-          startAccessor='START_TIME'
-          endAccessor='END_TIME'
-          min={min}
-          max={max} 
-          date={this.state.date}
-          components={{
-            toolbar: Toolbar
-          }}
-          onNavigate={(date) => {
-            this.setState({
-              date,
-            })}}
-          onSelectEvent={event => this.selectEvent(event)}
-          onSelectSlot={slotInfo => this.selectSlot(slotInfo)}
-          eventPropGetter={
-            (event, start, end, isSelected) => {
-              let newStyle = {
-                backgroundColor: "#2a1215",
-                color: 'white',
-                borderRadius: "4px",
-                marginLeft: "3px",
-                marginRight: "2px",
-                fontWeight: 500
-              };
-
-              roomColors && roomColors.length > 0 && roomColors.map(row => {
-                if(event.SECTIONS && 
-                    event.SECTIONS.records && 
-                    event.SECTIONS.records.length > 0 &&
-                    event.SECTIONS.records[0].COURSE_ID == row.Course){
-                      newStyle.borderBottom = `5px solid ${row.color}`
-                }
-              })
-        
-              if (event.SCHEDULE_ID == null){
-                newStyle.backgroundColor = "red",
-                newStyle.border = ".7px solid black";
-                newStyle.fontWeight = '550'
-                newStyle.color = 'white'
-              }
-
-              if (event.BOOKING_ID == this.props.conflictBookingId){
-                borderRadius: "2px",
-                newStyle.backgroundColor = "yellow"
-              }
-
-              return {
-                className: "",
-                style: newStyle
-              };
-            }
-          }
-        />
-        </Hidden>
       </div>
       <ReactToPrint
             trigger={() => <a href="#">Print</a>}

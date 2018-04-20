@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class EmptyHome extends Component {
-    state = { events: [], event: {}, open: false, date: new Date()};
+    state = { events: [], event: {}, open: false };
 
     componentWillReceiveProps = (nextProps) => {
         this.setState({events: nextProps.events})
