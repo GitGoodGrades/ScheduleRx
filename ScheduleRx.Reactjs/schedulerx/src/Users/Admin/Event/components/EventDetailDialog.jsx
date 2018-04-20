@@ -17,7 +17,10 @@ import Dialog, {
 import { FormGroup, FormControlLabel } from "material-ui/Form";
 import Checkbox from "material-ui/Checkbox";
 import Repeat from "material-ui-icons/Repeat";
-
+import Done from "material-ui-icons/Done";
+import Clear from "material-ui-icons/Clear";
+import Tooltip from 'material-ui/Tooltip';
+import Typography from 'material-ui/Typography';
 
 const styles = theme => ({
 
@@ -91,52 +94,59 @@ class EventDetailDialog extends Component {
         open={this.props.open}
       >
         <DialogContent className={classes.content}>
-          <div className={classes.textdiv}>
-              <h1 className={classes.title}>EVENT DETAILS</h1>
-        <div>
-          <input
+          
+              <Typography style={{fontWeight: 'bold', fontSize: '16px'}} align="center">EVENT DETAILS</Typography>
+          <div>
+          <InputLabel>Event Title:</InputLabel>
+          <Input
             className={this.state.valid ? classes.field : classes.invalid}
             id="title"
+            style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
             onBlur={this.handleBlur}
             onChange={this.validate}
-            placeholder={this.state.valid ? "EVENT TITLE" : "*REQUIRED"}
-            maxLength={50}
+            disableUnderline
+            placeholder={this.state.valid ? "" : "*REQUIRED"}
+            inputProps={{maxLength: 50, style:{fontSize: '12px'}}}
           />
         </div>
         <div>
-          <textarea
+          <InputLabel>Event Details:</InputLabel>
+          <TextField
+            InputProps={{disableUnderline: true, inputProps: {style:{fontSize: '12px'}}}}
+            style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
+            inputProps={{maxLength: 50}}
             className={classes.field}
+            multiline
             id="details"
             onBlur={this.handleBlur}
-            maxLength={50}
           />
         </div>
-        </div>
-        </DialogContent>
-        <DialogActions>
-        <FormControlLabel
-          control={
+        <div style={{float: 'right', marginTop: 10}}>
+        <Tooltip title="Repeat Weekly" position="bottom">
             <Checkbox
+              style={{height: 24, width: 24}}
               icon={<Repeat />}
-              checkedIcon={<Repeat />}
+              checkedIcon={<Repeat/>}
               id="repeat"
               onClick={this.handleRepeat}
             />
-          }
-          label="Weekly"
-        />
+          </Tooltip>
           <Button
               className={classes.btn}
               onClick={this.cancel}>
             Cancel
+            <Clear/>
           </Button>
           <Button
               className={classes.btn}
               onClick={this.handleSave}
+              style={{marginLeft: 5}}
           >
             Submit
+            <Done/>
           </Button>
-        </DialogActions>
+          </div>
+          </DialogContent>
       </Dialog>
     )
   }

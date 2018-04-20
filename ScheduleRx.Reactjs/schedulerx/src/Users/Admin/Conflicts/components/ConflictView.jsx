@@ -331,7 +331,7 @@ class EventViewEditFull extends Component{
                  {this.props.eventDetails} 
                 </Typography>
                 <TextField inputProps={{maxLength: 250}}
-                            InputProps={{disableUnderline: true, paddingLeft: '3%', paddingRight: '3%', fontSize: '5px', inputProps: {style:{fontSize: '12px'}}}}
+                            InputProps={{disableUnderline: true, paddingLeft: '3%', paddingRight: '3%', inputProps: {style:{fontSize: '12px'}}}}
                             onBlur={this.handleMessageBlur} 
                             id="denyMessage"
                             multiline
