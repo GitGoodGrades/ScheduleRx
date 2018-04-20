@@ -68,7 +68,9 @@ class CreateEvent extends Component {
         start: '',
         temp: {},
         title: "",
-        myCourses: null
+        myCourses: null,
+        mine: true,
+        past: false
     };
 
     handleAddEvent = (event) => {
@@ -465,15 +467,33 @@ class CreateEvent extends Component {
     selectEvent = (event) => {
         let eventStartTime = moment(event.START_TIME);
         let today = moment();
+
         if(today.isAfter(eventStartTime)) {
             this.setState({
-                event,
-                openEventView: true
+                mine: false
             })
+        } else{
+            let courses = [];
+            this.state.myCourses && this.state.myCourses.length > 0 && this.state.myCourses.map(row =>{
+                courses.push(row.COURSE_ID)
+            });
+
+            const course = event.SECTIONS && 
+                event.SECTIONS.records.length > 0 && 
+                event.SECTIONS.records[0].COURSE_ID;
+
+            const index = courses.length && courses.indexOf(course);
+            if(this.props.myRole !== Admin && index === -1){
+                this.setState({mine: false})
+            } else {
+                this.setState({mine: true})
+            }
         }
-        else {
-            this.setState({event, open: true})
-        }
+        
+        
+        
+        this.setState({event, open: true})
+        
     };
 
     selectSlot = (slot) => {
@@ -525,14 +545,6 @@ class CreateEvent extends Component {
                     onChange={this.handleChange}
                     onCancel={this.cancel}
                 />
-                <EventView
-                    event={this.state.event} 
-                    open={this.state.openEventView} 
-                    onClose={this.handleViewClose} 
-                    courseList={this.state.myCourses ? this.state.myCourses : this.props.courses} 
-                    sectionList={this.props.sections} 
-                    roomList={this.props.rooms} 
-                />
                 <EventViewFullEdit 
                     event={this.state.event} 
                     open={this.state.open} 
@@ -542,7 +554,10 @@ class CreateEvent extends Component {
                     roomList={this.props.rooms} 
                     onSave={this.handleEdit}
                     delete={this.handleDelete}
-                    spliceEvent={this.handleSpliceEvent}/>
+                    spliceEvent={this.handleSpliceEvent}
+                    mine={this.state.mine}
+                    past={this.state.past}
+                />
                 <ConflictDialog
                     onConflictSave={this.handleConflictSave}
                     onConflictChange={this.handleConflictChange}
