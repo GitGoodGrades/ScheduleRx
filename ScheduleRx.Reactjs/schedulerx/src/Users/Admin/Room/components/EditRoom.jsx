@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
+import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import  {Dialog,   DialogActions,
@@ -13,13 +14,6 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 230,
-    justifyContent: 'center',
-    alignItems: 'middle',
   },
   menu: {
     width: 230,
@@ -89,9 +83,10 @@ return (
     <Dialog
         className={classes.container}
         open={this.props.open}
+        
     >
-    <DialogContent className={classes.content}>
-      <h2 style={{color: 'rgb(111, 0, 41)', textAlign: 'center'}}>Edit room: {this.state.ROOM_ID}</h2>
+    <DialogContent style={{minWidth: 275}}>
+      <Typography align="center" style={{fontSize: 20, marginBottom: 10}}>Edit room: {this.state.ROOM_ID}</Typography>
         <div>
             <InputLabel>Capacity:</InputLabel>
             <TextField
@@ -103,9 +98,9 @@ return (
                 type="number"
                 error={!(this.state.valid || this.state.CAPACITY)}
                 required={true}
-                inputProps={{max: 999, style: {paddingLeft: '10px'}}}
+                inputProps={{max: 999}}
                 InputProps={{disableUnderline: 'true'}}
-                style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
+                style={{border: '1px solid rgb(204,204,204)',paddingLeft: '2%', paddingRight: '2%', borderRadius: '4px', height: '36px', width: '96%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
             <InputLabel>Room Name:</InputLabel>
             <TextField
@@ -114,9 +109,9 @@ return (
                 className={classes.textField}
                 onChange={this.handleChange}
                 required={false}
-                inputProps={{maxLength: 10, style: {paddingLeft: '10px'}}}
+                inputProps={{maxLength: 10}}
                 InputProps={{disableUnderline: 'true'}}
-                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
+                style={{ border: '1px solid rgb(204,204,204)', paddingLeft: '2%', paddingRight: '2%', borderRadius: '4px', height: '36px', width: '96%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
         <InputLabel>Location:</InputLabel>
         <TextField
@@ -127,9 +122,9 @@ return (
                 onChange={this.handleChange}
                 error={!(this.state.valid || this.state.LOCATION)}
                 required={false}
-                inputProps={{maxLength: 15, style: {paddingLeft: '10px'}}}
+                inputProps={{maxLength: 15}}
                 InputProps={{disableUnderline: 'true'}}
-                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
+                style={{ border: '1px solid rgb(204,204,204)', paddingLeft: '2%', paddingRight: '2%', borderRadius: '4px', height: '36px', width: '96%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
             <InputLabel htmlFor="select-multiple" className={classes.label}>Select Capabilities</InputLabel>
             <Select
@@ -141,8 +136,8 @@ return (
                 options={this.props.capabilityOptions}
                 value={this.state.CAPABILITIES}
                 optionComponent={Option}
-                InputProps={{disableUnderline: 'true', paddingLeft: '10px'}}
-                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
+                InputProps={{disableUnderline: 'true'}}
+                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '100%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
             <InputLabel>Description:</InputLabel>
             <TextField
@@ -151,15 +146,13 @@ return (
                 className={classes.textField}
                 onChange={this.handleChange}
                 required={false}
-                inputProps={{maxLength: 25, style: {paddingLeft: '10px'}}}
+                inputProps={{maxLength: 25}}
                 InputProps={{disableUnderline: 'true'}}
-                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px', height: '36px', width: '98%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
+                style={{ border: '1px solid rgb(204,204,204)', borderRadius: '4px',paddingLeft: '2%', paddingRight: '2%', height: '36px', width: '96%', marginRight: 'none', marginLeft: '0px', marginBottom: 10}}
             />
         </div>
-        </DialogContent>
-            <DialogActions>
+        <div style={{float: 'right', marginTop: 10}}>
           <Button
-
             variant="raised" 
             color="primary"
               className={classes.btn}
@@ -171,10 +164,12 @@ return (
             color="primary"
               className={classes.btn}
               onClick={this.handleSave}
+              style={{marginLeft: 5}}
           >
             Submit
           </Button>
-        </DialogActions>
+          </div>
+        </DialogContent>
       </Dialog>
    );
 }
