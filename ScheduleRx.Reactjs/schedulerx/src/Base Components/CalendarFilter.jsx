@@ -195,19 +195,20 @@ class CalendarFilter extends Component{
                             value={this.state.semester}
                             optionComponent={Option}
                         />
-                    </DialogContent>
                     
-                    <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
+                    
+                    <div style={{float: 'right', marginTop: 10}}>
+                    <Button onClick={this.handleClose} variant="raised" color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={this.handleOk} color="primary">
+                    <Button onClick={this.handleOk} style={{marginLeft: 5}} variant="raised" color="primary">
                         Ok
                     </Button>
-                    </DialogActions>
+                    </div>
+                    </DialogContent>
                 </Dialog>
                 <Dialog open={this.state.monthPicker} >
-                        <IconButton variant="fab" color="secondary" className={classes.button} onClick={this.exit}>
+                        <IconButton variant="fab" color="primary" className={classes.button} onClick={this.exit}>
                             <Clear></Clear>
                         </IconButton>
                     <DialogContent>
