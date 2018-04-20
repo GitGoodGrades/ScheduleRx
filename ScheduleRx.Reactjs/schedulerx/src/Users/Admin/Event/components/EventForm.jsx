@@ -22,20 +22,20 @@ const styles = theme => ({
         paddingBottom: 10,
         background: 'rgba(0,0,0, .7)',
         borderRadius: 5,
-        zIndex: 999
+        zIndex: 98
     },
     control: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'middle',
-        zIndex: 999
+        zIndex: 98
     },
     Select: {
         minWidth: 200,
         background: '#D7BAAB',
         borderRadius: 3,
         marginRight: 5,
-        zIndex: 999
+        zIndex: 98
     },
     label: {
         fontFamily: 'Open Sans',
@@ -46,7 +46,7 @@ const styles = theme => ({
     Input: {
         fontFamily: 'Open Sans',
         fontSize: 12,
-        zIndex: 999
+        zIndex: 98
     },
     item: {
         fontFamily: 'Open Sans'
@@ -114,8 +114,8 @@ class EventForm extends Component {
         return (
 
                 <div className={classes.FormContainer}>
-                    <form className={classes.Form}  style={{zIndex: 100}}>
-                            <div className={classes.control}  style={{zIndex: 100}}>
+                    <form className={classes.Form}  style={{zIndex: 98}}>
+                            <div className={classes.control}  style={{zIndex: 98}}>
                                 <InputLabel className={classes.label} htmlFor="course-helper">Select Course</InputLabel>
                                 <Select
                                     className={classes.Select}
