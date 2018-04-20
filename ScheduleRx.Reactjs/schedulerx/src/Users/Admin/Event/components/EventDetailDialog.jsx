@@ -123,7 +123,6 @@ class EventDetailDialog extends Component {
         <div style={{float: 'right', marginTop: 10}}>
         <Tooltip title="Repeat Weekly" position="bottom">
             <Checkbox
-              
               icon={<Repeat />}
               checkedIcon={<DoneAll/>}
               id="repeat"
