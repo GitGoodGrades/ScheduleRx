@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Dialog, {DialogContent } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import Input, {InputLabel} from 'material-ui/Input';
 import Icon from 'material-ui/Icon';
@@ -149,11 +148,11 @@ class ApproveDialog extends Component{
                                 <Typography>Would you like to continue?</Typography>
                             </div>
                             <div style={{float: 'right', marginTop: 10}}>
-                            <Button style={{fontSize: 12}} variant="raised" color="secondary" size="small" onClick={this.handleClose}>
+                            <Button variant="raised" color="primary" size="small" onClick={this.handleClose}>
                                 Cancel
                                 <Clear fontSize='12px'></Clear>
                             </Button>
-                            <Button  style={{marginLeft: 5, fontSize: 12}} variant="raised" color="secondary" size="small" onClick={this.handleSave}>
+                            <Button  style={{marginLeft: 5}} variant="raised" color="primary" size="small" onClick={this.handleSave}>
                                 Confirm
                                 <Send fontSize='12px' ></Send>
                             </Button>

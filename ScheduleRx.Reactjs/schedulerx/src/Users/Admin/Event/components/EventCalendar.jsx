@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Calendar from '../../../../Base Components/Calendar';
-import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import CalendarFilter from '../../../../Base Components/CalendarFilter';
 import { client } from '../../../../configuration/client';

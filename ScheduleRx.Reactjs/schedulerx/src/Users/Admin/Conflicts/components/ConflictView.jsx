@@ -287,20 +287,20 @@ class EventViewEditFull extends Component{
                 </Typography>
                 </DialogContent>
                 <DialogContent>
-                <div style={{display: 'inline', float: 'right'}}>
-                <Button style={{marginLeft: 5, marginTop: 15}} 
+                <div style={{float: 'right', marginTop: 10}}>
+                <Button style={{marginLeft: 5}} 
                         variant="raised" 
                         size="small" 
-                        color="secondary" 
+                        color="primary" 
                         className={classes.button} 
                         onClick={this.selectEdit}  >
                 Edit Request
                 <Edit size="small"></Edit>
               </Button>
-              <Button style={{marginLeft: 5,  marginTop: 15}} 
+              <Button style={{marginLeft: 5}} 
                       variant="raised" 
                       size="small" 
-                      color="secondary" 
+                      color="primary" 
                       className={classes.button} 
                       onClick={this.selectDeny} 
                       onMouseEnter={this.denyEnter} 
@@ -308,10 +308,10 @@ class EventViewEditFull extends Component{
                 Deny Request
                 <Clear size="small" ></Clear>
               </Button>
-              <Button style={{ marginLeft: 5, marginTop: 15}} 
+              <Button style={{ marginLeft: 5}} 
                       variant="raised" 
                       size="small" 
-                      color="secondary"
+                      color="primary"
                       className={classes.button} 
                       onClick={this.selectApprove} 
                       onMouseEnter={this.approveEnter} 
@@ -340,11 +340,11 @@ class EventViewEditFull extends Component{
                 
             
                 <div style={{float: 'right', marginTop: 10}}>
-                <Button variant="raised" size="small" color="secondary" className={classes.button} onClick={this.selectCancelDeny}>
+                <Button variant="raised" size="small" color="primary" className={classes.button} onClick={this.selectCancelDeny}>
                     Cancel
                     <Clear></Clear>
                 </Button>
-              <Button style={{marginLeft: 5}} variant="raised" size="small" color="secondary"className={classes.button} onClick={this.selectDenySend}>
+              <Button style={{marginLeft: 5}} variant="raised" size="small" color="primary"className={classes.button} onClick={this.selectDenySend}>
                 Send
                 <Send></Send>
               </Button>

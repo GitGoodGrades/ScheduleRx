@@ -159,11 +159,16 @@ return (
         </DialogContent>
             <DialogActions>
           <Button
+
+            variant="raised" 
+            color="primary"
               className={classes.btn}
               onClick={this.cancel}>
             Cancel
           </Button>
           <Button
+            variant="raised"
+            color="primary"
               className={classes.btn}
               onClick={this.handleSave}
           >

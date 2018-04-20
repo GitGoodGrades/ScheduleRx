@@ -9,7 +9,6 @@ import Select from 'material-ui/Select';
 import { withStyles } from 'material-ui/styles';
 import TableFooter from 'material-ui/Table';
 import AddIcon from 'material-ui-icons/Add';
-import IconButton from 'material-ui/IconButton';
 import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 const styles = theme => ({
