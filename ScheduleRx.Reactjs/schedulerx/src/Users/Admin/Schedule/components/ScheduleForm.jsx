@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import { DateRange } from 'react-date-range';
-import { Dialog, DialogActions, DialogContent, } from 'material-ui';
+import { Dialog, DialogActions, DialogContent, Typography, } from 'material-ui';
 import moment from 'moment';
 import {InputLabel} from 'material-ui/Input';
 
@@ -100,7 +100,7 @@ class ScheduleForm extends React.Component {
             open={this.props.open}
         >
          <DialogContent className={classes.content}>
-          <h2 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Create New Schedule</h2>
+          <Typography component="p" style={{color: 'primary', fontSize: 20, paddingTop: 10, paddingBottom: 10, textAlign: 'center'}}>Create New Schedule</Typography>
             <div style={{width: 'auto'}}>
                 <InputLabel className={classes.label}>Semester Name:</InputLabel>
                 <TextField
@@ -160,19 +160,25 @@ class ScheduleForm extends React.Component {
                     </ Dialog>
                 </div>
             </DialogContent>
-            <DialogActions>
+            <DialogContent>
+            <div style={{float: 'right', marginTop: 10}}>
           <Button
-              className={classes.btn}
-              onClick={this.cancel}>
+                style={{marginLeft: 5}} 
+                variant="raised"
+                color="primary"
+                onClick={this.cancel}>
             Cancel
           </Button>
           <Button
-              className={classes.btn}
+                style={{marginLeft: 5}} 
+                variant="raised" 
+                color="primary"
               onClick={this.handleSave}
           >
             Submit
           </Button>
-        </DialogActions>
+          </div>
+       </DialogContent>
       </Dialog>
     );
   }

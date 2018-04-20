@@ -67,6 +67,7 @@ const styles = theme => ({
         top: '50%',
         transform: 'translateY(-50%)',
         textTransform: 'none',
+        zIndex: 99,
     }
 });
 

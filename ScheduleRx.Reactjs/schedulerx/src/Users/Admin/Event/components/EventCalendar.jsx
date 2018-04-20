@@ -8,11 +8,11 @@ import { client } from '../../../../configuration/client';
 
 class EventCalendar extends Component{
     state = {
-      view: 'week', anchorEl: null, date: new Date()
+      view: 'week', anchorEl: null
     };
 
     componentWillReceiveProps = (nextProps) => {
-        this.setState({events: nextProps.events, date: nextProps.date})
+        this.setState({events: nextProps.events, date: nextProps.date ? nextProps.date : null})
     }
 
     selectEvent = (event) => {
@@ -81,7 +81,7 @@ class EventCalendar extends Component{
             />    
            <Calendar events={this.state.events} handleEventSelection={this.selectEvent} handleSlotSelection={this.selectSlot}
              defaultView={this.state.view}
-             defaultDate={new Date(this.state.date)}
+             defaultDate={this.state.date}
              views={['month', 'week', 'day']}
              step={5}
              timeslots={6}

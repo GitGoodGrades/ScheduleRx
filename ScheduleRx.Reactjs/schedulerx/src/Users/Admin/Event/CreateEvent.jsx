@@ -533,7 +533,7 @@ class CreateEvent extends Component {
                     handleSelectSlot={this.selectSlot} 
                     style={{zIndex: 0}}
                     conflictBookingId={this.props.redirected_event && this.props.redirected_event.BOOKING_ID}
-                    date={this.props.redirected ? this.props.redirect_date : new Date()}
+                    date={this.props.redirected ? this.props.redirect_date : null}
                     users={this.props.users}
                     rooms={this.props.rooms}
                 />

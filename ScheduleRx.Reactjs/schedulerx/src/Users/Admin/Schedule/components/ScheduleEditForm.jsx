@@ -114,10 +114,10 @@ class ScheduleEditForm extends React.Component {
             open={this.props.open}
         >
          <DialogContent className={classes.content}>
-          <h2 style={{color: 'rgb(111, 0, 41)', paddingTop: 10, textAlign: 'center'}}>Edit {this.state.SCHEDULE_ID}</h2>
+          <Typography component="p" style={{color: 'primary', fontSize: 20, paddingTop: 10, paddingBottom: 10, textAlign: 'center'}}>Edit {this.state.SCHEDULE_ID}</Typography>
           
-            <div style={{textAlign: 'center', marginBottom: 8}}> 
-                Registration Start-End:
+            <div style={{textAlign: 'center', marginTop: 10}}> 
+                Registration Period:
                 <Button onClick={this.setRegOpen} style={this.state.valid || (this.state.START_REG_DATE && this.state.END_REG_DATE) ?
                     {height: 15}:{height: 15, color: 'red'}}>
                     {
@@ -140,8 +140,8 @@ class ScheduleEditForm extends React.Component {
                         </Button>
                 </ Dialog>
                 </div>
-                <div style={{textAlign: 'center', fontSize: '15', marginTop: 30}} >
-                Semester Start-End:
+                <div style={{textAlign: 'center', fontSize: '15'}} >
+                Semester Period:
                 <Button onClick={this.setSemOpen} style={this.state.valid || (this.state.START_SEM_DATE && this.state.END_SEM_DATE) ?
                     {height: 15}:{height: 15, color: 'red'}}>
                     {
@@ -177,24 +177,26 @@ class ScheduleEditForm extends React.Component {
                     />
                     }
                     label=" Schedule visibility" />
-            <DialogActions>
-                {/* <div>
-                    <IconButton variant="fab" color="secondary" aria-label="edit" className={classes.button} onClick={this.handleDelete}>
-                        <Icon>delete_forever_icon</Icon>
-                    </IconButton>
-              </div> */}
+             <DialogContent>
+            <div style={{float: 'right', marginTop: 10}}>
           <Button
-              className={classes.btn}
-              onClick={this.cancel}>
+                style={{marginLeft: 5}} 
+                variant="raised"
+                color="primary"
+                onClick={this.cancel}>
             Cancel
           </Button>
           <Button
-              className={classes.btn}
+                style={{marginLeft: 5}} 
+                variant="raised" 
+                color="primary"
               onClick={this.handleSave}
           >
             Submit
           </Button>
-        </DialogActions>
+          </div>
+       </DialogContent>
+        
       </Dialog>
     );
   }
