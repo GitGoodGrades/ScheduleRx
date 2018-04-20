@@ -130,7 +130,7 @@ class TopNavMenu extends Component {
                     <NavLink 
                         activeStyle={{fontSize: '15px', color: '#D7BAAB'}} to="/room/list"
                         className={this.props.role !== Admin ? classes.hidden : classes.seen}>
-                        Room List
+                        Manage Rooms
                     </NavLink>
                     </Hidden>
                     
