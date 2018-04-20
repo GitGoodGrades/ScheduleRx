@@ -113,8 +113,7 @@ class EventDetailDialog extends Component {
           <InputLabel>Event Details:</InputLabel>
           <TextField
             InputProps={{disableUnderline: true, inputProps:   {maxLength: 205, style:{fontSize: '12px'}}}}
-            style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
-            className={classes.field}
+            style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}            className={classes.field}
             multiline
             id="details"
             onBlur={this.handleBlur}
@@ -131,12 +130,16 @@ class EventDetailDialog extends Component {
             />
           </Tooltip>
           <Button
+              variant="raised"
+              color="primary"
               className={classes.btn}
               onClick={this.cancel}>
             Cancel
             <Clear/>
           </Button>
           <Button
+              variant="raised"
+              color="primary"
               className={classes.btn}
               onClick={this.handleSave}
               style={{marginLeft: 5}}

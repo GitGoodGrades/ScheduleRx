@@ -138,7 +138,7 @@ class EventEditView extends Component{
           <Typography className={moment(event.START_TIME).isBefore(moment())? classes.content : classes.hidden}>{this.state.details}</Typography>
 
             <Button variant="raised"
-                    color="secondary" 
+                    color="primary" 
                     size="small" 
                     style={{float: 'right'}} 
                     className={this.state.noteChange? classes.button : classes.hidden}

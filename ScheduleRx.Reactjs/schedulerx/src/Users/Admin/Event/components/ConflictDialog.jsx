@@ -5,9 +5,11 @@ import Input, {InputLabel} from 'material-ui/Input';
 import {FormControl, FormHelperText} from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
+import Typography from 'material-ui/Typography';
 import moment from 'moment';
 import axios from 'axios';
-//import { styles } from '../EventStyles';
+import Send from 'material-ui-icons/Send';
+import Clear from 'material-ui-icons/Clear';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -67,32 +69,43 @@ class ConflictDialog extends Component {
         open={this.props.open}
       >
         <DialogContent className={classes.content}>
-          <div className={classes.textdiv}>
-              <h1 className={classes.title}>UH OH!</h1>
-              <p>{this.props.conflictRequestString}</p>
-        <div>
-          <textarea
+          
+              <Typography align="center" style={{fontWeight: 'bold', fontSize: '16px'}} className={classes.title}>UH OH!</Typography>
+              <Typography>{this.props.conflictRequestString}</Typography>
+        
+          <TextField
             className={classes.field}
             id="message"
+            multiline
             onBlur={this.handleBlur}
-            maxLength={250}
-          ></textarea>
-        </div>
-        </div>
-        </DialogContent>
-        <DialogActions>
+            
+            style={{border: '1px solid rgb(204,204,204)', borderRadius: '4px', width: '96%', paddingLeft: '2%', paddingRight: '2%'}}
+            inputProps={{maxLength: 250}}
+            InputProps={{disableUnderline: true, inputProps: {style:{fontSize: '12px'}}}}
+          />
+        
+        
+        <div style={{float: 'right', marginTop: 10}}>
           <Button
+              variant="raised"
+              color="primary"
               className={classes.btn}
               onClick={this.conflictCancel}>
             Cancel Request 
+            <Clear/>
           </Button>
           <Button
+              variant="raised"
+              color="primary"
+              style={{marginLeft: 5}}
               className={classes.btn}
               onClick={this.handleConflictSave}
           >
-            Submit Request
+            Submit Request 
+            <Send/>
           </Button>
-        </DialogActions>
+        </div>
+        </DialogContent>
       </Dialog>
     )
   }

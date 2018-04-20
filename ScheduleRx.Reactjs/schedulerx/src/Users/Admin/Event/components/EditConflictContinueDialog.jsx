@@ -59,6 +59,7 @@ class EditConflictContinueDialog extends Component {
                         />
                         <div style={{float: 'right', marginTop: 10}}>
                         <Button
+                            color="primary"
                             variant="raised"
                             size="small"
                             onClick={this.handleCancel}>
@@ -66,6 +67,7 @@ class EditConflictContinueDialog extends Component {
                             <Clear/>
                         </Button>
                         <Button
+                            color="primary"
                             style={{marginLeft: 5}}
                             variant="raised"
                             size="small"

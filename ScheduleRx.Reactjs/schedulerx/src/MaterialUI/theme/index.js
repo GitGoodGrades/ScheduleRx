@@ -1,5 +1,6 @@
 import 'typeface-open-sans';
-import { createMuiTheme } from 'material-ui/styles';
+import React from 'react';
+import {MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 const baseTheme = {
     root: {
@@ -23,7 +24,7 @@ const schoolPalette = {
             main: 'black'
         },
         transBlack: {
-            main: 'rgba(0,0,0, .7)'
+            main: 'rgba(0,0,0, .8)'
         }
     }
 };
@@ -31,4 +32,9 @@ const schoolPalette = {
 
 export const ulmTheme = createMuiTheme({
   ...baseTheme, ...schoolPalette,
+    
+  
 });
+
+
+
