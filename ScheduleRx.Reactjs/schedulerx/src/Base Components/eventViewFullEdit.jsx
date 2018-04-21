@@ -85,7 +85,10 @@ class EventViewEditFull extends Component{
     }
 
     handleClose = () => {
-    this.props.onClose();
+        this.setState({
+            edit: false
+        })
+        this.props.onClose();
     };
 
     handleSave = () => {
@@ -96,7 +99,7 @@ class EventViewEditFull extends Component{
         let regSemStart = this.props.registrationSchedule.START_SEM_DATE;
         let regSemEnd = this.props.registrationSchedule.END_SEM_DATE;
         if(now.isBetween(regStart, regEnd)){
-            if(this.state.roomChange == 'true' || this.state.timeChange == 'true') {
+            if(this.state.roomChange == 'true' || this.state.timeChange == 'true' || this.state.originalEvent.BOOKING_ID == null) {
                 if(moment(this.state.start).isBetween(regSemStart, regSemEnd)) {
                     this.setState({
                         isRequest: false
@@ -263,8 +266,9 @@ class EventViewEditFull extends Component{
     };
 
     handleContinue = () => {
-
-        this.props.delete(this.state.originalEvent.BOOKING_ID);
+        if(this.state.originalEvent.BOOKING_ID != null) {
+            this.props.delete(this.state.originalEvent.BOOKING_ID);
+        }
         this.createEditedEvent();
     }
 
@@ -366,7 +370,20 @@ class EventViewEditFull extends Component{
     }
 
     handleDuplicate = () => {
-        this.setState({ edit: true, BOOKING_ID: null, date: null })
+        const event = this.state.originalEvent;
+        this.setState({ 
+            edit: true,
+            BOOKING_ID: null,
+            date: null,
+            room: event.ROOM_ID,
+            course: event.COURSE_ID,
+            sections: event.SECTION_ID,
+            title: event.BOOKING_TITLE,
+            details: event.NOTES ? event.NOTES : '',
+            start: event.START_TIME,
+            end: event.END_TIME,
+        })
+
     }
 
     handleDelete = () => {
