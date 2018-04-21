@@ -96,6 +96,7 @@ class Calendar extends Component {
                 backgroundColor: '#2a1215',
                 color: 'white',
                 borderRadius: "4px",
+                border: '1px solid white',
                 marginLeft: "3px",
                 marginRight: "2px",
                 fontWeight: 500,
@@ -118,7 +119,6 @@ class Calendar extends Component {
         
               if (event.SCHEDULE_ID == null){
                 newStyle.backgroundColor = "red",
-                newStyle.border = ".7px solid black";
                 newStyle.fontWeight = '550'
                 newStyle.color = 'white'
               }

@@ -17,6 +17,7 @@ import Dialog, {
 import { FormGroup, FormControlLabel } from "material-ui/Form";
 import Checkbox from "material-ui/Checkbox";
 import Repeat from "material-ui-icons/Repeat";
+import DoneAll from 'material-ui-icons/DoneAll';
 import Done from "material-ui-icons/Done";
 import Clear from "material-ui-icons/Clear";
 import Tooltip from 'material-ui/Tooltip';
@@ -122,9 +123,8 @@ class EventDetailDialog extends Component {
         <div style={{float: 'right', marginTop: 10}}>
         <Tooltip title="Repeat Weekly" position="bottom">
             <Checkbox
-              
               icon={<Repeat />}
-              checkedIcon={<Repeat/>}
+              checkedIcon={<DoneAll/>}
               id="repeat"
               onClick={this.handleRepeat}
             />
