@@ -125,11 +125,6 @@ class Calendar extends Component {
                 newStyle.color = 'white'
               }
 
-              if (event.BOOKING_ID == this.props.conflictBookingId){
-                borderRadius: "2px",
-                newStyle.backgroundColor = "yellow"
-              }
-
               return {
                 className: "",
                 style: newStyle

@@ -557,6 +557,7 @@ class CreateEvent extends Component {
                     spliceEvent={this.handleSpliceEvent}
                     mine={this.state.mine}
                     past={this.state.past}
+                    addEvent={this.handleAddEvent}
                 />
                 <ConflictDialog
                     onConflictSave={this.handleConflictSave}

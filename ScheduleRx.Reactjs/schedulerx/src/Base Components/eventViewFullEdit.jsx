@@ -343,8 +343,7 @@ class EventViewEditFull extends Component{
             DETAILS: this.state.details,
             BOOKING_ID: this.state.duplicate? null : this.state.originalEvent.BOOKING_ID
         }
-
-        this.props.spliceEvent(temp);
+        this.state.duplicate? this.props.addEvent(temp) : this.props.spliceEvent(temp);
 
         this.setState({
             conflictDialogOpen: false
