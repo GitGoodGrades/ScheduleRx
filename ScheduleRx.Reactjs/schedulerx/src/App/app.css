@@ -27,7 +27,7 @@ body {
 }
 
 button {
-    
+    text-decoration: 'none';
     text-transform: uppercase;
 
 }
@@ -43,7 +43,7 @@ button:hover {
 
 a:link {
   color: #000000;
-  
+  text-decoration-line: none;
   text-transform: uppercase;
 }
 
@@ -54,10 +54,6 @@ a:hover{
     transition-duration: 0.3s;
     transition-timing-function: linear;
     transition-delay: initial;
-}
-
-input {
-    
 }
 
 #App {
