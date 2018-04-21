@@ -99,7 +99,7 @@ class EventViewEditFull extends Component{
         let regSemStart = this.props.registrationSchedule.START_SEM_DATE;
         let regSemEnd = this.props.registrationSchedule.END_SEM_DATE;
         if(now.isBetween(regStart, regEnd)){
-            if(this.state.roomChange == 'true' || this.state.timeChange == 'true' || this.state.originalEvent.BOOKING_ID == null) {
+            if(this.state.roomChange == true || this.state.timeChange == true || this.state.duplicate == true) {
                 if(moment(this.state.start).isBetween(regSemStart, regSemEnd)) {
                     this.setState({
                         isRequest: false
@@ -266,7 +266,7 @@ class EventViewEditFull extends Component{
     };
 
     handleContinue = () => {
-        if(this.state.originalEvent.BOOKING_ID != null) {
+        if(!this.state.duplicate) {
             this.props.delete(this.state.originalEvent.BOOKING_ID);
         }
         this.createEditedEvent();
@@ -331,14 +331,17 @@ class EventViewEditFull extends Component{
             })
         }
         let temp = {
-            SCHEDULE_ID: this.state.message ? null : this.props.registrationSchedule.SCHEDULE_ID,
-            COURSE_ID: this.state.course,
+            SCHEDULE_ID: this.state.message ? null : this.state.originalEvent.SCHEDULE_ID,
+            SECTIONS: {records: [{
+                COURSE_ID: this.state.course
+            }]},
             SECTION_ID: sections,
-            room: this.state.room,
+            ROOM_ID: this.state.room,
             START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
             END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
             BOOKING_TITLE: this.state.title,
-            NOTES: this.state.details
+            DETAILS: this.state.details,
+            BOOKING_ID: this.state.duplicate? null : this.state.originalEvent.BOOKING_ID
         }
 
         this.props.spliceEvent(temp);
@@ -382,6 +385,7 @@ class EventViewEditFull extends Component{
             details: event.NOTES ? event.NOTES : '',
             start: event.START_TIME,
             end: event.END_TIME,
+            duplicate: true
         })
 
     }
