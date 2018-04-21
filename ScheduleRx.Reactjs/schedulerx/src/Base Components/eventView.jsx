@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
+import PrintIcon from 'material-ui-icons/Print';
 import moment from 'moment';
-import Dialog from 'material-ui/Dialog';
+import Dialog, { DialogContent } from 'material-ui/Dialog';
 import ReactToPrint from "react-to-print";
 import { ulmTheme as theme1 } from '../MaterialUI/theme/index';
 
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
+    width: 325,
+    wordWrap: 'break-word'
   },
   bullet: {
     display: 'inline-block',
@@ -29,7 +31,9 @@ const styles = theme => ({
   },
   content: {
     fontSize: 15,
-    marginBottom: 5
+    marginBottom: 5,
+    wordWrap: 'break-word'
+    
   }
 });
 
@@ -67,17 +71,12 @@ class EventView extends Component{
           onClose={this.handleClose}
           onBackdropClick={this.handleClose}
       >
-      <ReactToPrint
-            trigger={() => <a href="#">Print</a>}
-            content={() => this.componentRef}
-        />
+      
         <div className="text-center"
           ref={el => (this.componentRef = el)}
         >
-          <Card className={classes.card}>
-            <CardContent>
-              
-              <Typography variant="headline" component="h2">
+            <DialogContent className={classes.card}>
+              <Typography align='center' variant="headline" component="h2">
                 {event && event.BOOKING_TITLE}
               </Typography>
               <Typography className={classes.pos}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
@@ -96,10 +95,16 @@ class EventView extends Component{
               <Typography className={classes.content} component="p">
                 Details: {this.findNote(event && event.SECTIONS)}
               </Typography>
-              
-            </CardContent>
-          </Card>
+            </DialogContent>
       </div>
+      <DialogContent>
+      <div style={{float: "right"}}>
+              <ReactToPrint
+                trigger={() => <a href="#"><PrintIcon color="primary"/></a>}
+                content={() => this.componentRef}
+              />
+      </div>
+      </DialogContent>
       </ Dialog>
   );
   }

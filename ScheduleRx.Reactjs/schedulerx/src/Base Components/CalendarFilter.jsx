@@ -84,7 +84,7 @@ class CalendarFilter extends Component{
 
     setCalendarDate = () => {
         this.setState({monthPicker: false})
-        this.props.changeCalendarDate(new Date(moment(this.state.date).subtract(5, 'd')));
+        this.props.changeCalendarDate(new Date(moment(this.state.date).subtract(5, 'd').format('MM 01 YYYY')));
     }
 
     handleMonthPick  = () => {
@@ -196,8 +196,8 @@ class CalendarFilter extends Component{
                             value={this.state.semester}
                             optionComponent={Option}
                         />
-                    
-                    
+                    </DialogContent>
+                    <DialogContent>
                     <div style={{float: 'right', marginTop: 10}}>
                     <Button onClick={this.handleClose} variant="raised" color="primary">
                         Cancel

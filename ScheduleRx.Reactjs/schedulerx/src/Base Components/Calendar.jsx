@@ -4,10 +4,11 @@ import moment from 'moment';
 import './react-big-calendar.css';
 import {withStyles} from 'material-ui/styles';
 import ReactToPrint from "react-to-print";
+import PrintIcon from 'material-ui-icons/Print';
 import LoadWrapper from './LoadWrapper';
 import { roomColors } from '../configuration/variables';
 import Toolbar from './Toolbar';
-import { Hidden } from 'material-ui';
+import { Hidden, Button } from 'material-ui';
 import compose from 'recompose/compose';
 import withWidth from 'material-ui/utils/withWidth';
 
@@ -70,6 +71,7 @@ class Calendar extends Component {
         <div className="text-center"
           ref={el => (this.componentRef = el)}
         >
+        
         <BigCalendar
           {...this.props}
           selectable
@@ -137,10 +139,19 @@ class Calendar extends Component {
         />
 
       </div>
+      <div style={{marginTop:"10px"}}>
       <ReactToPrint
-            trigger={() => <a href="#">Print</a>}
+            trigger={() => <a href="#">
+              <Button 
+                variant="raised"
+                size="small"
+                style={{backgroundColor: 'rgba(0,0,0,.7)', color: 'white'}}
+              >
+              <PrintIcon/>
+            </Button></a>}
             content={() => this.componentRef}
         />
+      </div>
     </div>
     )
   }
