@@ -79,7 +79,7 @@ class EventViewEditFull extends Component{
         details: '',
         start: '',
         end: '',
-        message: "",
+        message: null,
         timeChange: 'false',
         roomChange: 'false'
     }
@@ -210,7 +210,7 @@ class EventViewEditFull extends Component{
             COURSE_ID: nextProps.event.SECTIONS && nextProps.event.SECTIONS.records[0] && nextProps.event.SECTIONS.records[0].COURSE_ID,
             SECTION_ID: selectSections,
             BOOKING_TITLE: nextProps.event.BOOKING_TITLE,
-            NOTES: nextProps.event.NOTES ? nextProps.event.NOTES : '',
+            DETAILS: nextProps.event.DETAILS ? nextProps.event.DETAILS : '',
             START_TIME: nextProps.event.START_TIME,
             END_TIME: nextProps.event.END_TIME,
             sectionOptions: sections,
@@ -254,7 +254,7 @@ class EventViewEditFull extends Component{
             course: event.COURSE_ID,
             sections: event.SECTION_ID,
             title: event.BOOKING_TITLE,
-            details: event.NOTES ? event.NOTES : '',
+            details: event.DETAILS ? event.DETAILS : '',
             start: event.START_TIME,
             end: event.END_TIME,
             date: moment(event.START_TIME).format("YYYY-MM-DD")
@@ -313,7 +313,7 @@ class EventViewEditFull extends Component{
                 BOOKING_TITLE: this.state.title,
                 NOTES: this.state.details,
                 BOOKING_IDs: this.state.conflicts,
-                MESSAGE: this.state.message
+                MESSAGE: this.state.message === null? "" : this.state.message
             })
         }
         else if(this.state.isConflict == false && this.state.isRequest == true) {
@@ -327,14 +327,15 @@ class EventViewEditFull extends Component{
                 BOOKING_TITLE: this.state.title,
                 NOTES: this.state.details,
                 BOOKING_IDs: this.state.conflicts,
-                MESSAGE: this.state.message
+                MESSAGE:  this.state.message === null? "" : this.state.message
             })
         }
         let temp = {
-            SCHEDULE_ID: this.state.message ? null : this.state.originalEvent.SCHEDULE_ID,
-            SECTIONS: {records: [{
-                COURSE_ID: this.state.course
-            }]},
+            SCHEDULE_ID: this.state.message !== null ? null : this.state.originalEvent.SCHEDULE_ID,
+            SECTIONS: {records: sections && sections.map(row =>  {
+                return {COURSE_ID: this.state.course,
+                SECTION_ID: row}
+            })},
             SECTION_ID: sections,
             ROOM_ID: this.state.room,
             START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
@@ -352,7 +353,7 @@ class EventViewEditFull extends Component{
 
     handleMessageBlur = (message) => {
         this.setState({
-            message: message
+            message: message == null? "" : message
         })
     }
 
@@ -364,10 +365,11 @@ class EventViewEditFull extends Component{
             course: event.COURSE_ID,
             sections: event.SECTION_ID,
             title: event.BOOKING_TITLE,
-            details: event.NOTES ? event.NOTES : '',
+            details: event.DETAILS ? event.DETAILS : '',
             start: event.START_TIME,
             end: event.END_TIME,
-            date: moment(event.START_TIME).format("YYYY-MM-DD")
+            date: moment(event.START_TIME).format("YYYY-MM-DD"),
+            
         })
     }
 
@@ -381,7 +383,7 @@ class EventViewEditFull extends Component{
             course: event.COURSE_ID,
             sections: event.SECTION_ID,
             title: event.BOOKING_TITLE,
-            details: event.NOTES ? event.NOTES : '',
+            details: event.DETAILS ? event.DETAILS : '',
             start: event.START_TIME,
             end: event.END_TIME,
             duplicate: true
@@ -444,9 +446,10 @@ class EventViewEditFull extends Component{
 
         let newEvent = {
             SCHEDULE_ID: this.state.originalEvent.SCHEDULE_ID,
-            SECTIONS: {records: [{
-                COURSE_ID: this.state.course
-            }]},
+            SECTIONS: {records: sections && sections.map(row =>  {
+                return {COURSE_ID: this.state.course,
+                SECTION_ID: row}
+            })},
             SECTION_ID: sections,
             ROOM_ID: this.state.room,
             START_TIME: this.state.start,
