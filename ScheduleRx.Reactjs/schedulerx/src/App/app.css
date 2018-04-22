@@ -42,7 +42,7 @@ button:hover {
 }
 
 a:link {
-  color: #000000;
+  
   text-decoration-line: none;
   text-transform: uppercase;
 }
@@ -55,6 +55,8 @@ a:hover{
     transition-timing-function: linear;
     transition-delay: initial;
 }
+
+
 
 #App {
   height: 100%;

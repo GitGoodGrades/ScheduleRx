@@ -90,9 +90,6 @@ button.rbc-input::-moz-focus-inner {
     font-weight: 400;
 }
 
-.rbc-header > a:visited {
-    color: black;
-}
 .rbc-row-content {
   /**position: relative;*/
   -moz-user-select: none;
@@ -457,6 +454,7 @@ button.rbc-input::-moz-focus-inner {
   -webkit-flex: none;
       -ms-flex: none;
           flex: none;
+
 }
 .rbc-label {
   padding: 0 5px;
@@ -573,8 +571,7 @@ button.rbc-input::-moz-focus-inner {
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.rbc-time-header.rbc-overflowing {
-}
+
 .rbc-rtl .rbc-time-header.rbc-overflowing {
   border-right-width: 0;
 }
@@ -591,6 +588,7 @@ button.rbc-input::-moz-focus-inner {
 .rbc-time-header > .rbc-row:last-child {
   border-bottom: 1px solid #DDD;
   background-color: white;
+  display: none
 }
 .rbc-time-header > .rbc-row.rbc-row-resource {
   border-bottom: 1px solid #DDD;
@@ -665,4 +663,13 @@ button.rbc-input::-moz-focus-inner {
 }
 div.rbc-header.rbc-today {
     background: none;
+}
+
+.rbc-allday-cell {
+  display: none;
+}
+
+.rbc-header-gutter {
+  width: 77.9px;
+
 }
