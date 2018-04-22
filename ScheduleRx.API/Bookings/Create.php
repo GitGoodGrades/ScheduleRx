@@ -9,7 +9,9 @@ include  '../SuperCRUD/Create.php';
 include 'GetEventDetail.php';
 include '../models/getGUID.php';
 include '../Conflict/Create.php';
+include_once '../Schedule/findByTime.php';
 include_once '../config/LogHandler.php';
+include_once '../SuperCRUD/Index.php';
 
 $database = new Database();
 $conn = $database->getConnection();
@@ -39,10 +41,12 @@ if ($data->ROOM_ID != 'clinical' && ($data->SCHEDULE_ID == null || $data->SCHEDU
     else { //Attempt Error Recovery
         $log->warn("Null SCHEDULE_ID supplied with No Attached Message");
         $log->warn("Adjusting SCHEDULE_ID to current");
-        $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn));
-        if (!$current) { $log->warn("No Released Schedule"); exit(null); }
-        $data->SCHEDULE_ID = $current->SCHEDULE_ID;
+        $data->SCHEDULE_ID = findByTime($data->START_TIME, $conn, $log);
     }
+}
+else if ($data->ROOM_ID == 'clinical') {
+    $current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn));
+        $data->SCHEDULE_ID = findByTime($data->START_TIME, $conn, $log);
 }
 
 $sectionEntries = $data->SECTION_ID;
