@@ -115,11 +115,12 @@ class EventViewEditFull extends Component{
     }
 
     selectDenySend = () => {
+        const conflict = this.state.conflictEvent.CONFLICT_ID;
         client.post('bookings/delete.php', {
             SCHEDULE_ID: this.state.conflictEvent.SCHEDULE_ID,
             BOOKING_ID: this.state.conflictEvent.BOOKING_ID
         })
-        this.props.onSelectDenySend(this.state.conflictEvent.CONFLICT_ID);
+        this.props.onSelectDenySend(conflict);
     }
 
     handleMessageBlur = (event) => {
@@ -233,7 +234,7 @@ class EventViewEditFull extends Component{
                                     {(index+1)+ ". " + 
                                         (this.state.events[index].SECTIONS &&
                                         this.state.events[index].SECTIONS.records &&
-                                        this.state.events[index].SECTIONS.records[0].SECTION_ID)}
+                                        this.state.events[index].SECTIONS.records[0].COURSE_ID)}
                                     <br/>
                                     </div>
                                 }
@@ -241,18 +242,18 @@ class EventViewEditFull extends Component{
                                     return (index+1)+ ". " + 
                                         (this.state.events[index].SECTIONS &&
                                         this.state.events[index].SECTIONS.records &&
-                                        this.state.events[index].SECTIONS.records[0].SECTION_ID)
+                                        this.state.events[index].SECTIONS.records[0].COURSE_ID)
                                 }
                             }) ||   this.state.events && this.state.events[0] &&
                                     this.state.events[0].SECTIONS &&
                                     this.state.events[0].SECTIONS.records &&
-                                    this.state.events[0].SECTIONS.records[0].SECTION_ID}
+                                    this.state.events[0].SECTIONS.records[0].COURSE_ID}
                         </TableCell>
                         <TableCell style={{paddingLeft: 5}} padding="none" className={this.state.approveHighlight? classes.deny : this.state.denyHighlight? classes.approve : classes.noApprove}>{
                             this.state.conflictEvent &&
                             this.state.conflictEvent.SECTIONS &&
                             this.state.conflictEvent.SECTIONS.records &&
-                            this.state.conflictEvent.SECTIONS.records[0].SECTION_ID}
+                            this.state.conflictEvent.SECTIONS.records[0].COURSE_ID}
                         </TableCell>
                     </TableRow>
                     <TableRow id={2}>
