@@ -18,8 +18,10 @@ $conn = $database->getConnection();
 $results = [];
 $allTheThings = json_decode(GetAll('booking', 'BOOKING_ID', $conn));
 
-foreach ($allTheThings->records as $record) {
-    array_push($results, GetDetail($record->BOOKING_ID, $conn));
+if ($allTheThings) {
+    foreach ($allTheThings->records as $record) {
+        array_push($results, GetDetail($record->BOOKING_ID, $conn));
+    }
 }
 
 echo json_encode($results);

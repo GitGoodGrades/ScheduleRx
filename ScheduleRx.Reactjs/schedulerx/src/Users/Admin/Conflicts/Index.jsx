@@ -94,16 +94,25 @@ class Conflicts extends Component {
     };
 
     handleApproveClose = (Approval) => {
+        let tempConflicts = this.state.conflicts;
+        let index = null;
+        tempConflicts && tempConflicts.map(conflict => {
+            if(conflict.CONFLICT_ID === Approval.CONFLICT_ID) {
+                index = tempConflicts.indexOf(conflict);
+            }
+        });
+
+        tempConflicts.splice(index, 1);
+
         client.post(`Bookings/ApproveDelete.php`, {
             ...Approval
+        });
+
+        this.setState({
+            approveOpen: false,
+            dialogOpen: false,
+            conflicts: tempConflicts
         })
-            .then(res => {
-                this.setState({
-                    conflicts:res.data.records,
-                    approveOpen: false,
-                    dialogOpen: false
-                });
-            });
     };
 
     handleDeny = () => {
@@ -147,12 +156,16 @@ class Conflicts extends Component {
     handleDenySend = (conflictID) => {
         let tempConflicts = this.state.conflicts;
         let index = null;
+        const conf = this.state.conflict;
         tempConflicts && tempConflicts.map(conflict => {
-            if(conflict.CONFLICT_ID === conflictID) {
-                index = tempConflicts.IndexOf(conflict);
+            if(conflict.CONFLICT_ID === conf.CONFLICT_ID) {
+                index = tempConflicts.indexOf(conflict);
+                tempConflicts.splice(index, 1);
             }
         });
-        tempConflicts.splice(index, 1);
+        
+        if(index != -1) tempConflicts.splice(index, 1);
+
         client.post('Message/Create.php', {
             MESSAGE: this.state.denyMessage,
             USER_ID: this.state.user

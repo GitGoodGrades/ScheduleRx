@@ -359,6 +359,8 @@ class CreateEvent extends Component {
         let schedule = this.getSchedule();
         let message = null;
         let conflictFlag = false;
+        const myRole = this.props.myRole;
+        const admin = Admin;
         client.post(`Bookings/Conflict.php`, {
             START_TIME:  moment(start).format('YYYY-MM-DD HH:mm:ss'),
             END_TIME:   moment(start).format('YYYY-MM-DD ') + moment(event.END_TIME).format('HH:mm:ss'),
@@ -366,13 +368,13 @@ class CreateEvent extends Component {
         })
         .then(res => {
             if(res.data == "" || (res.data && res.data.length == 1 && res.data[0].BOOKING_ID === this.state.original.BOOKING_ID)){
-                if((!moment(start).isBetween(
+                if(((!moment(start).isBetween(
                     this.props.registration_schedule.START_SEM_DATE,
                     this.props.registration_schedule.END_SEM_DATE)) 
                     || 
                     (!moment().isBetween(
                         this.props.registration_schedule.START_REG_DATE,
-                        this.props.registration_schedule.END_REG_DATE))){
+                        this.props.registration_schedule.END_REG_DATE))) && myRole != admin){
 
                     scheduleID = null;
                     conflictFlag = true;
