@@ -331,7 +331,7 @@ class EventViewEditFull extends Component{
             })
         }
         let temp = {
-            SCHEDULE_ID: this.state.message !== null ? null : this.state.originalEvent.SCHEDULE_ID,
+            SCHEDULE_ID: this.state.isConflict || this.state.isRequest ? null : this.state.originalEvent.SCHEDULE_ID,
             SECTIONS: {records: sections && sections.map(row =>  {
                 return {COURSE_ID: this.state.course,
                 SECTION_ID: row}
