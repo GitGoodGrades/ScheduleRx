@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import moment from 'moment';
 import Dialog, {DialogContent, DialogActions} from 'material-ui/Dialog';
@@ -10,6 +11,7 @@ import TextField from 'material-ui/TextField';
 import ReactToPrint from "react-to-print";
 import {InputLabel} from "material-ui/Input";
 import Save from "material-ui-icons/Save";
+import PrintIcon from 'material-ui-icons/Print';
 
 const styles = theme => ({
   card: {
@@ -95,10 +97,7 @@ class EventEditView extends Component{
       onBackdropClick={this.handleClose}
   >
     <div>
-    <ReactToPrint
-            trigger={() => <a href="#">Print</a>}
-            content={() => this.componentRef}
-        />
+    
       <DialogContent className={classes.card} ref={el => (this.componentRef = el)}>
           
           <Typography align='center' variant="headline" component="h2">
@@ -135,8 +134,14 @@ class EventEditView extends Component{
             style={{border: '1px solid rgb(204, 204, 204)', width: '98%', borderRadius: '4px', paddingLeft: '2%' }}
           />
           </div>
+          </DialogContent>
+          <DialogContent>
           <Typography className={moment(event.START_TIME).isBefore(moment())? classes.content : classes.hidden}>{this.state.details}</Typography>
-
+            <div style={{width: '100%'}}>
+            <ReactToPrint
+            trigger={() => <a href="#"><IconButton  variant="fab" color="primary"><PrintIcon/></IconButton></a>}
+            content={() => this.componentRef}
+            />
             <Button variant="raised"
                     color="primary" 
                     size="small" 
@@ -147,6 +152,8 @@ class EventEditView extends Component{
                     Save
                     <Save style={{paddingLeft: 5}}/>
             </Button>
+            
+            </div>
         </DialogContent> 
     </div>
   </ Dialog>

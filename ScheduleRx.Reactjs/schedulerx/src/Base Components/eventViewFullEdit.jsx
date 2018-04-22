@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Dialog, {DialogContent } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
@@ -11,7 +11,6 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui-pickers/DatePicker';
 import TimePicker from 'material-ui-pickers/TimePicker';
 import moment from 'moment';
-import Dialog from 'material-ui/Dialog';
 import Chip from 'material-ui/Chip';
 import Select from 'react-select';
 import Option from './Option';
@@ -369,7 +368,7 @@ class EventViewEditFull extends Component{
             start: event.START_TIME,
             end: event.END_TIME,
             date: moment(event.START_TIME).format("YYYY-MM-DD"),
-            
+            duplicate: false
         })
     }
 
@@ -474,8 +473,7 @@ class EventViewEditFull extends Component{
           onBackdropClick={this.handleClose}
       >
         <div>
-          <Card className={classes.card}>
-            <CardContent className={this.state.edit ? classes.hidden : ''}>
+            <DialogContent className={this.state.edit ? classes.hidden : ''}>
               
               <Typography variant="headline" component="h2">
                 {event && event.BOOKING_TITLE}
@@ -509,8 +507,8 @@ class EventViewEditFull extends Component{
               </IconButton>
             </Tooltip>
             </div>
-            </CardContent>
-            <CardContent className={this.state.edit ? '' : classes.hidden}>
+            </DialogContent>
+            <DialogContent className={this.state.edit ? '' : classes.hidden}>
                 <Typography variant="headline" component="h2" align='center' >Edit Event</Typography>
                 <InputLabel className={classes.content} htmlFor="course-helper">Title:</InputLabel>
                     <input
@@ -534,7 +532,6 @@ class EventViewEditFull extends Component{
                         )}
                         value={this.state.room}
                         optionComponent={Option}
-                        value={event && event.ROOM_ID}
                         clearable={false}
                     />
                 </div>
@@ -548,7 +545,6 @@ class EventViewEditFull extends Component{
                             row = {label: row.COURSE_ID, value: row.COURSE_ID}
                         )}
                         value={this.state.course}
-                        value={(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}
                         optionComponent={Option}
                         clearable={false}
                     />
@@ -613,16 +609,15 @@ class EventViewEditFull extends Component{
                 </textarea>         
        
                
-            </CardContent>
-            <CardActions className={this.state.edit ? '' : classes.hidden}>
-                 <Button variant="raised" size="small" onClick={this.cancel}>
+            <div style={{float: 'right', marginTop: 10}} className={this.state.edit ? '' : classes.hidden}>
+                 <Button variant="raised" color="primary" size="small" onClick={this.cancel}>
                     Cancel
                 </Button> 
-                <Button variant="raised" size="small" onClick={this.handleSave}>
+                <Button style={{marginLeft: 5}} variant="raised" color="primary" size="small" onClick={this.handleSave}>
                     Save
                 </Button>
-            </CardActions>
-          </Card>
+            </div>
+            </DialogContent>    
         </div>
       </ Dialog>
         <EditConflictContinueDialog

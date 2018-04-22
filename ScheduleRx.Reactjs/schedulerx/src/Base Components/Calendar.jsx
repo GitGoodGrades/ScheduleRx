@@ -60,7 +60,7 @@ class Calendar extends Component {
   };
 
   render(){
-    const height = this.state.height * .8;
+    const height = this.state.height;
     const min = new Date();
     const max = new Date();
     min.setHours(6, 0, 0);
@@ -75,7 +75,7 @@ class Calendar extends Component {
         <BigCalendar
           {...this.props}
           selectable
-          style={{height: height}}
+          style={{minHeight: height}}
           events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
           titleAccessor={window.innerWidth < 960 ? "SMALL" : "TITLE"} 
           startAccessor='START_TIME'

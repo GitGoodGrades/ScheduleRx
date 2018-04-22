@@ -118,6 +118,12 @@ button.rbc-input::-moz-focus-inner {
   padding: 0 10px;
   text-align: center;
   font-size: 18px;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #000000;
+  border-radius: 4px;
 }
 .rbc-toolbar button {
   background-color: rgba(0, 0, 0, 0.5);
@@ -261,6 +267,12 @@ button.rbc-input::-moz-focus-inner {
   line-height: normal;
   white-space: nowrap;
 }
+
+a.rbc-show-more {
+  color: #2a1215;
+  margin-left: 3px;
+  font-size: 12px;
+}
 .rbc-month-view {
   position: relative;
   display: -webkit-flex;
@@ -279,8 +291,7 @@ button.rbc-input::-moz-focus-inner {
   -webkit-user-select: none;
   height: 100%;
 }
-.rbc-month-view .rbc-header {
-}
+
 .rbc-month-view .rbc-header + .rbc-header {
   border-left: 1px solid #d7baab;
 }

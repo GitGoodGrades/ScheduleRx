@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import PrintIcon from 'material-ui-icons/Print';
+import IconButton from 'material-ui/IconButton';
 import moment from 'moment';
 import Dialog, { DialogContent } from 'material-ui/Dialog';
 import ReactToPrint from "react-to-print";
@@ -100,7 +101,7 @@ class EventView extends Component{
       <DialogContent>
       <div style={{float: "right"}}>
               <ReactToPrint
-                trigger={() => <a href="#"><PrintIcon color="primary"/></a>}
+                trigger={() => <a href="#"><IconButton  variant="fab" color="primary"><PrintIcon/></IconButton></a>}
                 content={() => this.componentRef}
               />
       </div>
