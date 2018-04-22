@@ -31,7 +31,7 @@ const styles = theme => ({
         fontFamily: 'Open Sans',
         padding: '0',
         border: '1px solid #767676',
-        borderRadius: '2px',
+        borderRadius: '3px',
         paddingLeft: '.2em',
         background: 'white',
         fontFamily: 'Open Sans'
@@ -165,8 +165,8 @@ class LoginForm extends React.Component {
                 <div className={classes.regbutton}>
                     <NavLink
                         style={{color: 'white', fontSize: '14px', marginLeft: '4px'}}
-                        to="/register">
-                        Never been here before? Register
+                        to="/register"><a>
+                        Never been here before? Register</a>
                     </NavLink>
                 </div>
             </form>

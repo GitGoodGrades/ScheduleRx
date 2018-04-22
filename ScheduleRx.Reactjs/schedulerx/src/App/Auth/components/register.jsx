@@ -224,8 +224,8 @@ class RegisterForm extends React.Component {
                 </form>
                 <NavLink
                     style={{color: 'white', fontSize: '14px', marginLeft: '4px'}}
-                    to="/">
-                    Already Registered? Login
+                    to="/"><a>
+                    Already Registered? Login</a>
                 </NavLink>
             </div>
       </div>

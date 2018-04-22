@@ -115,15 +115,16 @@ button.rbc-input::-moz-focus-inner {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  padding: 0 10px;
+  padding: 4px 10px;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.7);
   margin-left: 5%;
   margin-right: 5%;
   border: 1px solid #000000;
   border-radius: 4px;
+  
 }
 .rbc-toolbar button {
   background-color: rgba(0, 0, 0, 0.5);
@@ -293,7 +294,9 @@ a.rbc-show-more {
 }
 
 .rbc-month-view .rbc-header + .rbc-header {
-  border-left: 1px solid #d7baab;
+  border-left: 1px solid #000000;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
 }
 .rbc-rtl .rbc-month-view .rbc-header + .rbc-header {
   border-left-width: 0;
@@ -587,7 +590,8 @@ a.rbc-show-more {
   border-right-width: 0;
 }
 .rbc-time-header > .rbc-row > * + * {
-  border-left: 1px solid #d7baab;;
+  border-left: 1px solid #000000;
+  border-top: #000000;
 }
 .rbc-rtl .rbc-time-header > .rbc-row > * + * {
   border-left-width: 0;
@@ -683,4 +687,8 @@ div.rbc-header.rbc-today {
 .rbc-header-gutter {
   width: 77.9px;
 
+}
+
+button.rbc-btn-group {
+  font-family: 'Open Sans';
 }
