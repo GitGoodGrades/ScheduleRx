@@ -166,8 +166,12 @@ class Conflicts extends Component {
         
         if(index != -1) tempConflicts.splice(index, 1);
 
+        const extra = this.state.denyMessage && this.state.denyMessage != '' ? `Notes from the admin: ${this.state.denyMessage}` : `Please try to find an alternative option.`;
+
+        const myMessage = `Your event in room ${conf.ROOM} has been denied. ${extra}`;
+
         client.post('Message/Create.php', {
-            MESSAGE: this.state.denyMessage,
+            MESSAGE: myMessage,
             USER_ID: this.state.user
         });
         this.setState({
