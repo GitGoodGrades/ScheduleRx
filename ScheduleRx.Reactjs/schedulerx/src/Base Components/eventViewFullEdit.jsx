@@ -58,34 +58,36 @@ const mapStateToProps = (state) => ({
     registrationSchedule: state.registrationSchedule
 })
 
+const initialState = {
+    edit: false,
+    date: null,
+    sectionOptions: [],
+    sectionChange: false,
+    originalEvent: {},
+    redirection: false,
+    confirm: false,
+    conflictDialogOpen: false,
+    conflicts: [],
+    isConflict: false,
+    isRequest: false,
+    room: '',
+    course: '',
+    sections: [],
+    title: "",
+    details: '',
+    start: '',
+    end: '',
+    message: null,
+    timeChange: false,
+    roomChange: false
+}
+
 class EventViewEditFull extends Component{
-    state = {
-        edit: false,
-        date: null,
-        sectionOptions: [],
-        sectionChange: false,
-        originalEvent: {},
-        redirection: false,
-        confirm: false,
-        conflictDialogOpen: false,
-        conflicts: [],
-        isConflict: false,
-        isRequest: false,
-        room: '',
-        course: '',
-        sections: [],
-        title: "",
-        details: '',
-        start: '',
-        end: '',
-        message: null,
-        timeChange: 'false',
-        roomChange: 'false'
-    }
+    state = initialState;
 
     handleClose = () => {
         this.setState({
-            edit: false
+            state: initialState
         })
         this.props.onClose();
     };
@@ -125,7 +127,7 @@ class EventViewEditFull extends Component{
                 //create request
         }
         else {
-            if(this.state.timeChange == 'true' || this.state.roomChange == 'true') {
+            if(this.state.timeChange == true || this.state.roomChange == true) {
                 this.setState({
                     isRequest: true,
                     isConflict: false,
@@ -242,7 +244,7 @@ class EventViewEditFull extends Component{
     };
 
     handleRoomChange = event => {
-        this.setState({room: event.value, roomChange: 'true'})
+        this.setState({room: event.value, roomChange: true})
     };
 
     cancel = () => {
@@ -281,6 +283,9 @@ class EventViewEditFull extends Component{
     createEditedEvent = () => {
         let sections = [];
         let check = this.state.sections;
+        let temp = null;
+        const duplicate = this.state.duplicate;
+
         if(!Array.isArray(check)){
             sections = this.state.sections.split(',');
         } else {
@@ -289,67 +294,39 @@ class EventViewEditFull extends Component{
             })
         }
 
-        if(this.state.isConflict == false && this.state.isRequest == false) {
-            client.post(`Bookings/Create.php`, {
-                SCHEDULE_ID: this.props.registrationSchedule.SCHEDULE_ID,
-                COURSE_ID: this.state.course,
-                SECTION_ID: sections,
-                ROOM_ID: this.state.room,
-                START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
-                END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
-                BOOKING_TITLE: this.state.title,
-                NOTES: this.state.details
-            })
-        }
-        else if(this.state.isConflict == true && this.state.isRequest == false) {
-            client.post(`Bookings/Create.php`, {
-                SCHEDULE_ID: null,
-                COURSE_ID: this.state.course,
-                SECTION_ID: sections,
-                ROOM_ID: this.state.room,
-                START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
-                END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
-                BOOKING_TITLE: this.state.title,
-                NOTES: this.state.details,
-                BOOKING_IDs: this.state.conflicts,
-                MESSAGE: this.state.message === null? "" : this.state.message
-            })
-        }
-        else if(this.state.isConflict == false && this.state.isRequest == true) {
-            client.post(`Bookings/Create.php`, {
-                SCHEDULE_ID: null,
-                COURSE_ID: this.state.course,
-                SECTION_ID: sections,
-                ROOM_ID: this.state.room,
-                START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
-                END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
-                BOOKING_TITLE: this.state.title,
-                NOTES: this.state.details,
-                BOOKING_IDs: this.state.conflicts,
-                MESSAGE:  this.state.message === null? "" : this.state.message
-            })
-        }
-        let temp = {
-            SCHEDULE_ID: this.state.isConflict || this.state.isRequest ? null : this.state.originalEvent.SCHEDULE_ID,
-            SECTIONS: {records: sections && sections.map(row =>  {
-                return {COURSE_ID: this.state.course,
-                SECTION_ID: row}
-            })},
-            SECTION_ID: sections,
-            ROOM_ID: this.state.room,
-            START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
-            END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
-            BOOKING_TITLE: this.state.title,
-            DETAILS: this.state.details,
-            BOOKING_ID: this.state.duplicate? null : this.state.originalEvent.BOOKING_ID
-        }
-        this.state.duplicate? this.props.addEvent(temp) : this.props.spliceEvent(temp);
+        let schedID = null;
+        let conflicts = null;
+        let mgs = null;
 
+        if(this.state.isConflict === false && this.state.isRequest === false) {
+            schedID = this.props.registrationSchedule.SCHEDULE_ID;
+        } else{
+            conflicts = this.state.conflicts;
+            mgs = this.state.message === null? "" : this.state.message
+        }
+
+        client.post(`Bookings/Create.php`, {
+                SCHEDULE_ID: schedID,
+                COURSE_ID: this.state.course,
+                SECTION_ID: sections,
+                ROOM_ID: this.state.room,
+                START_TIME: moment(this.state.start).format('YYYY-MM-DD HH:mm:ss'),
+                END_TIME:moment(this.state.end).format('YYYY-MM-DD HH:mm:ss'),
+                BOOKING_TITLE: this.state.title,
+                NOTES: this.state.details,
+                BOOKING_IDs: conflicts,
+                MESSAGE: mgs
+            }).then(res => {
+                duplicate ? 
+                    this.props.addEvent(res.data) : 
+                    this.props.spliceEvent(res.data);
+            })
+
+           
         this.setState({
             conflictDialogOpen: false
         })
     }
-
     handleMessageBlur = (message) => {
         this.setState({
             message: message == null? "" : message
@@ -399,7 +376,7 @@ class EventViewEditFull extends Component{
             date: moment(event._d).format("YYYY-MM-DD"),
             start: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.start).format('h:mm a'),
             end: moment(event._d).format("YYYY-MM-DD") + " " + moment(this.state.end).format('h:mm a'),
-            timeChange: 'true'
+            timeChange: true
     })
     }
 
@@ -407,7 +384,7 @@ class EventViewEditFull extends Component{
         let date = this.state.date;
         this.setState({
             start: date + " " + moment(event._d).format('h:mm a'),
-            timeChange: 'true'
+            timeChange: true
         })
     }
 
@@ -415,7 +392,7 @@ class EventViewEditFull extends Component{
         let date = this.state.date;
         this.setState({
             end: date + " " + moment(event._d).format('h:mm a'),
-            timeChange: 'true'
+            timeChange: true
         })
     }
 
@@ -438,7 +415,7 @@ class EventViewEditFull extends Component{
             DETAILS: this.state.details
         })
         this.setState({
-            edit: 'false'
+            edit: false
         })
 
         this.handleClose();
