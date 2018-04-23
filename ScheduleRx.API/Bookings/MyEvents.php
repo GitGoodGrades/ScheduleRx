@@ -1,8 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+#header("Access-Control-Allow-Methods: POST");
+#header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 include_once '../config/database.php';
 include_once '../config/Banner_DB.php';
@@ -19,12 +19,18 @@ $database = new Banner_DB();
 $conn2 = $database->getConnection();
 $data1 = json_decode(file_get_contents("php://input"));
 $data =  json_decode(FindRecord("users", "USER_ID", $data1->USER_ID, $conn1));
-$current = json_decode(FindRecord("schedule", "IS_RELEASED", 1, $conn1));
-
+$schedule_id = "";
+$resultant = json_decode(findRecord("schedule", "IS_RELEASED", 0, $conn1)); //<----
+//print_r($resultant);
 if ($data->ROLE_ID == '4' || $data->ROLE_ID == '3') {
-    if (!$current) { $log->warn("No Released Schedule"); exit(null); }
-} //Stop if there is no released schedule
-
+    if (!$resultant) {
+        $log->warn("No Released Schedule");
+        $schedule_id = null; // <---
+    }
+    else {
+        $schedule_id = $resultant->SCHEDULE_ID;
+    }
+}
 
 /* Script
  * MyEvents Gathers All events for a given USER (Lead, Faculty, or Student) and returns All events
@@ -45,13 +51,13 @@ else {
 }
 
 $query = "";
-if ($data->ROLE_ID == '2') {
+if (($data->ROLE_ID == '2')) {
     $query = "select * from booking join event_section on booking.BOOKING_ID = event_section.BOOKING_ID
               WHERE SCHEDULE_ID is not null";
 }
 else {
     $query = "select * from booking join event_section on booking.BOOKING_ID = event_section.BOOKING_ID
-              WHERE SCHEDULE_ID='" . $current->SCHEDULE_ID ."'";
+              WHERE SCHEDULE_ID!='" . $schedule_id ."'"; //<----
 }
 $stmt = $conn1->prepare($query);
 $stmt->execute();
@@ -79,14 +85,9 @@ if ($data->ROLE_ID == '2') {
     $myEvents = GetLeadIndex($myEvents, $data->USER_ID, $conn1);
 }
 else {
-    $log->info("Removing Other Sections");
     foreach ($myEvents as $event) {
         $mySections = [];
-        $log->info("Removing Sections for Event with ID: " . $event->BOOKING_ID, $log);
-        $log->info("Number of Sections:" . count($event->SECTIONS['records']) );
-        $log->info($event);
         for ($counter = 0; $counter < count($event->SECTIONS['records']) ; $counter++) {
-            $log->info("counter value: " . $counter);
             if (isIn($event->SECTIONS['records'][$counter]['SECTION_ID'], $results->records, $log)) {
                 array_push($mySections , $event->SECTIONS['records'][$counter]);
             }
@@ -96,7 +97,6 @@ else {
 }
 
 if($myEvents){
-    $log->info($myEvents);
     echo json_encode($myEvents);
 }
 else{
@@ -105,12 +105,11 @@ else{
 
 function isIn($value, $array, $log) {
     foreach ($array as $arrayVal) {
-        $log->info("Comparing Section:" . $value . " | to User_Section:" . $arrayVal->SECTION_ID);
+        //$log->info("Comparing Section:" . $value . " | to User_Section:" . $arrayVal->SECTION_ID);
         if ($arrayVal->SECTION_ID == $value) {
             return true;
         }
     }
-    $log->info("Section not on list");
     return false;
 }
 /*
