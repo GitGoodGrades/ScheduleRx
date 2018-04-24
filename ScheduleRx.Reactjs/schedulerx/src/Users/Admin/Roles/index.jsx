@@ -31,19 +31,24 @@ class Roles extends Component {
         })
     }
 
+    open = () => {
+        this.setState({snackbarOpen: true})
+        setTimeout(this.snackbarClose, 900)
+    }
+
     render(){
         return(
             <div style={{paddingTop: 40}}>
-                <FacultyTable openSnackbar={()=> this.setState({snackbarOpen: true})}  users={this.props.users} user={this.props.user}/>
-                <Snackbar onClose={this.snackbarClose} 
+                <FacultyTable openSnackbar={this.open}  users={this.props.users} user={this.props.user}/>
+                <Snackbar  
                         open={this.state.snackbarOpen}
-                        autoHideDuration={2000}
                         
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'left',
                           }}
-                        message={<span>Course Leader</span>}
+                        transition={Grow}
+                        message={<span>Faculty Role Has Been Saved!</span>}
                         >
                 </Snackbar>
             </div>

@@ -10,8 +10,7 @@ import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
 class UserCourseTable extends Component {
     state = {
-        faculty: [],
-        snackbarOpen: false
+        faculty: []
     };
 
     componentWillReceiveProps = (nextProps) => {
