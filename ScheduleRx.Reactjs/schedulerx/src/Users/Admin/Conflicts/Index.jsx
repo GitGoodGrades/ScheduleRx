@@ -163,8 +163,6 @@ class Conflicts extends Component {
                 tempConflicts.splice(index, 1);
             }
         });
-        
-        if(index != -1) tempConflicts.splice(index, 1);
 
         const extra = this.state.denyMessage && this.state.denyMessage != '' ? `Notes from the admin: ${this.state.denyMessage}` : `Please try to find an alternative option.`;
 

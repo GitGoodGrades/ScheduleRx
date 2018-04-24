@@ -168,7 +168,7 @@ export function setEditGlobals(event) {
         dispatch({
             type: 'SET_EDIT',
             redirect_date: date,
-            redirect_event: newEvent
+            
         });
 }
 

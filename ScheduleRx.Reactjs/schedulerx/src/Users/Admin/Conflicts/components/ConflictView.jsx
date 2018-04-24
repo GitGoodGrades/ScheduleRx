@@ -44,21 +44,27 @@ const styles = theme => ({
       display: 'none'
   },
   approve: {
-        backgroundColor: 'rgba(255, 0, 0, .5)',
+        backgroundColor: 'rgba(255, 0, 0, .2)',
+        
+        
         borderColor: 'transparent',
-        transition: 'background-Color .3s linear', 
+        transition: 'background-Color .5s ease-in, border-Color .5s ease-in', 
         transitionDelay: 'initial',
+        
   },
   noApprove: {
         backgroundColor: 'white',
         borderColor: '#E0E0E0',
-        transition: 'background-Color .3s linear, border-Color .3s linear', 
+        
+        transition: 'background-Color .5s ease-in, border-Color .5s ease-in', 
         transitionDelay: 'initial',
   },
   deny: {
-        backgroundColor: 'rgba(0, 255, 0, .5)',
+        backgroundColor: 'rgba(0, 128, 0, .2)',
+        
+        
         borderColor: 'transparent',
-        transition: 'background-Color .3s linear',
+        transition: 'background-Color .5s ease-in, border-Color .5s ease-in',
         transitionDelay: 'initial',
   }
 });
@@ -273,7 +279,7 @@ class EventViewEditFull extends Component{
                                     moment(this.state.events[0].START_TIME).format('h:mm a') + "-" +  moment(this.state.events[0].END_TIME).format('h:mm a')}
         
                         </TableCell>
-                        <TableCell  padding="none" className={this.state.approveHighlight? classes.deny : this.state.denyHighlight? classes.approve : classes.noApprove}>{    
+                        <TableCell style={{paddingLeft: 5}} padding="none" className={this.state.approveHighlight? classes.deny : this.state.denyHighlight? classes.approve : classes.noApprove}>{    
                             this.state.conflictEvent && 
                             moment(this.state.conflictEvent.START_TIME).format('h:mm a') + "-" +  moment(this.state.conflictEvent.END_TIME).format('h:mm a')}
                         </TableCell>

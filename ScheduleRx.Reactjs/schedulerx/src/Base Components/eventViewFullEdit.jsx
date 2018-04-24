@@ -58,7 +58,10 @@ const mapStateToProps = (state) => ({
     registrationSchedule: state.registrationSchedule
 })
 
-const initialState = {
+
+
+class EventViewEditFull extends Component{
+    state = {
     edit: false,
     date: null,
     sectionOptions: [],
@@ -82,12 +85,30 @@ const initialState = {
     roomChange: false
 }
 
-class EventViewEditFull extends Component{
-    state = initialState;
 
     handleClose = () => {
         this.setState({
-            state: initialState
+            edit: false,
+            date: null,
+            sectionOptions: [],
+            sectionChange: false,
+            originalEvent: {},
+            redirection: false,
+            confirm: false,
+            conflictDialogOpen: false,
+            conflicts: [],
+            isConflict: false,
+            isRequest: false,
+            room: '',
+            course: '',
+            sections: [],
+            title: "",
+            details: '',
+            start: '',
+            end: '',
+            message: null,
+            timeChange: false,
+            roomChange: false
         })
         this.props.onClose();
     };
@@ -223,10 +244,6 @@ class EventViewEditFull extends Component{
             sectionOptions: sections,
             originalEvent: original
         })
-
-        if(nextProps.redirect){
-            this.selectEdit();
-        }
     }
   
     handleCourseChange = event => {
@@ -275,7 +292,9 @@ class EventViewEditFull extends Component{
 
     handleConflictCancel = () => {
         this.setState({
-            conflictDialogOpen: false
+            conflictDialogOpen: false,
+            isConflict: false,
+            isRequest: false
         })
     }
     
@@ -326,6 +345,7 @@ class EventViewEditFull extends Component{
         this.setState({
             conflictDialogOpen: false
         })
+        this.handleClose();
     }
     handleMessageBlur = (message) => {
         this.setState({
@@ -418,7 +438,6 @@ class EventViewEditFull extends Component{
             edit: false
         })
 
-        this.handleClose();
 
         let newEvent = {
             SCHEDULE_ID: this.state.originalEvent.SCHEDULE_ID,
@@ -435,6 +454,8 @@ class EventViewEditFull extends Component{
             BOOKING_ID: this.state.originalEvent.BOOKING_ID
         }
 
+        this.handleClose();
+
         this.props.spliceEvent(newEvent);
     }
 
@@ -450,7 +471,7 @@ class EventViewEditFull extends Component{
           onBackdropClick={this.handleClose}
       >
         <div>
-            <DialogContent className={this.state.edit ? classes.hidden : ''}>
+            <DialogContent className={this.state.edit ? classes.hidden : classes.nothidden}>
               
               <Typography variant="headline" component="h2">
                 {event && event.BOOKING_TITLE}
@@ -485,7 +506,7 @@ class EventViewEditFull extends Component{
             </Tooltip>
             </div>
             </DialogContent>
-            <DialogContent className={this.state.edit ? '' : classes.hidden}>
+            <DialogContent className={this.state.edit ? classes.nothidden : classes.hidden}>
                 <Typography variant="headline" component="h2" align='center' >Edit Event</Typography>
                 <InputLabel className={classes.content} htmlFor="course-helper">Title:</InputLabel>
                     <input

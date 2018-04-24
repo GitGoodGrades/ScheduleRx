@@ -82,6 +82,13 @@ class EventDetailDialog extends Component {
   handleSave = () => {
     if(this.state.title && this.state.title !== ''){
       this.props.onSave(this.state.title, this.state.details, this.state.repeat);
+      this.setState({
+        repeat: false,
+        title: '',
+        details: '',
+        repeat: false,
+        valid: true
+      })
     }else{
       this.setState({valid: false})
     }

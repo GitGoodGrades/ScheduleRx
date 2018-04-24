@@ -7,9 +7,11 @@ import {client} from '../../../../configuration/client';
 import {SystemAdminIDs} from '../../../../configuration/variables';
 import LoadWrapper from '../../../../Base Components/LoadWrapper';
 
+
 class UserCourseTable extends Component {
     state = {
-        faculty: []
+        faculty: [],
+        snackbarOpen: false
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -38,6 +40,7 @@ class UserCourseTable extends Component {
     };
 
     handleChange = (row, event) => {
+        this.props.openSnackbar();
         let temp = this.state.faculty;
 
         let index = -1;
@@ -59,6 +62,8 @@ class UserCourseTable extends Component {
             PROMOTE: event.value
         });
         this.setState({faculty: temp})
+        
+
     };
 
 

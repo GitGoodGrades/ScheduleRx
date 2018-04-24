@@ -115,12 +115,7 @@ class CreateEvent extends Component {
         }
 
 
-        if(nextProps.redirected) {
-            this.setState({
-                open: true,
-                event: nextProps.redirected_event
-            })
-        }
+        
 
         this.setState({
             events: nextProps.events,
@@ -156,6 +151,25 @@ class CreateEvent extends Component {
                 temp.push(res.data);
                 this.setState({events: temp})
             })
+    };
+
+    editedConflict = (event) => {
+        let userId = null;
+        let oldEvent = this.props.redirected_event;
+        let course = this.props.redirected_event.SECTIONS && this.props.redirected_event.SECTIONS.records && this.props.redirected_event.SECTIONS.records[0].COURSE_ID;
+        this.props.leadsCourses && this.props.leadsCourses.map(lead => {
+            if(lead.COURSE_ID === course){
+                userId = lead.USER_ID;
+            }
+        });
+        client.post('Messages/Create.php', {
+            USER_ID: userId,
+            MESSAGE: `The event titled ${oldEvent.BOOKING_TITLE} in room ${oldEvent.ROOM_ID} on 
+            ${moment(oldEvent.START_TIME).format("MMM Do YY")} at ${moment(oldEvent.START_TIME).format("h:mm a")} has been
+            edited. It is now in room ${event.ROOM_ID} at  ${moment(event.START_TIME).format('MMMM Do YYYY, h:mm:ss a')}`
+        });
+        this.props.clearGlobals();
+        this.props.history.push("/conflicts"); 
     };
 
     getSchedule = () => {
@@ -560,6 +574,7 @@ class CreateEvent extends Component {
                     mine={this.state.mine}
                     past={this.state.past}
                     addEvent={this.handleAddEvent}
+                    editConflict={this.editedConflict}
                 />
                 <ConflictDialog
                     onConflictSave={this.handleConflictSave}

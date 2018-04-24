@@ -5,11 +5,14 @@ import Select from 'material-ui/Select';
 import {MenuItem} from 'material-ui/Menu';
 import {client} from '../../../../configuration/client';
 import LoadWrapper from '../../../../Base Components/LoadWrapper';
+import { Snackbar } from 'material-ui';
+import Grow from 'material-ui/transitions/Grow';
 
 class UserCourseTable extends Component {
     state = {
         leads: [],
-        faculty: []
+        faculty: [],
+        snackbarOpen: false
     };
 
     componentWillReceiveProps = (nextProps) => {
@@ -34,8 +37,12 @@ class UserCourseTable extends Component {
             };
         }
          client.post(`/LeadsCourse/Assign.php`, this.state.leads);
-        this.setState({leads: leadsTemp})
+        this.setState({leads: leadsTemp, snackbarOpen: true})
     };
+
+    snackbarClose = () => {
+        this.setState({snackbarOpen: false})
+    }
 
 
 
@@ -77,7 +84,19 @@ class UserCourseTable extends Component {
                 })}
                 </TableBody>
             </Table>
+            <Snackbar onClose={this.snackbarClose} 
+                        open={this.state.snackbarOpen}
+                        autoHideDuration={900}
+                        transition={Grow}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                          }}
+                        message={<span>Course Leader Has Been Saved!</span>}
+                        >
+            </Snackbar>
         </Paper>
+
         );
   }
 }

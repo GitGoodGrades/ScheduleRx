@@ -130,6 +130,7 @@ class ScheduleForm extends React.Component {
                     onBackdropClick={this.setRegClose}    
                 >
                         <DateRange
+                            linkedCalendars={true}
                             onChange={this.handleRegSelect}
                         />
                         <Button onClick={this.setRegClose}>
@@ -151,6 +152,7 @@ class ScheduleForm extends React.Component {
                         onBackdropClick={this.setSemClose}    
                     >
                         <DateRange
+                            linkedCalendars={true}
                             onInit={this.handleSemSelect}
                             onChange={this.handleSemSelect}
                         />
