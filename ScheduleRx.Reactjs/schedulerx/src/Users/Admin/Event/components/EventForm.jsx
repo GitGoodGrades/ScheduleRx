@@ -18,29 +18,31 @@ const styles = theme => ({
         justifyContent: 'center',
         marginTop: 5,
         marginBottom: 5,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingBottom: 8,
         background: 'rgba(0,0,0, .7)',
         borderRadius: 5,
         zIndex: 98
     },
     control: {
-        display: 'flex',
+        //display: 'flex',
         justifyContent: 'center',
         alignItems: 'middle',
-        zIndex: 98
+        zIndex: 98,
+        margin: '0px 10px',
+        marginRight: '20px',
+        marginLeft: '20px',
     },
     Select: {
         minWidth: 200,
         background: '#D7BAAB',
         borderRadius: 3,
-        marginRight: 5,
+        
         zIndex: 98
     },
     label: {
         fontFamily: 'Open Sans',
-        color: '#D7BAAB',
-        fontSize: 12,
+        color: 'white',
+        fontSize: 14,
         marginRight: 5,
     },
     Input: {
@@ -116,7 +118,7 @@ class EventForm extends Component {
                 <div className={classes.FormContainer}>
                     <form className={classes.Form}  style={{zIndex: 98}}>
                             <div className={classes.control}  style={{zIndex: 98}}>
-                                <InputLabel className={classes.label} htmlFor="course-helper">Select Course</InputLabel>
+                                <InputLabel className={classes.label} htmlFor="course-helper">Select Course:</InputLabel>
                                 <Select
                                     className={classes.Select}
                                     onChange={this.handleCourseChange}
@@ -124,12 +126,12 @@ class EventForm extends Component {
                                         row = {label: row.COURSE_ID, value: row.COURSE_ID}
                                     )}
                                     value={course}
-                                    placeholder="course"
+                                    //placeholder="course"
                                     optionComponent={Option}
                                 />
                             </div>
                             <div className={classes.control}>
-                              <InputLabel htmlFor="select-multiple" className={classes.label}>Select Section(s)</InputLabel>
+                              <InputLabel htmlFor="select-multiple" className={classes.label}>Select Section(s):</InputLabel>
                               <Select
                                 className={classes.Select}
                                 closeOnSelect={true}
@@ -137,14 +139,14 @@ class EventForm extends Component {
                                 multi
                                 onChange={this.handleSectionChange}
                                 options={this.state.sectionOptions}
-                                placeholder="Sections"
+                                //placeholder="Sections"
                                 simpleValue
                                 value={this.state.sections}
                                 optionComponent={Option}
                               />
                         </div>
                         <div className={classes.control}>
-                                <InputLabel htmlFor="section-helper" className={classes.label}>Select Room</InputLabel>
+                                <InputLabel htmlFor="section-helper" className={classes.label}>Select Room:</InputLabel>
                                 <Select
                                     className={classes.Select}
                                     closeOnSelect

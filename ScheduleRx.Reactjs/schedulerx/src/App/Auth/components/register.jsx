@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField';
 import { Typography, Hidden } from 'material-ui';
 import compose from 'recompose/compose';
 import withWidth from 'material-ui/utils/withWidth';
+import { client } from '../../../configuration/client';
 
 const styles = theme => ({
     container: {
@@ -128,7 +129,7 @@ class RegisterForm extends React.Component {
     }
 
     componentDidMount(){
-        axios.get(`http://localhost:63342/ScheduleRx/ScheduleRx.API/Users/Index.php`)
+        client.get(`Users/Index.php`)
           .then(res => {
               this.setState({first: res.data.message === "No users found." ? true : false})
           })

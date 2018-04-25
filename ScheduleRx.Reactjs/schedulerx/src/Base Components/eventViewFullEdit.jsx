@@ -471,7 +471,7 @@ class EventViewEditFull extends Component{
           onBackdropClick={this.handleClose}
       >
         <div>
-            <DialogContent className={this.state.edit ? classes.hidden : classes.nothidden}>
+            <DialogContent style={{minWidth: 275}} className={this.state.edit ? classes.hidden : classes.nothidden}>
               
               <Typography variant="headline" component="h2">
                 {event && event.BOOKING_TITLE}

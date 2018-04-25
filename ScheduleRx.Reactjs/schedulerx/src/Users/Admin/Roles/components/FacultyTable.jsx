@@ -39,7 +39,7 @@ class UserCourseTable extends Component {
     };
 
     handleChange = (row, event) => {
-        this.props.openSnackbar();
+        
         let temp = this.state.faculty;
 
         let index = -1;
@@ -61,7 +61,7 @@ class UserCourseTable extends Component {
             PROMOTE: event.value
         });
         this.setState({faculty: temp})
-        
+        //this.props.openSnackbar();
 
     };
 

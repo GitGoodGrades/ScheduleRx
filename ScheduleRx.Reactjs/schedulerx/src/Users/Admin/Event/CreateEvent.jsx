@@ -405,7 +405,7 @@ class CreateEvent extends Component {
                 }
             } else {
                 this.setState({
-                    conflictRequestString: "This event's time and room conflicts with an existing event. You may send a note the admin with your request.",
+                    conflictRequestString: "This event's time and room conflicts with an existing event. You may send a note to the admin with your request.",
                     conflictFlag: true,
                     conflict_List: res.data
                 });
