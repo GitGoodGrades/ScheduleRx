@@ -34,7 +34,8 @@ class Calendar extends Component {
       if (obj !== "") {
           obj.START_TIME = new Date(obj.START_TIME);
           obj.END_TIME = new Date(obj.END_TIME);
-          obj.TITLE = `${obj.SECTIONS && obj.SECTIONS.records && obj.SECTIONS.records.length > 0 && obj.SECTIONS.records[0].COURSE_ID}\n${obj.BOOKING_TITLE}\n ${obj.ROOM_ID} `;
+          obj.TITLE = 
+          `${obj.SECTIONS && obj.SECTIONS.records && obj.SECTIONS.records.length > 0 && obj.SECTIONS.records[0].COURSE_ID} ${obj.BOOKING_TITLE},  ${obj.ROOM_ID},  ${moment(obj.START_TIME).format("h:mm")}-${moment(obj.END_TIME).format("h:mm")}`;
           obj.SMALL = `${obj.SECTIONS && obj.SECTIONS.records && obj.SECTIONS.records.length > 0 && obj.SECTIONS.records[0].COURSE_ID}`
           formattedEvents.push(obj);
       }
@@ -60,7 +61,7 @@ class Calendar extends Component {
   };
 
   render(){
-    const height = this.state.height;
+    const height = this.state.height * 2;
     const min = new Date();
     const max = new Date();
     min.setHours(6, 0, 0);
@@ -75,7 +76,7 @@ class Calendar extends Component {
         <BigCalendar
           {...this.props}
           selectable
-          style={{minHeight: height}}
+          style={{display: 'flex', minHeight: height}}
           events={this.props.events && this.props.events.length > 0 ? this.props.events : [] }
           titleAccessor={window.innerWidth < 960 ? "SMALL" : "TITLE"} 
           startAccessor='START_TIME'
@@ -95,14 +96,15 @@ class Calendar extends Component {
           eventPropGetter={
             (event, start, end, isSelected) => {
               let newStyle = {
-                backgroundColor: '#2a1215',
-                color: 'white',
+                backgroundColor: 'white',
+                color: 'black',
                 borderRadius: "4px",
-                border: '1px solid white',
+                border: '1px solid black',
                 marginLeft: "3px",
                 marginRight: "2px",
                 fontWeight: 500,
-                fontSize: 12
+                fontSize: 9,
+                display: 'flex'
               };
 
               if(window.innerWidth < 600){
@@ -114,7 +116,7 @@ class Calendar extends Component {
                     event.SECTIONS.records && 
                     event.SECTIONS.records.length > 0 &&
                     event.SECTIONS.records[0].COURSE_ID == row.Course){
-                      newStyle.borderBottom = `5px solid ${row.color}`
+                      newStyle.borderBottom = `2px solid ${row.color}`
                       
                 }
               })

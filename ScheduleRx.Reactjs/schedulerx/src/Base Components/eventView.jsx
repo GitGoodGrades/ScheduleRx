@@ -81,10 +81,6 @@ class EventView extends Component{
                 {event && event.BOOKING_TITLE}
               </Typography>
               <Typography className={classes.pos}>Course: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records[0].COURSE_ID: 'None'}</Typography>
-                <Typography className={classes.content} component="p">
-                    Sections: {(event && event.SECTIONS && event.SECTIONS.records.length > 0)? event.SECTIONS.records.map(sec => sec.SECTION_ID + ' ') : " "
-                    }
-                </Typography>
               <Typography className={classes.title}>In Room {event && event.ROOM_ID}</Typography>
               <Typography className={classes.content} component="p">
                 On {event && moment(event.START_TIME).format('MMMM Do YYYY')}
