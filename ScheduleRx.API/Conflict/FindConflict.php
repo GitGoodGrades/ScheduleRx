@@ -4,7 +4,7 @@
  * Function for Determining if an event conflicts with an existing event in the database
  */
 function findConflict( $tableName, $booking_ID ,$start, $end, $room , $conn) {
-    $allBookings = json_decode(Search($tableName, 'ROOM_ID', $room . " AND SCHEDULE_ID IS NOT NULL", $conn));
+    $allBookings = json_decode(Search($tableName, 'ROOM_ID', "'" . $room . "'" . " AND SCHEDULE_ID IS NOT NULL", $conn));
     $conflicts = [];
     if ($allBookings == null) {
         return null;
